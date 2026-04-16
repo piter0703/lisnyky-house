@@ -1,0 +1,1824 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lisnyky House — Таунхауси біля лісу. 12 хвилин від Києва</title>
+  <meta name="description" content="Готові таунхауси у с. Лісники поряд з лісом та озером. 12 хвилин до метро Видубичі. Розумний дім, сонячні батареї." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500;1,600&family=Luxurious+Script&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── RESET ─────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Manrope', system-ui, sans-serif;
+      font-weight: 400;
+      color: #1a1a1a;
+      background: #fff;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── VARIABLES ──────────────────────────── */
+    :root {
+      --green:      #3d8f38;
+      --green-dark: #2a6326;
+      --green-bg:   #f0f7ef;
+      --text:       #1a1a1a;
+      --text-mid:   #555;
+      --text-light: #888;
+      --white:      #ffffff;
+      --off:        #f7f7f5;
+      --border:     rgba(0,0,0,0.09);
+      --serif:      'Cormorant Garamond', Georgia, serif;
+      --sans:       'Manrope', system-ui, sans-serif;
+    }
+
+    /* ─── SIDE NAV ───────────────────────────── */
+    .side-nav {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 52px;
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 0;
+      background: transparent;
+      border-right: 1px solid rgba(255,255,255,0.25);
+      pointer-events: none;
+      transition: background 0.35s, border-color 0.35s;
+    }
+
+    /* After hero — solid subtle bar */
+    .side-nav.scrolled {
+      background: rgba(255,255,255,0.95);
+      border-right-color: rgba(0,0,0,0.07);
+    }
+
+    .side-menu-label {
+      pointer-events: all;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .side-menu-label span {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      transition: color 0.2s;
+    }
+
+    .side-nav.scrolled .side-menu-label span { color: var(--text-light); }
+    .side-menu-label:hover span { color: var(--green) !important; }
+
+    .side-menu-dots {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .side-menu-dots i {
+      display: block;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.45);
+      transition: background 0.2s;
+    }
+
+    .side-nav.scrolled .side-menu-dots i { background: rgba(0,0,0,0.18); }
+    .side-menu-label:hover .side-menu-dots i { background: var(--green) !important; }
+
+    /* ─── SLIDE-OUT MENU ─────────────────────── */
+    .slide-menu {
+      position: fixed;
+      left: 0; top: 0; bottom: 0;
+      width: 380px;
+      background: #fff;
+      z-index: 300;
+      display: flex;
+      flex-direction: column;
+      padding: 48px 0 48px 52px;
+      transform: translateX(-100%);
+      transition: transform 0.45s cubic-bezier(0.77,0,0.175,1);
+      box-shadow: 4px 0 40px rgba(0,0,0,0.08);
+    }
+
+    .slide-menu.open { transform: translateX(0); }
+
+    .slide-menu-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      z-index: 299;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s;
+    }
+
+    .slide-menu-overlay.open { opacity: 1; pointer-events: all; }
+
+    .slide-menu-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-right: 32px;
+      margin-bottom: 48px;
+    }
+
+    .slide-menu-logo {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-style: italic;
+      color: var(--text);
+      letter-spacing: 0.04em;
+    }
+
+    .slide-menu-logo img { height: 120px; }
+
+    .slide-close {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      cursor: pointer;
+      background: none;
+      font-size: 20px;
+      color: var(--text);
+      transition: border-color 0.2s;
+      flex-shrink: 0;
+    }
+
+    .slide-close:hover { border-color: var(--green); color: var(--green); }
+
+    .slide-menu nav {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .slide-menu nav a {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-style: italic;
+      color: var(--text);
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      opacity: 0.75;
+      transition: opacity 0.2s, color 0.2s, padding-left 0.2s;
+    }
+
+    .slide-menu nav a:first-child { border-top: 1px solid var(--border); }
+    .slide-menu nav a:hover { opacity: 1; color: var(--green); padding-left: 8px; }
+
+    .slide-menu-phone {
+      margin-top: 32px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-mid);
+      padding-right: 32px;
+    }
+
+    .slide-menu-phone a {
+      color: var(--text);
+      font-size: 18px;
+      font-weight: 600;
+      display: block;
+      margin-top: 4px;
+      transition: color 0.2s;
+    }
+
+    .slide-menu-phone a:hover { color: var(--green); }
+
+    /* ─── HEADER ─────────────────────────────── */
+    @keyframes barFadeIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    header {
+      position: fixed;
+      top: 0; left: 52px; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 17px 48px 17px 32px;
+      opacity: 0;
+      pointer-events: none;
+      transition: background 0.4s ease, box-shadow 0.4s ease, opacity 0.4s ease;
+    }
+
+    header.scrolled {
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 2px 24px rgba(0,0,0,0.08);
+      opacity: 1;
+      pointer-events: all;
+      animation: barFadeIn 0.4s ease both;
+    }
+
+    .header-logo {
+      display: block;
+      flex-shrink: 0;
+    }
+
+    .header-logo img {
+      height: 68px;
+      width: auto;
+      display: block;
+    }
+
+    /* ─── HERO NAV (scrolls with hero) ──────── */
+    .hero-nav {
+      position: absolute;
+      top: 0;
+      left: 52px;
+      right: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 48px 20px 32px;
+    }
+
+    .hero-nav-logo img {
+      height: 200px;
+      width: auto;
+      display: block;
+    }
+
+    .hero-nav-right {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .hero-nav-phone {
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+
+    .hero-nav-phone:hover { color: #fff; }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .header-phone {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--white);
+      transition: color 0.2s;
+      letter-spacing: 0.02em;
+    }
+
+    header.scrolled .header-phone { color: var(--text); }
+    .header-phone:hover { color: var(--green); }
+
+    .btn-green {
+      background: var(--green);
+      color: #fff;
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 12px 24px;
+      border-radius: 40px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-green:hover { background: var(--green-dark); }
+
+    /* ─── MOBILE MENU OVERLAY ────────────────── */
+    .m-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #fff;
+      z-index: 200;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 60px 40px;
+      gap: 0;
+    }
+
+    .m-menu.open { display: flex; }
+
+    .m-menu a {
+      font-family: var(--serif);
+      font-size: 36px;
+      font-style: italic;
+      color: var(--text);
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      width: 100%;
+      opacity: 0.85;
+      transition: opacity 0.2s, color 0.2s;
+    }
+
+    .m-menu a:last-child { border-bottom: none; }
+    .m-menu a:hover { opacity: 1; color: var(--green); }
+
+    .m-close {
+      position: absolute;
+      top: 24px; right: 24px;
+      font-size: 32px;
+      color: var(--text);
+      background: none;
+      border: none;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    /* ─── HERO ───────────────────────────────── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: flex-end;
+      padding-left: 52px;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('images/hero-night2.png');
+      background-size: cover;
+      background-position: center 55%;
+      animation: zoomIn 14s ease-out forwards;
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(1.06); }
+      to   { transform: scale(1.00); }
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        160deg,
+        rgba(0,0,0,0.55) 0%,
+        rgba(0,0,0,0.25) 50%,
+        rgba(0,0,0,0.65) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 60px 72px 52px;
+      max-width: 780px;
+    }
+
+    .hero-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(56px, 8vw, 104px);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 0.98;
+      color: var(--white);
+      margin-bottom: 32px;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--white);
+      border-bottom: 1px solid rgba(255,255,255,0.4);
+      padding-bottom: 2px;
+      transition: border-color 0.2s;
+    }
+
+    .hero-cta:hover { border-color: var(--white); }
+
+    .hero-cta svg { transition: transform 0.2s; }
+    .hero-cta:hover svg { transform: translateX(4px); }
+
+    .hero-bottom {
+      position: absolute;
+      bottom: 32px;
+      right: 60px;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .hero-news {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .hero-news-date {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+    }
+
+    .hero-news-title {
+      font-size: 13px;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .hero-scroll {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .hero-scroll svg { animation: bounce 2s ease-in-out infinite; }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(5px); }
+    }
+
+    /* ─── SECTION SHARED ─────────────────────── */
+    .section { padding: 120px 0 120px 52px; }
+    .section-inner { max-width: 1180px; margin: 0 auto; padding: 0 60px; }
+
+    .s-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 20px;
+    }
+
+    h2.s-title {
+      font-family: var(--serif);
+      font-size: clamp(42px, 5.5vw, 76px);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.05;
+      color: var(--text);
+      margin-bottom: 28px;
+    }
+
+    .s-text {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.8;
+      max-width: 520px;
+    }
+
+    .s-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text);
+      border-bottom: 1px solid var(--text);
+      padding-bottom: 2px;
+      margin-top: 36px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .s-link:hover { color: var(--green); border-color: var(--green); }
+    .s-link svg { transition: transform 0.2s; }
+    .s-link:hover svg { transform: translateX(5px); }
+
+    /* ─── STATS ──────────────────────────────── */
+    .stats-row {
+      display: flex;
+      gap: 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-top: 72px;
+    }
+
+    .stat {
+      flex: 1;
+      padding: 36px 0;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .stat:last-child { border-right: none; }
+
+    .stat-n {
+      font-family: var(--serif);
+      font-size: 52px;
+      font-weight: 400;
+      line-height: 1;
+      color: var(--text);
+    }
+
+    .stat-n sup {
+      font-size: 24px;
+      vertical-align: super;
+    }
+
+    .stat-l {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-light);
+      letter-spacing: 0.02em;
+    }
+
+    /* ─── SECTION: CONCEPT (centered) ───────── */
+    .s-concept { background: var(--white); }
+
+    .s-concept .section-inner { text-align: center; }
+
+    .s-concept h2.s-title { margin-left: auto; margin-right: auto; }
+
+    .s-concept .s-text {
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .s-concept .s-link { margin: 36px auto 0; }
+
+    /* ─── SECTION: SPLIT ─────────────────────── */
+    .s-split .split-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      align-items: stretch;
+    }
+
+    .split-img {
+      overflow: hidden;
+      min-height: 580px;
+    }
+
+    .split-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.8s ease;
+    }
+
+    .split-img:hover img { transform: scale(1.03); }
+
+    .split-img-ph {
+      width: 100%;
+      height: 100%;
+      min-height: 580px;
+      background: linear-gradient(135deg, #d4e8d0 0%, #b8d8b2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-light);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+    }
+
+    .split-text {
+      padding: 80px 72px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--white);
+    }
+
+    .split-text.bg-off { background: var(--off); }
+
+    /* ─── SECTION: ADVANTAGES ────────────────── */
+    .s-adv { background: var(--off); }
+
+    .adv-intro {
+      max-width: 640px;
+      margin-bottom: 64px;
+    }
+
+    .adv-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px 80px;
+    }
+
+    .adv-item { display: flex; flex-direction: column; gap: 12px; }
+
+    .adv-num {
+      font-family: var(--serif);
+      font-size: 40px;
+      font-style: italic;
+      color: var(--green);
+      line-height: 1;
+      opacity: 0.35;
+    }
+
+    .adv-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .adv-desc {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.75;
+    }
+
+    /* ─── SECTION: GALLERY FULL ──────────────── */
+    .s-gallery { padding: 0; }
+
+    .gallery-full {
+      display: grid;
+      grid-template-columns: 5fr 3fr 3fr;
+      height: 520px;
+      gap: 3px;
+    }
+
+    .gal-item {
+      overflow: hidden;
+      position: relative;
+      background: var(--off);
+    }
+
+    .gal-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+
+    .gal-item:hover img { transform: scale(1.04); }
+
+    .gal-ph {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--text-light);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      background: #e8f0e7;
+    }
+
+    /* ─── SECTION: PLANS ─────────────────────── */
+    .s-plans { background: var(--white); }
+
+    .plans-intro { margin-bottom: 64px; }
+
+    .plan-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3px;
+    }
+
+    .plan-card {
+      background: var(--off);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .plan-card-top {
+      height: 280px;
+      background: linear-gradient(135deg, #ddebd8 0%, #c8dfc3 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: var(--text-light);
+      letter-spacing: 0.08em;
+      border-bottom: 1px solid var(--border);
+      font-style: italic;
+    }
+
+    .plan-card-body { padding: 36px 40px 40px; }
+
+    .plan-name {
+      font-family: var(--serif);
+      font-size: 30px;
+      font-style: italic;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+
+    .plan-specs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px 32px;
+      margin-bottom: 32px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ps-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 4px;
+    }
+
+    .ps-val {
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .plan-price {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-style: italic;
+      color: var(--green);
+      margin-bottom: 20px;
+    }
+
+    /* ─── SECTION: LOCATION ──────────────────── */
+    .s-location { background: var(--white); }
+
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 80px;
+      align-items: center;
+      margin-top: 56px;
+    }
+
+    .loc-point {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .loc-point:first-child { border-top: 1px solid var(--border); }
+
+    .loc-icon {
+      font-size: 20px;
+      width: 36px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .loc-time {
+      font-family: var(--serif);
+      font-size: 26px;
+      font-style: italic;
+      color: var(--text);
+      min-width: 80px;
+    }
+
+    .loc-desc {
+      font-size: 14px;
+      color: var(--text-mid);
+      line-height: 1.5;
+    }
+
+    .loc-arrow {
+      margin-left: auto;
+      color: var(--green);
+      font-size: 18px;
+    }
+
+    .location-map {
+      height: 440px;
+      border-radius: 2px;
+      overflow: hidden;
+      background: #e8f0e7;
+    }
+
+    .location-map iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* ─── SECTION: DARK CTA ──────────────────── */
+    .s-dark-cta {
+      background: var(--green-dark);
+      padding: 100px 0 100px 52px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .s-dark-cta::after {
+      content: '';
+      position: absolute;
+      right: -120px;
+      top: -120px;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.03);
+      pointer-events: none;
+    }
+
+    .s-dark-cta .s-label { color: rgba(255,255,255,0.5); }
+
+    .s-dark-cta h2.s-title { color: var(--white); }
+
+    .s-dark-cta .s-text { color: rgba(255,255,255,0.65); }
+
+    /* ─── CONTACT FORM ───────────────────────── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      margin-top: 60px;
+    }
+
+    .contact-details { display: flex; flex-direction: column; gap: 0; }
+
+    .c-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .c-detail:first-child { border-top: 1px solid rgba(255,255,255,0.1); }
+
+    .c-detail-icon {
+      font-size: 18px;
+      width: 28px;
+      flex-shrink: 0;
+      opacity: 0.7;
+    }
+
+    .c-detail-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 4px;
+    }
+
+    .c-detail a, .c-detail span {
+      font-size: 16px;
+      color: rgba(255,255,255,0.9);
+      transition: color 0.2s;
+    }
+
+    .c-detail a:hover { color: #fff; }
+
+    .messengers { display: flex; gap: 12px; margin-top: 32px; }
+
+    .m-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 40px;
+      font-size: 13px;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+
+    .m-btn:hover { opacity: 0.85; }
+    .m-btn.wa { background: #25D366; color: #fff; }
+    .m-btn.tg { background: #2AABEE; color: #fff; }
+
+    .form-box {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 2px;
+      padding: 48px 44px;
+    }
+
+    .form-title {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-style: italic;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+
+    .form-sub {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+
+    .fg { margin-bottom: 16px; }
+
+    .fg label {
+      display: block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 6px;
+    }
+
+    .fg input, .fg select, .fg textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 2px;
+      padding: 13px 16px;
+      font-family: var(--sans);
+      font-size: 15px;
+      color: var(--white);
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+
+    .fg input:focus, .fg select:focus, .fg textarea:focus {
+      border-color: rgba(255,255,255,0.4);
+    }
+
+    .fg input::placeholder, .fg textarea::placeholder {
+      color: rgba(255,255,255,0.25);
+    }
+
+    .fg select option { background: #2a6326; }
+
+    .fg textarea { height: 90px; resize: none; }
+
+    .btn-submit {
+      width: 100%;
+      margin-top: 8px;
+      background: var(--white);
+      color: var(--green-dark);
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 16px;
+      border-radius: 40px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .btn-submit:hover { background: #e8f0e7; }
+
+    .form-note {
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+      text-align: center;
+      margin-top: 12px;
+    }
+
+    /* ─── FOOTER ──────────────────────────────── */
+    footer {
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      padding: 60px 0 40px 52px;
+    }
+
+    .footer-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 60px;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .footer-brand img { height: 44px; margin-bottom: 16px; }
+
+    .footer-brand p {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-light);
+      line-height: 1.7;
+      max-width: 240px;
+    }
+
+    .footer-col h4 {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+
+    .footer-col li a {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text-mid);
+      transition: color 0.2s;
+    }
+
+    .footer-col li a:hover { color: var(--green); }
+
+    .footer-bottom {
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-light);
+    }
+
+    /* ─── FLOATING PHONE BUTTON ───────────────── */
+    .float-phone {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      z-index: 90;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(61,143,56,0.35);
+      transition: background 0.2s, transform 0.2s;
+      color: #fff;
+    }
+
+    .float-phone:hover {
+      background: var(--green-dark);
+      transform: scale(1.05);
+    }
+
+    /* ─── RESPONSIVE ──────────────────────────── */
+    @media (max-width: 1024px) {
+      .side-nav { display: none; }
+      header { left: 0; padding: 20px 24px; }
+      .section { padding: 80px 0; }
+      .section-inner { padding: 0 24px; }
+      .s-split .split-grid { grid-template-columns: 1fr; }
+      .split-img { min-height: 340px; }
+      .split-text { padding: 48px 24px; }
+      .adv-list { grid-template-columns: 1fr 1fr; gap: 36px 48px; }
+      .gallery-full { grid-template-columns: 1fr 1fr; height: auto; }
+      .gal-item { height: 240px; }
+      .plan-cards { grid-template-columns: 1fr; }
+      .location-grid { grid-template-columns: 1fr; gap: 48px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .hero-bottom { display: none; }
+      .s-dark-cta { padding: 80px 0 80px 0; }
+      footer { padding: 60px 0 40px 0; }
+    }
+
+    @media (max-width: 640px) {
+      header { padding: 16px 20px; }
+      .header-phone { display: none; }
+      .hero-content { padding: 0 24px 56px; }
+      .hero h1 { font-size: 52px; }
+      .adv-list { grid-template-columns: 1fr; }
+      .gallery-full { grid-template-columns: 1fr; }
+      .gal-item { height: 280px; }
+      .stats-row { flex-wrap: wrap; }
+      .stat { min-width: 50%; }
+      .stat:nth-child(2) { border-right: none; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+      .form-box { padding: 32px 20px; }
+      .messengers { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── SIDE NAV ──────────────────────────────── -->
+<div class="side-nav">
+  <div class="side-menu-label" id="menuTrigger">
+    <div class="side-menu-dots">
+      <i></i><i></i><i></i>
+    </div>
+    <span>Меню</span>
+  </div>
+</div>
+
+<!-- ── SLIDE-OUT MENU ────────────────────────── -->
+<div class="slide-menu-overlay" id="menuOverlay"></div>
+<div class="slide-menu" id="slideMenu">
+  <div class="slide-menu-top">
+    <div class="slide-menu-logo">
+      <img src="images/л2.png"
+           alt="Lisnyky House" />
+    </div>
+    <button class="slide-close" id="menuClose">&times;</button>
+  </div>
+
+  <nav>
+    <a href="#about">Про комплекс</a>
+    <a href="#advantages">Переваги</a>
+    <a href="#plans">Планування</a>
+    <a href="#location">Локація</a>
+    <a href="#contact">Контакти</a>
+  </nav>
+
+  <div class="slide-menu-phone">
+    Зателефонувати:
+    <a href="tel:+380672004777">+38 067 200 47 77</a>
+  </div>
+</div>
+
+<!-- ── MOBILE MENU (fallback) ────────────────── -->
+<div class="m-menu" id="mMenu">
+  <button class="m-close" id="mClose">&times;</button>
+  <a href="#about">Про комплекс</a>
+  <a href="#advantages">Переваги</a>
+  <a href="#plans">Планування</a>
+  <a href="#location">Локація</a>
+  <a href="#contact">Контакти</a>
+</div>
+
+<!-- ── HEADER ────────────────────────────────── -->
+<header id="hdr">
+  <a href="#top" class="header-logo">
+    <img src="images/л2.png" alt="Lisnyky House" />
+  </a>
+  <div class="header-right">
+    <a href="tel:+380672004777" class="header-phone" id="hPhone">+38 067 200 47 77</a>
+    <a href="#contact" class="btn-green">Обрати будинок</a>
+  </div>
+</header>
+
+
+<!-- ════════════════════════════════════════════
+     HERO
+═════════════════════════════════════════════ -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+
+  <!-- nav всередині hero — скролиться разом з блоком -->
+  <div class="hero-nav">
+    <a href="#top" class="hero-nav-logo">
+      <img src="images/л1.png" alt="Lisnyky House" />
+    </a>
+    <div class="hero-nav-right">
+      <a href="tel:+380672004777" class="hero-nav-phone">+38 067 200 47 77</a>
+      <a href="#contact" class="btn-green">Обрати будинок</a>
+    </div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-label">Лісники, Київська область</div>
+    <h1>Жити поряд<br />з природою</h1>
+    <a href="#about" class="hero-cta">
+      Дізнатись більше
+      <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
+        <path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+    </a>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="hero-news">
+      <div class="hero-news-date">Готово до заселення</div>
+      <div class="hero-news-title">Будинки введено в експлуатацію</div>
+    </div>
+    <div class="hero-news">
+      <div class="hero-news-date">12 хв</div>
+      <div class="hero-news-title">до метро Видубичі</div>
+    </div>
+    <a href="#top" class="hero-scroll">
+      <svg width="14" height="20" viewBox="0 0 14 20" fill="none">
+        <path d="M7 0v18M1 13l6 6 6-6" stroke="rgba(255,255,255,0.5)" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+      Гортати
+    </a>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     CONCEPT
+═════════════════════════════════════════════ -->
+<section class="section s-concept" id="about">
+  <div class="section-inner">
+    <div class="s-label">Про комплекс</div>
+    <h2 class="s-title">Місце, де місто<br />зустрічається з лісом</h2>
+    <p class="s-text">
+      Lisnyky House — закритий таунхаус-комплекс у с. Лісники Київської
+      області. Тут ви отримуєте все що дає місто і те, чого місто дати не може:
+      ліс, озеро, тишу і простір для дітей.
+    </p>
+    <a href="#advantages" class="s-link">
+      Переваги комплексу
+      <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
+        <path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+    </a>
+
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-n">12<sup>хв</sup></div>
+        <div class="stat-l">до метро Видубичі</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">20<sup>хв</sup></div>
+        <div class="stat-l">до центру Києва</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">100<sup>%</sup></div>
+        <div class="stat-l">готово до заселення</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">24<sup>/7</sup></div>
+        <div class="stat-l">охорона та відеоспостереження</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SPLIT: NATURE
+═════════════════════════════════════════════ -->
+<section class="section s-split" style="padding: 0;">
+  <div class="split-grid">
+    <div class="split-img">
+      <img src="images/render-bikes.jpg"
+           alt="Lisnyky House — вдень"
+           onerror="this.outerHTML='<div class=\'split-img-ph\'>[render-bikes.jpg]</div>'" />
+    </div>
+    <div class="split-text">
+      <div class="s-label">Природа поруч</div>
+      <h2 class="s-title">Більше<br />простору</h2>
+      <p class="s-text">
+        Поряд — справжній ліс і озеро. Прогулянки по стежках, пікніки з дітьми,
+        вечірні пробіжки без виїзду з комплексу. Природний мікроклімат, чисте
+        повітря і тиша — кожен день.
+      </p>
+      <a href="#contact" class="s-link">
+        Записатись на перегляд
+        <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
+          <path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     SPLIT: READY
+═════════════════════════════════════════════ -->
+<section class="section s-split" style="padding: 0;">
+  <div class="split-grid">
+    <div class="split-text bg-off">
+      <div class="s-label">Готово сьогодні</div>
+      <h2 class="s-title">Ваш будинок<br />вже чекає</h2>
+      <p class="s-text">
+        Жодного «котловану» і жодного очікування. Всі будинки введено в
+        експлуатацію і готові до заселення. Ви купуєте готовий будинок і
+        в'їжджаєте коли зручно — наступного дня або наступного місяця.
+      </p>
+      <a href="#plans" class="s-link">
+        Переглянути планування
+        <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
+          <path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </a>
+    </div>
+    <div class="split-img">
+      <img src="images/render-family.jpg"
+           alt="Lisnyky House — сімейне"
+           onerror="this.outerHTML='<div class=\'split-img-ph\'>[render-family.jpg]</div>'" />
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     ADVANTAGES
+═════════════════════════════════════════════ -->
+<section class="section s-adv" id="advantages">
+  <div class="section-inner">
+    <div class="adv-intro">
+      <div class="s-label">Переваги</div>
+      <h2 class="s-title">Технології<br />та природа в одному домі</h2>
+    </div>
+
+    <div class="adv-list">
+      <div class="adv-item">
+        <div class="adv-num">01</div>
+        <div class="adv-title">Розумний дім</div>
+        <p class="adv-desc">Керування опаленням, освітленням та безпекою зі смартфону. Smart Home вбудований у кожен будинок.</p>
+      </div>
+      <div class="adv-item">
+        <div class="adv-num">02</div>
+        <div class="adv-title">Сонячні батареї</div>
+        <p class="adv-desc">Власна сонячна електростанція на даху — незалежність від відключень та економія на комунальних.</p>
+      </div>
+      <div class="adv-item">
+        <div class="adv-num">03</div>
+        <div class="adv-title">Біоканалізація ЄС</div>
+        <p class="adv-desc">Система очистки стічних вод за стандартами Євросоюзу. Екологічно безпечно для сім'ї та довкілля.</p>
+      </div>
+      <div class="adv-item">
+        <div class="adv-num">04</div>
+        <div class="adv-title">Закрита охоронювана територія</div>
+        <p class="adv-desc">Відеоспостереження та цілодобова охорона. Ваша сім'я та майно захищені в будь-який час доби.</p>
+      </div>
+      <div class="adv-item">
+        <div class="adv-num">05</div>
+        <div class="adv-title">Власне подвір'я та паркінг</div>
+        <p class="adv-desc">Кожен будинок має окреме подвір'я для відпочинку і паркінг для особистого авто.</p>
+      </div>
+      <div class="adv-item">
+        <div class="adv-num">06</div>
+        <div class="adv-title">12 хвилин від Києва</div>
+        <p class="adv-desc">Метро Видубичі — 12 хв, центр — 20 хв. Тиша передмістя без відриву від міської інфраструктури.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     GALLERY FULL
+═════════════════════════════════════════════ -->
+<section class="s-gallery">
+  <div class="gallery-full">
+
+    <div class="gal-item" style="grid-row: span 2;">
+      <img src="images/hero-night.jpg" alt="Lisnyky House вечір"
+           onerror="this.outerHTML='<div class=\'gal-ph\'>hero-night.jpg</div>'" />
+    </div>
+
+    <div class="gal-item">
+      <img src="images/render-fence.jpg" alt="Lisnyky House — вулиця"
+           onerror="this.outerHTML='<div class=\'gal-ph\'>render-fence.jpg</div>'" />
+    </div>
+
+    <div class="gal-item">
+      <img src="images/render-sunny.jpg" alt="Lisnyky House — сонячний день"
+           onerror="this.outerHTML='<div class=\'gal-ph\'>render-sunny.jpg</div>'" />
+    </div>
+
+    <div class="gal-item">
+      <img src="images/render-bikes.jpg" alt="Lisnyky House — прогулянка"
+           onerror="this.outerHTML='<div class=\'gal-ph\'>render-bikes.jpg</div>'" />
+    </div>
+
+    <div class="gal-item">
+      <img src="images/render-family.jpg" alt="Lisnyky House — сім'я"
+           onerror="this.outerHTML='<div class=\'gal-ph\'>render-family.jpg</div>'" />
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     PLANS
+═════════════════════════════════════════════ -->
+<section class="section s-plans" id="plans">
+  <div class="section-inner">
+    <div class="plans-intro">
+      <div class="s-label">Колекція будинків</div>
+      <h2 class="s-title">Оберіть свій<br />будинок</h2>
+      <p class="s-text">Два варіанти планування для різних потреб. Кожен будинок — два поверхи, балкон, власне подвір'я і паркінг.</p>
+    </div>
+
+    <div class="plan-cards">
+
+      <div class="plan-card">
+        <div class="plan-card-top">
+          Планування А — додайте зображення plan-a.jpg
+        </div>
+        <div class="plan-card-body">
+          <div class="plan-name">Таунхаус А</div>
+          <div class="plan-specs">
+            <div>
+              <div class="ps-label">Площа</div>
+              <div class="ps-val">110 м²</div>
+            </div>
+            <div>
+              <div class="ps-label">Кімнати</div>
+              <div class="ps-val">3 + 1</div>
+            </div>
+            <div>
+              <div class="ps-label">Поверхи</div>
+              <div class="ps-val">2</div>
+            </div>
+            <div>
+              <div class="ps-label">Балкон</div>
+              <div class="ps-val">Є</div>
+            </div>
+          </div>
+          <div class="plan-price">Уточнити ціну →</div>
+          <a href="#contact" class="s-link" style="margin-top:0">
+            Отримати деталі
+            <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
+              <path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="plan-card">
+        <div class="plan-card-top">
+          Планування Б — додайте зображення plan-b.jpg
+        </div>
+        <div class="plan-card-body">
+          <div class="plan-name">Таунхаус Б</div>
+          <div class="plan-specs">
+            <div>
+              <div class="ps-label">Площа</div>
+              <div class="ps-val">140 м²</div>
+            </div>
+            <div>
+              <div class="ps-label">Кімнати</div>
+              <div class="ps-val">4 + 1</div>
+            </div>
+            <div>
+              <div class="ps-label">Поверхи</div>
+              <div class="ps-val">2</div>
+            </div>
+            <div>
+              <div class="ps-label">Балкон</div>
+              <div class="ps-val">Є</div>
+            </div>
+          </div>
+          <div class="plan-price">Уточнити ціну →</div>
+          <a href="#contact" class="s-link" style="margin-top:0">
+            Отримати деталі
+            <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
+              <path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+    <p style="margin-top:24px; font-size:13px; color:var(--text-light);">* Площі та планування уточнюйте у менеджера. Ціни актуальні на дату звернення.</p>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     LOCATION
+═════════════════════════════════════════════ -->
+<section class="section s-location" id="location">
+  <div class="section-inner">
+    <div class="s-label">Локація</div>
+    <h2 class="s-title">Між природою<br />і містом</h2>
+
+    <div class="location-grid">
+      <div>
+        <div class="loc-point">
+          <div class="loc-icon">🚇</div>
+          <div class="loc-time">12 хв</div>
+          <div class="loc-desc">до метро<br /><strong>Видубичі</strong></div>
+          <div class="loc-arrow">→</div>
+        </div>
+        <div class="loc-point">
+          <div class="loc-icon">🏙️</div>
+          <div class="loc-time">20 хв</div>
+          <div class="loc-desc">до<br /><strong>центру Києва</strong></div>
+          <div class="loc-arrow">→</div>
+        </div>
+        <div class="loc-point">
+          <div class="loc-icon">🌲</div>
+          <div class="loc-time">пішки</div>
+          <div class="loc-desc">до<br /><strong>лісу та озера</strong></div>
+          <div class="loc-arrow">→</div>
+        </div>
+        <div class="loc-point">
+          <div class="loc-icon">🚗</div>
+          <div class="loc-time">5 хв</div>
+          <div class="loc-desc">до<br /><strong>супермаркету</strong></div>
+          <div class="loc-arrow">→</div>
+        </div>
+        <p style="margin-top:24px; font-size:13px; color:var(--text-light); line-height:1.6;">
+          вул. Виноградна, 33-35<br />
+          с. Лісники, Київська обл., 08172
+        </p>
+      </div>
+
+      <div class="location-map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2543.85!2d30.6169!3d50.3583!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4cf7a33333333%3A0x0!2z0KHQtdC70L4g0JvRltGB0L3QuNC60Lg!5e0!3m2!1suk!2sua!4v1700000000!5m2!1suk!2sua"
+          allowfullscreen=""
+          loading="lazy">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     DARK CTA + CONTACT
+═════════════════════════════════════════════ -->
+<section class="s-dark-cta" id="contact">
+  <div class="section-inner">
+    <div class="s-label">Зв'язатись з нами</div>
+    <h2 class="s-title">Готові показати<br />будинок сьогодні</h2>
+    <p class="s-text">Запишіться на особистий перегляд або задайте будь-яке питання. Відповімо протягом 15 хвилин.</p>
+
+    <div class="contact-grid">
+
+      <div class="contact-details">
+        <div class="c-detail">
+          <div class="c-detail-icon">📞</div>
+          <div>
+            <div class="c-detail-label">Телефон</div>
+            <a href="tel:+380672004777">+38 067 200 47 77</a>
+          </div>
+        </div>
+        <div class="c-detail">
+          <div class="c-detail-icon">📧</div>
+          <div>
+            <div class="c-detail-label">Email</div>
+            <a href="mailto:lisnykyhouse@gmail.com">lisnykyhouse@gmail.com</a>
+          </div>
+        </div>
+        <div class="c-detail">
+          <div class="c-detail-icon">📍</div>
+          <div>
+            <div class="c-detail-label">Адреса</div>
+            <span>вул. Виноградна, 33-35<br />с. Лісники, Київська обл.</span>
+          </div>
+        </div>
+
+        <div class="messengers">
+          <a href="https://wa.me/380672004777" class="m-btn wa" target="_blank" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp
+          </a>
+          <a href="https://t.me/+380672004777" class="m-btn tg" target="_blank" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+            Telegram
+          </a>
+        </div>
+      </div>
+
+      <div class="form-box">
+        <div class="form-title">Записатись на перегляд</div>
+        <div class="form-sub">Менеджер зв'яжеться з вами та погодить зручний час для особистого відвідування.</div>
+
+        <form action="mailto:lisnykyhouse@gmail.com" method="post" enctype="text/plain">
+          <div class="fg">
+            <label for="f-name">Ваше ім'я</label>
+            <input type="text" id="f-name" name="name" placeholder="Олена Коваленко" required />
+          </div>
+          <div class="fg">
+            <label for="f-phone">Номер телефону</label>
+            <input type="tel" id="f-phone" name="phone" placeholder="+38 0__ ___ __ __" required />
+          </div>
+          <div class="fg">
+            <label for="f-int">Що цікавить</label>
+            <select id="f-int" name="interest">
+              <option value="">Оберіть варіант</option>
+              <option>Таунхаус А (до 110 м²)</option>
+              <option>Таунхаус Б (до 140 м²)</option>
+              <option>Хочу спочатку проконсультуватись</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label for="f-msg">Коментар</label>
+            <textarea id="f-msg" name="message" placeholder="Зручний час для дзвінка або питання..."></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Надіслати заявку</button>
+          <p class="form-note">Ваші дані захищені та не передаються третім особам</p>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     FOOTER
+═════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="images/л1.png"
+             alt="Lisnyky House" />
+        <p>Готові таунхауси поряд з лісом та озером. Лісники, Київська область.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Про комплекс</h4>
+        <ul>
+          <li><a href="#about">Про проєкт</a></li>
+          <li><a href="#advantages">Переваги</a></li>
+          <li><a href="#plans">Планування</a></li>
+          <li><a href="#location">Локація</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Контакти</h4>
+        <ul>
+          <li><a href="tel:+380672004777">+38 067 200 47 77</a></li>
+          <li><a href="mailto:lisnykyhouse@gmail.com">lisnykyhouse@gmail.com</a></li>
+          <li><a href="#location">вул. Виноградна, 33-35<br />с. Лісники, 08172</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Месенджери</h4>
+        <ul>
+          <li><a href="https://wa.me/380672004777" target="_blank">WhatsApp</a></li>
+          <li><a href="https://t.me/+380672004777" target="_blank">Telegram</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Lisnyky House. Всі права захищені.</span>
+      <a href="#" style="font-size:13px; color:var(--text-light);">Політика конфіденційності</a>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ── FLOATING PHONE ─────────────────────────── -->
+<a href="tel:+380672004777" class="float-phone" title="Зателефонувати">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+    <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" fill="white"/>
+  </svg>
+</a>
+
+
+<script>
+  // Header + side nav scroll state
+  const hdr     = document.getElementById('hdr');
+  const sideNav = document.querySelector('.side-nav');
+  const heroH   = document.querySelector('.hero').offsetHeight;
+
+  window.addEventListener('scroll', () => {
+    const pastHero = window.scrollY > heroH * 0.98;
+    hdr.classList.toggle('scrolled', pastHero);
+    sideNav.classList.toggle('scrolled', pastHero);
+  });
+
+  window.dispatchEvent(new Event('scroll'));
+
+  // Slide-out menu
+  const slideMenu   = document.getElementById('slideMenu');
+  const menuOverlay = document.getElementById('menuOverlay');
+  const menuClose   = document.getElementById('menuClose');
+  const menuTrigger = document.getElementById('menuTrigger');
+  let hoverTimeout;
+
+  function openMenu() {
+    clearTimeout(hoverTimeout);
+    slideMenu.classList.add('open');
+    menuOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    slideMenu.classList.remove('open');
+    menuOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  const isMobile = () => window.innerWidth <= 1024;
+
+  // Desktop: hover to open
+  menuTrigger && menuTrigger.addEventListener('mouseenter', () => {
+    if (!isMobile()) openMenu();
+  });
+
+  // Keep open while hovering the menu panel itself
+  slideMenu && slideMenu.addEventListener('mouseenter', () => {
+    if (!isMobile()) clearTimeout(hoverTimeout);
+  });
+
+  slideMenu && slideMenu.addEventListener('mouseleave', () => {
+    if (!isMobile()) hoverTimeout = setTimeout(closeMenu, 300);
+  });
+
+  sideNav && sideNav.addEventListener('mouseleave', () => {
+    if (!isMobile()) hoverTimeout = setTimeout(closeMenu, 300);
+  });
+
+  // Mobile: click to open
+  menuTrigger && menuTrigger.addEventListener('click', () => {
+    if (isMobile()) openMenu();
+  });
+
+  menuClose   && menuClose.addEventListener('click', closeMenu);
+  menuOverlay && menuOverlay.addEventListener('click', closeMenu);
+
+  document.querySelectorAll('.slide-menu nav a').forEach(a => {
+    a.addEventListener('click', closeMenu);
+  });
+
+  // Mobile top menu (fallback)
+  const mMenu = document.getElementById('mMenu');
+  const mClose = document.getElementById('mClose');
+  mClose && mClose.addEventListener('click', () => mMenu.classList.remove('open'));
+  document.querySelectorAll('.m-menu a').forEach(a => {
+    a.addEventListener('click', () => mMenu.classList.remove('open'));
+  });
+
+  // Smooth anchor scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) {
+        e.preventDefault();
+        window.scrollTo({ top: t.offsetTop - 72, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Scroll reveal
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.adv-item, .plan-card, .loc-point, .stat, .c-detail').forEach(el => {
+    el.style.cssText += 'opacity:0;transform:translateY(20px);transition:opacity 0.55s ease,transform 0.55s ease;';
+    io.observe(el);
+  });
+</script>
+
+</body>
+</html>

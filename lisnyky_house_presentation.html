@@ -1,0 +1,1763 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Lisnyky House — Digital Strategy Audit 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --dark: #0A0E1A;
+    --dark2: #111827;
+    --dark3: #1C2537;
+    --accent: #C9A84C;
+    --accent2: #E8C97A;
+    --green: #22C55E;
+    --red: #EF4444;
+    --orange: #F97316;
+    --yellow: #EAB308;
+    --blue: #3B82F6;
+    --text: #E2E8F0;
+    --text-muted: #94A3B8;
+    --border: rgba(201,168,76,0.2);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* ─── SLIDES ─── */
+  .slide {
+    min-height: 100vh;
+    padding: 60px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 1px solid var(--border);
+    page-break-after: always;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slide::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* ─── COVER ─── */
+  .slide-cover {
+    background: linear-gradient(135deg, #0A0E1A 0%, #0F1929 50%, #0A0E1A 100%);
+    text-align: center;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .cover-tag {
+    background: rgba(201,168,76,0.15);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 8px 20px;
+    border-radius: 40px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .cover-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 1.1;
+    background: linear-gradient(135deg, #FFFFFF 0%, var(--accent2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .cover-subtitle {
+    font-size: 20px;
+    color: var(--text-muted);
+    max-width: 600px;
+    font-weight: 300;
+  }
+
+  .cover-meta {
+    display: flex;
+    gap: 40px;
+    margin-top: 20px;
+  }
+
+  .cover-meta-item {
+    text-align: center;
+  }
+
+  .cover-meta-item .num {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+
+  .cover-meta-item .label {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .cover-divider {
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+  }
+
+  /* ─── SECTION HEADER ─── */
+  .section-num {
+    font-size: 120px;
+    font-weight: 900;
+    color: rgba(201,168,76,0.06);
+    position: absolute;
+    top: 20px; right: 60px;
+    line-height: 1;
+    font-family: 'Playfair Display', serif;
+  }
+
+  .slide-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .slide-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+
+  .slide-desc {
+    color: var(--text-muted);
+    font-size: 16px;
+    margin-bottom: 40px;
+    max-width: 700px;
+  }
+
+  /* ─── CARDS ─── */
+  .cards {
+    display: grid;
+    gap: 16px;
+  }
+
+  .cards-2 { grid-template-columns: 1fr 1fr; }
+  .cards-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .cards-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+  .card {
+    background: var(--dark2);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+
+  .card.red::before { background: var(--red); }
+  .card.orange::before { background: var(--orange); }
+  .card.yellow::before { background: var(--yellow); }
+  .card.green::before { background: var(--green); }
+  .card.gold::before { background: var(--accent); }
+  .card.blue::before { background: var(--blue); }
+
+  .card-icon {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  .card-text {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* ─── STATUS BADGES ─── */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .badge-red { background: rgba(239,68,68,0.15); color: #FCA5A5; border: 1px solid rgba(239,68,68,0.3); }
+  .badge-orange { background: rgba(249,115,22,0.15); color: #FDBA74; border: 1px solid rgba(249,115,22,0.3); }
+  .badge-yellow { background: rgba(234,179,8,0.15); color: #FDE047; border: 1px solid rgba(234,179,8,0.3); }
+  .badge-green { background: rgba(34,197,94,0.15); color: #86EFAC; border: 1px solid rgba(34,197,94,0.3); }
+  .badge-gold { background: rgba(201,168,76,0.15); color: var(--accent2); border: 1px solid var(--border); }
+
+  /* ─── TABLE ─── */
+  .matrix-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .matrix-table th {
+    background: var(--dark3);
+    color: var(--accent);
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .matrix-table th:first-child { border-radius: 10px 0 0 0; }
+  .matrix-table th:last-child { border-radius: 0 10px 0 0; }
+
+  .matrix-table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: var(--text);
+    vertical-align: middle;
+  }
+
+  .matrix-table tr:last-child td { border-bottom: none; }
+
+  .matrix-table tr:nth-child(even) td {
+    background: rgba(255,255,255,0.02);
+  }
+
+  .matrix-table tr.highlight td {
+    background: rgba(201,168,76,0.06);
+    border-left: 2px solid var(--accent);
+  }
+
+  .check { color: var(--green); font-size: 16px; }
+  .cross { color: var(--red); font-size: 16px; }
+  .partial { color: var(--yellow); font-size: 16px; }
+
+  /* ─── PROBLEM ITEMS ─── */
+  .problem-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .problem-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--dark2);
+    border-radius: 12px;
+    border-left: 3px solid;
+  }
+
+  .problem-item.critical { border-color: var(--red); }
+  .problem-item.serious { border-color: var(--orange); }
+  .problem-item.moderate { border-color: var(--yellow); }
+
+  .problem-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+
+  .problem-title {
+    font-weight: 700;
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+
+  .problem-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* ─── PRICE ITEMS ─── */
+  .price-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .price-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    background: var(--dark2);
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .price-item-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .price-item-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .pi-free { background: rgba(34,197,94,0.15); }
+  .pi-low { background: rgba(59,130,246,0.15); }
+  .pi-mid { background: rgba(234,179,8,0.15); }
+  .pi-high { background: rgba(201,168,76,0.15); }
+
+  .price-item-name { font-weight: 600; font-size: 14px; color: #fff; }
+  .price-item-desc { font-size: 12px; color: var(--text-muted); }
+
+  .price-tag {
+    font-weight: 700;
+    font-size: 15px;
+    white-space: nowrap;
+  }
+
+  .price-free { color: var(--green); }
+  .price-low { color: var(--blue); }
+  .price-mid { color: var(--yellow); }
+  .price-high { color: var(--accent); }
+
+  /* ─── FUNNEL ─── */
+  .funnel {
+    display: flex;
+    gap: 0;
+    align-items: stretch;
+  }
+
+  .funnel-stage {
+    flex: 1;
+    padding: 24px 20px;
+    position: relative;
+  }
+
+  .funnel-stage::after {
+    content: '▶';
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent);
+    font-size: 20px;
+    z-index: 2;
+  }
+
+  .funnel-stage:last-child::after { display: none; }
+
+  .funnel-stage-1 { background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.2); border-radius: 16px 0 0 16px; }
+  .funnel-stage-2 { background: rgba(234,179,8,0.08); border: 1px solid rgba(234,179,8,0.2); border-top: 1px solid rgba(234,179,8,0.2); border-bottom: 1px solid rgba(234,179,8,0.2); border-left: none; border-right: none; }
+  .funnel-stage-3 { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.2); border-radius: 0 16px 16px 0; }
+
+  .funnel-num {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .fs1 .funnel-num { color: var(--blue); }
+  .fs2 .funnel-num { color: var(--yellow); }
+  .fs3 .funnel-num { color: var(--green); }
+
+  .funnel-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+
+  .funnel-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .funnel-items li {
+    font-size: 13px;
+    color: var(--text-muted);
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .funnel-items li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  /* ─── AUTOMATION ROW ─── */
+  .auto-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .auto-item {
+    background: var(--dark2);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .auto-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .auto-icon {
+    font-size: 24px;
+  }
+
+  .auto-title {
+    font-weight: 700;
+    font-size: 15px;
+    color: #fff;
+  }
+
+  .auto-arrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+  }
+
+  .auto-from {
+    background: rgba(239,68,68,0.12);
+    color: #FCA5A5;
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+
+  .auto-to {
+    background: rgba(34,197,94,0.12);
+    color: #86EFAC;
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+
+  .auto-arrow-sym { color: var(--accent); font-size: 14px; }
+
+  .auto-benefit {
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* ─── ROI BLOCK ─── */
+  .roi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .roi-card {
+    background: var(--dark3);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+  }
+
+  .roi-value {
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--accent);
+    font-family: 'Playfair Display', serif;
+  }
+
+  .roi-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 6px;
+  }
+
+  /* ─── KILLER BLOCK ─── */
+  .killer-block {
+    background: linear-gradient(135deg, rgba(239,68,68,0.1), rgba(239,68,68,0.03));
+    border: 1px solid rgba(239,68,68,0.3);
+    border-radius: 20px;
+    padding: 32px 40px;
+    text-align: center;
+  }
+
+  .killer-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+
+  .killer-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    color: #fff;
+    line-height: 1.4;
+    max-width: 800px;
+    margin: 0 auto 20px;
+  }
+
+  .killer-sub {
+    font-size: 15px;
+    color: var(--text-muted);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* ─── CTA SLIDE ─── */
+  .slide-cta {
+    background: linear-gradient(135deg, #0A0E1A 0%, #101624 50%, #0A0E1A 100%);
+    text-align: center;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .cta-steps {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 20px 0;
+  }
+
+  .cta-step {
+    background: var(--dark2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px 28px;
+    width: 220px;
+    text-align: center;
+  }
+
+  .cta-step-num {
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--accent);
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 8px;
+  }
+
+  .cta-step-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+
+  .cta-step-text {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  /* ─── QUICK WIN TABLE ─── */
+  .qw-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .qw-table th {
+    background: var(--dark3);
+    color: var(--accent);
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .qw-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 13px;
+    vertical-align: middle;
+  }
+
+  .qw-table tr:last-child td { border-bottom: none; }
+  .qw-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+
+  /* ─── PAGE NUMBER ─── */
+  .page-num {
+    position: absolute;
+    bottom: 24px;
+    right: 40px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.2);
+    font-weight: 500;
+  }
+
+  .logo-corner {
+    position: absolute;
+    bottom: 24px;
+    left: 40px;
+    font-size: 11px;
+    color: rgba(201,168,76,0.4);
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ─── HIGHLIGHT TEXT ─── */
+  .highlight { color: var(--accent); font-weight: 700; }
+  .highlight-green { color: var(--green); font-weight: 700; }
+  .highlight-red { color: var(--red); font-weight: 700; }
+
+  /* ─── PRINT ─── */
+  @media print {
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    body { background: var(--dark) !important; }
+    .slide {
+      page-break-after: always;
+      break-after: page;
+      min-height: 100vh;
+      padding: 40px 60px;
+    }
+    .section-num { display: none; }
+  }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 768px) {
+
+    /* BASE */
+    .slide {
+      padding: 32px 16px 60px !important;
+      min-height: auto !important;
+    }
+    .section-num { display: none !important; }
+
+    /* TYPOGRAPHY */
+    .cover-title  { font-size: 32px !important; }
+    .cover-subtitle { font-size: 14px !important; }
+    .cover-meta   { gap: 16px !important; flex-wrap: wrap !important; justify-content: center !important; }
+    .cover-meta-item .num { font-size: 24px !important; }
+    .slide-title  { font-size: 24px !important; }
+    .slide-desc   { font-size: 13px !important; margin-bottom: 24px !important; }
+    .slide-label  { font-size: 10px !important; }
+
+    /* ALL GRIDS → single column */
+    .cards-2,
+    .cards-3,
+    .cards-4,
+    .two-col,
+    .auto-grid,
+    .roi-grid { grid-template-columns: 1fr !important; }
+
+    /* INLINE GRIDS — override via universal selector */
+    [style*="grid-template-columns"] {
+      grid-template-columns: 1fr !important;
+    }
+    /* except price-item-left which is a flex row */
+    .price-item-left { display: flex !important; }
+
+    /* FUNNEL → vertical */
+    .funnel { flex-direction: column !important; gap: 10px !important; }
+    .funnel-stage::after { display: none !important; }
+    .funnel-stage-1,
+    .funnel-stage-2,
+    .funnel-stage-3 {
+      border-radius: 16px !important;
+      border: 1px solid rgba(255,255,255,0.1) !important;
+    }
+    .funnel-stage-1 { border-color: rgba(59,130,246,0.3) !important; }
+    .funnel-stage-2 { border-color: rgba(234,179,8,0.3) !important; }
+    .funnel-stage-3 { border-color: rgba(34,197,94,0.3) !important; }
+
+    /* TABLES → scrollable */
+    .table-scroll {
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+    }
+    .matrix-table,
+    .qw-table {
+      min-width: 580px;
+      font-size: 11px !important;
+    }
+    .matrix-table th,
+    .matrix-table td,
+    .qw-table th,
+    .qw-table td { padding: 7px 8px !important; }
+
+    /* PROBLEM LIST */
+    .problem-item { gap: 10px !important; padding: 12px 14px !important; }
+    .problem-title { font-size: 13px !important; }
+    .problem-desc  { font-size: 12px !important; }
+
+    /* PRICE LIST */
+    .price-item { flex-direction: column !important; align-items: flex-start !important; gap: 8px !important; }
+    .price-tag  { font-size: 14px !important; }
+
+    /* KILLER */
+    .killer-block { padding: 24px 16px !important; }
+    .killer-text  { font-size: 18px !important; }
+    .killer-sub   { font-size: 13px !important; }
+
+    /* CTA */
+    .cta-steps { flex-direction: column !important; align-items: center !important; gap: 12px !important; }
+    .cta-step  { width: 100% !important; max-width: 100% !important; }
+
+    /* INSIGHT BOX */
+    .insight-box { padding: 14px 16px !important; }
+    .ib-text { font-size: 13px !important; }
+
+    /* AUTO ITEM */
+    .auto-item { padding: 16px !important; }
+    .auto-arrow { flex-wrap: wrap !important; gap: 6px !important; }
+
+    /* BADGES on small screens */
+    .badge { font-size: 10px !important; padding: 3px 7px !important; }
+
+    /* PAGE META */
+    .logo-corner,
+    .page-num { font-size: 10px !important; }
+
+    /* ROI cards in investments */
+    .roi-card { padding: 16px !important; }
+    .roi-value { font-size: 28px !important; }
+  }
+
+  /* ─── GRID HELPERS ─── */
+  .grid-5col {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+  }
+  @media (max-width: 768px) {
+    .grid-5col { grid-template-columns: repeat(3, 1fr) !important; }
+  }
+  @media (max-width: 480px) {
+    .grid-5col { grid-template-columns: 1fr 1fr !important; }
+  }
+
+  /* ─── DIVIDER ─── */
+  .gold-line {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    margin-bottom: 20px;
+  }
+
+  /* ─── TWO COL ─── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .insight-box {
+    background: rgba(201,168,76,0.06);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 24px;
+  }
+
+  .insight-box .ib-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+  }
+
+  .insight-box .ib-text {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 1 — COVER
+════════════════════════════════════════════ -->
+<div class="slide slide-cover">
+  <div class="cover-tag">Digital Strategy Audit · Квітень 2026</div>
+  <div class="cover-title">Lisnyky House</div>
+  <div class="cover-subtitle">Комплексний аудит цифрового присутності та стратегічний план зростання продажів</div>
+  <div class="cover-divider"></div>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <div class="num">4</div>
+      <div class="label">Фази аудиту</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="num">23</div>
+      <div class="label">Рекомендації</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="num">10</div>
+      <div class="label">Quick Wins</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="num">+28%</div>
+      <div class="label">Ріст попиту на таунхауси</div>
+    </div>
+  </div>
+  <div class="page-num">1 / 12</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 2 — EXECUTIVE SUMMARY
+════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="section-num">02</div>
+  <div class="slide-label">Резюме</div>
+  <div class="slide-title">Сильний продукт.<br>Слабкий цифровий фронт.</div>
+  <div class="slide-desc">Lisnyky House має унікальний набір конкурентних переваг, але сайт не дозволяє ним скористатись.</div>
+
+  <div class="two-col">
+    <div>
+      <div class="problem-list">
+        <div class="problem-item critical">
+          <div class="problem-icon">🔴</div>
+          <div>
+            <div class="problem-title">Нульова конверсія без форм</div>
+            <div class="problem-desc">Єдиний спосіб контакту — телефон. Бізнес-клас не дзвонить одразу. Покупець іде до конкурентів.</div>
+          </div>
+        </div>
+        <div class="problem-item critical">
+          <div class="problem-icon">🔴</div>
+          <div>
+            <div class="problem-title">Відсутність цін = відсутність рішення</div>
+            <div class="problem-desc">Park Lake City, Villaggo — ціни відкриті. Lisnyky House — тиша. Покупець сприймає це як проблему з проєктом.</div>
+          </div>
+        </div>
+        <div class="problem-item serious">
+          <div class="problem-icon">🟠</div>
+          <div>
+            <div class="problem-title">Невидимість на ринку</div>
+            <div class="problem-desc">Відсутність на LUN.ua та DOM.RIA — це 60-70% цільової аудиторії, яка ніколи не дізнається про об'єкт.</div>
+          </div>
+        </div>
+        <div class="problem-item serious">
+          <div class="problem-icon">🟠</div>
+          <div>
+            <div class="problem-title">Gmail = недовіра</div>
+            <div class="problem-desc">lisnykyhouse@gmail.com для об'єктів 4+ млн грн — це серйозний удар по іміджу.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:16px;">
+      <div class="insight-box">
+        <div class="ib-title">✅ Що вже добре</div>
+        <div class="ib-text">
+          · Будинки <strong style="color:#fff">введено в експлуатацію</strong> — унікальна перевага у 2026 р.<br>
+          · Генератор + сонячні панелі + укриття<br>
+          · 4 програми іпотеки (єОселя + 3 банки)<br>
+          · Smart home технологія<br>
+          · 12 хв до метро Видубичі<br>
+          · Ліс + озеро в пішій доступності
+        </div>
+      </div>
+      <div class="insight-box" style="background: rgba(201,168,76,0.1);">
+        <div class="ib-title">📊 Ринок 2026</div>
+        <div class="ib-text">
+          Попит на таунхауси зріс на <strong style="color: var(--accent)">28%</strong> у 2025 р.<br>
+          єОселя — <strong style="color: var(--accent)">7 700 кредитів</strong> на 15 млрд грн.<br>
+          Покупці воліють <strong style="color: var(--accent)">готові об'єкти</strong>.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="logo-corner">Lisnyky House · Digital Audit 2026</div>
+  <div class="page-num">2 / 12</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 3 — CRO AUDIT
+════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="section-num">03</div>
+  <div class="slide-label">Фаза 1 · Технічний аудит</div>
+  <div class="slide-title">Аудит конверсії сайту</div>
+  <div class="slide-desc">Повний CRO-аналіз www.lisnykyhouse.kyiv.ua</div>
+
+  <div class="cards cards-3">
+    <div class="card red">
+      <div class="card-icon">📋</div>
+      <div class="card-title">Лід-форми</div>
+      <div class="card-text">
+        <span style="color: var(--red);">❌ Відсутні повністю</span><br>
+        Тільки телефон без форми. Нема "Отримати ціну", "Записатись на показ", "Завантажити презентацію".
+      </div>
+    </div>
+    <div class="card red">
+      <div class="card-icon">💰</div>
+      <div class="card-title">Ціноутворення</div>
+      <div class="card-text">
+        <span style="color: var(--red);">❌ Ціни відсутні</span><br>
+        Покупець не може оцінити об'єкт без дзвінка. 80% покупців закривають сайт без ціни.
+      </div>
+    </div>
+    <div class="card orange">
+      <div class="card-icon">📹</div>
+      <div class="card-title">Відеоконтент</div>
+      <div class="card-text">
+        <span style="color: var(--orange);">❌ Відсутній</span><br>
+        6 фотографій для готового об'єкту — критично мало. Конкуренти мають дрон-відео та тури.
+      </div>
+    </div>
+    <div class="card red">
+      <div class="card-icon">📧</div>
+      <div class="card-title">Email</div>
+      <div class="card-text">
+        <span style="color: var(--red);">❌ Gmail</span><br>
+        lisnykyhouse@gmail.com для бізнес-класу. Виправляється за $6/міс (Google Workspace).
+      </div>
+    </div>
+    <div class="card orange">
+      <div class="card-icon">📍</div>
+      <div class="card-title">Google Maps</div>
+      <div class="card-text">
+        <span style="color: var(--orange);">❌ Не вбудовано</span><br>
+        Покупці з інших міст та з-за кордону не можуть оцінити локацію без карти.
+      </div>
+    </div>
+    <div class="card orange">
+      <div class="card-icon">📱</div>
+      <div class="card-title">Соціальні мережі</div>
+      <div class="card-text">
+        <span style="color: var(--orange);">❌ Немає посилань</span><br>
+        У 2026 р. 60-70% знайомства з нерухомістю — через Instagram/Facebook.
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top: 20px;" class="table-scroll">
+    <table class="matrix-table">
+      <thead>
+        <tr>
+          <th>Параметр</th>
+          <th>Lisnyky House</th>
+          <th>Park Lake City</th>
+          <th>Villaggo</th>
+          <th>Пріоритет</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Ціни на сайті</td>
+          <td><span class="cross">✗ Відсутні</span></td>
+          <td><span class="check">✓ 9,24-12,51 млн</span></td>
+          <td><span class="check">✓ від 25 200 грн/м²</span></td>
+          <td><span class="badge badge-red">🔴 Критично</span></td>
+        </tr>
+        <tr>
+          <td>Лід-форма</td>
+          <td><span class="cross">✗ Тільки тел.</span></td>
+          <td><span class="check">✓ Онлайн-заявка</span></td>
+          <td><span class="check">✓ Форма</span></td>
+          <td><span class="badge badge-red">🔴 Критично</span></td>
+        </tr>
+        <tr>
+          <td>LUN.ua / DOM.RIA</td>
+          <td><span class="cross">✗ Відсутній</span></td>
+          <td><span class="check">✓ Активний</span></td>
+          <td><span class="check">✓ Активний</span></td>
+          <td><span class="badge badge-red">🔴 Критично</span></td>
+        </tr>
+        <tr>
+          <td>Відеоконтент</td>
+          <td><span class="cross">✗ Немає</span></td>
+          <td><span class="check">✓ Дрон + тури</span></td>
+          <td><span class="check">✓ Є</span></td>
+          <td><span class="badge badge-orange">🟠 Важливо</span></td>
+        </tr>
+        <tr>
+          <td>Укриття / генератор</td>
+          <td><span class="check">✓ Є</span></td>
+          <td><span class="partial">~ Не акцент.</span></td>
+          <td><span class="cross">✗ Не вказано</span></td>
+          <td><span class="badge badge-gold">⭐ Перевага</span></td>
+        </tr>
+        <tr>
+          <td>Статус готовності</td>
+          <td><span class="check">✓ Введено!</span></td>
+          <td><span class="partial">~ Черги до 2026</span></td>
+          <td><span class="partial">~ В процесі</span></td>
+          <td><span class="badge badge-gold">⭐ Перевага</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="logo-corner">Lisnyky House · Digital Audit 2026</div>
+  <div class="page-num">3 / 12</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 4 — SEO AUDIT
+════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="section-num">04</div>
+  <div class="slide-label">Фаза 1 · SEO</div>
+  <div class="slide-title">SEO та видимість у пошуку</div>
+  <div class="slide-desc">Потенційні покупці шукають — але не знаходять Lisnyky House</div>
+
+  <div class="two-col">
+    <div>
+      <div class="problem-list">
+        <div class="problem-item critical">
+          <div>
+            <div class="problem-title">❌ Немає title та meta description</div>
+            <div class="problem-desc">Google показує автогенерований опис. CTR знижується на 20-30% порівняно з оптимізованим результатом.</div>
+          </div>
+        </div>
+        <div class="problem-item critical">
+          <div>
+            <div class="problem-title">❌ Зображення без alt-тексту</div>
+            <div class="problem-desc">Втрачено весь image SEO трафік. Alt-текст — безкоштовний і швидкий спосіб отримати кліки з Google Images.</div>
+          </div>
+        </div>
+        <div class="problem-item critical">
+          <div>
+            <div class="problem-title">❌ Відсутній Schema markup</div>
+            <div class="problem-desc">Google не розуміє що це нерухомість. LocalBusiness + RealEstateListing — дають rich snippet у пошуку.</div>
+          </div>
+        </div>
+        <div class="problem-item serious">
+          <div>
+            <div class="problem-title">⚠️ Відсутній блог/контент</div>
+            <div class="problem-desc">Статичний сайт без нового контенту = повільне падіння у пошуку. Конкуренти ведуть блоги.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="insight-box" style="margin-bottom: 16px;">
+        <div class="ib-title">🎯 Пріоритетні ключові запити</div>
+        <div style="display:flex; flex-direction:column; gap:8px; margin-top:8px;">
+          <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:6px; font-size:13px; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06);">
+            <span>таунхауси Лісники купити</span>
+            <span class="badge badge-red">Комерційний</span>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:6px; font-size:13px; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06);">
+            <span>купити будинок під Києвом ліс</span>
+            <span class="badge badge-gold">Lifestyle</span>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:6px; font-size:13px; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06);">
+            <span>таунхаус з укриттям генератором</span>
+            <span class="badge badge-orange">Безпека 2026</span>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:6px; font-size:13px; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06);">
+            <span>єОселя таунхаус під Києвом</span>
+            <span class="badge badge-blue" style="background:rgba(59,130,246,0.15);color:#93C5FD;border:1px solid rgba(59,130,246,0.3);">Іпотека</span>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:6px; font-size:13px; padding: 6px 0;">
+            <span>таунхаус Київ-Святошинський район</span>
+            <span class="badge badge-yellow">Географічний</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="insight-box">
+        <div class="ib-title">💡 Рекомендований Title Tag</div>
+        <div class="ib-text" style="font-family: monospace; font-size: 13px; color: #7DD3FC; margin-top: 6px;">
+          "Таунхауси Лісники Хаус — купити будинок під Києвом від забудовника | Готові до заселення"
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="logo-corner">Lisnyky House · Digital Audit 2026</div>
+  <div class="page-num">4 / 12</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 5 — COMPETITOR MATRIX
+════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="section-num">05</div>
+  <div class="slide-label">Фаза 2 · Конкуренти</div>
+  <div class="slide-title">Матриця конкурентного<br>порівняння</div>
+  <div class="slide-desc">Lisnyky House має продуктову перевагу — але програє в digital-присутності</div>
+
+  <div class="table-scroll">
+  <table class="matrix-table">
+    <thead>
+      <tr>
+        <th style="width:22%">Критерій</th>
+        <th style="width:20%; background: rgba(201,168,76,0.12);">⭐ Lisnyky House</th>
+        <th style="width:19%">Park Lake City</th>
+        <th style="width:19%">Villaggo</th>
+        <th style="width:20%">Kadelyuk Homes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="highlight">
+        <td><strong>Статус</strong></td>
+        <td><span class="check">✓ Введено в експл.</span></td>
+        <td><span class="partial">~ Черги до 2026</span></td>
+        <td><span class="partial">~ В процесі</span></td>
+        <td><span class="partial">~ Готовність 2026</span></td>
+      </tr>
+      <tr>
+        <td>Відстань до центру</td>
+        <td><span class="check">✓ 12-20 хв</span></td>
+        <td><span class="check">✓ 15-20 хв</span></td>
+        <td><span class="partial">~ 4 км (пробки)</span></td>
+        <td><span class="check">✓ 10-20 хв</span></td>
+      </tr>
+      <tr>
+        <td>Ціни на сайті</td>
+        <td><span class="cross">✗ Відсутні</span></td>
+        <td><span class="check">✓ 9.2-12.5 млн грн</span></td>
+        <td><span class="check">✓ від 25 200 грн/м²</span></td>
+        <td><span class="cross">✗ Немає</span></td>
+      </tr>
+      <tr class="highlight">
+        <td><strong>Укриття + генератор</strong></td>
+        <td><span class="check">✓ ОБА є</span></td>
+        <td><span class="partial">~ Не акцентовано</span></td>
+        <td><span class="cross">✗ Не вказано</span></td>
+        <td><span class="cross">✗ Не вказано</span></td>
+      </tr>
+      <tr class="highlight">
+        <td><strong>Сонячні панелі</strong></td>
+        <td><span class="check">✓ Є</span></td>
+        <td><span class="cross">✗ Не вказано</span></td>
+        <td><span class="cross">✗ Не вказано</span></td>
+        <td><span class="cross">✗ Не вказано</span></td>
+      </tr>
+      <tr>
+        <td>Smart Home</td>
+        <td><span class="check">✓ Є</span></td>
+        <td><span class="cross">✗ Не вказано</span></td>
+        <td><span class="check">✓ Є</span></td>
+        <td><span class="cross">✗ Не вказано</span></td>
+      </tr>
+      <tr>
+        <td>єОселя / іпотека</td>
+        <td><span class="check">✓ 4 програми</span></td>
+        <td><span class="check">✓ Є</span></td>
+        <td><span class="check">✓ Є</span></td>
+        <td><span class="cross">✗ Немає даних</span></td>
+      </tr>
+      <tr>
+        <td>Відеоконтент</td>
+        <td><span class="cross">✗ Відсутній</span></td>
+        <td><span class="check">✓ Дрон + тури</span></td>
+        <td><span class="check">✓ Є</span></td>
+        <td><span class="cross">✗ Мінімальний</span></td>
+      </tr>
+      <tr>
+        <td>LUN.ua / DOM.RIA</td>
+        <td><span class="cross">✗ Відсутній</span></td>
+        <td><span class="check">✓ Активний</span></td>
+        <td><span class="check">✓ Активний</span></td>
+        <td><span class="cross">✗ Немає даних</span></td>
+      </tr>
+      <tr>
+        <td>Лід-форма на сайті</td>
+        <td><span class="cross">✗ Тільки тел.</span></td>
+        <td><span class="check">✓ Є</span></td>
+        <td><span class="check">✓ Є</span></td>
+        <td><span class="cross">✗ Немає</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div><!-- /overflow-x -->
+
+  <div style="margin-top: 16px; padding: 16px 20px; background: rgba(201,168,76,0.07); border: 1px solid var(--border); border-radius: 12px; font-size: 14px; color: var(--text);">
+    <strong style="color: var(--accent);">Висновок:</strong> Lisnyky House — єдиний конкурент з <strong>готовим об'єктом + укриттям + сонячними панелями</strong>. Це унікальне поєднання, якого немає у жодного конкурента. Але ринок про це не знає.
+  </div>
+
+  <div class="logo-corner">Lisnyky House · Digital Audit 2026</div>
+  <div class="page-num">5 / 12</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 6 — MARKET TRENDS
+════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="section-num">06</div>
+  <div class="slide-label">Фаза 2 · Ринок</div>
+  <div class="slide-title">Тренди ринку 2026</div>
+  <div class="slide-desc">Умови сприятливі — час діяти</div>
+
+  <div class="cards cards-4" style="margin-bottom: 24px;">
+    <div class="card green">
+      <div class="card-icon">📈</div>
+      <div class="card-title">+28%</div>
+      <div class="card-text">Ріст попиту на таунхауси у 2025 р. — найбільший серед усіх форматів житла</div>
+    </div>
+    <div class="card gold">
+      <div class="card-icon">🏦</div>
+      <div class="card-title">7 700</div>
+      <div class="card-text">Іпотечних кредитів єОселя у 2025 р. на 15 млрд грн. Програма продовжується у 2026</div>
+    </div>
+    <div class="card blue">
+      <div class="card-icon">⚡</div>
+      <div class="card-title">Енергетика</div>
+      <div class="card-text">Генератор і сонячні панелі — з бонусу перетворились на базовий критерій вибору</div>
+    </div>
+    <div class="card orange">
+      <div class="card-icon">🛡️</div>
+      <div class="card-title">Безпека</div>
+      <div class="card-text">Укриття — топ-1 купівельний критерій для сімей з дітьми у 2026 р.</div>
+    </div>
+  </div>
+
+  <div class="insight-box" style="margin-bottom: 16px;">
+    <div class="ib-title">🎯 Висновок: Lisnyky House відповідає 5/5 трендам 2026 року</div>
+    <div class="grid-5col" style="gap: 12px; margin-top: 12px;">
+      <div style="text-align:center; padding: 12px; background: rgba(34,197,94,0.08); border-radius: 10px;">
+        <div style="font-size: 24px;">✅</div>
+        <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Готовий об'єкт</div>
+      </div>
+      <div style="text-align:center; padding: 12px; background: rgba(34,197,94,0.08); border-radius: 10px;">
+        <div style="font-size: 24px;">✅</div>
+        <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Генератор</div>
+      </div>
+      <div style="text-align:center; padding: 12px; background: rgba(34,197,94,0.08); border-radius: 10px;">
+        <div style="font-size: 24px;">✅</div>
+        <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Укриття</div>
+      </div>
+      <div style="text-align:center; padding: 12px; background: rgba(34,197,94,0.08); border-radius: 10px;">
+        <div style="font-size: 24px;">✅</div>
+        <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">єОселя</div>
+      </div>
+      <div style="text-align:center; padding: 12px; background: rgba(34,197,94,0.08); border-radius: 10px;">
+        <div style="font-size: 24px;">✅</div>
+        <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Сонячні панелі</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="logo-corner">Lisnyky House · Digital Audit 2026</div>
+  <div class="page-num">6 / 12</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 7 — QUICK WINS
+════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="section-num">07</div>
+  <div class="slide-label">Фаза 3 · Дії</div>
+  <div class="slide-title">10 Quick Wins<br>за 7 днів</div>
+  <div class="slide-desc">Зміни, що не потребують великих інвестицій, але суттєво збільшують конверсію</div>
+
+  <div class="table-scroll">
+  <table class="qw-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Дія</th>
+        <th>Складність</th>
+        <th>Вартість</th>
+        <th>Очікуваний ефект</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong style="color:var(--accent)">1</strong></td>
+        <td>Розміститись на <strong>LUN.ua + DOM.RIA</strong></td>
+        <td><span class="badge badge-green">Низька</span></td>
+        <td><span class="highlight-green">Безкоштовно</span></td>
+        <td>+300-500% органічного трафіку</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--accent)">2</strong></td>
+        <td>Додати <strong>лід-форму</strong> "Отримати ціну" на головну</td>
+        <td><span class="badge badge-green">Низька</span></td>
+        <td><span class="highlight-green">Безкоштовно</span></td>
+        <td>Конверсія: 0% → 15-25%</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--accent)">3</strong></td>
+        <td>Вказати <strong>стартову ціну</strong> ("від 4 200 000 грн")</td>
+        <td><span class="badge badge-green">Мінімальна</span></td>
+        <td><span class="highlight-green">Безкоштовно</span></td>
+        <td>↓ відмов, ↑ якість лідів</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--accent)">4</strong></td>
+        <td>Зняти <strong>відеотур</strong> готового будинку (смартфон)</td>
+        <td><span class="badge badge-green">Низька</span></td>
+        <td><span class="highlight-green">Безкоштовно</span></td>
+        <td>Engagement ×3, ↑ довіра</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--accent)">5</strong></td>
+        <td>Перейти на <strong>корпоративний email</strong></td>
+        <td><span class="badge badge-green">Мінімальна</span></td>
+        <td style="color: #7DD3FC;">$6/міс</td>
+        <td>Довіра +20%, імідж бренду</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--accent)">6</strong></td>
+        <td>Вбудувати <strong>Google Maps</strong> з маршрутом</td>
+        <td><span class="badge badge-green">Мінімальна</span></td>
+        <td><span class="highlight-green">Безкоштовно</span></td>
+        <td>↓ тертя для прийняття рішення</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--accent)">7</strong></td>
+        <td>Додати <strong>посилання на Instagram/FB</strong></td>
+        <td><span class="badge badge-green">Мінімальна</span></td>
+        <td><span class="highlight-green">Безкоштовно</span></td>
+        <td>+нова аудиторія, ретаргетинг</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--accent)">8</strong></td>
+        <td>Прописати <strong>alt-тексти</strong> для всіх фото</td>
+        <td><span class="badge badge-green">Мінімальна</span></td>
+        <td><span class="highlight-green">Безкоштовно</span></td>
+        <td>Image SEO трафік</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--accent)">9</strong></td>
+        <td>Додати <strong>SEO title + meta description</strong></td>
+        <td><span class="badge badge-green">Мінімальна</span></td>
+        <td><span class="highlight-green">Безкоштовно</span></td>
+        <td>CTR у Google +15-25%</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--accent)">10</strong></td>
+        <td>Завантажити <strong>акт введення в експлуатацію</strong> (PDF)</td>
+        <td><span class="badge badge-green">Мінімальна</span></td>
+        <td><span class="highlight-green">Безкоштовно</span></td>
+        <td>Довіра: покупець бачить документ</td>
+      </tr>
+    </tbody>
+  </table>
+  </div><!-- /overflow-x -->
+
+  <div class="logo-corner">Lisnyky House · Digital Audit 2026</div>
+  <div class="page-num">7 / 12</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 8 — SALES FUNNEL
+════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="section-num">08</div>
+  <div class="slide-label">Фаза 3 · Маркетинг</div>
+  <div class="slide-title">Маркетингова воронка<br>для преміум нерухомості</div>
+  <div class="slide-desc">3-стадійна система від першого контакту до підписання договору</div>
+
+  <div class="funnel" style="margin-bottom: 24px;">
+    <div class="funnel-stage funnel-stage-1 fs1">
+      <div class="funnel-num">Стадія 1</div>
+      <div class="funnel-title">AWARENESS</div>
+      <ul class="funnel-items">
+        <li>Google Ads: "таунхаус під Києвом"</li>
+        <li>Meta Ads: таргет Київ + ВПО</li>
+        <li>Reels/TikTok: дрон-відео лісу</li>
+        <li>LUN.ua + DOM.RIA органіка</li>
+        <li>YouTube Pre-Roll 15 сек</li>
+      </ul>
+      <div style="margin-top: 16px; padding: 10px; background: rgba(59,130,246,0.1); border-radius: 8px; font-size: 12px; color: #7DD3FC;">
+        <strong>Меседж:</strong> "Будинок у лісі — готовий до заселення сьогодні"
+      </div>
+    </div>
+    <div class="funnel-stage funnel-stage-2 fs2">
+      <div class="funnel-num">Стадія 2</div>
+      <div class="funnel-title">CONSIDERATION</div>
+      <ul class="funnel-items">
+        <li>Email-серія (5 листів за 15 днів)</li>
+        <li>Ретаргетинг відвідувачів сайту</li>
+        <li>YouTube: повний тур 10 хв</li>
+        <li>WhatsApp-бот: PDF-презентація</li>
+        <li>Порівняння з конкурентами</li>
+      </ul>
+      <div style="margin-top: 16px; padding: 10px; background: rgba(234,179,8,0.1); border-radius: 8px; font-size: 12px; color: #FDE047;">
+        <strong>Меседж:</strong> "Порівняй і зрозумій чому обирають Лісники"
+      </div>
+    </div>
+    <div class="funnel-stage funnel-stage-3 fs3">
+      <div class="funnel-num">Стадія 3</div>
+      <div class="funnel-title">DECISION</div>
+      <ul class="funnel-items">
+        <li>Особистий показ</li>
+        <li>Zoom-тур (діаспора/інші міста)</li>
+        <li>Документальний пакет PDF</li>
+        <li>Резерв за 10 000 грн (30 днів)</li>
+        <li>WhatsApp менеджера 24/7</li>
+      </ul>
+      <div style="margin-top: 16px; padding: 10px; background: rgba(34,197,94,0.1); border-radius: 8px; font-size: 12px; color: #86EFAC;">
+        <strong>Меседж:</strong> "Залишилось X таунхаусів — ваш будинок чекає"
+      </div>
+    </div>
+  </div>
+
+  <div class="cards cards-3">
+    <div class="card blue">
+      <div class="card-title">🎯 Цільова аудиторія</div>
+      <div class="card-text">Сім'ї з дітьми · ВПО з Харкова/Дніпра · ІТ-спеціалісти · Діаспора (США, ЄС) · Ветерани (єОселя)</div>
+    </div>
+    <div class="card gold">
+      <div class="card-title">📊 Цикл прийняття рішення</div>
+      <div class="card-text">Покупці бізнес-класу досліджують <strong style="color:#fff">3-6 тижнів</strong> онлайн перед першим контактом. Ключ — не відпускати з воронки.</div>
+    </div>
+    <div class="card green">
+      <div class="card-title">💡 Головний тригер 2026</div>
+      <div class="card-text">"Готовий будинок + укриття + генератор" — це те, що конвертує сьогоднішнього покупця.</div>
+    </div>
+  </div>
+
+  <div class="logo-corner">Lisnyky House · Digital Audit 2026</div>
+  <div class="page-num">8 / 12</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 9 — AUTOMATION
+════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="section-num">09</div>
+  <div class="slide-label">Фаза 4 · Автоматизація</div>
+  <div class="slide-title">Автоматизація<br>циклу продажів</div>
+  <div class="slide-desc">Від ручних процесів до системи, що працює 24/7</div>
+
+  <div class="auto-grid">
+    <div class="auto-item">
+      <div class="auto-header">
+        <div class="auto-icon">🤖</div>
+        <div class="auto-title">AI-чатбот (Tidio + Manychat)</div>
+      </div>
+      <div class="auto-arrow">
+        <span class="auto-from">Менеджер відповідає вручну</span>
+        <span class="auto-arrow-sym">→</span>
+        <span class="auto-to">Бот відповідає за 5 сек 24/7</span>
+      </div>
+      <div style="font-size: 13px; color: var(--text-muted);">Кваліфікує: бюджет / строки / форма оплати. Надсилає PDF. Передає в CRM.</div>
+      <div class="auto-benefit">⚡ Нульові пропущені ліди у неробочий час</div>
+    </div>
+
+    <div class="auto-item">
+      <div class="auto-header">
+        <div class="auto-icon">📊</div>
+        <div class="auto-title">CRM — Pipedrive або LP-CRM</div>
+      </div>
+      <div class="auto-arrow">
+        <span class="auto-from">Excel / папір / пам'ять</span>
+        <span class="auto-arrow-sym">→</span>
+        <span class="auto-to">Pipeline + авто-нагадування</span>
+      </div>
+      <div style="font-size: 13px; color: var(--text-muted);">Статуси: Новий → Кваліф. → Показ → Переговори → Угода. Авто-нагадування при 48 год без контакту.</div>
+      <div class="auto-benefit">📈 Жоден лід не загубиться</div>
+    </div>
+
+    <div class="auto-item">
+      <div class="auto-header">
+        <div class="auto-icon">📧</div>
+        <div class="auto-title">Email-автоматизація (Brevo)</div>
+      </div>
+      <div class="auto-arrow">
+        <span class="auto-from">Ручне надсилання PDF</span>
+        <span class="auto-arrow-sym">→</span>
+        <span class="auto-to">Серія з 5 листів за 15 днів</span>
+      </div>
+      <div style="font-size: 13px; color: var(--text-muted);">День 0: презентація → День 2: lifestyle → День 5: відгуки → День 10: ціни → День 15: резерв.</div>
+      <div class="auto-benefit">🔄 Лід "дозріває" автоматично</div>
+    </div>
+
+    <div class="auto-item">
+      <div class="auto-header">
+        <div class="auto-icon">🏠</div>
+        <div class="auto-title">3D/VR Тур (Matterport)</div>
+      </div>
+      <div class="auto-arrow">
+        <span class="auto-from">Фізичний показ для всіх</span>
+        <span class="auto-arrow-sym">→</span>
+        <span class="auto-to">Онлайн-тур для нерезидентів</span>
+      </div>
+      <div style="font-size: 13px; color: var(--text-muted);">Покупці з діаспори (США, ЄС) та інших міст вирішують дистанційно. Скорочення "холодних" показів.</div>
+      <div class="auto-benefit">✈️ Продажі без кордонів</div>
+    </div>
+  </div>
+
+  <div class="logo-corner">Lisnyky House · Digital Audit 2026</div>
+  <div class="page-num">9 / 12</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 10 — INVESTMENT PLAN
+════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="section-num">10</div>
+  <div class="slide-label">Інвестиції</div>
+  <div class="slide-title">План інвестицій<br>та очікуване ROI</div>
+  <div class="slide-desc">Три рівні впровадження — від безкоштовного до повного стеку</div>
+
+  <div class="two-col">
+    <div>
+      <div style="margin-bottom: 12px; font-size: 12px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1px;">Рівень 1 — Старт (Тиждень 1-2)</div>
+      <div class="price-list">
+        <div class="price-item">
+          <div class="price-item-left">
+            <div class="price-item-icon pi-free">📝</div>
+            <div>
+              <div class="price-item-name">LUN.ua + DOM.RIA</div>
+              <div class="price-item-desc">Реєстрація об'єкту</div>
+            </div>
+          </div>
+          <div class="price-tag price-free">Безкоштовно</div>
+        </div>
+        <div class="price-item">
+          <div class="price-item-left">
+            <div class="price-item-icon pi-free">🎥</div>
+            <div>
+              <div class="price-item-name">Відеотур (смартфон)</div>
+              <div class="price-item-desc">Зйомка + монтаж</div>
+            </div>
+          </div>
+          <div class="price-tag price-free">Безкоштовно</div>
+        </div>
+        <div class="price-item">
+          <div class="price-item-left">
+            <div class="price-item-icon pi-low">📧</div>
+            <div>
+              <div class="price-item-name">Корпоративний email</div>
+              <div class="price-item-desc">Google Workspace</div>
+            </div>
+          </div>
+          <div class="price-tag price-low">$6/міс</div>
+        </div>
+        <div class="price-item">
+          <div class="price-item-left">
+            <div class="price-item-icon pi-low">🔧</div>
+            <div>
+              <div class="price-item-name">SEO + форма на сайті</div>
+              <div class="price-item-desc">Доопрацювання (розробник)</div>
+            </div>
+          </div>
+          <div class="price-tag price-low">$150-300</div>
+        </div>
+      </div>
+
+      <div style="margin-top: 20px; margin-bottom: 12px; font-size: 12px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1px;">Рівень 2 — Ріст (Місяць 1-2)</div>
+      <div class="price-list">
+        <div class="price-item">
+          <div class="price-item-left">
+            <div class="price-item-icon pi-mid">📊</div>
+            <div>
+              <div class="price-item-name">CRM (Pipedrive / LP-CRM)</div>
+              <div class="price-item-desc">Налаштування + навчання</div>
+            </div>
+          </div>
+          <div class="price-tag price-mid">$15-50/міс</div>
+        </div>
+        <div class="price-item">
+          <div class="price-item-left">
+            <div class="price-item-icon pi-mid">🤖</div>
+            <div>
+              <div class="price-item-name">Tidio чатбот</div>
+              <div class="price-item-desc">Налаштування сценаріїв</div>
+            </div>
+          </div>
+          <div class="price-tag price-mid">$19/міс</div>
+        </div>
+        <div class="price-item">
+          <div class="price-item-left">
+            <div class="price-item-icon pi-mid">📱</div>
+            <div>
+              <div class="price-item-name">Meta Ads (старт)</div>
+              <div class="price-item-desc">Бюджет + налаштування</div>
+            </div>
+          </div>
+          <div class="price-tag price-mid">$300-500/міс</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div style="margin-bottom: 12px; font-size: 12px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1px;">Рівень 3 — Максимум (Місяць 2-3)</div>
+      <div class="price-list" style="margin-bottom: 20px;">
+        <div class="price-item">
+          <div class="price-item-left">
+            <div class="price-item-icon pi-high">🏠</div>
+            <div>
+              <div class="price-item-name">Matterport 3D-тур</div>
+              <div class="price-item-desc">Сканування готового будинку</div>
+            </div>
+          </div>
+          <div class="price-tag price-high">$400-600</div>
+        </div>
+        <div class="price-item">
+          <div class="price-item-left">
+            <div class="price-item-icon pi-high">✨</div>
+            <div>
+              <div class="price-item-name">Редизайн сайту</div>
+              <div class="price-item-desc">Нові сторінки, UX, lifestyle</div>
+            </div>
+          </div>
+          <div class="price-tag price-high">$1500-3000</div>
+        </div>
+        <div class="price-item">
+          <div class="price-item-left">
+            <div class="price-item-icon pi-high">🎬</div>
+            <div>
+              <div class="price-item-name">Дрон-відео + монтаж</div>
+              <div class="price-item-desc">Профі зйомка комплексу</div>
+            </div>
+          </div>
+          <div class="price-tag price-high">$300-500</div>
+        </div>
+      </div>
+
+      <div style="background: rgba(201,168,76,0.08); border: 1px solid var(--border); border-radius: 14px; padding: 20px;">
+        <div style="font-size: 12px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">ROI Калькуляція</div>
+        <div class="roi-grid" style="gap: 10px;">
+          <div style="text-align: center; padding: 12px; background: rgba(0,0,0,0.3); border-radius: 10px;">
+            <div style="font-size: 22px; font-weight: 800; color: var(--accent);">×5-10</div>
+            <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Ріст трафіку (LUN+DOM.RIA)</div>
+          </div>
+          <div style="text-align: center; padding: 12px; background: rgba(0,0,0,0.3); border-radius: 10px;">
+            <div style="font-size: 22px; font-weight: 800; color: var(--green);">1 угода</div>
+            <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">= окупність усього стеку</div>
+          </div>
+          <div style="text-align: center; padding: 12px; background: rgba(0,0,0,0.3); border-radius: 10px;">
+            <div style="font-size: 22px; font-weight: 800; color: var(--blue);">3-4 міс</div>
+            <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Повна окупність впровадження</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="logo-corner">Lisnyky House · Digital Audit 2026</div>
+  <div class="page-num">10 / 12</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 11 — #1 KILLER
+════════════════════════════════════════════ -->
+<div class="slide" style="justify-content: center;">
+  <div class="section-num">11</div>
+  <div style="text-align: center; margin-bottom: 40px;">
+    <div class="slide-label" style="text-align:center; justify-content:center; display:block;">Головний висновок</div>
+    <div class="slide-title" style="text-align:center;">Що вбиває продажі<br>прямо зараз</div>
+  </div>
+
+  <div class="killer-block">
+    <div class="killer-title">⚠️ #1 Причина втрати клієнтів</div>
+    <div class="killer-text">
+      Сайт є тупиком, а не початком воронки
+    </div>
+    <div class="killer-sub">
+      Lisnyky House має <strong style="color:#fff">видатний продукт</strong>: єдиний готовий до заселення таунхаус-комплекс з укриттям, генератором та 12 хв до метро — в сегменті де попит зріс на 28%. Але сайт не дає відвідувачу <strong style="color:#fff">жодного способу залишитись у воронці</strong> крім дзвінка.<br><br>
+      Покупець приходить → не знаходить ціни → не бачить форми → не має де подивитись відео → іде до Park Lake City, де за 5 хвилин дізнається ціну, подивиться 3D-план і залишить заявку.
+    </div>
+  </div>
+
+  <div class="cards cards-4" style="margin-top: 24px;">
+    <div style="text-align:center; padding:16px; background:var(--dark2); border-radius:12px; border:1px solid rgba(255,255,255,0.06);">
+      <div style="font-size: 28px; font-weight: 900; color: var(--red);">0</div>
+      <div style="font-size: 11px; color: var(--text-muted); text-transform:uppercase; letter-spacing:1px;">Лід-форм</div>
+    </div>
+    <div style="text-align:center; padding:16px; background:var(--dark2); border-radius:12px; border:1px solid rgba(255,255,255,0.06);">
+      <div style="font-size: 28px; font-weight: 900; color: var(--red);">0</div>
+      <div style="font-size: 11px; color: var(--text-muted); text-transform:uppercase; letter-spacing:1px;">Ціни на сайті</div>
+    </div>
+    <div style="text-align:center; padding:16px; background:var(--dark2); border-radius:12px; border:1px solid rgba(255,255,255,0.06);">
+      <div style="font-size: 28px; font-weight: 900; color: var(--red);">0</div>
+      <div style="font-size: 11px; color: var(--text-muted); text-transform:uppercase; letter-spacing:1px;">Відео на сайті</div>
+    </div>
+    <div style="text-align:center; padding:16px; background:var(--dark2); border-radius:12px; border:1px solid rgba(255,255,255,0.06);">
+      <div style="font-size: 28px; font-weight: 900; color: var(--red);">0</div>
+      <div style="font-size: 11px; color: var(--text-muted); text-transform:uppercase; letter-spacing:1px;">Агрегатори</div>
+    </div>
+  </div>
+
+  <div class="logo-corner">Lisnyky House · Digital Audit 2026</div>
+  <div class="page-num">11 / 12</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 12 — NEXT STEPS CTA
+════════════════════════════════════════════ -->
+<div class="slide slide-cta">
+  <div class="cover-tag">Наступні кроки</div>
+  <div class="cover-title" style="font-size: 48px;">Починаємо зі старту</div>
+  <div class="cover-subtitle">Три кроки, які дадуть перший результат вже за 2 тижні</div>
+
+  <div class="cta-steps">
+    <div class="cta-step">
+      <div class="cta-step-num">01</div>
+      <div class="cta-step-title">Тиждень 1</div>
+      <div class="cta-step-text">LUN.ua + форма на сайті + ціна + корп. email + SEO-мета</div>
+    </div>
+    <div class="cta-step">
+      <div class="cta-step-num">02</div>
+      <div class="cta-step-title">Тиждень 2-3</div>
+      <div class="cta-step-text">Відеотур + CRM + чатбот + Instagram + Google Maps</div>
+    </div>
+    <div class="cta-step">
+      <div class="cta-step-num">03</div>
+      <div class="cta-step-title">Місяць 2+</div>
+      <div class="cta-step-text">Meta Ads + 3D-тур + редизайн + email-автоматизація</div>
+    </div>
+  </div>
+
+  <div class="cover-divider"></div>
+
+  <div style="font-size: 14px; color: var(--text-muted); max-width: 600px; text-align: center; line-height: 1.8;">
+    Lisnyky House відповідає всім трендам ринку 2026.<br>
+    <strong style="color: var(--accent);">Продукт готовий. Час зробити так, щоб його побачив ринок.</strong>
+  </div>
+
+  <div style="margin-top: 20px; padding: 14px 28px; background: rgba(201,168,76,0.1); border: 1px solid var(--border); border-radius: 40px; font-size: 13px; color: var(--accent); font-weight: 600;">
+    Digital Strategy Audit · Квітень 2026 · Конфіденційно
+  </div>
+
+  <div class="page-num">12 / 12</div>
+</div>
+
+</body>
+</html>
