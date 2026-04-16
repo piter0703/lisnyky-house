@@ -1235,13 +1235,19 @@
       .header-phone { display: none; }
 
       /* Hero mobile */
-      .hero-nav { padding: 14px 16px; }
+      .hero-nav { padding: 14px 16px; left: 0; }
       .hero-nav-phone { display: none; }
       .slide-texts { padding: 0 20px 100px 20px; left: 0; }
       .hero h1 { font-size: clamp(36px, 10vw, 52px); }
       .hero-desc { font-size: 15px; margin-bottom: 24px; }
       .hero-cta { padding: 12px 22px; font-size: 11px; }
       .slide-num { font-size: 11px; margin-top: 10px; margin-bottom: 18px; }
+
+      /* Fix: background-size:112% не покриває portrait екран */
+      .slide { background-size: cover !important; background-position: center center !important; }
+
+      /* Timer: без зсуву від side-nav */
+      .hero-timer { left: 0; }
 
       /* Carousel controls mobile */
       .carousel-controls { top: auto; bottom: 20px; right: 16px; transform: none; flex-direction: row; gap: 10px; }
