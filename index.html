@@ -74,14 +74,15 @@
     }
 
     .side-menu-label span {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.22em;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.28em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.95);
+      color: #fff;
       writing-mode: vertical-rl;
       transform: rotate(180deg);
       transition: color 0.2s;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.4);
     }
 
     .side-nav.scrolled .side-menu-label span { color: var(--text-light); }
@@ -444,14 +445,15 @@
 
     .slide-num {
       font-family: var(--sans);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.22em;
-      color: rgba(255,255,255,0.45);
-      margin-bottom: 18px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      color: rgba(255,255,255,0.7);
+      margin-top: 16px;
+      margin-bottom: 28px;
     }
 
-    .slide-num span { opacity: 0.6; }
+    .slide-num span { color: rgba(255,255,255,0.35); }
 
     .hero-label {
       font-size: 11px;
@@ -510,12 +512,14 @@
     /* Arrows + counter row */
     .carousel-controls {
       position: absolute;
-      bottom: 36px;
-      right: 52px;
+      top: 50%;
+      right: 28px;
+      transform: translateY(-50%);
       z-index: 10;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
     }
 
     .carousel-arrow {
@@ -1291,9 +1295,9 @@
   <div class="hero-content">
 
     <div class="slide-texts active">
-      <div class="slide-num">01 <span>/ 03</span></div>
       <div class="hero-label">Лісники, Київська область</div>
       <h1>Жити поряд<br/>з природою</h1>
+      <div class="slide-num">01 <span>/ 03</span></div>
       <p class="hero-desc">Ліс, озеро і тиша — за 12 хвилин від Києва</p>
       <a href="#about" class="hero-cta">
         Дізнатись більше
@@ -1302,9 +1306,9 @@
     </div>
 
     <div class="slide-texts">
-      <div class="slide-num">02 <span>/ 03</span></div>
       <div class="hero-label">Простір для активного життя</div>
       <h1>Більше<br/>простору</h1>
+      <div class="slide-num">02 <span>/ 03</span></div>
       <p class="hero-desc">Власний двір, тераса і місце де діти ростуть вільно</p>
       <a href="#advantages" class="hero-cta">
         Переваги комплексу
@@ -1313,9 +1317,9 @@
     </div>
 
     <div class="slide-texts">
-      <div class="slide-num">03 <span>/ 03</span></div>
       <div class="hero-label">Сучасна архітектура</div>
       <h1>Розумний дім.<br/>Готовий до заселення</h1>
+      <div class="slide-num">03 <span>/ 03</span></div>
       <p class="hero-desc">Сонячні батареї, автономія, власна охорона 24/7</p>
       <a href="#contact" class="hero-cta">
         Обрати будинок
@@ -1325,14 +1329,14 @@
 
   </div>
 
-  <!-- Controls: prev / counter / next — внизу праворуч -->
+  <!-- Controls: вертикально по центру справа -->
   <div class="carousel-controls">
     <button class="carousel-arrow" id="cPrev">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 15l-6-6-6 6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
-    <span id="cCounter" style="font-size:12px;font-weight:500;letter-spacing:0.2em;color:rgba(255,255,255,0.55);white-space:nowrap;">01 <span style="opacity:.4">/ 03</span></span>
+    <span id="cCounter" style="font-size:11px;font-weight:600;letter-spacing:0.2em;color:rgba(255,255,255,0.6);writing-mode:vertical-rl;">01</span>
     <button class="carousel-arrow" id="cNext">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
   </div>
 
