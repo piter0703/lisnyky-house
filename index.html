@@ -53,7 +53,7 @@
       justify-content: center;
       padding: 32px 0;
       background: transparent;
-      border-right: 1px solid rgba(255,255,255,0.25);
+      border-right: 2px solid rgba(255,255,255,0.55);
       pointer-events: none;
       transition: background 0.35s, border-color 0.35s;
     }
@@ -78,7 +78,7 @@
       font-weight: 600;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.75);
+      color: rgba(255,255,255,0.95);
       writing-mode: vertical-rl;
       transform: rotate(180deg);
       transition: color 0.2s;
@@ -99,7 +99,7 @@
       width: 4px;
       height: 4px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.45);
+      background: rgba(255,255,255,0.7);
       transition: background 0.2s;
     }
 
@@ -258,14 +258,8 @@
       z-index: 10;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-end;
       padding: 20px 48px 20px 32px;
-    }
-
-    .hero-nav-logo img {
-      height: 200px;
-      width: auto;
-      display: block;
     }
 
     .hero-nav-right {
@@ -361,29 +355,56 @@
       line-height: 1;
     }
 
-    /* ─── HERO ───────────────────────────────── */
+    /* ─── HERO + CAROUSEL ───────────────────── */
     .hero {
       position: relative;
       height: 100vh;
       min-height: 600px;
-      display: flex;
-      align-items: flex-end;
-      padding-left: 52px;
       overflow: hidden;
     }
 
-    .hero-bg {
+    /* Timer bar */
+    .hero-timer {
+      position: absolute;
+      top: 0; left: 52px; right: 0;
+      height: 2px;
+      background: rgba(255,255,255,0.15);
+      z-index: 20;
+    }
+
+    @keyframes timerProgress {
+      from { width: 0%; }
+      to   { width: 100%; }
+    }
+
+    .hero-timer-bar {
+      height: 100%;
+      background: rgba(255,255,255,0.65);
+      width: 0%;
+    }
+
+    .hero-timer-bar.running {
+      animation: timerProgress 5s linear forwards;
+    }
+
+    /* Slides */
+    .slide {
       position: absolute;
       inset: 0;
-      background-image: url('images/hero-night2.png');
       background-size: cover;
       background-position: center 55%;
-      animation: zoomIn 14s ease-out forwards;
+      opacity: 0;
+      transition: opacity 0.9s ease;
     }
 
     @keyframes zoomIn {
       from { transform: scale(1.06); }
       to   { transform: scale(1.00); }
+    }
+
+    .slide.active {
+      opacity: 1;
+      animation: zoomIn 7s ease-out forwards;
     }
 
     .hero-overlay {
@@ -395,13 +416,33 @@
         rgba(0,0,0,0.25) 50%,
         rgba(0,0,0,0.65) 100%
       );
+      z-index: 2;
     }
 
+    /* Slide text container */
     .hero-content {
-      position: relative;
-      z-index: 2;
-      padding: 0 60px 72px 52px;
-      max-width: 780px;
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+    }
+
+    .slide-texts {
+      position: absolute;
+      bottom: 0;
+      left: 52px;
+      right: 0;
+      padding: 0 60px 80px 52px;
+      max-width: 860px;
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease 0.25s, transform 0.65s ease 0.25s;
+      pointer-events: none;
+    }
+
+    .slide-texts.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
     }
 
     .hero-label {
@@ -420,7 +461,16 @@
       font-style: italic;
       line-height: 0.98;
       color: var(--white);
-      margin-bottom: 32px;
+      margin-bottom: 20px;
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.6;
+      margin-bottom: 28px;
+      max-width: 420px;
     }
 
     .hero-cta {
@@ -438,55 +488,47 @@
     }
 
     .hero-cta:hover { border-color: var(--white); }
-
     .hero-cta svg { transition: transform 0.2s; }
     .hero-cta:hover svg { transform: translateX(4px); }
 
-    .hero-bottom {
+    /* Arrows */
+    .carousel-arrow {
       position: absolute;
-      bottom: 32px;
-      right: 60px;
-      z-index: 2;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      width: 52px;
+      height: 52px;
       display: flex;
       align-items: center;
-      gap: 48px;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s;
     }
 
-    .hero-news {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
+    .carousel-arrow:hover { background: rgba(255,255,255,0.22); }
+    .carousel-prev { right: 120px; }
+    .carousel-next { right: 56px; }
 
-    .hero-news-date {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      color: rgba(255,255,255,0.5);
-      text-transform: uppercase;
-    }
-
-    .hero-news-title {
-      font-size: 13px;
-      color: rgba(255,255,255,0.8);
-    }
-
-    .hero-scroll {
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    /* Slide counter */
+    .carousel-counter {
+      position: absolute;
+      bottom: 38px;
+      right: 56px;
+      z-index: 10;
       font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
+      font-weight: 500;
+      letter-spacing: 0.18em;
       color: rgba(255,255,255,0.5);
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
 
-    .hero-scroll svg { animation: bounce 2s ease-in-out infinite; }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50%       { transform: translateY(5px); }
-    }
+    .cc-sep { opacity: 0.4; }
 
     /* ─── SECTION SHARED ─────────────────────── */
     .section { padding: 120px 0 120px 52px; }
@@ -1217,47 +1259,74 @@
      HERO
 ═════════════════════════════════════════════ -->
 <section class="hero" id="top">
-  <div class="hero-bg"></div>
+
+  <!-- Timer -->
+  <div class="hero-timer"><div class="hero-timer-bar" id="timerBar"></div></div>
+
+  <!-- Slides (backgrounds) -->
+  <div class="slide active" style="background-image:url('images/hero-night2.png')"></div>
+  <div class="slide" style="background-image:url('images/render-bikes.jpg')"></div>
+  <div class="slide" style="background-image:url('images/render-fence.jpg')"></div>
+
+  <!-- Overlay -->
   <div class="hero-overlay"></div>
 
-  <!-- nav всередині hero — скролиться разом з блоком -->
+  <!-- Nav (scrolls with hero, no logo) -->
   <div class="hero-nav">
-    <a href="#top" class="hero-nav-logo">
-      <img src="images/л1.png" alt="Lisnyky House" />
-    </a>
     <div class="hero-nav-right">
       <a href="tel:+380672004777" class="hero-nav-phone">+38 067 200 47 77</a>
       <a href="#contact" class="btn-green">Обрати будинок</a>
     </div>
   </div>
 
+  <!-- Slide texts -->
   <div class="hero-content">
-    <div class="hero-label">Лісники, Київська область</div>
-    <h1>Жити поряд<br />з природою</h1>
-    <a href="#about" class="hero-cta">
-      Дізнатись більше
-      <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
-        <path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-      </svg>
-    </a>
+
+    <div class="slide-texts active">
+      <div class="hero-label">Лісники, Київська область</div>
+      <h1>Жити поряд<br/>з природою</h1>
+      <p class="hero-desc">Ліс, озеро і тиша — за 12 хвилин від Києва</p>
+      <a href="#about" class="hero-cta">
+        Дізнатись більше
+        <svg width="20" height="10" viewBox="0 0 20 10" fill="none"><path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      </a>
+    </div>
+
+    <div class="slide-texts">
+      <div class="hero-label">Простір для активного життя</div>
+      <h1>Більше<br/>простору</h1>
+      <p class="hero-desc">Власний двір, тераса і місце де діти ростуть вільно</p>
+      <a href="#advantages" class="hero-cta">
+        Переваги комплексу
+        <svg width="20" height="10" viewBox="0 0 20 10" fill="none"><path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      </a>
+    </div>
+
+    <div class="slide-texts">
+      <div class="hero-label">Сучасна архітектура</div>
+      <h1>Розумний дім.<br/>Готовий до заселення</h1>
+      <p class="hero-desc">Сонячні батареї, автономія, власна охорона 24/7</p>
+      <a href="#contact" class="hero-cta">
+        Обрати будинок
+        <svg width="20" height="10" viewBox="0 0 20 10" fill="none"><path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      </a>
+    </div>
+
   </div>
 
-  <div class="hero-bottom">
-    <div class="hero-news">
-      <div class="hero-news-date">Готово до заселення</div>
-      <div class="hero-news-title">Будинки введено в експлуатацію</div>
-    </div>
-    <div class="hero-news">
-      <div class="hero-news-date">12 хв</div>
-      <div class="hero-news-title">до метро Видубичі</div>
-    </div>
-    <a href="#top" class="hero-scroll">
-      <svg width="14" height="20" viewBox="0 0 14 20" fill="none">
-        <path d="M7 0v18M1 13l6 6 6-6" stroke="rgba(255,255,255,0.5)" stroke-width="1.2" stroke-linecap="round"/>
-      </svg>
-      Гортати
-    </a>
+  <!-- Arrows -->
+  <button class="carousel-arrow carousel-prev" id="cPrev">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <button class="carousel-arrow carousel-next" id="cNext">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
+  <!-- Counter -->
+  <div class="carousel-counter">
+    <span id="cCurrent">01</span><span class="cc-sep"> / </span><span>03</span>
   </div>
+
 </section>
 
 
@@ -1731,6 +1800,38 @@
   });
 
   window.dispatchEvent(new Event('scroll'));
+
+  // ── CAROUSEL ──────────────────────────────────
+  const slides      = document.querySelectorAll('.slide');
+  const slideTexts  = document.querySelectorAll('.slide-texts');
+  const timerBar    = document.getElementById('timerBar');
+  const cCurrent    = document.getElementById('cCurrent');
+  const cPrev       = document.getElementById('cPrev');
+  const cNext       = document.getElementById('cNext');
+  let current = 0;
+  let autoPlay;
+
+  function goTo(n) {
+    slides[current].classList.remove('active');
+    slideTexts[current].classList.remove('active');
+    current = (n + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    slideTexts[current].classList.add('active');
+    cCurrent.textContent = String(current + 1).padStart(2, '0');
+    // Restart timer animation
+    timerBar.classList.remove('running');
+    void timerBar.offsetWidth; // reflow
+    timerBar.classList.add('running');
+    // Restart autoplay
+    clearInterval(autoPlay);
+    autoPlay = setInterval(() => goTo(current + 1), 5000);
+  }
+
+  cPrev && cPrev.addEventListener('click', () => goTo(current - 1));
+  cNext && cNext.addEventListener('click', () => goTo(current + 1));
+
+  // Start
+  goTo(0);
 
   // Slide-out menu
   const slideMenu   = document.getElementById('slideMenu');
