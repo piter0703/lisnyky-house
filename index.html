@@ -1193,8 +1193,21 @@
     @media (max-width: 640px) {
       header { padding: 16px 20px; }
       .header-phone { display: none; }
-      .hero-content { padding: 0 24px 56px; }
-      .hero h1 { font-size: 52px; }
+
+      /* Hero mobile */
+      .hero-nav { padding: 14px 16px; }
+      .hero-nav-phone { display: none; }
+      .slide-texts { padding: 0 20px 100px 20px; left: 0; }
+      .hero h1 { font-size: clamp(36px, 10vw, 52px); }
+      .hero-desc { font-size: 15px; margin-bottom: 24px; }
+      .hero-cta { padding: 12px 22px; font-size: 11px; }
+      .slide-num { font-size: 11px; margin-top: 10px; margin-bottom: 18px; }
+
+      /* Carousel controls mobile */
+      .carousel-controls { top: auto; bottom: 20px; right: 16px; transform: none; flex-direction: row; gap: 10px; }
+      .carousel-arrow { width: 36px; height: 36px; }
+
+      /* Sections */
       .adv-list { grid-template-columns: 1fr; }
       .gallery-full { grid-template-columns: 1fr; }
       .gal-item { height: 280px; }
