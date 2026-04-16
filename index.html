@@ -1186,17 +1186,16 @@
     }
 
     /* ─── FLOATING PHONE BUTTON ───────────────── */
-    .float-phone { display: none; } /* тимчасово сховано */
-    .float-phone-hidden {
+    .float-phone {
+      display: none; /* показується тільки на мобільному */
       position: fixed;
-      bottom: 32px;
-      right: 32px;
+      bottom: 24px;
+      right: 24px;
       z-index: 90;
       width: 56px;
       height: 56px;
       border-radius: 50%;
       background: var(--green);
-      display: flex;
       align-items: center;
       justify-content: center;
       box-shadow: 0 4px 20px rgba(61,143,56,0.35);
@@ -1207,6 +1206,27 @@
     .float-phone:hover {
       background: var(--green-dark);
       transform: scale(1.05);
+    }
+
+    /* ─── HEADER BURGER (mobile only) ───────── */
+    .header-burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      margin-left: 8px;
+    }
+
+    .header-burger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 1px;
+      transition: background 0.2s;
     }
 
     /* ─── RESPONSIVE ──────────────────────────── */
@@ -1231,8 +1251,11 @@
     }
 
     @media (max-width: 640px) {
-      header { padding: 16px 20px; }
+      header { padding: 14px 20px; }
       .header-phone { display: none; }
+      .header-logo img { height: 44px; }
+      .header-right .btn-green { display: none; }
+      .header-burger { display: flex; }
 
       /* Hero mobile */
       .hero-nav { padding: 14px 16px; left: 0; }
@@ -1254,16 +1277,22 @@
       .carousel-arrow { width: 36px; height: 36px; }
 
       /* Sections */
+      .stat-n { font-size: 36px; }
+      .stat-n sup { font-size: 17px; }
       .adv-list { grid-template-columns: 1fr; }
       .gallery-full { grid-template-columns: 1fr; }
       .gal-item { height: 280px; }
       .stats-row { flex-wrap: wrap; }
       .stat { min-width: 50%; }
       .stat:nth-child(2) { border-right: none; }
+      .plan-card-body { padding: 24px 20px 28px; }
       .footer-top { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
       .form-box { padding: 32px 20px; }
       .messengers { flex-wrap: wrap; }
+
+      /* Floating phone CTA */
+      .float-phone { display: flex; }
     }
   </style>
 </head>
@@ -1322,6 +1351,9 @@
   <div class="header-right">
     <a href="tel:+380672004777" class="header-phone" id="hPhone">+38 067 200 47 77</a>
     <a href="#contact" class="btn-green">Обрати будинок</a>
+    <button class="header-burger" id="headerBurger" aria-label="Відкрити меню">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
@@ -1967,6 +1999,10 @@
 
   menuClose   && menuClose.addEventListener('click', closeMenu);
   menuOverlay && menuOverlay.addEventListener('click', closeMenu);
+
+  // Header burger (мобільна кнопка відкриття меню)
+  const headerBurger = document.getElementById('headerBurger');
+  headerBurger && headerBurger.addEventListener('click', openMenu);
 
   document.querySelectorAll('.slide-menu nav a').forEach(a => {
     a.addEventListener('click', closeMenu);
