@@ -8,7 +8,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500;1,600&family=Luxurious+Script&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500;1,600&family=Playfair+Display:wght@600;700&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <style>
     /* ─── RESET ─────────────────────────────── */
@@ -445,32 +445,45 @@
       pointer-events: all;
     }
 
-    .hero-label {
-      font-size: 12px;
+    .slide-num {
+      font-family: var(--sans);
+      font-size: 11px;
       font-weight: 500;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.22em;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 18px;
+    }
+
+    .slide-num span { opacity: 0.6; }
+
+    .hero-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.75);
-      margin-bottom: 16px;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 14px;
     }
 
     .hero h1 {
-      font-family: var(--serif);
-      font-size: clamp(56px, 8vw, 104px);
-      font-weight: 400;
-      font-style: italic;
-      line-height: 0.98;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(44px, 5.5vw, 80px);
+      font-weight: 700;
+      font-style: normal;
+      line-height: 1.08;
       color: var(--white);
       margin-bottom: 20px;
+      text-shadow: 0 2px 24px rgba(0,0,0,0.35);
     }
 
     .hero-desc {
-      font-size: 15px;
-      font-weight: 300;
-      color: rgba(255,255,255,0.7);
-      line-height: 1.6;
-      margin-bottom: 28px;
-      max-width: 420px;
+      font-size: 17px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.65;
+      margin-bottom: 32px;
+      max-width: 440px;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.3);
     }
 
     .hero-cta {
@@ -513,22 +526,6 @@
     .carousel-prev { right: 120px; }
     .carousel-next { right: 56px; }
 
-    /* Slide counter */
-    .carousel-counter {
-      position: absolute;
-      bottom: 38px;
-      right: 56px;
-      z-index: 10;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      color: rgba(255,255,255,0.5);
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .cc-sep { opacity: 0.4; }
 
     /* ─── SECTION SHARED ─────────────────────── */
     .section { padding: 120px 0 120px 52px; }
@@ -1283,6 +1280,7 @@
   <div class="hero-content">
 
     <div class="slide-texts active">
+      <div class="slide-num">01 <span>/ 03</span></div>
       <div class="hero-label">Лісники, Київська область</div>
       <h1>Жити поряд<br/>з природою</h1>
       <p class="hero-desc">Ліс, озеро і тиша — за 12 хвилин від Києва</p>
@@ -1293,6 +1291,7 @@
     </div>
 
     <div class="slide-texts">
+      <div class="slide-num">02 <span>/ 03</span></div>
       <div class="hero-label">Простір для активного життя</div>
       <h1>Більше<br/>простору</h1>
       <p class="hero-desc">Власний двір, тераса і місце де діти ростуть вільно</p>
@@ -1303,6 +1302,7 @@
     </div>
 
     <div class="slide-texts">
+      <div class="slide-num">03 <span>/ 03</span></div>
       <div class="hero-label">Сучасна архітектура</div>
       <h1>Розумний дім.<br/>Готовий до заселення</h1>
       <p class="hero-desc">Сонячні батареї, автономія, власна охорона 24/7</p>
@@ -1322,10 +1322,6 @@
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </button>
 
-  <!-- Counter -->
-  <div class="carousel-counter">
-    <span id="cCurrent">01</span><span class="cc-sep"> / </span><span>03</span>
-  </div>
 
 </section>
 
@@ -1805,7 +1801,6 @@
   const slides      = document.querySelectorAll('.slide');
   const slideTexts  = document.querySelectorAll('.slide-texts');
   const timerBar    = document.getElementById('timerBar');
-  const cCurrent    = document.getElementById('cCurrent');
   const cPrev       = document.getElementById('cPrev');
   const cNext       = document.getElementById('cNext');
   let current = 0;
@@ -1817,7 +1812,6 @@
     current = (n + slides.length) % slides.length;
     slides[current].classList.add('active');
     slideTexts[current].classList.add('active');
-    cCurrent.textContent = String(current + 1).padStart(2, '0');
     // Restart timer animation
     timerBar.classList.remove('running');
     void timerBar.offsetWidth; // reflow
