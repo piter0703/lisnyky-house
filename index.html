@@ -31,8 +31,8 @@
     body {
       font-family: 'Instrument Sans', system-ui, sans-serif;
       font-weight: 400;
-      color: #1a1a1a;
-      background: #fff;
+      color: var(--text);
+      background: var(--white);
       overflow-x: hidden;
     }
     img { display: block; max-width: 100%; }
@@ -40,15 +40,17 @@
 
     /* ─── VARIABLES ──────────────────────────── */
     :root {
-      --green:      #3d8f38;
-      --green-dark: #2a6326;
-      --green-bg:   #f0f7ef;
-      --text:       #1a1a1a;
-      --text-mid:   #555;
-      --text-light: #888;
-      --white:      #ffffff;
-      --off:        #f7f7f5;
-      --border:     rgba(0,0,0,0.09);
+      --green:      #4F5B4C;
+      --green-dark: #3A4A37;
+      --green-bg:   #E8EDE6;
+      --text:       #1A1C1A;
+      --text-mid:   #4A4D47;
+      --text-light: #A8A499;
+      --white:      #F6F5F2;
+      --off:        #EFEDE7;
+      --sand:       #E5E1D6;
+      --stone:      #C9C4B8;
+      --border:     rgba(26,28,26,0.10);
       --serif:      'Instrument Serif', Georgia, serif;
       --sans:       'Instrument Sans', system-ui, sans-serif;
       --mono:       'JetBrains Mono', ui-monospace, monospace;
@@ -129,7 +131,7 @@
       position: fixed;
       left: 0; top: 0; bottom: 0;
       width: 380px;
-      background: #fff;
+      background: var(--white);
       z-index: 300;
       display: flex;
       flex-direction: column;
@@ -248,7 +250,7 @@
     }
 
     header.scrolled {
-      background: rgba(255,255,255,0.97);
+      background: rgba(246,245,242,0.97);
       backdrop-filter: blur(12px);
       box-shadow: 0 2px 24px rgba(0,0,0,0.08);
       opacity: 1;
@@ -336,7 +338,7 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: #fff;
+      background: var(--white);
       z-index: 200;
       flex-direction: column;
       align-items: flex-start;
@@ -918,7 +920,7 @@
       border-bottom: 1px solid var(--border);
       position: relative;
       overflow: hidden;
-      background: #1c1f1b;
+      background: var(--text);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1238,7 +1240,7 @@
 
     /* ─── FOOTER ──────────────────────────────── */
     footer {
-      background: var(--white);
+      background: var(--off);
       border-top: 1px solid var(--border);
       padding: 60px 0 40px 52px;
     }
