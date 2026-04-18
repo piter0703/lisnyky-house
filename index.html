@@ -733,19 +733,62 @@
       letter-spacing: 0.02em;
     }
 
-    /* ─── SECTION: CONCEPT (centered) ───────── */
+    /* ─── SECTION: MANIFESTO ─────────────────── */
     .s-concept { background: var(--white); }
 
-    .s-concept .section-inner { text-align: center; }
-
-    .s-concept h2.s-title { margin-left: auto; margin-right: auto; }
-
-    .s-concept .s-text {
-      margin: 0 auto;
-      text-align: center;
+    .manifesto-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 80px;
+      align-items: start;
     }
 
-    .s-concept .s-link { margin: 36px auto 0; }
+    .manifesto-stats {
+      margin-top: 48px;
+      display: grid;
+      gap: 0;
+    }
+
+    .manifesto-stat {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 16px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .manifesto-stat:last-child { border-bottom: 1px solid var(--border); }
+
+    .manifesto-num {
+      font-family: var(--serif);
+      font-size: 40px;
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+
+    .manifesto-num sup {
+      font-family: var(--mono);
+      font-size: 16px;
+      vertical-align: super;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+    }
+
+    .manifesto-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      text-align: right;
+      max-width: 120px;
+    }
+
+    @media (max-width: 900px) {
+      .manifesto-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
 
     /* ─── SECTION: SPLIT ─────────────────────── */
     .s-split .split-grid {
@@ -1589,37 +1632,43 @@
 ═════════════════════════════════════════════ -->
 <section class="section s-concept" id="about">
   <div class="section-inner">
-    <div class="s-label">Про комплекс</div>
-    <h2 class="s-title">Місце, де місто<br /><em>зустрічається з лісом</em></h2>
-    <p class="s-text">
-      Lisnyky House — закритий таунхаус-комплекс у с. Лісники Київської
-      області. Тут ви отримуєте все що дає місто і те, чого місто дати не може:
-      ліс, озеро, тишу і простір для дітей.
-    </p>
-    <a href="#advantages" class="s-link">
-      Переваги комплексу
-      <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
-        <path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-      </svg>
-    </a>
+    <div class="manifesto-grid">
 
-    <div class="stats-row">
-      <div class="stat">
-        <div class="stat-n">12<sup>хв</sup></div>
-        <div class="stat-l">до метро Видубичі</div>
+      <div>
+        <div class="s-label">Маніфест</div>
+        <div class="manifesto-stats">
+          <div class="manifesto-stat">
+            <span class="manifesto-num">12<sup>хв</sup></span>
+            <span class="manifesto-label">до метро Видубичі</span>
+          </div>
+          <div class="manifesto-stat">
+            <span class="manifesto-num">20<sup>хв</sup></span>
+            <span class="manifesto-label">до центру Києва</span>
+          </div>
+          <div class="manifesto-stat">
+            <span class="manifesto-num">100<sup>%</sup></span>
+            <span class="manifesto-label">готово до заселення</span>
+          </div>
+          <div class="manifesto-stat">
+            <span class="manifesto-num">24<sup>/7</sup></span>
+            <span class="manifesto-label">охорона та відеонагляд</span>
+          </div>
+        </div>
       </div>
-      <div class="stat">
-        <div class="stat-n">20<sup>хв</sup></div>
-        <div class="stat-l">до центру Києва</div>
+
+      <div>
+        <h2 class="s-title">Місце, де місто<br /><em>зустрічається з лісом</em></h2>
+        <p class="s-text" style="margin-top: 40px; max-width: 56ch;">
+          Lisnyky House — це нова категорія житла: камерний квартал таунхаусів між сосновим лісом і Дніпровськими схилами. Без велелюддя висоток, без шуму магістралей, без компромісів в якості. Просто життя у власному домі — з приватним подвір'ям, власним гаражем та лісом, що починається за хвіртку.
+        </p>
+        <a href="#advantages" class="s-link">
+          Переваги комплексу
+          <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
+            <path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </a>
       </div>
-      <div class="stat">
-        <div class="stat-n">100<sup>%</sup></div>
-        <div class="stat-l">готово до заселення</div>
-      </div>
-      <div class="stat">
-        <div class="stat-n">24<sup>/7</sup></div>
-        <div class="stat-l">охорона та відеоспостереження</div>
-      </div>
+
     </div>
   </div>
 </section>
