@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Будинки — Lisnyky House</title>
+  <meta name="description" content="Каталог таунхаусів Lisnyky House. Оберіть будинок: тип А (110 м²) або тип Б (140 м²). Готові до заселення." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Instrument Sans', system-ui, sans-serif;
+      color: var(--text);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    :root {
+      --green:      #4F5B4C;
+      --green-dark: #3A4A37;
+      --green-bg:   #E8EDE6;
+      --text:       #1A1C1A;
+      --text-mid:   #4A4D47;
+      --text-light: #A8A499;
+      --white:      #F6F5F2;
+      --off:        #EFEDE7;
+      --sand:       #E5E1D6;
+      --stone:      #C9C4B8;
+      --border:     rgba(26,28,26,0.10);
+      --serif:      'Instrument Serif', Georgia, serif;
+      --sans:       'Instrument Sans', system-ui, sans-serif;
+      --mono:       'JetBrains Mono', ui-monospace, monospace;
+      --ease:       cubic-bezier(.2,.7,.2,1);
+    }
+
+    /* ─── SIDE NAV ─── */
+    .side-nav {
+      position: fixed; left: 0; top: 0; bottom: 0; width: 52px;
+      z-index: 50; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; padding: 32px 0;
+      background: rgba(246,245,242,0.97);
+      border-right: 2px solid rgba(0,0,0,0.07);
+      pointer-events: none;
+    }
+    .side-menu-label {
+      pointer-events: all; display: flex; flex-direction: column;
+      align-items: center; gap: 10px; cursor: pointer;
+    }
+    .side-menu-label span {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.28em;
+      text-transform: uppercase; color: var(--text-light);
+      writing-mode: vertical-rl; transform: rotate(180deg); transition: color 0.2s;
+    }
+    .side-menu-label:hover span { color: var(--green); }
+    .side-menu-dots { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+    .side-menu-dots i {
+      display: block; width: 4px; height: 4px; border-radius: 50%;
+      background: rgba(0,0,0,0.18); transition: background 0.2s;
+    }
+    .side-menu-label:hover .side-menu-dots i { background: var(--green); }
+
+    /* ─── SLIDE-OUT MENU ─── */
+    .slide-menu {
+      position: fixed; left: 0; top: 0; bottom: 0; width: 380px;
+      background: var(--white); z-index: 300;
+      display: flex; flex-direction: column;
+      padding: 48px 0 48px 52px;
+      transform: translateX(-100%);
+      transition: transform 0.45s cubic-bezier(0.77,0,0.175,1);
+      box-shadow: 4px 0 40px rgba(0,0,0,0.08);
+    }
+    .slide-menu.open { transform: translateX(0); }
+    .slide-menu-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.35);
+      z-index: 299; opacity: 0; pointer-events: none; transition: opacity 0.35s;
+    }
+    .slide-menu-overlay.open { opacity: 1; pointer-events: all; }
+    .slide-menu-top {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-right: 32px; margin-bottom: 48px;
+    }
+    .slide-menu-logo img { height: 120px; }
+    .slide-close {
+      width: 36px; height: 36px; display: flex; align-items: center;
+      justify-content: center; border: 1px solid var(--border); border-radius: 50%;
+      cursor: pointer; background: none; font-size: 20px; color: var(--text);
+      transition: border-color 0.2s; flex-shrink: 0;
+    }
+    .slide-close:hover { border-color: var(--green); color: var(--green); }
+    .slide-menu nav { display: flex; flex-direction: column; flex: 1; }
+    .slide-menu nav a {
+      font-family: var(--serif); font-size: 28px; font-style: italic;
+      color: var(--text); padding: 14px 0; border-bottom: 1px solid var(--border);
+      opacity: 0.75; transition: opacity 0.2s, color 0.2s, padding-left 0.2s;
+    }
+    .slide-menu nav a:first-child { border-top: 1px solid var(--border); }
+    .slide-menu nav a:hover, .slide-menu nav a.active { opacity: 1; color: var(--green); padding-left: 8px; }
+    .slide-menu-phone { margin-top: 32px; font-size: 15px; color: var(--text-mid); padding-right: 32px; }
+    .slide-menu-phone a { color: var(--text); font-size: 18px; font-weight: 600; display: block; margin-top: 4px; }
+    .slide-menu-phone a:hover { color: var(--green); }
+
+    /* ─── HEADER ─── */
+    header {
+      position: fixed; top: 0; left: 52px; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 17px 48px 17px 32px;
+      background: rgba(246,245,242,0.97);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 2px 24px rgba(0,0,0,0.06);
+    }
+    .header-logo img { height: 68px; width: auto; display: block; }
+    .header-right { display: flex; align-items: center; gap: 32px; }
+    .header-phone { font-size: 14px; font-weight: 500; color: var(--text); transition: color 0.2s; }
+    .header-phone:hover { color: var(--green); }
+    .btn-green {
+      background: var(--green); color: #fff; font-family: var(--mono);
+      font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 12px 24px; border-radius: 100px; transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .btn-green:hover { background: var(--green-dark); }
+    .header-burger {
+      display: none; flex-direction: column; gap: 5px; background: none;
+      border: none; cursor: pointer; padding: 4px;
+    }
+    .header-burger span {
+      display: block; width: 22px; height: 2px; background: var(--text);
+      border-radius: 2px; transition: background 0.2s;
+    }
+    @media (max-width: 768px) {
+      .header-burger { display: flex; }
+      .header-phone, .btn-green { display: none; }
+    }
+
+    /* ─── MOBILE MENU ─── */
+    .m-menu {
+      display: none; position: fixed; inset: 0; background: var(--white);
+      z-index: 400; flex-direction: column; padding: 80px 32px 48px;
+      gap: 0;
+    }
+    .m-menu.open { display: flex; }
+    .m-menu a {
+      font-family: var(--serif); font-size: 32px; font-style: italic;
+      color: var(--text); padding: 16px 0; border-bottom: 1px solid var(--border);
+      opacity: 0.75;
+    }
+    .m-close {
+      position: absolute; top: 20px; right: 24px; background: none; border: none;
+      font-size: 28px; cursor: pointer; color: var(--text);
+    }
+
+    /* ─── PAGE HERO BANNER ─── */
+    .page-banner {
+      margin-left: 52px;
+      padding-top: 100px;
+      background: var(--off);
+      padding-bottom: 64px;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-banner-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 48px;
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 32px;
+    }
+    .page-banner h1 {
+      font-family: var(--serif); font-size: clamp(40px, 5vw, 72px);
+      font-weight: 400; line-height: 0.96; letter-spacing: -0.02em;
+    }
+    .page-banner h1 em { font-style: italic; color: var(--green); }
+    .page-banner-meta {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+      color: var(--text-light); text-transform: uppercase;
+      display: flex; flex-direction: column; gap: 4px; text-align: right;
+      flex-shrink: 0;
+    }
+    .page-banner-meta strong { font-size: 28px; font-family: var(--mono); color: var(--text); letter-spacing: -0.02em; font-weight: 500; }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--text-light);
+      margin-bottom: 32px; transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--green); }
+    .back-link svg { transition: transform 0.2s; }
+    .back-link:hover svg { transform: translateX(-3px); }
+
+    /* ─── MAIN CONTENT ─── */
+    .catalog-wrap {
+      margin-left: 52px; padding: 48px 48px 96px;
+      max-width: calc(1200px + 52px);
+    }
+
+    /* ─── FILTER BAR ─── */
+    .filter-bar {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 40px; flex-wrap: wrap;
+    }
+    .filter-group {
+      display: flex; align-items: center; gap: 4px;
+      padding: 4px; background: var(--off); border-radius: 100px;
+    }
+    .filter-divider {
+      width: 1px; height: 24px; background: var(--border); margin: 0 8px;
+    }
+    .filter-btn {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text-mid);
+      background: none; border: none; cursor: pointer;
+      padding: 8px 16px; border-radius: 100px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .filter-btn:hover { color: var(--text); }
+    .filter-btn.active {
+      background: var(--white); color: var(--text);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .filter-count {
+      font-family: var(--mono); font-size: 11px; color: var(--text-light);
+      margin-left: auto; letter-spacing: 0.05em;
+    }
+
+    /* ─── HOUSE GRID ─── */
+    .house-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .house-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 4px; overflow: hidden; cursor: pointer;
+      transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+    }
+    .house-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.10);
+    }
+    .house-card.hidden { display: none; }
+
+    .house-card-img {
+      position: relative; aspect-ratio: 4/3; overflow: hidden; background: var(--sand);
+    }
+    .house-card-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s var(--ease);
+    }
+    .house-card:hover .house-card-img img { transform: scale(1.04); }
+
+    .house-status {
+      position: absolute; top: 12px; right: 12px;
+      font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 5px 10px; border-radius: 100px;
+      font-weight: 500;
+    }
+    .status-free { background: var(--green); color: #fff; }
+    .status-reserved { background: #C8975A; color: #fff; }
+    .status-sold { background: rgba(26,28,26,0.55); color: rgba(255,255,255,0.8); }
+
+    .house-card-body { padding: 20px 24px 24px; }
+    .house-num {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text-light); margin-bottom: 6px;
+    }
+    .house-title {
+      font-family: var(--serif); font-size: 22px; font-style: italic;
+      color: var(--text); margin-bottom: 14px; line-height: 1;
+    }
+    .house-specs {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px;
+      margin-bottom: 16px;
+    }
+    .hs-item {}
+    .hs-label { font-size: 11px; color: var(--text-light); margin-bottom: 2px; }
+    .hs-val { font-family: var(--mono); font-size: 13px; color: var(--text); font-weight: 500; }
+
+    .house-card-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 14px; border-top: 1px solid var(--border);
+    }
+    .house-price { font-family: var(--mono); font-size: 12px; color: var(--text-mid); }
+    .house-cta {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--green);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .house-cta svg { transition: transform 0.2s; }
+    .house-card:hover .house-cta svg { transform: translateX(3px); }
+
+    .house-card.sold-card { opacity: 0.55; pointer-events: none; }
+
+    /* ─── MODAL ─── */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+      z-index: 500; display: flex; align-items: center; justify-content: center;
+      padding: 24px; opacity: 0; pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+    .modal {
+      background: var(--white); max-width: 800px; width: 100%;
+      border-radius: 4px; overflow: hidden;
+      transform: translateY(20px) scale(0.97);
+      transition: transform 0.35s var(--ease);
+      max-height: 90vh; overflow-y: auto;
+    }
+    .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+
+    .modal-img {
+      width: 100%; aspect-ratio: 16/9; overflow: hidden; background: var(--sand);
+    }
+    .modal-img img { width: 100%; height: 100%; object-fit: cover; }
+
+    .modal-body { padding: 40px 48px 48px; }
+    .modal-head {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      margin-bottom: 32px; gap: 16px;
+    }
+    .modal-num {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--text-light); margin-bottom: 6px;
+    }
+    .modal-title {
+      font-family: var(--serif); font-size: 36px; font-style: italic;
+      line-height: 0.96; color: var(--text);
+    }
+    .modal-close {
+      width: 40px; height: 40px; display: flex; align-items: center;
+      justify-content: center; border: 1px solid var(--border); border-radius: 50%;
+      cursor: pointer; background: none; font-size: 22px; color: var(--text);
+      transition: border-color 0.2s; flex-shrink: 0;
+    }
+    .modal-close:hover { border-color: var(--green); color: var(--green); }
+
+    .modal-specs {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 24px; padding: 24px 0; border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border); margin-bottom: 32px;
+    }
+    .ms-item {}
+    .ms-label { font-size: 11px; color: var(--text-light); margin-bottom: 6px; }
+    .ms-val { font-family: var(--mono); font-size: 20px; color: var(--text); font-weight: 500; }
+
+    .modal-features {
+      display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px;
+    }
+    .modal-feature {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 6px 14px; border: 1px solid var(--border);
+      border-radius: 100px; color: var(--text-mid);
+    }
+
+    .modal-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+    .modal-btn-primary {
+      flex: 1; min-width: 180px; background: var(--green); color: #fff;
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 16px 24px; border-radius: 100px;
+      text-align: center; transition: background 0.2s; border: none; cursor: pointer;
+    }
+    .modal-btn-primary:hover { background: var(--green-dark); }
+    .modal-btn-secondary {
+      flex: 1; min-width: 180px; background: none; color: var(--text);
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 16px 24px; border-radius: 100px;
+      text-align: center; border: 1px solid var(--border); transition: border-color 0.2s;
+      cursor: pointer;
+    }
+    .modal-btn-secondary:hover { border-color: var(--green); color: var(--green); }
+
+    /* ─── EMPTY STATE ─── */
+    .no-results {
+      display: none; grid-column: 1/-1;
+      text-align: center; padding: 80px 0; color: var(--text-light);
+      font-family: var(--serif); font-size: 24px; font-style: italic;
+    }
+    .no-results.show { display: block; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      .house-grid { grid-template-columns: repeat(2, 1fr); }
+      .modal-specs { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .catalog-wrap { margin-left: 0; padding: 32px 20px 64px; }
+      .page-banner { margin-left: 0; padding: 80px 20px 40px; }
+      .page-banner-inner { padding: 0; flex-direction: column; align-items: flex-start; }
+      .page-banner-meta { text-align: left; }
+      .side-nav { display: none; }
+      header { left: 0; padding: 14px 20px; }
+      .house-grid { grid-template-columns: 1fr; }
+      .modal-body { padding: 24px 20px 32px; }
+      .modal-specs { grid-template-columns: repeat(2, 1fr); }
+      .modal-title { font-size: 28px; }
+      .filter-count { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── SIDE NAV ── -->
+<div class="side-nav" id="sideNav">
+  <div class="side-menu-label" id="menuTrigger">
+    <div class="side-menu-dots">
+      <i></i><i></i><i></i>
+    </div>
+    <span>Меню</span>
+  </div>
+</div>
+
+<!-- ── SLIDE-OUT MENU ── -->
+<div class="slide-menu-overlay" id="menuOverlay"></div>
+<div class="slide-menu" id="slideMenu">
+  <div class="slide-menu-top">
+    <div class="slide-menu-logo">
+      <img src="images/л2.png" alt="Lisnyky House" />
+    </div>
+    <button class="slide-close" id="menuClose">&times;</button>
+  </div>
+  <nav>
+    <a href="index.html">Головна</a>
+    <a href="index.html#about">Про комплекс</a>
+    <a href="index.html#advantages">Переваги</a>
+    <a href="houses.html" class="active">Будинки</a>
+    <a href="index.html#location">Локація</a>
+    <a href="index.html#contact">Контакти</a>
+  </nav>
+  <div class="slide-menu-phone">
+    Зателефонувати:
+    <a href="tel:+380672004777">+38 067 200 47 77</a>
+  </div>
+</div>
+
+<!-- ── MOBILE MENU ── -->
+<div class="m-menu" id="mMenu">
+  <button class="m-close" id="mClose">&times;</button>
+  <a href="index.html">Головна</a>
+  <a href="index.html#about">Про комплекс</a>
+  <a href="index.html#advantages">Переваги</a>
+  <a href="houses.html">Будинки</a>
+  <a href="index.html#location">Локація</a>
+  <a href="index.html#contact">Контакти</a>
+</div>
+
+<!-- ── HEADER ── -->
+<header>
+  <a href="index.html" class="header-logo">
+    <img src="images/л2.png" alt="Lisnyky House" />
+  </a>
+  <div class="header-right">
+    <a href="tel:+380672004777" class="header-phone">+38 067 200 47 77</a>
+    <a href="index.html#contact" class="btn-green">Зв'язатись</a>
+    <button class="header-burger" id="headerBurger" aria-label="Відкрити меню">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ── PAGE BANNER ── -->
+<div class="page-banner">
+  <div class="page-banner-inner">
+    <div>
+      <a href="index.html" class="back-link">
+        <svg width="16" height="8" viewBox="0 0 16 8" fill="none">
+          <path d="M16 4H2M6 1L2 4l4 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        Повернутись
+      </a>
+      <h1>Усі<br/><em>будинки</em></h1>
+    </div>
+    <div class="page-banner-meta">
+      <span>Доступно зараз</span>
+      <strong id="availableCount">5</strong>
+      <span>таунхаусів</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── CATALOG ── -->
+<div class="catalog-wrap">
+
+  <!-- FILTERS -->
+  <div class="filter-bar">
+    <div class="filter-group">
+      <button class="filter-btn active" data-filter="all">Всі</button>
+      <button class="filter-btn" data-filter="free">Вільні</button>
+      <button class="filter-btn" data-filter="reserved">Зарезервовані</button>
+    </div>
+    <div class="filter-divider"></div>
+    <div class="filter-group">
+      <button class="filter-btn active" data-type="all">Всі типи</button>
+      <button class="filter-btn" data-type="a">Тип А · 110 м²</button>
+      <button class="filter-btn" data-type="b">Тип Б · 140 м²</button>
+    </div>
+    <span class="filter-count" id="filterCount">12 будинків</span>
+  </div>
+
+  <!-- GRID -->
+  <div class="house-grid" id="houseGrid">
+
+    <div class="house-card" data-status="free" data-type="a" data-id="1">
+      <div class="house-card-img">
+        <img src="images/1.jpg" alt="Будинок №1" loading="lazy" />
+        <span class="house-status status-free">Вільний</span>
+      </div>
+      <div class="house-card-body">
+        <div class="house-num">Будинок № 01 · Тип А</div>
+        <div class="house-title">Таунхаус А</div>
+        <div class="house-specs">
+          <div class="hs-item"><div class="hs-label">Площа</div><div class="hs-val">110 м²</div></div>
+          <div class="hs-item"><div class="hs-label">Кімнати</div><div class="hs-val">3+1</div></div>
+          <div class="hs-item"><div class="hs-label">Поверхи</div><div class="hs-val">2</div></div>
+          <div class="hs-item"><div class="hs-label">Балкон</div><div class="hs-val">Є</div></div>
+        </div>
+        <div class="house-card-footer">
+          <div class="house-price">Уточнити ціну</div>
+          <div class="house-cta">Детальніше <svg width="16" height="8" viewBox="0 0 16 8" fill="none"><path d="M0 4h14M10 1l4 3-4 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="house-card" data-status="sold" data-type="a" data-id="2">
+      <div class="house-card-img">
+        <img src="images/2.jpg" alt="Будинок №2" loading="lazy" />
+        <span class="house-status status-sold">Продано</span>
+      </div>
+      <div class="house-card-body">
+        <div class="house-num">Будинок № 02 · Тип А</div>
+        <div class="house-title">Таунхаус А</div>
+        <div class="house-specs">
+          <div class="hs-item"><div class="hs-label">Площа</div><div class="hs-val">110 м²</div></div>
+          <div class="hs-item"><div class="hs-label">Кімнати</div><div class="hs-val">3+1</div></div>
+          <div class="hs-item"><div class="hs-label">Поверхи</div><div class="hs-val">2</div></div>
+          <div class="hs-item"><div class="hs-label">Балкон</div><div class="hs-val">Є</div></div>
+        </div>
+        <div class="house-card-footer">
+          <div class="house-price">Продано</div>
+          <div class="house-cta"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="house-card" data-status="free" data-type="b" data-id="3">
+      <div class="house-card-img">
+        <img src="images/3.jpg" alt="Будинок №3" loading="lazy" />
+        <span class="house-status status-free">Вільний</span>
+      </div>
+      <div class="house-card-body">
+        <div class="house-num">Будинок № 03 · Тип Б</div>
+        <div class="house-title">Таунхаус Б</div>
+        <div class="house-specs">
+          <div class="hs-item"><div class="hs-label">Площа</div><div class="hs-val">140 м²</div></div>
+          <div class="hs-item"><div class="hs-label">Кімнати</div><div class="hs-val">4+1</div></div>
+          <div class="hs-item"><div class="hs-label">Поверхи</div><div class="hs-val">2</div></div>
+          <div class="hs-item"><div class="hs-label">Балкон</div><div class="hs-val">Є</div></div>
+        </div>
+        <div class="house-card-footer">
+          <div class="house-price">Уточнити ціну</div>
+          <div class="house-cta">Детальніше <svg width="16" height="8" viewBox="0 0 16 8" fill="none"><path d="M0 4h14M10 1l4 3-4 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="house-card" data-status="reserved" data-type="b" data-id="4">
+      <div class="house-card-img">
+        <img src="images/4.jpg" alt="Будинок №4" loading="lazy" />
+        <span class="house-status status-reserved">Зарезервовано</span>
+      </div>
+      <div class="house-card-body">
+        <div class="house-num">Будинок № 04 · Тип Б</div>
+        <div class="house-title">Таунхаус Б</div>
+        <div class="house-specs">
+          <div class="hs-item"><div class="hs-label">Площа</div><div class="hs-val">140 м²</div></div>
+          <div class="hs-item"><div class="hs-label">Кімнати</div><div class="hs-val">4+1</div></div>
+          <div class="hs-item"><div class="hs-label">Поверхи</div><div class="hs-val">2</div></div>
+          <div class="hs-item"><div class="hs-label">Балкон</div><div class="hs-val">Є</div></div>
+        </div>
+        <div class="house-card-footer">
+          <div class="house-price">Зарезервовано</div>
+          <div class="house-cta"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="house-card" data-status="sold" data-type="a" data-id="5">
+      <div class="house-card-img">
+        <img src="images/5.jpg" alt="Будинок №5" loading="lazy" />
+        <span class="house-status status-sold">Продано</span>
+      </div>
+      <div class="house-card-body">
+        <div class="house-num">Будинок № 05 · Тип А</div>
+        <div class="house-title">Таунхаус А</div>
+        <div class="house-specs">
+          <div class="hs-item"><div class="hs-label">Площа</div><div class="hs-val">110 м²</div></div>
+          <div class="hs-item"><div class="hs-label">Кімнати</div><div class="hs-val">3+1</div></div>
+          <div class="hs-item"><div class="hs-label">Поверхи</div><div class="hs-val">2</div></div>
+          <div class="hs-item"><div class="hs-label">Балкон</div><div class="hs-val">Є</div></div>
+        </div>
+        <div class="house-card-footer">
+          <div class="house-price">Продано</div>
+          <div class="house-cta"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="house-card" data-status="free" data-type="a" data-id="6">
+      <div class="house-card-img">
+        <img src="images/6.jpg" alt="Будинок №6" loading="lazy" />
+        <span class="house-status status-free">Вільний</span>
+      </div>
+      <div class="house-card-body">
+        <div class="house-num">Будинок № 06 · Тип А</div>
+        <div class="house-title">Таунхаус А</div>
+        <div class="house-specs">
+          <div class="hs-item"><div class="hs-label">Площа</div><div class="hs-val">110 м²</div></div>
+          <div class="hs-item"><div class="hs-label">Кімнати</div><div class="hs-val">3+1</div></div>
+          <div class="hs-item"><div class="hs-label">Поверхи</div><div class="hs-val">2</div></div>
+          <div class="hs-item"><div class="hs-label">Балкон</div><div class="hs-val">Є</div></div>
+        </div>
+        <div class="house-card-footer">
+          <div class="house-price">Уточнити ціну</div>
+          <div class="house-cta">Детальніше <svg width="16" height="8" viewBox="0 0 16 8" fill="none"><path d="M0 4h14M10 1l4 3-4 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="house-card" data-status="sold" data-type="b" data-id="7">
+      <div class="house-card-img">
+        <img src="images/7.jpg" alt="Будинок №7" loading="lazy" />
+        <span class="house-status status-sold">Продано</span>
+      </div>
+      <div class="house-card-body">
+        <div class="house-num">Будинок № 07 · Тип Б</div>
+        <div class="house-title">Таунхаус Б</div>
+        <div class="house-specs">
+          <div class="hs-item"><div class="hs-label">Площа</div><div class="hs-val">140 м²</div></div>
+          <div class="hs-item"><div class="hs-label">Кімнати</div><div class="hs-val">4+1</div></div>
+          <div class="hs-item"><div class="hs-label">Поверхи</div><div class="hs-val">2</div></div>
+          <div class="hs-item"><div class="hs-label">Балкон</div><div class="hs-val">Є</div></div>
+        </div>
+        <div class="house-card-footer">
+          <div class="house-price">Продано</div>
+          <div class="house-cta"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="house-card" data-status="free" data-type="a" data-id="8">
+      <div class="house-card-img">
+        <img src="images/8.jpg" alt="Будинок №8" loading="lazy" />
+        <span class="house-status status-free">Вільний</span>
+      </div>
+      <div class="house-card-body">
+        <div class="house-num">Будинок № 08 · Тип А</div>
+        <div class="house-title">Таунхаус А</div>
+        <div class="house-specs">
+          <div class="hs-item"><div class="hs-label">Площа</div><div class="hs-val">110 м²</div></div>
+          <div class="hs-item"><div class="hs-label">Кімнати</div><div class="hs-val">3+1</div></div>
+          <div class="hs-item"><div class="hs-label">Поверхи</div><div class="hs-val">2</div></div>
+          <div class="hs-item"><div class="hs-label">Балкон</div><div class="hs-val">Є</div></div>
+        </div>
+        <div class="house-card-footer">
+          <div class="house-price">Уточнити ціну</div>
+          <div class="house-cta">Детальніше <svg width="16" height="8" viewBox="0 0 16 8" fill="none"><path d="M0 4h14M10 1l4 3-4 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="house-card" data-status="free" data-type="b" data-id="9">
+      <div class="house-card-img">
+        <img src="images/9.jpg" alt="Будинок №9" loading="lazy" />
+        <span class="house-status status-free">Вільний</span>
+      </div>
+      <div class="house-card-body">
+        <div class="house-num">Будинок № 09 · Тип Б</div>
+        <div class="house-title">Таунхаус Б</div>
+        <div class="house-specs">
+          <div class="hs-item"><div class="hs-label">Площа</div><div class="hs-val">140 м²</div></div>
+          <div class="hs-item"><div class="hs-label">Кімнати</div><div class="hs-val">4+1</div></div>
+          <div class="hs-item"><div class="hs-label">Поверхи</div><div class="hs-val">2</div></div>
+          <div class="hs-item"><div class="hs-label">Балкон</div><div class="hs-val">Є</div></div>
+        </div>
+        <div class="house-card-footer">
+          <div class="house-price">Уточнити ціну</div>
+          <div class="house-cta">Детальніше <svg width="16" height="8" viewBox="0 0 16 8" fill="none"><path d="M0 4h14M10 1l4 3-4 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="house-card" data-status="reserved" data-type="a" data-id="10">
+      <div class="house-card-img">
+        <img src="images/10.jpg" alt="Будинок №10" loading="lazy" />
+        <span class="house-status status-reserved">Зарезервовано</span>
+      </div>
+      <div class="house-card-body">
+        <div class="house-num">Будинок № 10 · Тип А</div>
+        <div class="house-title">Таунхаус А</div>
+        <div class="house-specs">
+          <div class="hs-item"><div class="hs-label">Площа</div><div class="hs-val">110 м²</div></div>
+          <div class="hs-item"><div class="hs-label">Кімнати</div><div class="hs-val">3+1</div></div>
+          <div class="hs-item"><div class="hs-label">Поверхи</div><div class="hs-val">2</div></div>
+          <div class="hs-item"><div class="hs-label">Балкон</div><div class="hs-val">Є</div></div>
+        </div>
+        <div class="house-card-footer">
+          <div class="house-price">Зарезервовано</div>
+          <div class="house-cta"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="house-card" data-status="free" data-type="b" data-id="11">
+      <div class="house-card-img">
+        <img src="images/11.jpg" alt="Будинок №11" loading="lazy" />
+        <span class="house-status status-free">Вільний</span>
+      </div>
+      <div class="house-card-body">
+        <div class="house-num">Будинок № 11 · Тип Б</div>
+        <div class="house-title">Таунхаус Б</div>
+        <div class="house-specs">
+          <div class="hs-item"><div class="hs-label">Площа</div><div class="hs-val">140 м²</div></div>
+          <div class="hs-item"><div class="hs-label">Кімнати</div><div class="hs-val">4+1</div></div>
+          <div class="hs-item"><div class="hs-label">Поверхи</div><div class="hs-val">2</div></div>
+          <div class="hs-item"><div class="hs-label">Балкон</div><div class="hs-val">Є</div></div>
+        </div>
+        <div class="house-card-footer">
+          <div class="house-price">Уточнити ціну</div>
+          <div class="house-cta">Детальніше <svg width="16" height="8" viewBox="0 0 16 8" fill="none"><path d="M0 4h14M10 1l4 3-4 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="house-card" data-status="sold" data-type="a" data-id="12">
+      <div class="house-card-img">
+        <img src="images/12.jpg" alt="Будинок №12" loading="lazy" />
+        <span class="house-status status-sold">Продано</span>
+      </div>
+      <div class="house-card-body">
+        <div class="house-num">Будинок № 12 · Тип А</div>
+        <div class="house-title">Таунхаус А</div>
+        <div class="house-specs">
+          <div class="hs-item"><div class="hs-label">Площа</div><div class="hs-val">110 м²</div></div>
+          <div class="hs-item"><div class="hs-label">Кімнати</div><div class="hs-val">3+1</div></div>
+          <div class="hs-item"><div class="hs-label">Поверхи</div><div class="hs-val">2</div></div>
+          <div class="hs-item"><div class="hs-label">Балкон</div><div class="hs-val">Є</div></div>
+        </div>
+        <div class="house-card-footer">
+          <div class="house-price">Продано</div>
+          <div class="house-cta"></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="no-results" id="noResults">Немає будинків за обраними фільтрами</p>
+
+  </div><!-- /house-grid -->
+</div><!-- /catalog-wrap -->
+
+<!-- ── MODAL ── -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modal">
+    <div class="modal-img">
+      <img id="modalImg" src="" alt="" />
+    </div>
+    <div class="modal-body">
+      <div class="modal-head">
+        <div>
+          <div class="modal-num" id="modalNum"></div>
+          <div class="modal-title" id="modalTitle"></div>
+        </div>
+        <button class="modal-close" id="modalClose">&times;</button>
+      </div>
+      <div class="modal-specs">
+        <div class="ms-item"><div class="ms-label">Площа</div><div class="ms-val" id="mArea"></div></div>
+        <div class="ms-item"><div class="ms-label">Кімнати</div><div class="ms-val" id="mRooms"></div></div>
+        <div class="ms-item"><div class="ms-label">Поверхи</div><div class="ms-val" id="mFloors">2</div></div>
+        <div class="ms-item"><div class="ms-label">Балкон</div><div class="ms-val">Є</div></div>
+      </div>
+      <div class="modal-features">
+        <span class="modal-feature">Розумний дім</span>
+        <span class="modal-feature">Сонячні батареї</span>
+        <span class="modal-feature">Власне подвір'я</span>
+        <span class="modal-feature">Паркінг на 2 авто</span>
+        <span class="modal-feature">Бойлер 200 л</span>
+        <span class="modal-feature">Чистова обробка</span>
+      </div>
+      <div class="modal-ctas">
+        <a href="index.html#contact" class="modal-btn-primary">Записатись на перегляд</a>
+        <a href="tel:+380672004777" class="modal-btn-secondary">+38 067 200 47 77</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── Side menu
+  const menuTrigger = document.getElementById('menuTrigger');
+  const slideMenu   = document.getElementById('slideMenu');
+  const menuOverlay = document.getElementById('menuOverlay');
+  const menuClose   = document.getElementById('menuClose');
+
+  function openMenu()  { slideMenu.classList.add('open'); menuOverlay.classList.add('open'); }
+  function closeMenu() { slideMenu.classList.remove('open'); menuOverlay.classList.remove('open'); }
+
+  menuTrigger.addEventListener('click', openMenu);
+  menuClose.addEventListener('click', closeMenu);
+  menuOverlay.addEventListener('click', closeMenu);
+
+  // ── Mobile burger
+  const headerBurger = document.getElementById('headerBurger');
+  const mMenu = document.getElementById('mMenu');
+  const mClose = document.getElementById('mClose');
+  if (headerBurger) {
+    headerBurger.addEventListener('click', () => mMenu.classList.add('open'));
+    mClose.addEventListener('click', () => mMenu.classList.remove('open'));
+  }
+
+  // ── Filter logic
+  let activeStatus = 'all';
+  let activeType   = 'all';
+
+  const cards = document.querySelectorAll('.house-card');
+  const noResults = document.getElementById('noResults');
+  const filterCount = document.getElementById('filterCount');
+
+  function applyFilters() {
+    let visible = 0;
+    cards.forEach(card => {
+      const s = card.dataset.status;
+      const t = card.dataset.type;
+      const statusOk = activeStatus === 'all'
+        || (activeStatus === 'free' && s === 'free')
+        || (activeStatus === 'reserved' && s === 'reserved');
+      const typeOk = activeType === 'all' || t === activeType;
+      const show = statusOk && typeOk;
+      card.classList.toggle('hidden', !show);
+      if (show) visible++;
+    });
+    noResults.classList.toggle('show', visible === 0);
+    filterCount.textContent = visible + ' ' + plural(visible, 'будинок', 'будинки', 'будинків');
+  }
+
+  function plural(n, f1, f2, f5) {
+    const v = Math.abs(n) % 100;
+    const v1 = v % 10;
+    if (v > 10 && v < 20) return f5;
+    if (v1 > 1 && v1 < 5) return f2;
+    if (v1 === 1) return f1;
+    return f5;
+  }
+
+  document.querySelectorAll('[data-filter]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeStatus = btn.dataset.filter;
+      applyFilters();
+    });
+  });
+
+  document.querySelectorAll('[data-type]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-type]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeType = btn.dataset.type;
+      applyFilters();
+    });
+  });
+
+  applyFilters();
+
+  // ── Modal
+  const modalOverlay = document.getElementById('modalOverlay');
+  const modalClose   = document.getElementById('modalClose');
+
+  const houseData = {
+    1:  { img: 'images/1.jpg',  num: '01', type: 'А', area: '110 м²', rooms: '3+1' },
+    2:  { img: 'images/2.jpg',  num: '02', type: 'А', area: '110 м²', rooms: '3+1' },
+    3:  { img: 'images/3.jpg',  num: '03', type: 'Б', area: '140 м²', rooms: '4+1' },
+    4:  { img: 'images/4.jpg',  num: '04', type: 'Б', area: '140 м²', rooms: '4+1' },
+    5:  { img: 'images/5.jpg',  num: '05', type: 'А', area: '110 м²', rooms: '3+1' },
+    6:  { img: 'images/6.jpg',  num: '06', type: 'А', area: '110 м²', rooms: '3+1' },
+    7:  { img: 'images/7.jpg',  num: '07', type: 'Б', area: '140 м²', rooms: '4+1' },
+    8:  { img: 'images/8.jpg',  num: '08', type: 'А', area: '110 м²', rooms: '3+1' },
+    9:  { img: 'images/9.jpg',  num: '09', type: 'Б', area: '140 м²', rooms: '4+1' },
+    10: { img: 'images/10.jpg', num: '10', type: 'А', area: '110 м²', rooms: '3+1' },
+    11: { img: 'images/11.jpg', num: '11', type: 'Б', area: '140 м²', rooms: '4+1' },
+    12: { img: 'images/12.jpg', num: '12', type: 'А', area: '110 м²', rooms: '3+1' },
+  };
+
+  cards.forEach(card => {
+    const status = card.dataset.status;
+    if (status === 'sold' || status === 'reserved') return;
+    card.addEventListener('click', () => openModal(card.dataset.id));
+  });
+
+  function openModal(id) {
+    const d = houseData[id];
+    if (!d) return;
+    document.getElementById('modalImg').src   = d.img;
+    document.getElementById('modalImg').alt   = 'Будинок №' + d.num;
+    document.getElementById('modalNum').textContent   = 'Будинок № ' + d.num + ' · Тип ' + d.type;
+    document.getElementById('modalTitle').textContent = 'Таунхаус ' + d.type;
+    document.getElementById('mArea').textContent  = d.area;
+    document.getElementById('mRooms').textContent = d.rooms;
+    modalOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modalOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  modalClose.addEventListener('click', closeModal);
+  modalOverlay.addEventListener('click', e => { if (e.target === modalOverlay) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // Update available count in banner
+  const avail = [...cards].filter(c => c.dataset.status === 'free').length;
+  document.getElementById('availableCount').textContent = avail;
+</script>
+</body>
+</html>
