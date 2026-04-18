@@ -12,7 +12,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500;1,600&family=Playfair+Display:wght@600;700&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <style>
     /* ─── HERO SLIDES: зображення ──────────── */
@@ -29,7 +29,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 16px; }
     body {
-      font-family: 'Manrope', system-ui, sans-serif;
+      font-family: 'Instrument Sans', system-ui, sans-serif;
       font-weight: 400;
       color: #1a1a1a;
       background: #fff;
@@ -49,8 +49,11 @@
       --white:      #ffffff;
       --off:        #f7f7f5;
       --border:     rgba(0,0,0,0.09);
-      --serif:      'Cormorant Garamond', Georgia, serif;
-      --sans:       'Manrope', system-ui, sans-serif;
+      --serif:      'Instrument Serif', Georgia, serif;
+      --sans:       'Instrument Sans', system-ui, sans-serif;
+      --mono:       'JetBrains Mono', ui-monospace, monospace;
+      --ease:       cubic-bezier(.2,.7,.2,1);
+      --dur:        420ms;
     }
 
     /* ─── SIDE NAV ───────────────────────────── */
@@ -313,10 +316,10 @@
     .btn-green {
       background: var(--green);
       color: #fff;
-      font-family: var(--sans);
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.16em;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       padding: 12px 26px;
       border-radius: 3px;
@@ -471,11 +474,11 @@
     }
 
     .slide-num {
-      font-family: var(--sans);
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.3em;
-      color: rgba(255,255,255,0.7);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.55);
       margin-top: 0;
       margin-bottom: 16px;
     }
@@ -483,23 +486,30 @@
     .slide-num span { color: rgba(255,255,255,0.35); }
 
     .hero-label {
+      font-family: var(--mono);
       font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.22em;
+      font-weight: 400;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: rgba(255,255,255,0.65);
       margin-bottom: 14px;
     }
 
     .hero h1 {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: var(--serif);
       font-size: clamp(52px, 7vw, 96px);
-      font-weight: 700;
+      font-weight: 400;
       font-style: normal;
-      line-height: 1.05;
+      line-height: 0.96;
+      letter-spacing: -0.02em;
       color: var(--white);
       margin-bottom: 20px;
       text-shadow: 0 2px 32px rgba(0,0,0,0.5);
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: rgba(255,255,255,0.82);
     }
 
     .hero-desc {
@@ -516,9 +526,10 @@
       display: inline-flex;
       align-items: center;
       gap: 12px;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.18em;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--white);
       background: rgba(255,255,255,0.10);
@@ -574,23 +585,41 @@
     .section-inner { max-width: 1180px; margin: 0 auto; padding: 0 60px; }
 
     .s-label {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--mono);
       font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.22em;
+      font-weight: 500;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--green);
       margin-bottom: 20px;
     }
 
+    .s-label::before {
+      content: '';
+      display: inline-block;
+      width: 28px;
+      height: 1px;
+      background: currentColor;
+      flex-shrink: 0;
+    }
+
     h2.s-title {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: var(--serif);
       font-size: clamp(42px, 5.5vw, 76px);
-      font-weight: 600;
+      font-weight: 400;
       font-style: normal;
-      line-height: 1.05;
+      line-height: 0.98;
+      letter-spacing: -0.015em;
       color: var(--text);
       margin-bottom: 28px;
+    }
+
+    h2.s-title em {
+      font-style: italic;
+      color: var(--green);
     }
 
     .s-text {
@@ -605,15 +634,57 @@
       display: inline-flex;
       align-items: center;
       gap: 14px;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.18em;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--text);
       border-bottom: 1px solid var(--text);
       padding-bottom: 2px;
       margin-top: 36px;
       transition: color 0.2s, border-color 0.2s;
+    }
+
+    /* ─── MARQUEE ─────────────────────────────── */
+    .marquee-strip {
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--off);
+      padding: 14px 0;
+      white-space: nowrap;
+      mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    }
+
+    .marquee-strip__track {
+      display: inline-flex;
+      gap: 0;
+      animation: marqueeScroll 38s linear infinite;
+    }
+
+    .marquee-strip__item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      padding: 0 32px;
+    }
+
+    .marquee-strip__item::before {
+      content: '·';
+      margin-right: 32px;
+      color: var(--green);
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    @keyframes marqueeScroll {
+      to { transform: translateX(-50%); }
     }
 
     .s-link:hover { color: var(--green); border-color: var(--green); }
@@ -759,14 +830,14 @@
     }
 
     /* ─── SECTION: INTERIOR ─────────────────── */
-    .s-interior { background: var(--bg); }
+    .s-interior { background: var(--white); }
 
     .interior-intro { margin-bottom: 56px; }
 
     .interior-grid {
       display: grid;
       grid-template-columns: 1.4fr 1fr;
-      grid-template-rows: 300px 300px;
+      grid-template-rows: 340px 340px;
       gap: 3px;
     }
 
@@ -906,9 +977,10 @@
     }
 
     .ps-label {
+      font-family: var(--mono);
       font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.16em;
+      font-weight: 400;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--text-light);
       margin-bottom: 4px;
@@ -1044,9 +1116,10 @@
     }
 
     .c-detail-label {
+      font-family: var(--mono);
       font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.18em;
+      font-weight: 400;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: rgba(255,255,255,0.4);
       margin-bottom: 4px;
@@ -1195,9 +1268,10 @@
     }
 
     .footer-col h4 {
+      font-family: var(--mono);
       font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.2em;
+      font-weight: 500;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--text);
       margin-bottom: 20px;
@@ -1288,8 +1362,8 @@
       .adv-list { grid-template-columns: 1fr 1fr; gap: 36px 48px; }
       .gallery-full { grid-template-columns: 1fr 1fr; height: auto; }
       .gal-item { height: 240px; }
-      .interior-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
-      .int-item { height: 280px; }
+      .interior-grid { grid-template-columns: 1fr; grid-template-rows: auto; margin-top: 40px; }
+      .int-item { height: 300px; }
       .int-item--large { grid-row: span 1; }
       .plan-cards { grid-template-columns: 1fr; }
       .location-grid { grid-template-columns: 1fr; gap: 48px; }
@@ -1438,7 +1512,7 @@
     <div class="slide-texts active">
       <div class="hero-label">Лісники, Київська область</div>
       <div class="slide-num">01 <span>/ 03</span></div>
-      <h1>Жити поряд<br/>з природою</h1>
+      <h1>Жити поряд<br/><em>з природою</em></h1>
       <p class="hero-desc">Ліс, озеро і тиша — за 12 хвилин від Києва</p>
       <a href="#about" class="hero-cta">
         Дізнатись більше
@@ -1449,7 +1523,7 @@
     <div class="slide-texts">
       <div class="hero-label">Простір для активного життя</div>
       <div class="slide-num">02 <span>/ 03</span></div>
-      <h1>Більше<br/>простору</h1>
+      <h1>Більше<br/><em>простору</em></h1>
       <p class="hero-desc">Власний двір, тераса і місце де діти ростуть вільно</p>
       <a href="#advantages" class="hero-cta">
         Переваги комплексу
@@ -1460,7 +1534,7 @@
     <div class="slide-texts">
       <div class="hero-label">Сучасна архітектура</div>
       <div class="slide-num">03 <span>/ 03</span></div>
-      <h1>Розумний дім.<br/>Готовий до заселення</h1>
+      <h1>Розумний дім.<br/><em>Готовий до заселення</em></h1>
       <p class="hero-desc">Сонячні батареї, автономія, власна охорона 24/7</p>
       <a href="#contact" class="hero-cta">
         Обрати будинок
@@ -1485,13 +1559,36 @@
 </section>
 
 
+<!-- ── MARQUEE FACTS ────────────────────────── -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-strip__track">
+    <span class="marquee-strip__item">12 хв до метро Видубичі</span>
+    <span class="marquee-strip__item">100% готово до заселення</span>
+    <span class="marquee-strip__item">Ліс та озеро поряд</span>
+    <span class="marquee-strip__item">24/7 охорона та відеоспостереження</span>
+    <span class="marquee-strip__item">Власний двір та паркінг</span>
+    <span class="marquee-strip__item">Сонячні батареї</span>
+    <span class="marquee-strip__item">Розумний дім</span>
+    <span class="marquee-strip__item">Лісники, Київська область</span>
+    <span class="marquee-strip__item">12 хв до метро Видубичі</span>
+    <span class="marquee-strip__item">100% готово до заселення</span>
+    <span class="marquee-strip__item">Ліс та озеро поряд</span>
+    <span class="marquee-strip__item">24/7 охорона та відеоспостереження</span>
+    <span class="marquee-strip__item">Власний двір та паркінг</span>
+    <span class="marquee-strip__item">Сонячні батареї</span>
+    <span class="marquee-strip__item">Розумний дім</span>
+    <span class="marquee-strip__item">Лісники, Київська область</span>
+  </div>
+</div>
+
+
 <!-- ════════════════════════════════════════════
      CONCEPT
 ═════════════════════════════════════════════ -->
 <section class="section s-concept" id="about">
   <div class="section-inner">
     <div class="s-label">Про комплекс</div>
-    <h2 class="s-title">Місце, де місто<br />зустрічається з лісом</h2>
+    <h2 class="s-title">Місце, де місто<br /><em>зустрічається з лісом</em></h2>
     <p class="s-text">
       Lisnyky House — закритий таунхаус-комплекс у с. Лісники Київської
       області. Тут ви отримуєте все що дає місто і те, чого місто дати не може:
@@ -1539,7 +1636,7 @@
     </div>
     <div class="split-text">
       <div class="s-label">Природа поруч</div>
-      <h2 class="s-title">Більше<br />простору</h2>
+      <h2 class="s-title">Більше<br /><em>простору</em></h2>
       <p class="s-text">
         Поряд — справжній ліс і озеро. Прогулянки по стежках, пікніки з дітьми,
         вечірні пробіжки без виїзду з комплексу. Природний мікроклімат, чисте
@@ -1563,7 +1660,7 @@
   <div class="split-grid">
     <div class="split-text bg-off">
       <div class="s-label">Готово сьогодні</div>
-      <h2 class="s-title">Ваш будинок<br />вже чекає</h2>
+      <h2 class="s-title">Ваш будинок<br /><em>вже чекає</em></h2>
       <p class="s-text">
         Жодного «котловану» і жодного очікування. Всі будинки введено в
         експлуатацію і готові до заселення. Ви купуєте готовий будинок і
@@ -1593,7 +1690,7 @@
   <div class="section-inner">
     <div class="adv-intro">
       <div class="s-label">Переваги</div>
-      <h2 class="s-title">Технології<br />та природа в одному домі</h2>
+      <h2 class="s-title">Технології та природа<br /><em>в одному домі</em></h2>
     </div>
 
     <div class="adv-list">
@@ -1626,31 +1723,6 @@
         <div class="adv-num">06</div>
         <div class="adv-title">12 хвилин від Києва</div>
         <p class="adv-desc">Метро Видубичі — 12 хв, центр — 20 хв. Тиша передмістя без відриву від міської інфраструктури.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ════════════════════════════════════════════
-     INTERIOR
-═════════════════════════════════════════════ -->
-<section class="section s-interior">
-  <div class="section-inner">
-    <div class="interior-intro">
-      <div class="s-label">Інтер'єр</div>
-      <h2 class="s-title">Простір,<br />створений для життя</h2>
-      <p class="s-text">Відкрите планування першого поверху, панорамні вікна на терасу, якісні оздоблювальні матеріали — деталі, які формують атмосферу.</p>
-    </div>
-    <div class="interior-grid">
-      <div class="int-item int-item--large">
-        <img src="images/p2/19.jpg" alt="Lisnyky House — вітальня з терасою" loading="lazy" />
-      </div>
-      <div class="int-item">
-        <img src="images/p2/27.jpg" alt="Lisnyky House — спальня з видом на ліс" loading="lazy" />
-      </div>
-      <div class="int-item">
-        <img src="images/p2/23.jpg" alt="Lisnyky House — ванна кімната" loading="lazy" />
       </div>
     </div>
   </div>
@@ -1693,13 +1765,38 @@
 
 
 <!-- ════════════════════════════════════════════
+     INTERIOR
+═════════════════════════════════════════════ -->
+<section class="section s-interior">
+  <div class="section-inner">
+    <div class="interior-intro">
+      <div class="s-label">Інтер'єр</div>
+      <h2 class="s-title">Простір,<br /><em>створений для життя</em></h2>
+      <p class="s-text">Відкрите планування першого поверху, панорамні вікна на терасу, якісні оздоблювальні матеріали — деталі, які формують атмосферу.</p>
+    </div>
+  </div>
+  <div class="interior-grid">
+    <div class="int-item int-item--large">
+      <img src="images/p2/19.jpg" alt="Lisnyky House — вітальня з терасою" loading="lazy" />
+    </div>
+    <div class="int-item">
+      <img src="images/p2/27.jpg" alt="Lisnyky House — спальня з видом на ліс" loading="lazy" />
+    </div>
+    <div class="int-item">
+      <img src="images/p2/23.jpg" alt="Lisnyky House — ванна кімната" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
      PLANS
 ═════════════════════════════════════════════ -->
 <section class="section s-plans" id="plans">
   <div class="section-inner">
     <div class="plans-intro">
       <div class="s-label">Колекція будинків</div>
-      <h2 class="s-title">Оберіть свій<br />будинок</h2>
+      <h2 class="s-title">Оберіть свій<br /><em>будинок</em></h2>
       <p class="s-text">Два варіанти планування для різних потреб. Кожен будинок — два поверхи, балкон, власне подвір'я і паркінг.</p>
     </div>
 
@@ -1785,7 +1882,7 @@
 <section class="section s-location" id="location">
   <div class="section-inner">
     <div class="s-label">Локація</div>
-    <h2 class="s-title">Між природою<br />і містом</h2>
+    <h2 class="s-title">Між природою<br /><em>і містом</em></h2>
 
     <div class="location-grid">
       <div>
@@ -1837,7 +1934,7 @@
 <section class="s-dark-cta" id="contact">
   <div class="section-inner">
     <div class="s-label">Зв'язатись з нами</div>
-    <h2 class="s-title">Готові показати<br />будинок сьогодні</h2>
+    <h2 class="s-title">Готові показати<br /><em>будинок сьогодні</em></h2>
     <p class="s-text">Запишіться на особистий перегляд або задайте будь-яке питання. Відповімо протягом 15 хвилин.</p>
 
     <div class="contact-grid">
