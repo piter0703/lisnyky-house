@@ -971,6 +971,7 @@
     }
     @media (max-width: 768px) {
       .plans-intro { grid-template-columns: 1fr; gap: 40px; }
+      .plan-video-wrap { display: none; }
     }
 
     .plan-cards {
@@ -1903,7 +1904,7 @@
         <p class="s-text">Два варіанти планування для різних потреб. Кожен будинок — два поверхи, балкон, власне подвір'я і паркінг.</p>
       </div>
       <div class="plan-video-wrap">
-        <video src="images/3Д.mp4" autoplay muted loop playsinline webkit-playsinline></video>
+        <video id="planVideo" data-src="images/3Д.mp4" muted loop playsinline webkit-playsinline></video>
       </div>
     </div>
 
@@ -2271,6 +2272,12 @@
       }
     });
   });
+
+  // Load plan video only on desktop
+  if (window.innerWidth > 768) {
+    const pv = document.getElementById('planVideo');
+    if (pv) { pv.src = pv.dataset.src; pv.play().catch(() => {}); }
+  }
 
   // Scroll reveal
   const io = new IntersectionObserver(entries => {
