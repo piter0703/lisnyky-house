@@ -77,10 +77,10 @@
       transition: background 0.35s, border-color 0.35s;
     }
 
-    /* After hero — solid subtle bar */
+    /* After hero — minimal bar on light bg */
     .side-nav.scrolled {
-      background: rgba(255,255,255,0.95);
-      border-right-color: rgba(0,0,0,0.07);
+      background: transparent;
+      border-right-color: rgba(0,0,0,0.1);
     }
 
     .side-menu-label {
@@ -104,7 +104,8 @@
       text-shadow: 0 1px 6px rgba(0,0,0,0.4);
     }
 
-    .side-nav.scrolled .side-menu-label span { color: var(--text-light); }
+    .side-nav.scrolled .side-menu-label span { color: var(--text); text-shadow: none; }
+    .side-nav.scrolled .side-menu-dots i { background: var(--text) !important; opacity: 0.3; }
     .side-menu-label:hover span { color: var(--green) !important; }
 
     .side-menu-dots {
@@ -1314,7 +1315,7 @@
       border-bottom: 1px solid var(--border);
     }
 
-    .footer-brand img { height: 72px; margin-bottom: 16px; }
+    .footer-brand img { height: 143px; margin-bottom: 16px; }
 
     .footer-brand p {
       font-size: 13px;
@@ -2101,7 +2102,7 @@
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="images/л1.png"
+        <img src="images/л2.png"
              alt="Lisnyky House" />
         <p>Готові таунхауси поряд з лісом та озером. Лісники, Київська область.</p>
       </div>
