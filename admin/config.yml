@@ -1,0 +1,57 @@
+backend:
+  name: github
+  repo: piter0703/lisnyky-house
+  branch: main
+  auth_type: pkce
+  app_id: REPLACE_WITH_CLIENT_ID
+
+media_folder: images
+public_folder: images
+
+locale: uk
+
+collections:
+  - name: houses_data
+    label: "Каталог будинків"
+    files:
+      - name: houses
+        label: "Будинки"
+        file: data/houses.json
+        fields:
+          - name: houses
+            label: "Список будинків"
+            widget: list
+            summary: "Будинок №{{fields.id}} · Тип {{fields.type}} · {{fields.status}}"
+            fields:
+              - { name: id,     label: "№ будинку", widget: number }
+              - name: type
+                label: "Тип"
+                widget: select
+                options:
+                  - { label: "Тип А (110 м²)", value: "a" }
+                  - { label: "Тип Б (140 м²)", value: "b" }
+              - name: status
+                label: "Статус"
+                widget: select
+                options:
+                  - { label: "Вільний",       value: "free" }
+                  - { label: "Продано",        value: "sold" }
+                  - { label: "Зарезервовано",  value: "reserved" }
+              - name: price
+                label: "Ціна"
+                widget: string
+                required: false
+                hint: "Напр: '85 000 $'. Залиш порожнім — відобразиться 'Уточнити ціну'"
+
+  - name: site_settings
+    label: "Налаштування сайту"
+    files:
+      - name: settings
+        label: "Контактна інформація"
+        file: data/settings.json
+        fields:
+          - { name: phone,    label: "Телефон",           widget: string }
+          - { name: email,    label: "Email",              widget: string }
+          - { name: address,  label: "Адреса",             widget: string }
+          - { name: whatsapp, label: "WhatsApp (посилання)", widget: string }
+          - { name: telegram, label: "Telegram (посилання)", widget: string }

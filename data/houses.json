@@ -1,0 +1,16 @@
+{
+  "houses": [
+    { "id": 1,  "type": "a", "status": "free",     "price": "" },
+    { "id": 2,  "type": "a", "status": "sold",     "price": "" },
+    { "id": 3,  "type": "b", "status": "free",     "price": "" },
+    { "id": 4,  "type": "b", "status": "reserved", "price": "" },
+    { "id": 5,  "type": "a", "status": "sold",     "price": "" },
+    { "id": 6,  "type": "a", "status": "free",     "price": "" },
+    { "id": 7,  "type": "b", "status": "sold",     "price": "" },
+    { "id": 8,  "type": "a", "status": "free",     "price": "" },
+    { "id": 9,  "type": "b", "status": "free",     "price": "" },
+    { "id": 10, "type": "a", "status": "reserved", "price": "" },
+    { "id": 11, "type": "b", "status": "free",     "price": "" },
+    { "id": 12, "type": "a", "status": "sold",     "price": "" }
+  ]
+}
