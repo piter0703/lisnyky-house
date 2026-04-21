@@ -1,12 +1,293 @@
 <!doctype html>
-<html>
+<html lang="uk">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
-  <title>Lisnyky House · CMS</title>
+  <title>Lisnyky House · Адмін</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f4f4f2; color: #1a1c1a; min-height: 100vh; }
+
+    .header { background: #1a1c1a; color: #fff; padding: 18px 32px; display: flex; align-items: center; justify-content: space-between; }
+    .header-title { font-size: 15px; font-weight: 600; letter-spacing: 0.04em; }
+    .header-sub { font-size: 12px; opacity: 0.5; margin-top: 2px; }
+    .btn-logout { background: none; border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.7); padding: 6px 14px; font-size: 12px; cursor: pointer; border-radius: 4px; }
+    .btn-logout:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+
+    /* Login screen */
+    .login-wrap { display: flex; align-items: center; justify-content: center; min-height: calc(100vh - 60px); }
+    .login-box { background: #fff; border: 1px solid #e0ddd8; padding: 40px; width: 100%; max-width: 440px; border-radius: 8px; }
+    .login-box h2 { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+    .login-box p { font-size: 13px; color: #666; margin-bottom: 24px; line-height: 1.6; }
+    .login-box a { color: #4f5b4c; }
+    .field-label { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #888; margin-bottom: 6px; }
+    .field-input { width: 100%; border: 1px solid #d8d5d0; padding: 10px 14px; font-size: 14px; border-radius: 4px; outline: none; }
+    .field-input:focus { border-color: #4f5b4c; }
+    .btn-primary { width: 100%; background: #4f5b4c; color: #fff; border: none; padding: 12px; font-size: 14px; font-weight: 600; cursor: pointer; border-radius: 4px; margin-top: 16px; }
+    .btn-primary:hover { background: #3d4a3a; }
+    .login-hint { margin-top: 16px; font-size: 12px; color: #999; line-height: 1.6; }
+
+    /* Main admin */
+    .main { max-width: 960px; margin: 0 auto; padding: 32px 24px; }
+    .section-title { font-size: 18px; font-weight: 600; margin-bottom: 20px; }
+    .save-bar { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
+    .btn-save { background: #4f5b4c; color: #fff; border: none; padding: 10px 28px; font-size: 14px; font-weight: 600; cursor: pointer; border-radius: 4px; }
+    .btn-save:hover { background: #3d4a3a; }
+    .btn-save:disabled { opacity: 0.5; cursor: not-allowed; }
+    .save-status { font-size: 13px; color: #666; }
+    .save-status.ok { color: #4f5b4c; font-weight: 600; }
+    .save-status.err { color: #c0392b; }
+
+    /* Table */
+    .house-table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #e0ddd8; border-radius: 8px; overflow: hidden; }
+    .house-table th { background: #f9f8f6; padding: 12px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #888; border-bottom: 1px solid #e0ddd8; }
+    .house-table td { padding: 12px 16px; border-bottom: 1px solid #f0ede8; vertical-align: middle; }
+    .house-table tr:last-child td { border-bottom: none; }
+    .house-table tr:hover td { background: #faf9f7; }
+
+    .house-num { font-size: 13px; font-weight: 600; }
+    .house-type { font-size: 12px; color: #999; margin-top: 2px; }
+
+    select.status-select { border: 1px solid #d8d5d0; padding: 7px 10px; font-size: 13px; border-radius: 4px; outline: none; cursor: pointer; background: #fff; }
+    select.status-select:focus { border-color: #4f5b4c; }
+    select.status-select.free     { color: #2d6a2d; }
+    select.status-select.sold     { color: #999; }
+    select.status-select.reserved { color: #b07a00; }
+
+    input.price-input { border: 1px solid #d8d5d0; padding: 7px 10px; font-size: 13px; border-radius: 4px; outline: none; width: 160px; }
+    input.price-input:focus { border-color: #4f5b4c; }
+    input.price-input::placeholder { color: #bbb; }
+
+    .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+    .badge-free     { background: #e8f5e8; color: #2d6a2d; }
+    .badge-sold     { background: #f0f0f0; color: #888; }
+    .badge-reserved { background: #fff8e1; color: #b07a00; }
+
+    @media (max-width: 600px) {
+      .main { padding: 20px 16px; }
+      .house-table th:nth-child(3), .house-table td:nth-child(3) { display: none; }
+    }
+  </style>
 </head>
 <body>
-  <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
+
+<div class="header">
+  <div>
+    <div class="header-title">Lisnyky House · Адмін-панель</div>
+    <div class="header-sub">Управління будинками</div>
+  </div>
+  <button class="btn-logout" id="btnLogout" style="display:none">Вийти</button>
+</div>
+
+<!-- Login -->
+<div class="login-wrap" id="loginWrap">
+  <div class="login-box">
+    <h2>Вхід</h2>
+    <p>Введіть GitHub Personal Access Token для управління сайтом.</p>
+    <div class="field-label">Personal Access Token</div>
+    <input class="field-input" type="password" id="tokenInput" placeholder="github_pat_..." autocomplete="off" />
+    <button class="btn-primary" id="btnLogin">Увійти</button>
+    <div id="loginError" style="color:#c0392b;font-size:13px;margin-top:12px;display:none"></div>
+    <div class="login-hint">
+      Де взяти токен: GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens → New token.<br>
+      Права: <strong>Contents: Read and write</strong> для репозиторію <strong>lisnyky-house</strong>.
+    </div>
+  </div>
+</div>
+
+<!-- Admin -->
+<div class="main" id="adminWrap" style="display:none">
+  <div class="save-bar">
+    <button class="btn-save" id="btnSave">Зберегти зміни</button>
+    <span class="save-status" id="saveStatus"></span>
+  </div>
+
+  <div class="section-title">Каталог будинків</div>
+  <table class="house-table">
+    <thead>
+      <tr>
+        <th>Будинок</th>
+        <th>Статус</th>
+        <th>Ціна</th>
+      </tr>
+    </thead>
+    <tbody id="houseTableBody"></tbody>
+  </table>
+</div>
+
+<script>
+  const REPO   = 'piter0703/lisnyky-house';
+  const FILE   = 'data/houses.json';
+  const API    = 'https://api.github.com';
+
+  const TYPE_INFO = { a: 'Тип А · 110 м²', b: 'Тип Б · 140 м²' };
+  const STATUS_LABEL = { free: 'Вільний', sold: 'Продано', reserved: 'Зарезервовано' };
+
+  let token = localStorage.getItem('lh_admin_token') || '';
+  let fileSha = '';
+  let houses = [];
+
+  // ── Auth
+  const loginWrap  = document.getElementById('loginWrap');
+  const adminWrap  = document.getElementById('adminWrap');
+  const btnLogout  = document.getElementById('btnLogout');
+  const btnLogin   = document.getElementById('btnLogin');
+  const tokenInput = document.getElementById('tokenInput');
+  const loginError = document.getElementById('loginError');
+
+  function showLogin() {
+    loginWrap.style.display = 'flex';
+    adminWrap.style.display = 'none';
+    btnLogout.style.display = 'none';
+  }
+
+  function showAdmin() {
+    loginWrap.style.display = 'none';
+    adminWrap.style.display = 'block';
+    btnLogout.style.display = 'inline-block';
+  }
+
+  btnLogin.addEventListener('click', async () => {
+    const t = tokenInput.value.trim();
+    if (!t) return;
+    btnLogin.disabled = true;
+    btnLogin.textContent = 'Перевірка...';
+    loginError.style.display = 'none';
+    try {
+      const res = await fetch(`${API}/repos/${REPO}/contents/${FILE}`, {
+        headers: { Authorization: `token ${t}`, Accept: 'application/vnd.github+json' }
+      });
+      if (!res.ok) throw new Error('Невірний токен або немає доступу до репозиторію');
+      localStorage.setItem('lh_admin_token', t);
+      token = t;
+      const data = await res.json();
+      loadData(data);
+      showAdmin();
+    } catch(e) {
+      loginError.textContent = e.message;
+      loginError.style.display = 'block';
+    } finally {
+      btnLogin.disabled = false;
+      btnLogin.textContent = 'Увійти';
+    }
+  });
+
+  tokenInput.addEventListener('keydown', e => { if (e.key === 'Enter') btnLogin.click(); });
+
+  btnLogout.addEventListener('click', () => {
+    localStorage.removeItem('lh_admin_token');
+    token = '';
+    showLogin();
+  });
+
+  // ── Load data
+  function loadData(data) {
+    fileSha = data.sha;
+    houses  = JSON.parse(atob(data.content.replace(/\n/g, ''))).houses;
+    renderTable();
+  }
+
+  async function fetchData() {
+    const res = await fetch(`${API}/repos/${REPO}/contents/${FILE}`, {
+      headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github+json' }
+    });
+    if (!res.ok) { localStorage.removeItem('lh_admin_token'); showLogin(); return; }
+    loadData(await res.json());
+    showAdmin();
+  }
+
+  // ── Render table
+  function renderTable() {
+    const tbody = document.getElementById('houseTableBody');
+    tbody.innerHTML = houses.map((h, i) => {
+      const num = String(h.id).padStart(2, '0');
+      return `
+        <tr>
+          <td>
+            <div class="house-num">Будинок № ${num}</div>
+            <div class="house-type">${TYPE_INFO[h.type]}</div>
+          </td>
+          <td>
+            <select class="status-select ${h.status}" data-idx="${i}" id="status-${i}">
+              <option value="free"     ${h.status==='free'     ? 'selected':''}>Вільний</option>
+              <option value="sold"     ${h.status==='sold'     ? 'selected':''}>Продано</option>
+              <option value="reserved" ${h.status==='reserved' ? 'selected':''}>Зарезервовано</option>
+            </select>
+          </td>
+          <td>
+            <input class="price-input" type="text" data-idx="${i}" id="price-${i}"
+              value="${h.price || ''}" placeholder="Уточнити ціну" />
+          </td>
+        </tr>`;
+    }).join('');
+
+    // Update select color on change
+    tbody.querySelectorAll('.status-select').forEach(sel => {
+      sel.addEventListener('change', () => {
+        sel.className = `status-select ${sel.value}`;
+      });
+    });
+  }
+
+  // ── Save
+  document.getElementById('btnSave').addEventListener('click', async () => {
+    const btn = document.getElementById('btnSave');
+    const status = document.getElementById('saveStatus');
+    btn.disabled = true;
+    status.className = 'save-status';
+    status.textContent = 'Збереження...';
+
+    // Collect updated values
+    const updated = houses.map((h, i) => ({
+      ...h,
+      status: document.getElementById(`status-${i}`).value,
+      price:  document.getElementById(`price-${i}`).value.trim(),
+    }));
+
+    const content = btoa(unescape(encodeURIComponent(
+      JSON.stringify({ houses: updated }, null, 2) + '\n'
+    )));
+
+    try {
+      const res = await fetch(`${API}/repos/${REPO}/contents/${FILE}`, {
+        method: 'PUT',
+        headers: {
+          Authorization: `token ${token}`,
+          Accept: 'application/vnd.github+json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: 'CMS: update houses catalog',
+          content,
+          sha: fileSha,
+        }),
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.message || 'Помилка збереження');
+      }
+
+      const data = await res.json();
+      fileSha = data.content.sha;
+      houses = updated;
+      status.className = 'save-status ok';
+      status.textContent = '✓ Збережено! Сайт оновиться через ~1 хв.';
+    } catch(e) {
+      status.className = 'save-status err';
+      status.textContent = '✗ ' + e.message;
+    } finally {
+      btn.disabled = false;
+    }
+  });
+
+  // ── Init
+  if (token) {
+    fetchData();
+  } else {
+    showLogin();
+  }
+</script>
 </body>
 </html>
