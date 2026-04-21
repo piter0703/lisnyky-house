@@ -3,7 +3,7 @@ backend:
   repo: piter0703/lisnyky-house
   branch: main
   auth_type: pkce
-  app_id: REPLACE_WITH_CLIENT_ID
+  app_id: Ov23lihN98J2A52Bg4wZ
 
 media_folder: images
 public_folder: images
