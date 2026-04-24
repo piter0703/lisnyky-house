@@ -121,9 +121,9 @@
     .header-phone:hover { color: var(--green); }
     .btn-green {
       background: var(--green); color: #fff; font-family: var(--mono);
-      font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
-      padding: 12px 24px; border-radius: 100px; transition: background 0.2s;
-      white-space: nowrap;
+      font-size: 11px; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 12px 26px; border-radius: 3px; border: none; cursor: pointer;
+      transition: background 0.2s; white-space: nowrap;
     }
     .btn-green:hover { background: var(--green-dark); }
     .header-burger {
@@ -359,19 +359,134 @@
     .modal-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
     .modal-btn-primary {
       flex: 1; min-width: 180px; background: var(--green); color: #fff;
-      font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em;
-      text-transform: uppercase; padding: 16px 24px; border-radius: 100px;
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 14px 24px; border-radius: 3px;
       text-align: center; transition: background 0.2s; border: none; cursor: pointer;
     }
     .modal-btn-primary:hover { background: var(--green-dark); }
     .modal-btn-secondary {
       flex: 1; min-width: 180px; background: none; color: var(--text);
-      font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em;
-      text-transform: uppercase; padding: 16px 24px; border-radius: 100px;
-      text-align: center; border: 1px solid var(--border); transition: border-color 0.2s;
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 14px 24px; border-radius: 3px;
+      text-align: center; border: 1px solid var(--border); transition: border-color 0.2s, color 0.2s;
       cursor: pointer;
     }
     .modal-btn-secondary:hover { border-color: var(--green); color: var(--green); }
+
+    /* ─── MODAL FORM VIEW ─── */
+    .modal-view { }
+    .modal-view.hidden { display: none; }
+
+    .modal-form-back {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--text-light);
+      background: none; border: none; cursor: pointer;
+      padding: 0; transition: color 0.2s;
+    }
+    .modal-form-back:hover { color: var(--green); }
+    .modal-form-back svg { transition: transform 0.2s; }
+    .modal-form-back:hover svg { transform: translateX(-3px); }
+
+    .modal-form-unit {
+      display: inline-block; font-family: var(--mono); font-size: 10px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      background: var(--green-bg); color: var(--green); padding: 4px 12px;
+      border-radius: 2px; margin-bottom: 20px;
+    }
+    .modal-form-title {
+      font-family: var(--serif); font-size: 28px; font-style: italic;
+      color: var(--text); margin-bottom: 28px; line-height: 1.1;
+    }
+
+    /* form fields — identical to index.html .cfl */
+    .cfl-wrap { display: grid; gap: 20px; }
+    .cfl-row { display: grid; gap: 8px; }
+    .cfl-lbl {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--text-light);
+    }
+    .cfl-inp {
+      background: transparent; border: 0;
+      border-bottom: 1px solid rgba(26,28,26,0.18);
+      padding: 10px 0; font-family: var(--sans); font-size: 15px;
+      color: var(--text); outline: none; transition: border-color 0.2s; width: 100%;
+    }
+    .cfl-inp:focus { border-bottom-color: var(--text); }
+    .cfl-inp::placeholder { color: var(--stone); }
+    .cfl-inp.error { border-bottom-color: #c0392b; }
+
+    /* submit — identical to index.html .btn-submit-new */
+    .btn-submit-form {
+      display: inline-flex; align-items: center; gap: 14px;
+      margin-top: 32px; background: none; color: var(--text);
+      font-family: var(--mono); font-size: 11px; font-weight: 400;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 0 0 2px; border: none; border-bottom: 1px solid var(--text);
+      cursor: pointer; transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-submit-form:hover { color: var(--green); border-color: var(--green); }
+    .btn-submit-form svg { transition: transform 0.2s; }
+    .btn-submit-form:hover svg { transform: translateX(5px); }
+    .btn-submit-form:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .modal-form-note {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--text-light);
+      margin-top: 20px; line-height: 1.6;
+    }
+
+    /* success state */
+    .modal-success-icon {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: var(--green-bg); display: flex; align-items: center;
+      justify-content: center; margin: 0 auto 24px;
+    }
+    .modal-success-icon svg { color: var(--green); }
+    .modal-success-title {
+      font-family: var(--serif); font-size: 30px; font-style: italic;
+      color: var(--text); text-align: center; margin-bottom: 12px;
+    }
+    .modal-success-text {
+      font-size: 14px; color: var(--text-mid); text-align: center;
+      line-height: 1.7; max-width: 340px; margin: 0 auto 32px;
+    }
+    .modal-success-close {
+      display: block; margin: 0 auto;
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 12px 32px; border-radius: 3px;
+      border: 1px solid var(--border); background: none; cursor: pointer;
+      color: var(--text-mid); transition: border-color 0.2s, color 0.2s;
+    }
+    .modal-success-close:hover { border-color: var(--green); color: var(--green); }
+
+    /* ─── GLOBAL CONTACT MODAL (header button) ─── */
+    .gcontact-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+      z-index: 600; display: flex; align-items: center; justify-content: center;
+      padding: 24px; opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    }
+    .gcontact-overlay.open { opacity: 1; pointer-events: all; }
+    .gcontact-modal {
+      background: var(--white); max-width: 520px; width: 100%;
+      border-radius: 4px; padding: 48px;
+      transform: translateY(16px) scale(0.98);
+      transition: transform 0.3s var(--ease);
+      max-height: 90vh; overflow-y: auto;
+    }
+    .gcontact-overlay.open .gcontact-modal { transform: translateY(0) scale(1); }
+    .gcontact-head {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      margin-bottom: 32px;
+    }
+    .gcontact-title {
+      font-family: var(--serif); font-size: 28px; font-style: italic;
+      color: var(--text); line-height: 1.1;
+    }
+    @media (max-width: 600px) {
+      .gcontact-modal { padding: 32px 24px; }
+      .gcontact-title { font-size: 24px; }
+    }
 
     /* ─── EMPTY STATE ─── */
     .no-results {
@@ -396,6 +511,10 @@
     .sec-avail {
       font-family: var(--mono); font-size: 11px; color: var(--text-light);
       letter-spacing: 0.04em;
+    }
+    .sec-price {
+      font-family: var(--mono); font-size: 14px; font-weight: 500;
+      color: var(--green); letter-spacing: 0.02em; margin-left: auto;
     }
     .sec-units { display: flex; flex-wrap: wrap; gap: 8px; }
     .unit-chip {
@@ -447,6 +566,7 @@
       position: absolute;
       top: 0; left: 0; width: 100%; height: 100%;
     }
+    /* desktop: individual unit rects */
     .gp-house {
       cursor: pointer;
       stroke: #fff;
@@ -457,8 +577,37 @@
     .gp-house:hover { opacity: 1; stroke-width: 0.9; }
     .gp-house.free     { fill: #5A8F45; }
     .gp-house.reserved { fill: #C89A1A; }
-    .gp-house.sold     { fill: #C04040; }
-    .gp-house.sold     { cursor: default; }
+    .gp-house.sold     { fill: #C04040; cursor: default; }
+    .gp-house.building { fill: #7A8C78; cursor: default; }
+
+    /* mobile: one large block per section */
+    .gp-section {
+      cursor: pointer;
+      stroke: rgba(255,255,255,0.5);
+      stroke-width: 1.5;
+      opacity: 0.78;
+      transition: opacity 0.15s;
+    }
+    .gp-section:hover { opacity: 1; }
+    .gp-section.free     { fill: #5A8F45; }
+    .gp-section.reserved { fill: #C89A1A; }
+    .gp-section.sold     { fill: #C04040; cursor: default; }
+    .gp-section.building { fill: #7A8C78; cursor: default; }
+    .gp-section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 16px; font-weight: 700;
+      fill: #fff; text-anchor: middle; dominant-baseline: central;
+      pointer-events: none; letter-spacing: 0.04em;
+    }
+    .gp-building-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; font-weight: 500;
+      fill: rgba(255,255,255,0.75); text-anchor: middle; dominant-baseline: central;
+      pointer-events: none; letter-spacing: 0.06em;
+    }
+
+    /* visibility toggle desktop/mobile */
+    .gp-section-block { display: none; }
 
     /* legend */
     .genplan-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; flex-wrap: wrap; gap: 12px; }
@@ -468,7 +617,31 @@
     .gp-leg-dot.free     { background: #5A8F45; }
     .gp-leg-dot.reserved { background: #C89A1A; }
     .gp-leg-dot.sold     { background: #C04040; }
+    .gp-leg-dot.building { background: #7A8C78; }
     .gp-calibrate-hint { font-size: 11px; font-family: var(--mono); color: var(--text-light); }
+
+    /* building section in catalog */
+    .sec-building-badge {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 3px 12px; border-radius: 100px;
+      background: var(--sand); color: var(--text-mid);
+    }
+    .sec-building-info {
+      display: flex; align-items: center; gap: 24px;
+      padding: 20px 0; flex-wrap: wrap;
+    }
+    .sec-building-text {
+      font-family: var(--serif); font-size: 15px; font-style: italic;
+      color: var(--text-mid); line-height: 1.6;
+    }
+    .sec-building-cta {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 10px 20px;
+      border: 1px solid var(--border); border-radius: 3px;
+      color: var(--text-mid); transition: border-color 0.2s, color 0.2s;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .sec-building-cta:hover { border-color: var(--green); color: var(--green); }
 
     /* tooltip */
     .gp-tooltip {
@@ -507,7 +680,9 @@
     }
     @media (max-width: 768px) {
       .genplan-wrap { margin-left: 0; padding: 32px 20px 40px; }
-      .genplan-svg { display: none; }
+      .genplan-svg { display: block; }
+      .gp-units-group { display: none; }
+      .gp-section-block { display: block; }
       .catalog-wrap { margin-left: 0; padding: 32px 20px 64px; }
       .page-banner { margin-left: 0; padding: 80px 20px 40px; }
       .page-banner-inner { padding: 0; flex-direction: column; align-items: flex-start; }
@@ -575,7 +750,7 @@
   </a>
   <div class="header-right">
     <a href="tel:+380672004777" class="header-phone">+38 067 200 47 77</a>
-    <a href="index.html#contact" class="btn-green">Зв'язатись</a>
+    <button class="btn-green" id="btnHeaderContact">Зв'язатись</button>
     <button class="header-burger" id="headerBurger" aria-label="Відкрити меню">
       <span></span><span></span><span></span>
     </button>
@@ -596,8 +771,8 @@
     </div>
     <div class="page-banner-meta">
       <span>Доступно зараз</span>
-      <strong id="availableCount">5</strong>
-      <span>таунхаусів</span>
+      <strong id="availableCount">—</strong>
+      <span>таунхаусів · <span style="color:var(--green)">100 000 $</span></span>
     </div>
   </div>
 </div>
@@ -623,6 +798,7 @@
         <div class="gp-leg"><div class="gp-leg-dot free"></div>Вільний</div>
         <div class="gp-leg"><div class="gp-leg-dot reserved"></div>Під завдатком</div>
         <div class="gp-leg"><div class="gp-leg-dot sold"></div>Продано</div>
+        <div class="gp-leg"><div class="gp-leg-dot building"></div>Будується</div>
       </div>
       <div class="gp-calibrate-hint" id="calibHint" style="display:none">
         Режим калібрування — клікай на дах кожного будинку
@@ -663,32 +839,140 @@
       <img id="modalImg" src="" alt="" />
     </div>
     <div class="modal-body">
-      <div class="modal-head">
-        <div>
-          <div class="modal-num" id="modalNum"></div>
-          <div class="modal-title" id="modalTitle"></div>
+
+      <!-- VIEW 1: unit details -->
+      <div class="modal-view" id="modalViewDetail">
+        <div class="modal-head">
+          <div>
+            <div class="modal-num" id="modalNum"></div>
+            <div class="modal-title" id="modalTitle"></div>
+          </div>
+          <button class="modal-close" id="modalClose">&times;</button>
         </div>
-        <button class="modal-close" id="modalClose">&times;</button>
+        <div class="modal-specs">
+          <div class="ms-item"><div class="ms-label">Ціна</div><div class="ms-val" id="mPrice" style="color:var(--green)"></div></div>
+          <div class="ms-item"><div class="ms-label">Площа</div><div class="ms-val" id="mArea"></div></div>
+          <div class="ms-item"><div class="ms-label">Поверхи</div><div class="ms-val">2</div></div>
+          <div class="ms-item"><div class="ms-label">Балкон</div><div class="ms-val">Є</div></div>
+        </div>
+        <div class="modal-features">
+          <span class="modal-feature">Розумний дім</span>
+          <span class="modal-feature">Сонячні батареї</span>
+          <span class="modal-feature">Власне подвір'я</span>
+          <span class="modal-feature">Паркінг на 2 авто</span>
+          <span class="modal-feature">Бойлер 200 л</span>
+          <span class="modal-feature">Чистова обробка</span>
+        </div>
+        <div class="modal-ctas">
+          <button class="modal-btn-primary" id="btnOpenForm">Записатись на перегляд</button>
+          <a href="tel:+380672004777" class="modal-btn-secondary">+38 067 200 47 77</a>
+        </div>
       </div>
-      <div class="modal-specs">
-        <div class="ms-item"><div class="ms-label">Площа</div><div class="ms-val" id="mArea"></div></div>
-        <div class="ms-item"><div class="ms-label">Кімнати</div><div class="ms-val" id="mRooms"></div></div>
-        <div class="ms-item"><div class="ms-label">Поверхи</div><div class="ms-val" id="mFloors">2</div></div>
-        <div class="ms-item"><div class="ms-label">Балкон</div><div class="ms-val">Є</div></div>
+
+      <!-- VIEW 2: contact form -->
+      <div class="modal-view hidden" id="modalViewForm">
+        <div class="modal-head" style="margin-bottom:0">
+          <button class="modal-form-back" id="btnBackToDetail">
+            <svg width="16" height="8" viewBox="0 0 16 8" fill="none">
+              <path d="M16 4H2M6 1L2 4l4 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+            Назад
+          </button>
+          <button class="modal-close" id="modalCloseForm">&times;</button>
+        </div>
+        <div style="margin-top:24px">
+          <div class="modal-form-unit" id="formUnitLabel"></div>
+          <div class="modal-form-title">Записатись<br/><em>на перегляд</em></div>
+          <form id="viewingForm" novalidate>
+            <div class="cfl-wrap">
+              <label class="cfl-row">
+                <span class="cfl-lbl">Ваше ім'я</span>
+                <input class="cfl-inp" type="text" id="formName" placeholder="Андрій" autocomplete="given-name" />
+              </label>
+              <label class="cfl-row">
+                <span class="cfl-lbl">Номер телефону</span>
+                <input class="cfl-inp" type="tel" id="formPhone" placeholder="+38 0__ ___ __ __" autocomplete="tel" />
+              </label>
+              <label class="cfl-row">
+                <span class="cfl-lbl">Зручний час для дзвінка</span>
+                <input class="cfl-inp" type="text" id="formTime" placeholder="Наприклад: будні 10:00–18:00" />
+              </label>
+            </div>
+            <input type="hidden" id="formUnit" />
+            <button class="btn-submit-form" type="submit" id="formSubmitBtn">
+              Надіслати заявку
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+            </button>
+          </form>
+          <div class="modal-form-note">Ми передзвонимо протягом робочого дня — жодного спаму.</div>
+        </div>
       </div>
-      <div class="modal-features">
-        <span class="modal-feature">Розумний дім</span>
-        <span class="modal-feature">Сонячні батареї</span>
-        <span class="modal-feature">Власне подвір'я</span>
-        <span class="modal-feature">Паркінг на 2 авто</span>
-        <span class="modal-feature">Бойлер 200 л</span>
-        <span class="modal-feature">Чистова обробка</span>
+
+      <!-- VIEW 3: success -->
+      <div class="modal-view hidden" id="modalViewSuccess">
+        <div class="modal-head" style="margin-bottom:0;justify-content:flex-end">
+          <button class="modal-close" id="modalCloseSuccess">&times;</button>
+        </div>
+        <div style="padding:40px 0 16px;text-align:center">
+          <div class="modal-success-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+          <div class="modal-success-title">Заявку<br/><em>надіслано</em></div>
+          <div class="modal-success-text">
+            Дякуємо! Ми зателефонуємо вам найближчим часом, щоб узгодити зручний час перегляду.
+          </div>
+          <button class="modal-success-close" id="btnSuccessClose">Закрити</button>
+        </div>
       </div>
-      <div class="modal-ctas">
-        <a href="index.html#contact" class="modal-btn-primary">Записатись на перегляд</a>
-        <a href="tel:+380672004777" class="modal-btn-secondary">+38 067 200 47 77</a>
-      </div>
+
     </div>
+  </div>
+</div>
+
+<!-- ── GLOBAL CONTACT MODAL (header button) ── -->
+<div class="gcontact-overlay" id="gcontactOverlay">
+  <div class="gcontact-modal">
+
+    <div class="gcontact-head">
+      <div class="gcontact-title">Зв'язатись<br/><em>з нами</em></div>
+      <button class="modal-close" id="gcontactClose">&times;</button>
+    </div>
+
+    <!-- form state -->
+    <div id="gcontactViewForm">
+      <div class="cfl-wrap">
+        <label class="cfl-row">
+          <span class="cfl-lbl">Ваше ім'я</span>
+          <input class="cfl-inp" type="text" id="gcName" placeholder="Андрій" autocomplete="given-name" />
+        </label>
+        <label class="cfl-row">
+          <span class="cfl-lbl">Номер телефону</span>
+          <input class="cfl-inp" type="tel" id="gcPhone" placeholder="+38 0__ ___ __ __" autocomplete="tel" />
+        </label>
+        <label class="cfl-row">
+          <span class="cfl-lbl">Ваше запитання (необов'язково)</span>
+          <input class="cfl-inp" type="text" id="gcMsg" placeholder="Цікавить секція 1, таунхаус №3" />
+        </label>
+      </div>
+      <button class="btn-submit-form" id="gcSubmitBtn" type="button">
+        Надіслати
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+      </button>
+      <div class="modal-form-note" style="margin-top:20px">Ми передзвонимо протягом робочого дня — жодного спаму.</div>
+    </div>
+
+    <!-- success state -->
+    <div id="gcontactViewSuccess" style="display:none; text-align:center; padding:24px 0">
+      <div class="modal-success-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <div class="modal-success-title">Дякуємо<br/><em>за заявку</em></div>
+      <div class="modal-success-text">Ми зателефонуємо вам найближчим часом.</div>
+      <button class="modal-success-close" id="gcSuccessClose">Закрити</button>
+    </div>
+
   </div>
 </div>
 
@@ -726,9 +1010,17 @@
     return f5;
   }
 
-  // ── Modal
+  // ── Modal views
   const modalOverlay = document.getElementById('modalOverlay');
-  const modalClose   = document.getElementById('modalClose');
+  const viewDetail   = document.getElementById('modalViewDetail');
+  const viewForm     = document.getElementById('modalViewForm');
+  const viewSuccess  = document.getElementById('modalViewSuccess');
+
+  function showView(active) {
+    [viewDetail, viewForm, viewSuccess].forEach(v => v.classList.add('hidden'));
+    active.classList.remove('hidden');
+    document.getElementById('modal').scrollTop = 0;
+  }
 
   function openModal(u) {
     const numStr = String(u.unit).padStart(2, '0');
@@ -738,6 +1030,11 @@
     document.getElementById('modalTitle').textContent = `Таунхаус №${numStr}`;
     document.getElementById('mArea').textContent  = '—';
     document.getElementById('mRooms').textContent = '—';
+    document.getElementById('mPrice').textContent = u.price || 'Уточнити';
+    // pre-fill hidden unit field
+    document.getElementById('formUnit').value     = `Секція ${u.section} · Таунхаус №${numStr}`;
+    document.getElementById('formUnitLabel').textContent = `Секція ${u.section} · Таунхаус №${numStr}`;
+    showView(viewDetail);
     modalOverlay.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
@@ -745,16 +1042,124 @@
   function closeModal() {
     modalOverlay.classList.remove('open');
     document.body.style.overflow = '';
+    // reset form on close
+    document.getElementById('viewingForm').reset();
+    document.querySelectorAll('#viewingForm .cfl-inp').forEach(i => i.classList.remove('error'));
   }
 
-  modalClose.addEventListener('click', closeModal);
+  // close buttons
+  ['modalClose','modalCloseForm','modalCloseSuccess'].forEach(id => {
+    document.getElementById(id).addEventListener('click', closeModal);
+  });
   modalOverlay.addEventListener('click', e => { if (e.target === modalOverlay) closeModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // view switches
+  document.getElementById('btnOpenForm').addEventListener('click', () => showView(viewForm));
+  document.getElementById('btnBackToDetail').addEventListener('click', () => showView(viewDetail));
+  document.getElementById('btnSuccessClose').addEventListener('click', closeModal);
+
+  // ── Form submit
+  document.getElementById('viewingForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    const name  = document.getElementById('formName').value.trim();
+    const phone = document.getElementById('formPhone').value.trim();
+    const unit  = document.getElementById('formUnit').value;
+    const time  = document.getElementById('formTime').value.trim();
+
+    let valid = true;
+    if (!name)  { document.getElementById('formName').classList.add('error');  valid = false; }
+    if (!phone) { document.getElementById('formPhone').classList.add('error'); valid = false; }
+    if (!valid) return;
+
+    const btn = document.getElementById('formSubmitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Надсилаємо...';
+
+    try {
+      // Formspree endpoint — replace FORM_ID when ready
+      const res = await fetch('https://formspree.io/f/FORM_ID', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ name, phone, unit, time }),
+      });
+      if (!res.ok && res.status !== 200) throw new Error('send failed');
+    } catch {
+      // fallback: open mailto silently, still show success to user
+      const subject = encodeURIComponent(`Заявка на перегляд: ${unit}`);
+      const body    = encodeURIComponent(`Ім'я: ${name}\nТелефон: ${phone}\nЧас: ${time || '—'}\nОб'єкт: ${unit}`);
+      window.location.href = `mailto:lisnykyhouse@gmail.com?subject=${subject}&body=${body}`;
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Надіслати заявку';
+    }
+
+    showView(viewSuccess);
+  });
+
+  // clear error on input
+  document.querySelectorAll('.cfl-inp').forEach(inp => {
+    inp.addEventListener('input', () => inp.classList.remove('error'));
+  });
+
+  // ── Global contact modal (header button)
+  const gOverlay = document.getElementById('gcontactOverlay');
+
+  function openGContact() {
+    gOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeGContact() {
+    gOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+    document.getElementById('gcName').value  = '';
+    document.getElementById('gcPhone').value = '';
+    document.getElementById('gcMsg').value   = '';
+    document.querySelectorAll('#gcontactOverlay .cfl-inp').forEach(i => i.classList.remove('error'));
+    document.getElementById('gcontactViewForm').style.display    = '';
+    document.getElementById('gcontactViewSuccess').style.display = 'none';
+  }
+
+  document.getElementById('btnHeaderContact').addEventListener('click', openGContact);
+  document.getElementById('gcontactClose').addEventListener('click', closeGContact);
+  document.getElementById('gcSuccessClose').addEventListener('click', closeGContact);
+  gOverlay.addEventListener('click', e => { if (e.target === gOverlay) closeGContact(); });
+
+  document.getElementById('gcSubmitBtn').addEventListener('click', async () => {
+    const name  = document.getElementById('gcName').value.trim();
+    const phone = document.getElementById('gcPhone').value.trim();
+    let valid = true;
+    if (!name)  { document.getElementById('gcName').classList.add('error');  valid = false; }
+    if (!phone) { document.getElementById('gcPhone').classList.add('error'); valid = false; }
+    if (!valid) return;
+
+    const btn = document.getElementById('gcSubmitBtn');
+    btn.disabled = true;
+
+    try {
+      const res = await fetch('https://formspree.io/f/FORM_ID', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ name, phone, message: document.getElementById('gcMsg').value.trim() }),
+      });
+      if (!res.ok) throw new Error();
+    } catch {
+      const msg = document.getElementById('gcMsg').value.trim();
+      const subject = encodeURIComponent('Заявка з сайту Lisnyky House');
+      const body    = encodeURIComponent(`Ім'я: ${name}\nТелефон: ${phone}${msg ? '\nПовідомлення: ' + msg : ''}`);
+      window.location.href = `mailto:lisnykyhouse@gmail.com?subject=${subject}&body=${body}`;
+    } finally {
+      btn.disabled = false;
+    }
+
+    document.getElementById('gcontactViewForm').style.display    = 'none';
+    document.getElementById('gcontactViewSuccess').style.display = '';
+  });
 
   // ── Filter
   let activeStatus = 'all';
 
-  function applyFilters(units) {
+  function applyFilters() {
     const chips = document.querySelectorAll('.unit-chip');
     let visible = 0;
     chips.forEach(chip => {
@@ -762,10 +1167,14 @@
       chip.classList.toggle('hidden', !show);
       if (show) visible++;
     });
-    // hide empty sections
     document.querySelectorAll('.sec-group').forEach(grp => {
-      const anyVisible = [...grp.querySelectorAll('.unit-chip')].some(c => !c.classList.contains('hidden'));
-      grp.classList.toggle('hidden', !anyVisible);
+      if (grp.dataset.building) {
+        // building sections visible only on "all"
+        grp.classList.toggle('hidden', activeStatus !== 'all');
+      } else {
+        const anyVisible = [...grp.querySelectorAll('.unit-chip')].some(c => !c.classList.contains('hidden'));
+        grp.classList.toggle('hidden', !anyVisible);
+      }
     });
     const fc = document.getElementById('filterCount');
     fc.textContent = visible + ' ' + plural(visible, 'юніт', 'юніти', 'юнітів');
@@ -781,12 +1190,27 @@
   });
 
   // ── Render section catalog
-  function renderSections(units) {
+  function renderSections(units, sections) {
     const wrap = document.getElementById('sectionsWrap');
-    const secIds = [...new Set(units.map(u => u.section))];
 
-    wrap.innerHTML = secIds.map(secId => {
-      const secUnits = units.filter(u => u.section === secId);
+    wrap.innerHTML = sections.map(sec => {
+      const secUnits = units.filter(u => u.section === sec.id);
+      const isBuilding = sec.status === 'building';
+
+      if (isBuilding) {
+        return `
+          <div class="sec-group" data-sec="${sec.id}" data-building="1">
+            <div class="sec-header">
+              <div class="sec-title">Секція ${sec.id}</div>
+              <div class="sec-building-badge">Будується</div>
+            </div>
+            <div class="sec-building-info">
+              <div class="sec-building-text">Секція будується. Прийом заявок відкрито — зв'яжіться з нами, щоб записатись у чергу.</div>
+              <a href="index.html#contact" class="sec-building-cta">Залишити заявку</a>
+            </div>
+          </div>`;
+      }
+
       const freeCount = secUnits.filter(u => u.status === 'free').length;
       const chips = secUnits.map(u => {
         const numStr = String(u.unit).padStart(2, '0');
@@ -803,17 +1227,23 @@
         ? `${freeCount} вільних з ${secUnits.length}`
         : `всі зайняті`;
 
+      // price from first unit with price set
+      const priceUnit = secUnits.find(u => u.price);
+      const priceHtml = priceUnit
+        ? `<div class="sec-price">${priceUnit.price}</div>`
+        : '';
+
       return `
-        <div class="sec-group" data-sec="${secId}">
+        <div class="sec-group" data-sec="${sec.id}">
           <div class="sec-header">
-            <div class="sec-title">Секція ${secId}</div>
+            <div class="sec-title">Секція ${sec.id}</div>
             <div class="sec-avail">${availText}</div>
+            ${priceHtml}
           </div>
           <div class="sec-units">${chips}</div>
         </div>`;
     }).join('');
 
-    // attach click to free chips
     wrap.querySelectorAll('.unit-chip.free').forEach(chip => {
       chip.addEventListener('click', () => {
         const u = units.find(x => x.id === chip.dataset.uid);
@@ -822,73 +1252,129 @@
     });
   }
 
-  // ── Build genplan SVG overlay from section data
-  function buildGenplan(units, sections) {
+  // ── Build genplan SVG: desktop=individual units, mobile=section blocks
+  function buildGenplan(units, sections, gpSections) {
     const svg = document.getElementById('genplanSvg');
     const tip = document.getElementById('gpTooltip');
     const map = document.getElementById('genplanMap');
     const NS  = 'http://www.w3.org/2000/svg';
 
-    sections.forEach(sec => {
-      const secUnits = units.filter(u => u.section === sec.id);
-      if (!secUnits.length) return;
+    gpSections.forEach(gp => {
+      const sec = sections.find(s => s.id === gp.id);
+      if (!sec) return;
 
-      const gap      = 3;
-      const unitW    = (sec.w - gap * (sec.units - 1)) / sec.units;
-      const pivotX   = sec.x;
-      const pivotY   = sec.y;
+      const secUnits   = units.filter(u => u.section === gp.id);
+      const isBuilding = sec.status === 'building';
+      const freeCount  = secUnits.filter(u => u.status === 'free').length;
+      const resCount   = secUnits.filter(u => u.status === 'reserved').length;
 
-      const g = document.createElementNS(NS, 'g');
-      g.setAttribute('transform', `rotate(${sec.angle}, ${pivotX}, ${pivotY})`);
+      // ── DESKTOP: 44 individual unit rects
+      {
+        const gap   = 3;
+        const unitW = (gp.w - gap * (gp.units - 1)) / gp.units;
 
-      secUnits.forEach((u, i) => {
-        const rx = sec.x + i * (unitW + gap);
-        const ry = sec.y;
-        const rect = document.createElementNS(NS, 'rect');
-        rect.setAttribute('x',      rx);
-        rect.setAttribute('y',      ry);
-        rect.setAttribute('width',  unitW);
-        rect.setAttribute('height', sec.h);
-        rect.setAttribute('rx',     '2');
-        rect.classList.add('gp-house', u.status);
-        rect.dataset.uid = u.id;
+        const g = document.createElementNS(NS, 'g');
+        g.setAttribute('transform', `rotate(${gp.angle}, ${gp.x}, ${gp.y})`);
+        g.classList.add('gp-units-group');
 
-        const numStr = String(u.unit).padStart(2, '0');
-        rect.addEventListener('mousemove', e => {
-          tip.innerHTML = `Секція ${u.section} · №${numStr}<br><b>${STATUS_LABEL[u.status]}</b>`;
-          tip.style.left = (e.clientX + 14) + 'px';
-          tip.style.top  = (e.clientY - 10) + 'px';
-          tip.classList.add('show');
+        secUnits.forEach((u, i) => {
+          const rx   = gp.x + i * (unitW + gap);
+          const rect = document.createElementNS(NS, 'rect');
+          rect.setAttribute('x',      rx);
+          rect.setAttribute('y',      gp.y);
+          rect.setAttribute('width',  unitW);
+          rect.setAttribute('height', gp.h);
+          rect.setAttribute('rx',     '2');
+          rect.classList.add('gp-house', isBuilding ? 'building' : u.status);
+          rect.dataset.uid = u.id;
+
+          const numStr      = String(u.unit).padStart(2, '0');
+          const statusLabel = isBuilding ? 'Будується' : STATUS_LABEL[u.status];
+          rect.addEventListener('mousemove', e => {
+            tip.innerHTML  = `Секція ${u.section} · №${numStr}<br><b>${statusLabel}</b>`;
+            tip.style.left = (e.clientX + 14) + 'px';
+            tip.style.top  = (e.clientY - 10) + 'px';
+            tip.classList.add('show');
+          });
+          rect.addEventListener('mouseleave', () => tip.classList.remove('show'));
+
+          if (!isBuilding && u.status === 'free') {
+            rect.addEventListener('click', () => {
+              tip.classList.remove('show');
+              document.getElementById('catalog-anchor').scrollIntoView({ behavior: 'smooth', block: 'start' });
+              setTimeout(() => openModal(u), 350);
+            });
+          }
+
+          g.appendChild(rect);
         });
-        rect.addEventListener('mouseleave', () => tip.classList.remove('show'));
 
-        if (u.status === 'free') {
-          rect.addEventListener('click', () => {
-            tip.classList.remove('show');
-            document.getElementById('catalog-anchor').scrollIntoView({ behavior: 'smooth', block: 'start' });
-            setTimeout(() => openModal(u), 350);
+        svg.appendChild(g);
+      }
+
+      // ── MOBILE: one large section block with label
+      {
+        let secClass;
+        if (isBuilding)         secClass = 'building';
+        else if (freeCount > 0) secClass = 'free';
+        else if (resCount > 0)  secClass = 'reserved';
+        else                    secClass = 'sold';
+
+        const g = document.createElementNS(NS, 'g');
+        g.setAttribute('transform', `rotate(${gp.angle}, ${gp.x}, ${gp.y})`);
+        g.classList.add('gp-section-block');
+
+        const rect = document.createElementNS(NS, 'rect');
+        rect.setAttribute('x',      gp.x);
+        rect.setAttribute('y',      gp.y);
+        rect.setAttribute('width',  gp.w);
+        rect.setAttribute('height', gp.h);
+        rect.setAttribute('rx',     '3');
+        rect.classList.add('gp-section', secClass);
+        g.appendChild(rect);
+
+        const cx = gp.x + gp.w / 2;
+        const cy = gp.y + gp.h / 2;
+
+        const label = document.createElementNS(NS, 'text');
+        label.setAttribute('x', cx);
+        label.setAttribute('y', isBuilding ? cy - 9 : cy);
+        label.setAttribute('class', 'gp-section-label');
+        label.textContent = `С${gp.id}`;
+        g.appendChild(label);
+
+        if (isBuilding) {
+          const sub = document.createElementNS(NS, 'text');
+          sub.setAttribute('x', cx);
+          sub.setAttribute('y', cy + 10);
+          sub.setAttribute('class', 'gp-building-text');
+          sub.textContent = 'будується';
+          g.appendChild(sub);
+        }
+
+        if (!isBuilding) {
+          g.style.cursor = 'pointer';
+          g.addEventListener('click', () => {
+            const target = document.querySelector(`.sec-group[data-sec="${gp.id}"]`);
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
           });
         }
 
-        g.appendChild(rect);
-      });
-
-      svg.appendChild(g);
+        svg.appendChild(g);
+      }
     });
 
-    // ── Calibration mode (?calibrate=1)
+    // calibration mode (?calibrate=1)
     if (new URLSearchParams(location.search).get('calibrate') === '1') {
       map.classList.add('calibrate');
       document.getElementById('calibHint').style.display = 'block';
       const panel = document.getElementById('calibPanel');
       panel.classList.add('show');
-
       let log = [];
       map.addEventListener('click', e => {
         const r  = map.getBoundingClientRect();
-        const iw = 1583, ih = 994;
-        const px = Math.round((e.clientX - r.left) / r.width  * iw);
-        const py = Math.round((e.clientY - r.top)  / r.height * ih);
+        const px = Math.round((e.clientX - r.left) / r.width  * 1583);
+        const py = Math.round((e.clientY - r.top)  / r.height * 994);
         log.push(`${px}, ${py}`);
         panel.innerHTML = `<b>x: ${px}, y: ${py}</b> (px у 1583×994)<br><small>Останні 2: [${log.slice(-2).join('] [')}]</small>`;
       });
@@ -903,21 +1389,19 @@
     console.error('❌ fetch failed (file:// не підтримує fetch). Запусти: python3 -m http.server 8080', err);
     document.getElementById('genplanMap').insertAdjacentHTML('beforeend',
       '<div style="position:absolute;top:10px;left:10px;background:red;color:#fff;padding:8px 12px;font-size:12px;border-radius:4px;z-index:99">⚠ Відкрий через сервер: python3 -m http.server 8080</div>');
-  }).then(([{ units }, gpData]) => {
-    if (!units) return;
+  }).then(([housesData, gpData]) => {
+    if (!housesData) return;
+    const { units, sections } = housesData;
 
-    // banner count
-    const avail = units.filter(u => u.status === 'free').length;
+    // banner count — only active sections' free units
+    const activeSectionIds = sections.filter(s => s.status === 'active').map(s => s.id);
+    const avail = units.filter(u => activeSectionIds.includes(u.section) && u.status === 'free').length;
     document.getElementById('availableCount').textContent = avail;
 
-    // catalog
-    renderSections(units);
-    applyFilters(units);
+    renderSections(units, sections);
+    applyFilters();
+    buildGenplan(units, sections, gpData.sections);
 
-    // genplan
-    buildGenplan(units, gpData.sections);
-
-    // filter count init
     document.getElementById('filterCount').textContent =
       avail + ' ' + plural(avail, 'вільний', 'вільних', 'вільних');
   });

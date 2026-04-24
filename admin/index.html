@@ -64,6 +64,30 @@
     .badge-sold     { background: #f0f0f0; color: #888; }
     .badge-reserved { background: #fff8e1; color: #b07a00; }
 
+    /* Section toggles */
+    .sections-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 36px; }
+    .sec-card {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 18px; background: #fff;
+      border: 1px solid #e0ddd8; border-radius: 6px;
+    }
+    .sec-card-title { font-size: 13px; font-weight: 600; min-width: 64px; }
+    .toggle-wrap { position: relative; display: inline-block; width: 40px; height: 22px; }
+    .toggle-wrap input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider {
+      position: absolute; cursor: pointer; inset: 0;
+      background: #ccc; border-radius: 11px; transition: background 0.25s;
+    }
+    .toggle-slider:before {
+      content: ''; position: absolute;
+      width: 16px; height: 16px; left: 3px; bottom: 3px;
+      background: #fff; border-radius: 50%; transition: transform 0.25s;
+    }
+    .toggle-wrap input:checked + .toggle-slider { background: #4f5b4c; }
+    .toggle-wrap input:checked + .toggle-slider:before { transform: translateX(18px); }
+    .sec-status-label { font-size: 12px; color: #888; min-width: 70px; }
+    .sec-status-label.active { color: #2d6a2d; font-weight: 600; }
+
     @media (max-width: 600px) {
       .main { padding: 20px 16px; }
       .house-table th:nth-child(3), .house-table td:nth-child(3) { display: none; }
@@ -103,6 +127,9 @@
     <span class="save-status" id="saveStatus"></span>
   </div>
 
+  <div class="section-title">Статус секцій</div>
+  <div class="sections-grid" id="sectionGrid"></div>
+
   <div class="section-title">Каталог будинків</div>
   <table class="house-table">
     <thead>
@@ -123,7 +150,8 @@
 
   let token = localStorage.getItem('lh_admin_token') || '';
   let fileSha = '';
-  let units = [];
+  let units    = [];
+  let sections = [];
 
   // ── Auth
   const loginWrap  = document.getElementById('loginWrap');
@@ -180,8 +208,11 @@
 
   // ── Load data
   function loadData(data) {
-    fileSha = data.sha;
-    units   = JSON.parse(atob(data.content.replace(/\n/g, ''))).units;
+    fileSha  = data.sha;
+    const parsed = JSON.parse(atob(data.content.replace(/\n/g, '')));
+    units    = parsed.units;
+    sections = parsed.sections || [];
+    renderSectionGrid();
     renderTable();
   }
 
@@ -194,12 +225,57 @@
     showAdmin();
   }
 
-  // ── Render table grouped by section
+  // ── Render section status toggles
+  function renderSectionGrid() {
+    const grid = document.getElementById('sectionGrid');
+    if (!sections.length) { grid.innerHTML = ''; return; }
+    grid.innerHTML = sections.map(sec => `
+      <div class="sec-card">
+        <div class="sec-card-title">Секція ${sec.id}</div>
+        <label class="toggle-wrap">
+          <input type="checkbox" id="sec-toggle-${sec.id}" data-secid="${sec.id}"
+            ${sec.status === 'active' ? 'checked' : ''}>
+          <span class="toggle-slider"></span>
+        </label>
+        <div class="sec-status-label ${sec.status === 'active' ? 'active' : ''}"
+             id="sec-status-label-${sec.id}">
+          ${sec.status === 'active' ? 'Активна' : 'Будується'}
+        </div>
+      </div>`).join('');
+
+    grid.querySelectorAll('.toggle-wrap input').forEach(toggle => {
+      toggle.addEventListener('change', () => {
+        const secId = parseInt(toggle.dataset.secid);
+        const lbl   = document.getElementById(`sec-status-label-${secId}`);
+        if (toggle.checked) {
+          lbl.textContent = 'Активна';
+          lbl.className   = 'sec-status-label active';
+        } else {
+          lbl.textContent = 'Будується';
+          lbl.className   = 'sec-status-label';
+        }
+        renderTable();
+      });
+    });
+  }
+
+  function getActiveSectionIds() {
+    return [...document.querySelectorAll('.toggle-wrap input')]
+      .filter(t => t.checked)
+      .map(t => parseInt(t.dataset.secid));
+  }
+
+  // ── Render table — only active sections
   function renderTable() {
     const tbody = document.getElementById('houseTableBody');
-    const secIds = [...new Set(units.map(u => u.section))];
+    const activeSecIds = getActiveSectionIds();
 
-    tbody.innerHTML = secIds.map(secId => {
+    if (!activeSecIds.length) {
+      tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;padding:24px;color:#999;font-size:13px">Немає активних секцій</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = activeSecIds.map(secId => {
       const secUnits = units.filter(u => u.section === secId);
       const rows = secUnits.map(u => {
         const i   = units.indexOf(u);
@@ -242,15 +318,25 @@
     status.className = 'save-status';
     status.textContent = 'Збереження...';
 
-    // Collect updated values
-    const updated = units.map((u, i) => ({
-      ...u,
-      status: document.getElementById(`status-${i}`).value,
-      price:  document.getElementById(`price-${i}`).value.trim(),
+    // Collect section statuses from toggles
+    const updatedSections = sections.map(sec => ({
+      ...sec,
+      status: document.getElementById(`sec-toggle-${sec.id}`)?.checked ? 'active' : 'building',
     }));
 
+    // Collect unit values (only visible inputs exist for active sections)
+    const updated = units.map((u, i) => {
+      const statusEl = document.getElementById(`status-${i}`);
+      const priceEl  = document.getElementById(`price-${i}`);
+      return {
+        ...u,
+        status: statusEl ? statusEl.value : u.status,
+        price:  priceEl  ? priceEl.value.trim() : u.price,
+      };
+    });
+
     const content = btoa(unescape(encodeURIComponent(
-      JSON.stringify({ units: updated }, null, 2) + '\n'
+      JSON.stringify({ sections: updatedSections, units: updated }, null, 2) + '\n'
     )));
 
     try {
@@ -274,8 +360,9 @@
       }
 
       const data = await res.json();
-      fileSha = data.content.sha;
-      units = updated;
+      fileSha  = data.content.sha;
+      units    = updated;
+      sections = updatedSections;
       status.className = 'save-status ok';
       status.textContent = '✓ Збережено! Сайт оновиться через ~1 хв.';
     } catch(e) {
