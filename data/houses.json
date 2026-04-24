@@ -1,16 +1,312 @@
 {
-  "houses": [
-    { "id": 1,  "type": "a", "status": "free",     "price": "" },
-    { "id": 2,  "type": "a", "status": "sold",     "price": "" },
-    { "id": 3,  "type": "b", "status": "free",     "price": "" },
-    { "id": 4,  "type": "b", "status": "reserved", "price": "" },
-    { "id": 5,  "type": "a", "status": "sold",     "price": "" },
-    { "id": 6,  "type": "a", "status": "free",     "price": "" },
-    { "id": 7,  "type": "b", "status": "sold",     "price": "" },
-    { "id": 8,  "type": "a", "status": "free",     "price": "" },
-    { "id": 9,  "type": "b", "status": "free",     "price": "" },
-    { "id": 10, "type": "a", "status": "reserved", "price": "" },
-    { "id": 11, "type": "b", "status": "free",     "price": "" },
-    { "id": 12, "type": "a", "status": "sold",     "price": "" }
+  "units": [
+    {
+      "id": "1-1",
+      "section": 1,
+      "unit": 1,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "1-2",
+      "section": 1,
+      "unit": 2,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "1-3",
+      "section": 1,
+      "unit": 3,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "1-4",
+      "section": 1,
+      "unit": 4,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "1-5",
+      "section": 1,
+      "unit": 5,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "1-6",
+      "section": 1,
+      "unit": 6,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "2-1",
+      "section": 2,
+      "unit": 1,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "2-2",
+      "section": 2,
+      "unit": 2,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "2-3",
+      "section": 2,
+      "unit": 3,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "2-4",
+      "section": 2,
+      "unit": 4,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "2-5",
+      "section": 2,
+      "unit": 5,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "2-6",
+      "section": 2,
+      "unit": 6,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "3-1",
+      "section": 3,
+      "unit": 1,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "3-2",
+      "section": 3,
+      "unit": 2,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "3-3",
+      "section": 3,
+      "unit": 3,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "3-4",
+      "section": 3,
+      "unit": 4,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "3-5",
+      "section": 3,
+      "unit": 5,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "4-1",
+      "section": 4,
+      "unit": 1,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "4-2",
+      "section": 4,
+      "unit": 2,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "4-3",
+      "section": 4,
+      "unit": 3,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "4-4",
+      "section": 4,
+      "unit": 4,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "4-5",
+      "section": 4,
+      "unit": 5,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "5-1",
+      "section": 5,
+      "unit": 1,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "5-2",
+      "section": 5,
+      "unit": 2,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "5-3",
+      "section": 5,
+      "unit": 3,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "5-4",
+      "section": 5,
+      "unit": 4,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "5-5",
+      "section": 5,
+      "unit": 5,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "6-1",
+      "section": 6,
+      "unit": 1,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "6-2",
+      "section": 6,
+      "unit": 2,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "6-3",
+      "section": 6,
+      "unit": 3,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "6-4",
+      "section": 6,
+      "unit": 4,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "6-5",
+      "section": 6,
+      "unit": 5,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "7-1",
+      "section": 7,
+      "unit": 1,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "7-2",
+      "section": 7,
+      "unit": 2,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "7-3",
+      "section": 7,
+      "unit": 3,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "7-4",
+      "section": 7,
+      "unit": 4,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "7-5",
+      "section": 7,
+      "unit": 5,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "7-6",
+      "section": 7,
+      "unit": 6,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "8-1",
+      "section": 8,
+      "unit": 1,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "8-2",
+      "section": 8,
+      "unit": 2,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "8-3",
+      "section": 8,
+      "unit": 3,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "8-4",
+      "section": 8,
+      "unit": 4,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "8-5",
+      "section": 8,
+      "unit": 5,
+      "status": "free",
+      "price": ""
+    },
+    {
+      "id": "8-6",
+      "section": 8,
+      "unit": 6,
+      "status": "free",
+      "price": ""
+    }
   ]
 }

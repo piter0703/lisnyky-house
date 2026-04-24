@@ -381,12 +381,132 @@
     }
     .no-results.show { display: block; }
 
+    /* ─── SECTION CATALOG ─── */
+    .sec-group { margin-bottom: 48px; }
+    .sec-group.hidden { display: none; }
+    .sec-header {
+      display: flex; align-items: baseline; gap: 16px;
+      margin-bottom: 16px; padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .sec-title {
+      font-family: var(--mono); font-size: 13px; font-weight: 500;
+      letter-spacing: 0.06em; color: var(--text); text-transform: uppercase;
+    }
+    .sec-avail {
+      font-family: var(--mono); font-size: 11px; color: var(--text-light);
+      letter-spacing: 0.04em;
+    }
+    .sec-units { display: flex; flex-wrap: wrap; gap: 8px; }
+    .unit-chip {
+      display: flex; flex-direction: column; align-items: center;
+      width: 64px; padding: 10px 6px 8px;
+      border-radius: 4px; border: 1px solid var(--border);
+      cursor: pointer; transition: all 0.2s var(--ease);
+      background: var(--white);
+    }
+    .unit-chip.free { border-color: #5A8F45; }
+    .unit-chip.free:hover { background: #5A8F45; }
+    .unit-chip.free:hover .chip-num { color: #fff; }
+    .unit-chip.free:hover .chip-label { color: rgba(255,255,255,0.8); }
+    .unit-chip.reserved { border-color: #C89A1A; cursor: default; }
+    .unit-chip.sold { border-color: var(--border); cursor: default; opacity: 0.45; }
+    .unit-chip.hidden { display: none; }
+    .chip-num {
+      font-family: var(--mono); font-size: 16px; font-weight: 500;
+      color: var(--text); line-height: 1; margin-bottom: 5px;
+    }
+    .chip-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+    }
+    .chip-dot.free     { background: #5A8F45; }
+    .chip-dot.reserved { background: #C89A1A; }
+    .chip-dot.sold     { background: var(--stone); }
+    .chip-label {
+      font-family: var(--mono); font-size: 8px; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--text-light); margin-top: 4px;
+    }
+
+    /* ─── GENPLAN INTERACTIVE ─── */
+    .genplan-wrap {
+      margin-left: 52px;
+      padding: 64px 48px 48px;
+      background: var(--off);
+    }
+    .genplan-inner { max-width: 1200px; margin: 0 auto; }
+    .genplan-label { margin-bottom: 20px; }
+
+    .genplan-map {
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.10);
+    }
+    .genplan-map img { width: 100%; height: auto; display: block; }
+    .genplan-svg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+    }
+    .gp-house {
+      cursor: pointer;
+      stroke: #fff;
+      stroke-width: 0.5;
+      opacity: 0.70;
+      transition: opacity 0.15s, stroke-width 0.15s;
+    }
+    .gp-house:hover { opacity: 1; stroke-width: 0.9; }
+    .gp-house.free     { fill: #5A8F45; }
+    .gp-house.reserved { fill: #C89A1A; }
+    .gp-house.sold     { fill: #C04040; }
+    .gp-house.sold     { cursor: default; }
+
+    /* legend */
+    .genplan-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; flex-wrap: wrap; gap: 12px; }
+    .genplan-legend { display: flex; gap: 20px; flex-wrap: wrap; }
+    .gp-leg { display: flex; align-items: center; gap: 7px; font-size: 11px; font-family: var(--mono); letter-spacing: 0.06em; color: var(--text-mid); text-transform: uppercase; }
+    .gp-leg-dot { width: 14px; height: 14px; border-radius: 2px; flex-shrink: 0; }
+    .gp-leg-dot.free     { background: #5A8F45; }
+    .gp-leg-dot.reserved { background: #C89A1A; }
+    .gp-leg-dot.sold     { background: #C04040; }
+    .gp-calibrate-hint { font-size: 11px; font-family: var(--mono); color: var(--text-light); }
+
+    /* tooltip */
+    .gp-tooltip {
+      position: fixed;
+      background: var(--text);
+      color: #fff;
+      font-family: var(--mono);
+      font-size: 12px;
+      line-height: 1.5;
+      padding: 8px 14px;
+      border-radius: 3px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.12s;
+      z-index: 300;
+      white-space: nowrap;
+    }
+    .gp-tooltip.show { opacity: 1; }
+
+    /* calibration mode */
+    .genplan-map.calibrate { cursor: crosshair; }
+    .gp-calib-panel {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      background: var(--text); color: #fff;
+      font-family: var(--mono); font-size: 13px;
+      padding: 14px 24px; border-radius: 6px;
+      z-index: 400; display: none;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .gp-calib-panel.show { display: block; }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 1024px) {
       .house-grid { grid-template-columns: repeat(2, 1fr); }
       .modal-specs { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 768px) {
+      .genplan-wrap { display: none; }
       .catalog-wrap { margin-left: 0; padding: 32px 20px 64px; }
       .page-banner { margin-left: 0; padding: 80px 20px 40px; }
       .page-banner-inner { padding: 0; flex-direction: column; align-items: flex-start; }
@@ -481,7 +601,42 @@
   </div>
 </div>
 
+<!-- ── GENPLAN INTERACTIVE ── -->
+<div class="genplan-wrap">
+  <div class="genplan-inner">
+    <div class="genplan-label">
+      <span class="s-label">ГЕНЕРАЛЬНИЙ ПЛАН</span>
+    </div>
+
+    <div class="genplan-map" id="genplanMap">
+      <img src="images/genplan.avif" alt="Генеральний план Lisnyky House" id="genplanImg" />
+      <svg class="genplan-svg" id="genplanSvg"
+           viewBox="0 0 1583 994"
+           preserveAspectRatio="none"
+           xmlns="http://www.w3.org/2000/svg">
+      </svg>
+    </div>
+
+    <div class="genplan-footer">
+      <div class="genplan-legend">
+        <div class="gp-leg"><div class="gp-leg-dot free"></div>Вільний</div>
+        <div class="gp-leg"><div class="gp-leg-dot reserved"></div>Під завдатком</div>
+        <div class="gp-leg"><div class="gp-leg-dot sold"></div>Продано</div>
+      </div>
+      <div class="gp-calibrate-hint" id="calibHint" style="display:none">
+        Режим калібрування — клікай на дах кожного будинку
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- tooltip -->
+<div class="gp-tooltip" id="gpTooltip"></div>
+<!-- calibration panel -->
+<div class="gp-calib-panel" id="calibPanel"></div>
+
 <!-- ── CATALOG ── -->
+<div id="catalog-anchor"></div>
 <div class="catalog-wrap">
 
   <!-- FILTERS -->
@@ -489,21 +644,15 @@
     <div class="filter-group">
       <button class="filter-btn active" data-filter="all">Всі</button>
       <button class="filter-btn" data-filter="free">Вільні</button>
-      <button class="filter-btn" data-filter="reserved">Зарезервовані</button>
+      <button class="filter-btn" data-filter="reserved">Під завдатком</button>
+      <button class="filter-btn" data-filter="sold">Продано</button>
     </div>
-    <div class="filter-divider"></div>
-    <div class="filter-group">
-      <button class="filter-btn active" data-type="all">Всі типи</button>
-      <button class="filter-btn" data-type="a">Тип А · 110 м²</button>
-      <button class="filter-btn" data-type="b">Тип Б · 140 м²</button>
-    </div>
-    <span class="filter-count" id="filterCount">12 будинків</span>
+    <span class="filter-count" id="filterCount"></span>
   </div>
 
-  <!-- GRID — populated from data/houses.json -->
-  <div class="house-grid" id="houseGrid">
-    <p class="no-results" id="noResults">Немає будинків за обраними фільтрами</p>
-  </div><!-- /house-grid -->
+  <!-- SECTIONS — populated from JS -->
+  <div id="sectionsWrap"></div>
+
 </div><!-- /catalog-wrap -->
 
 <!-- ── MODAL ── -->
@@ -565,13 +714,8 @@
     mClose.addEventListener('click', () => mMenu.classList.remove('open'));
   }
 
-  // ── Type config
-  const TYPE_INFO = {
-    a: { label: 'А', area: '110 м²', rooms: '3+1' },
-    b: { label: 'Б', area: '140 м²', rooms: '4+1' },
-  };
-  const STATUS_LABEL = { free: 'Вільний', sold: 'Продано', reserved: 'Зарезервовано' };
-  const ARROW_SVG = '<svg width="16" height="8" viewBox="0 0 16 8" fill="none"><path d="M0 4h14M10 1l4 3-4 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>';
+  const STATUS_LABEL = { free: 'Вільний', sold: 'Продано', reserved: 'Під завдатком' };
+  const STATUS_SHORT  = { free: 'Вільний', sold: 'Продано', reserved: 'Завдаток' };
 
   function plural(n, f1, f2, f5) {
     const v = Math.abs(n) % 100, v1 = v % 10;
@@ -581,90 +725,18 @@
     return f5;
   }
 
-  function renderCard(h) {
-    const t = TYPE_INFO[h.type];
-    const num = String(h.id).padStart(2, '0');
-    const isFree = h.status === 'free';
-    const priceText = h.price || (isFree ? 'Уточнити ціну' : STATUS_LABEL[h.status]);
-    const cta = isFree
-      ? `<div class="house-cta">Детальніше ${ARROW_SVG}</div>`
-      : '<div class="house-cta"></div>';
-    return `
-      <div class="house-card" data-status="${h.status}" data-type="${h.type}" data-id="${h.id}">
-        <div class="house-card-img">
-          <img src="images/${h.id}.jpg" alt="Будинок №${num}" loading="lazy" />
-          <span class="house-status status-${h.status}">${STATUS_LABEL[h.status]}</span>
-        </div>
-        <div class="house-card-body">
-          <div class="house-num">Будинок № ${num} · Тип ${t.label}</div>
-          <div class="house-title">Таунхаус ${t.label}</div>
-          <div class="house-specs">
-            <div class="hs-item"><div class="hs-label">Площа</div><div class="hs-val">${t.area}</div></div>
-            <div class="hs-item"><div class="hs-label">Кімнати</div><div class="hs-val">${t.rooms}</div></div>
-            <div class="hs-item"><div class="hs-label">Поверхи</div><div class="hs-val">2</div></div>
-            <div class="hs-item"><div class="hs-label">Балкон</div><div class="hs-val">Є</div></div>
-          </div>
-          <div class="house-card-footer">
-            <div class="house-price">${priceText}</div>
-            ${cta}
-          </div>
-        </div>
-      </div>`;
-  }
-
-  // ── Filter logic (runs after cards are rendered)
-  let activeStatus = 'all';
-  let activeType   = 'all';
-
-  function applyFilters() {
-    const cards = document.querySelectorAll('.house-card');
-    const noResults = document.getElementById('noResults');
-    const filterCount = document.getElementById('filterCount');
-    let visible = 0;
-    cards.forEach(card => {
-      const s = card.dataset.status;
-      const t = card.dataset.type;
-      const statusOk = activeStatus === 'all' || s === activeStatus;
-      const typeOk   = activeType === 'all'   || t === activeType;
-      const show = statusOk && typeOk;
-      card.classList.toggle('hidden', !show);
-      if (show) visible++;
-    });
-    noResults.classList.toggle('show', visible === 0);
-    filterCount.textContent = visible + ' ' + plural(visible, 'будинок', 'будинки', 'будинків');
-  }
-
-  document.querySelectorAll('[data-filter]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      activeStatus = btn.dataset.filter;
-      applyFilters();
-    });
-  });
-
-  document.querySelectorAll('[data-type]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('[data-type]').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      activeType = btn.dataset.type;
-      applyFilters();
-    });
-  });
-
   // ── Modal
   const modalOverlay = document.getElementById('modalOverlay');
   const modalClose   = document.getElementById('modalClose');
 
-  function openModal(h) {
-    const t = TYPE_INFO[h.type];
-    const num = String(h.id).padStart(2, '0');
-    document.getElementById('modalImg').src = `images/${h.id}.jpg`;
-    document.getElementById('modalImg').alt = `Будинок №${num}`;
-    document.getElementById('modalNum').textContent   = `Будинок № ${num} · Тип ${t.label}`;
-    document.getElementById('modalTitle').textContent = `Таунхаус ${t.label}`;
-    document.getElementById('mArea').textContent  = t.area;
-    document.getElementById('mRooms').textContent = t.rooms;
+  function openModal(u) {
+    const numStr = String(u.unit).padStart(2, '0');
+    document.getElementById('modalImg').src = `images/${u.section}.jpg`;
+    document.getElementById('modalImg').alt = `Секція ${u.section} · №${numStr}`;
+    document.getElementById('modalNum').textContent   = `Секція ${u.section} · Таунхаус №${numStr}`;
+    document.getElementById('modalTitle').textContent = `Таунхаус №${numStr}`;
+    document.getElementById('mArea').textContent  = '—';
+    document.getElementById('mRooms').textContent = '—';
     modalOverlay.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
@@ -678,30 +750,176 @@
   modalOverlay.addEventListener('click', e => { if (e.target === modalOverlay) closeModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-  // ── Load houses from JSON
-  fetch('data/houses.json')
-    .then(r => r.json())
-    .then(({ houses }) => {
-      const grid = document.getElementById('houseGrid');
-      const noResults = document.getElementById('noResults');
-      grid.innerHTML = houses.map(renderCard).join('') + noResults.outerHTML;
+  // ── Filter
+  let activeStatus = 'all';
 
-      // Attach modal listeners to free cards
-      grid.querySelectorAll('.house-card').forEach(card => {
-        if (card.dataset.status === 'free') {
-          card.addEventListener('click', () => {
-            const h = houses.find(x => x.id == card.dataset.id);
-            if (h) openModal(h);
-          });
-        }
-      });
+  function applyFilters(units) {
+    const chips = document.querySelectorAll('.unit-chip');
+    let visible = 0;
+    chips.forEach(chip => {
+      const show = activeStatus === 'all' || chip.dataset.status === activeStatus;
+      chip.classList.toggle('hidden', !show);
+      if (show) visible++;
+    });
+    // hide empty sections
+    document.querySelectorAll('.sec-group').forEach(grp => {
+      const anyVisible = [...grp.querySelectorAll('.unit-chip')].some(c => !c.classList.contains('hidden'));
+      grp.classList.toggle('hidden', !anyVisible);
+    });
+    const fc = document.getElementById('filterCount');
+    fc.textContent = visible + ' ' + plural(visible, 'юніт', 'юніти', 'юнітів');
+  }
 
-      // Update banner count
-      const avail = houses.filter(h => h.status === 'free').length;
-      document.getElementById('availableCount').textContent = avail;
-
+  document.querySelectorAll('[data-filter]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeStatus = btn.dataset.filter;
       applyFilters();
     });
+  });
+
+  // ── Render section catalog
+  function renderSections(units) {
+    const wrap = document.getElementById('sectionsWrap');
+    const secIds = [...new Set(units.map(u => u.section))];
+
+    wrap.innerHTML = secIds.map(secId => {
+      const secUnits = units.filter(u => u.section === secId);
+      const freeCount = secUnits.filter(u => u.status === 'free').length;
+      const chips = secUnits.map(u => {
+        const numStr = String(u.unit).padStart(2, '0');
+        return `
+          <div class="unit-chip ${u.status}" data-uid="${u.id}" data-status="${u.status}"
+               data-sec="${u.section}" data-unit="${u.unit}">
+            <div class="chip-num">${numStr}</div>
+            <div class="chip-dot ${u.status}"></div>
+            <div class="chip-label">${STATUS_SHORT[u.status]}</div>
+          </div>`;
+      }).join('');
+
+      const availText = freeCount > 0
+        ? `${freeCount} вільних з ${secUnits.length}`
+        : `всі зайняті`;
+
+      return `
+        <div class="sec-group" data-sec="${secId}">
+          <div class="sec-header">
+            <div class="sec-title">Секція ${secId}</div>
+            <div class="sec-avail">${availText}</div>
+          </div>
+          <div class="sec-units">${chips}</div>
+        </div>`;
+    }).join('');
+
+    // attach click to free chips
+    wrap.querySelectorAll('.unit-chip.free').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const u = units.find(x => x.id === chip.dataset.uid);
+        if (u) openModal(u);
+      });
+    });
+  }
+
+  // ── Build genplan SVG overlay from section data
+  function buildGenplan(units, sections) {
+    const svg = document.getElementById('genplanSvg');
+    const tip = document.getElementById('gpTooltip');
+    const map = document.getElementById('genplanMap');
+    const NS  = 'http://www.w3.org/2000/svg';
+
+    sections.forEach(sec => {
+      const secUnits = units.filter(u => u.section === sec.id);
+      if (!secUnits.length) return;
+
+      const gap      = 3;
+      const unitW    = (sec.w - gap * (sec.units - 1)) / sec.units;
+      const pivotX   = sec.x;
+      const pivotY   = sec.y;
+
+      const g = document.createElementNS(NS, 'g');
+      g.setAttribute('transform', `rotate(${sec.angle}, ${pivotX}, ${pivotY})`);
+
+      secUnits.forEach((u, i) => {
+        const rx = sec.x + i * (unitW + gap);
+        const ry = sec.y;
+        const rect = document.createElementNS(NS, 'rect');
+        rect.setAttribute('x',      rx);
+        rect.setAttribute('y',      ry);
+        rect.setAttribute('width',  unitW);
+        rect.setAttribute('height', sec.h);
+        rect.setAttribute('rx',     '2');
+        rect.classList.add('gp-house', u.status);
+        rect.dataset.uid = u.id;
+
+        const numStr = String(u.unit).padStart(2, '0');
+        rect.addEventListener('mousemove', e => {
+          tip.innerHTML = `Секція ${u.section} · №${numStr}<br><b>${STATUS_LABEL[u.status]}</b>`;
+          tip.style.left = (e.clientX + 14) + 'px';
+          tip.style.top  = (e.clientY - 10) + 'px';
+          tip.classList.add('show');
+        });
+        rect.addEventListener('mouseleave', () => tip.classList.remove('show'));
+
+        if (u.status === 'free') {
+          rect.addEventListener('click', () => {
+            tip.classList.remove('show');
+            document.getElementById('catalog-anchor').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            setTimeout(() => openModal(u), 350);
+          });
+        }
+
+        g.appendChild(rect);
+      });
+
+      svg.appendChild(g);
+    });
+
+    // ── Calibration mode (?calibrate=1)
+    if (new URLSearchParams(location.search).get('calibrate') === '1') {
+      map.classList.add('calibrate');
+      document.getElementById('calibHint').style.display = 'block';
+      const panel = document.getElementById('calibPanel');
+      panel.classList.add('show');
+
+      let log = [];
+      map.addEventListener('click', e => {
+        const r  = map.getBoundingClientRect();
+        const iw = 1583, ih = 994;
+        const px = Math.round((e.clientX - r.left) / r.width  * iw);
+        const py = Math.round((e.clientY - r.top)  / r.height * ih);
+        log.push(`${px}, ${py}`);
+        panel.innerHTML = `<b>x: ${px}, y: ${py}</b> (px у 1583×994)<br><small>Останні 2: [${log.slice(-2).join('] [')}]</small>`;
+      });
+    }
+  }
+
+  // ── Main: load data
+  Promise.all([
+    fetch('data/houses.json').then(r => r.json()),
+    fetch('data/genplan.json').then(r => r.json())
+  ]).catch(err => {
+    console.error('❌ fetch failed (file:// не підтримує fetch). Запусти: python3 -m http.server 8080', err);
+    document.getElementById('genplanMap').insertAdjacentHTML('beforeend',
+      '<div style="position:absolute;top:10px;left:10px;background:red;color:#fff;padding:8px 12px;font-size:12px;border-radius:4px;z-index:99">⚠ Відкрий через сервер: python3 -m http.server 8080</div>');
+  }).then(([{ units }, gpData]) => {
+    if (!units) return;
+
+    // banner count
+    const avail = units.filter(u => u.status === 'free').length;
+    document.getElementById('availableCount').textContent = avail;
+
+    // catalog
+    renderSections(units);
+    applyFilters(units);
+
+    // genplan
+    buildGenplan(units, gpData.sections);
+
+    // filter count init
+    document.getElementById('filterCount').textContent =
+      avail + ' ' + plural(avail, 'вільний', 'вільних', 'вільних');
+  });
 </script>
 </body>
 </html>

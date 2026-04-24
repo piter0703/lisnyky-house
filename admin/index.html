@@ -121,12 +121,9 @@
   const FILE   = 'data/houses.json';
   const API    = 'https://api.github.com';
 
-  const TYPE_INFO = { a: 'Тип А · 110 м²', b: 'Тип Б · 140 м²' };
-  const STATUS_LABEL = { free: 'Вільний', sold: 'Продано', reserved: 'Зарезервовано' };
-
   let token = localStorage.getItem('lh_admin_token') || '';
   let fileSha = '';
-  let houses = [];
+  let units = [];
 
   // ── Auth
   const loginWrap  = document.getElementById('loginWrap');
@@ -184,7 +181,7 @@
   // ── Load data
   function loadData(data) {
     fileSha = data.sha;
-    houses  = JSON.parse(atob(data.content.replace(/\n/g, ''))).houses;
+    units   = JSON.parse(atob(data.content.replace(/\n/g, ''))).units;
     renderTable();
   }
 
@@ -197,32 +194,39 @@
     showAdmin();
   }
 
-  // ── Render table
+  // ── Render table grouped by section
   function renderTable() {
     const tbody = document.getElementById('houseTableBody');
-    tbody.innerHTML = houses.map((h, i) => {
-      const num = String(h.id).padStart(2, '0');
-      return `
-        <tr>
-          <td>
-            <div class="house-num">Будинок № ${num}</div>
-            <div class="house-type">${TYPE_INFO[h.type]}</div>
-          </td>
-          <td>
-            <select class="status-select ${h.status}" data-idx="${i}" id="status-${i}">
-              <option value="free"     ${h.status==='free'     ? 'selected':''}>Вільний</option>
-              <option value="sold"     ${h.status==='sold'     ? 'selected':''}>Продано</option>
-              <option value="reserved" ${h.status==='reserved' ? 'selected':''}>Зарезервовано</option>
-            </select>
-          </td>
-          <td>
-            <input class="price-input" type="text" data-idx="${i}" id="price-${i}"
-              value="${h.price || ''}" placeholder="Уточнити ціну" />
-          </td>
-        </tr>`;
+    const secIds = [...new Set(units.map(u => u.section))];
+
+    tbody.innerHTML = secIds.map(secId => {
+      const secUnits = units.filter(u => u.section === secId);
+      const rows = secUnits.map(u => {
+        const i   = units.indexOf(u);
+        const num = String(u.unit).padStart(2, '0');
+        return `
+          <tr>
+            <td>
+              <div class="house-num">Секція ${u.section} · №${num}</div>
+            </td>
+            <td>
+              <select class="status-select ${u.status}" data-idx="${i}" id="status-${i}">
+                <option value="free"     ${u.status==='free'     ? 'selected':''}>Вільний</option>
+                <option value="reserved" ${u.status==='reserved' ? 'selected':''}>Під завдатком</option>
+                <option value="sold"     ${u.status==='sold'     ? 'selected':''}>Продано</option>
+              </select>
+            </td>
+            <td>
+              <input class="price-input" type="text" data-idx="${i}" id="price-${i}"
+                value="${u.price || ''}" placeholder="Уточнити ціну" />
+            </td>
+          </tr>`;
+      }).join('');
+
+      const sepRow = `<tr><td colspan="3" style="background:#f9f8f6;padding:8px 16px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888;border-bottom:1px solid #e0ddd8">Секція ${secId} — ${secUnits.length} юнітів</td></tr>`;
+      return sepRow + rows;
     }).join('');
 
-    // Update select color on change
     tbody.querySelectorAll('.status-select').forEach(sel => {
       sel.addEventListener('change', () => {
         sel.className = `status-select ${sel.value}`;
@@ -239,14 +243,14 @@
     status.textContent = 'Збереження...';
 
     // Collect updated values
-    const updated = houses.map((h, i) => ({
-      ...h,
+    const updated = units.map((u, i) => ({
+      ...u,
       status: document.getElementById(`status-${i}`).value,
       price:  document.getElementById(`price-${i}`).value.trim(),
     }));
 
     const content = btoa(unescape(encodeURIComponent(
-      JSON.stringify({ houses: updated }, null, 2) + '\n'
+      JSON.stringify({ units: updated }, null, 2) + '\n'
     )));
 
     try {
@@ -271,7 +275,7 @@
 
       const data = await res.json();
       fileSha = data.content.sha;
-      houses = updated;
+      units = updated;
       status.className = 'save-status ok';
       status.textContent = '✓ Збережено! Сайт оновиться через ~1 хв.';
     } catch(e) {
