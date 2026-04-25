@@ -1130,47 +1130,28 @@
       display: grid;
       grid-template-columns: 1fr 1.4fr;
       gap: 80px;
-      align-items: center;
-      margin-top: 56px;
+      align-items: start;
+      margin-top: 48px;
     }
 
-    .loc-point {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      padding: 24px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .loc-point:first-child { border-top: 1px solid var(--border); }
-
-    .loc-icon {
-      width: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      color: var(--green);
-    }
-
-    .loc-time {
-      font-family: var(--serif);
-      font-size: 26px;
-      font-style: italic;
-      color: var(--text);
-      min-width: 80px;
-    }
-
-    .loc-desc {
-      font-size: 14px;
+    .loc-address {
+      font-family: var(--sans);
+      font-size: 16px;
+      font-weight: 300;
       color: var(--text-mid);
-      line-height: 1.5;
+      line-height: 1.7;
+      margin-top: 24px;
+      margin-bottom: 32px;
     }
 
-    .loc-arrow {
-      margin-left: auto;
+    .stat-place {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       color: var(--green);
-      font-size: 18px;
+      margin-top: 2px;
     }
 
     .location-map {
@@ -1523,7 +1504,8 @@
       .plan-card-body { padding: 24px 20px 28px; }
 
       /* Location */
-      .loc-point { padding: 18px 0; gap: 14px; }
+      .location-grid { grid-template-columns: 1fr; gap: 40px; }
+      .stats-row { flex-wrap: wrap; }
 
       /* Contact */
       .messengers { flex-wrap: wrap; gap: 10px; }
@@ -2145,37 +2127,12 @@
 
     <div class="location-grid">
       <div>
-        <div class="loc-point">
-          <div class="loc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="13" rx="3"/><path d="M3 13h18M8 18l-2 2M16 18l2 2M8 9.5l1.5 2 1.5-2 1.5 2 1.5-2"/></svg></div>
-          <div class="loc-time">15 хв</div>
-          <div class="loc-desc">до метро<br /><strong>Видубичі</strong></div>
-          <div class="loc-arrow">→</div>
-        </div>
-        <div class="loc-point">
-          <div class="loc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="9" width="7" height="12"/><rect x="9" y="5" width="11" height="16"/><path d="M4 9V6M11 5V2M4 13h2M4 17h2M11 9h4M11 13h4M11 17h4"/></svg></div>
-          <div class="loc-time">25 хв</div>
-          <div class="loc-desc">до<br /><strong>центру Києва</strong></div>
-          <div class="loc-arrow">→</div>
-        </div>
-        <div class="loc-point">
-          <div class="loc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3L6 11h3.5L5 19h14l-4.5-8H18L12 3z"/><line x1="12" y1="19" x2="12" y2="22"/></svg></div>
-          <div class="loc-time">5 хв</div>
-          <div class="loc-desc">до<br /><strong>Чернечого лісу</strong></div>
-          <div class="loc-arrow">→</div>
-        </div>
-        <div class="loc-point">
-          <div class="loc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3v-5l2.5-5h13L21 12v5h-2"/><circle cx="7.5" cy="17" r="1.5"/><circle cx="16.5" cy="17" r="1.5"/><path d="M5 12h14"/></svg></div>
-          <div class="loc-time">5 хв</div>
-          <div class="loc-desc">до<br /><strong>супермаркету</strong></div>
-          <div class="loc-arrow">→</div>
-        </div>
-        <p style="margin-top:24px; font-size:13px; color:var(--text-light); line-height:1.6;">
+        <p class="loc-address">
           вул. Виноградна, 33-35<br />
           с. Лісники, Київська обл., 08172
         </p>
-        <a href="#contact" class="s-link" style="margin-top: 32px;">
+        <a href="#contact" class="btn-green" style="display:inline-block;text-decoration:none">
           Приїдьте подивитись — записатись
-          <svg width="20" height="10" viewBox="0 0 20 10" fill="none"><path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
         </a>
       </div>
 
@@ -2185,6 +2142,29 @@
           allowfullscreen=""
           loading="lazy">
         </iframe>
+      </div>
+    </div>
+
+    <div class="stats-row" style="margin-top:64px">
+      <div class="stat">
+        <span class="stat-n">15<sup>хв</sup></span>
+        <span class="stat-l">до метро</span>
+        <span class="stat-place">Видубичі</span>
+      </div>
+      <div class="stat">
+        <span class="stat-n">25<sup>хв</sup></span>
+        <span class="stat-l">до</span>
+        <span class="stat-place">центру Києва</span>
+      </div>
+      <div class="stat">
+        <span class="stat-n">5<sup>хв</sup></span>
+        <span class="stat-l">до</span>
+        <span class="stat-place">Чернечого лісу</span>
+      </div>
+      <div class="stat">
+        <span class="stat-n">5<sup>хв</sup></span>
+        <span class="stat-l">до</span>
+        <span class="stat-place">супермаркету</span>
       </div>
     </div>
   </div>
@@ -2512,7 +2492,7 @@
     });
   }, { threshold: 0.12 });
 
-  document.querySelectorAll('.adv-item, .plan-card, .loc-point, .stat, .c-detail').forEach(el => {
+  document.querySelectorAll('.adv-item, .plan-card, .stat, .c-detail').forEach(el => {
     el.style.cssText += 'opacity:0;transform:translateY(20px);transition:opacity 0.55s ease,transform 0.55s ease;';
     io.observe(el);
   });
