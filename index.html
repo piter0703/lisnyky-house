@@ -985,14 +985,46 @@
 
     .plans-intro {
       display: grid;
-      grid-template-columns: 1fr 1.5fr;
+      grid-template-columns: 1fr 1fr;
       gap: 60px;
       align-items: center;
       margin-bottom: 80px;
     }
     @media (max-width: 768px) {
       .plans-intro { grid-template-columns: 1fr; gap: 40px; }
-      .plan-video-wrap { display: none; }
+      .plan-preview-card { display: none; }
+    }
+
+    .plan-preview-card {
+      border: 1px solid var(--border);
+      background: var(--off);
+      overflow: hidden;
+      border-radius: 2px;
+    }
+    .plan-preview-card-img {
+      height: 260px;
+      border-bottom: 1px solid var(--border);
+      background: var(--off);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .plan-preview-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 20px;
+    }
+    .plan-preview-card-body {
+      padding: 28px 32px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .plan-preview-specs {
+      display: flex;
+      gap: 32px;
     }
 
     .plan-cards {
@@ -1090,14 +1122,6 @@
     }
     .plan-price:hover { opacity: 0.7; }
 
-    /* ─── PLAN VIDEO ─────────────────────────── */
-    .plan-video-wrap video {
-      width: 100%;
-      display: block;
-      border-radius: 2px;
-      aspect-ratio: 11/10;
-      object-fit: cover;
-    }
 
     /* ─── SECTION: LOCATION ──────────────────── */
     .s-location { background: var(--off); }
@@ -2003,10 +2027,35 @@
       <div class="plans-intro-text">
         <div class="s-label">06 — Колекція будинків</div>
         <h2 class="s-title">Оберіть свій<br /><em>будинок</em></h2>
-        <p class="s-text">Два варіанти планування для різних потреб. Кожен будинок — два поверхи, балкон, власне подвір'я і паркінг.</p>
+        <p class="s-text">Кожен будинок — два поверхи, балкон, власне подвір'я і паркінг.</p>
+        <a href="houses.html" class="s-link">
+          Переглянути всі будинки
+          <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
+            <path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </a>
       </div>
-      <div class="plan-video-wrap">
-        <video id="planVideo" data-src="images/3Д.mp4" muted loop playsinline webkit-playsinline></video>
+      <div class="plan-preview-card">
+        <div class="plan-preview-card-img">
+          <img src="images/plan-a.jpg" alt="Планування таунхаусу Lisnyky House" />
+        </div>
+        <div class="plan-preview-card-body">
+          <div class="plan-preview-specs">
+            <div>
+              <div class="ps-label">Площа</div>
+              <div class="ps-val">82 м²</div>
+            </div>
+            <div>
+              <div class="ps-label">Поверхи</div>
+              <div class="ps-val">2</div>
+            </div>
+            <div>
+              <div class="ps-label">Ціна</div>
+              <div class="ps-val" style="color:var(--green)">100 000 $</div>
+            </div>
+          </div>
+          <a href="houses.html" class="btn-green" style="display:inline-block;text-decoration:none">Обрати будинок</a>
+        </div>
       </div>
     </div>
 
@@ -2451,12 +2500,6 @@
       }
     });
   });
-
-  // Load plan video only on desktop
-  if (window.innerWidth > 768) {
-    const pv = document.getElementById('planVideo');
-    if (pv) { pv.src = pv.dataset.src; pv.play().catch(() => {}); }
-  }
 
   // Scroll reveal
   const io = new IntersectionObserver(entries => {
