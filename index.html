@@ -488,6 +488,28 @@
 
     .slide-num span { color: rgba(255,255,255,0.35); }
 
+    .hero-badge {
+      position: absolute;
+      bottom: 40px;
+      right: 72px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #fff;
+      background: rgba(79,91,76,0.75);
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 8px 14px;
+      border-radius: 2px;
+      z-index: 10;
+    }
+    .hero-badge svg { opacity: 0.9; flex-shrink: 0; }
     .hero-label {
       font-family: var(--mono);
       font-size: 11px;
@@ -1435,6 +1457,7 @@
       /* Hero mobile */
       .hero-nav { padding: 14px 16px; left: 0; }
       .hero-nav-phone { display: none; }
+      .hero-badge { bottom: 24px; right: 20px; font-size: 9px; padding: 6px 11px; }
       .slide-texts { padding: 0 20px 100px 20px; left: 0; }
       .hero h1 { font-size: clamp(38px, 9vw, 56px); }
       .hero-desc { font-size: 15px; margin-bottom: 24px; }
@@ -1576,6 +1599,12 @@
       <a href="tel:+380672004777" class="hero-nav-phone">+38 067 200 47 77</a>
       <a href="houses.html" class="btn-green">Обрати будинок</a>
     </div>
+  </div>
+
+  <!-- Exploitation badge -->
+  <div class="hero-badge">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    100% введено в експлуатацію
   </div>
 
   <!-- Slide texts -->
@@ -1913,11 +1942,11 @@
           <div class="plan-specs">
             <div>
               <div class="ps-label">Площа</div>
-              <div class="ps-val">110 м²</div>
+              <div class="ps-val">82 м²</div>
             </div>
             <div>
               <div class="ps-label">Кімнати</div>
-              <div class="ps-val">3 + 1</div>
+              <div class="ps-val">2</div>
             </div>
             <div>
               <div class="ps-label">Поверхи</div>
@@ -1947,11 +1976,11 @@
           <div class="plan-specs">
             <div>
               <div class="ps-label">Площа</div>
-              <div class="ps-val">140 м²</div>
+              <div class="ps-val">82 м²</div>
             </div>
             <div>
               <div class="ps-label">Кімнати</div>
-              <div class="ps-val">4 + 1</div>
+              <div class="ps-val">2</div>
             </div>
             <div>
               <div class="ps-label">Поверхи</div>
