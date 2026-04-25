@@ -831,6 +831,7 @@
     }
 
     /* ─── SECTION: SPLIT ─────────────────────── */
+    .s-split { padding: 0 0 0 52px; }
     .s-split .split-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -857,7 +858,7 @@
       width: 100%;
       height: 100%;
       min-height: 580px;
-      background: linear-gradient(135deg, #d4e8d0 0%, #b8d8b2 100%);
+      background: var(--green-bg);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -943,7 +944,7 @@
     .int-item--large { grid-row: span 2; }
 
     /* ─── SECTION: GALLERY FULL ──────────────── */
-    .s-gallery { padding: 0; }
+    .s-gallery { padding: 0 0 0 52px; }
 
     .gallery-full {
       display: grid;
@@ -978,11 +979,11 @@
       color: var(--text-light);
       font-size: 12px;
       letter-spacing: 0.1em;
-      background: #e8f0e7;
+      background: var(--green-bg);
     }
 
     /* ─── SECTION: PLANS ─────────────────────── */
-    .s-plans { background: var(--white); }
+    .s-plans { background: var(--off); }
 
     .plans-intro {
       display: grid;
@@ -1013,7 +1014,7 @@
       border-bottom: 1px solid var(--border);
       position: relative;
       overflow: hidden;
-      background: #EFEDE7;
+      background: var(--off);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1154,7 +1155,7 @@
       height: 440px;
       border-radius: 2px;
       overflow: hidden;
-      background: #e8f0e7;
+      background: var(--green-bg);
     }
 
     .location-map iframe {
@@ -1430,6 +1431,8 @@
       header { left: 0; padding: 20px 24px; }
       .section { padding: 80px 0; }
       .section-inner { padding: 0 24px; }
+      .s-split { padding: 0; }
+      .s-gallery { padding: 0; }
       .s-split .split-grid { grid-template-columns: 1fr; }
       .split-img { min-height: 340px; }
       .split-text { padding: 48px 24px; }
@@ -1819,7 +1822,7 @@
 <!-- ════════════════════════════════════════════
      SPLIT: NATURE
 ═════════════════════════════════════════════ -->
-<section class="section s-split" style="padding: 0;">
+<section class="section s-split">
   <div class="split-grid">
     <div class="split-img">
       <img src="images/render-bikes.jpg"
@@ -1847,7 +1850,7 @@
 <!-- ════════════════════════════════════════════
      SPLIT: READY
 ═════════════════════════════════════════════ -->
-<section class="section s-split" style="padding: 0;">
+<section class="section s-split">
   <div class="split-grid">
     <div class="split-text bg-off">
       <div class="s-label">03 — Готово сьогодні</div>
