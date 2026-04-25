@@ -1522,6 +1522,32 @@
       align-items: start;
     }
     .faq-left { position: sticky; top: 100px; }
+    .faq-desc {
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.75;
+      margin-top: 20px;
+    }
+    .faq-ask-btn {
+      display: inline-block;
+      margin-top: 32px;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text);
+      background: none;
+      border: 1px solid var(--text);
+      border-radius: 3px;
+      padding: 13px 22px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .faq-ask-btn:hover { border-color: var(--green); color: var(--green); }
     .faq-right { min-width: 0; }
     .faq-list { border-top: 1px solid var(--line); }
     .faq-item { border-bottom: 1px solid var(--line); }
@@ -2140,8 +2166,10 @@
   <div class="section-inner faq-inner">
 
     <div class="faq-left">
-      <div class="s-label">Запитання</div>
-      <h2 class="s-title">Часті<br /><em>запитання</em></h2>
+      <div class="s-label">06 — FAQ</div>
+      <h2 class="s-title">Часті<br /><em>запитання.</em></h2>
+      <p class="faq-desc">Не знайшли свою відповідь? Зателефонуйте менеджеру або напишіть в месенджер — відповімо протягом години.</p>
+      <a href="#contact" class="faq-ask-btn">Запитати менеджера</a>
     </div>
 
     <div class="faq-right">
@@ -2149,61 +2177,51 @@
 
         <div class="faq-item">
           <button class="faq-q" aria-expanded="false">
-            Чи можна купити зараз і одразу заселитись?
+            Коли можна заселитись?
             <span class="faq-icon"></span>
           </button>
           <div class="faq-a">
-            <p>Так. Секції 1 і 2 повністю введено в експлуатацію і готові до заселення. Ви купуєте готовий будинок, а не права на майбутнє житло.</p>
+            <p>Усі будинки секцій 1 і 2 введено в експлуатацію і повністю готові до проживання. Ви можете заселитися наступного дня або наступного місяця — як зручно.</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-q" aria-expanded="false">
-            Яка ціна і що в неї входить?
+            Яка форма власності?
             <span class="faq-icon"></span>
           </button>
           <div class="faq-a">
-            <p>100 000 $ за таунхаус площею 82 кв.м. У вартість включено: двоповерховий будинок без внутрішнього оздоблення, власну земельну ділянку, паркінг, підключення до інженерних мереж (вода, каналізація, електрика).</p>
+            <p>Приватна власність на будинок і земельну ділянку. Оформлення через нотаріуса — стандартний договір купівлі-продажу. Повний пакет документів на руках у забудовника.</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-q" aria-expanded="false">
-            Яке планування всередині?
+            Які комунікації вже проведені?
             <span class="faq-icon"></span>
           </button>
           <div class="faq-a">
-            <p>Перший поверх: просторова кухня-їдальня 29 кв.м, санвузол, хол. Другий поверх: дві спальні (19,5 і 10,9 кв.м), санвузол, балкон. Стеля на першому поверсі — 2,50 м, на другому — 2,99 м.</p>
+            <p>Центральний водопровід, каналізація, електрика 220В/380В. Опалення автономне. Підключення до всіх мереж включено у вартість — нічого доплачувати не потрібно.</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-q" aria-expanded="false">
-            Що відбувається з секціями 3–8?
+            Як організована охорона?
             <span class="faq-icon"></span>
           </button>
           <div class="faq-a">
-            <p>Секції 3–8 зараз у стадії будівництва. Ціни та терміни здачі уточнюйте у менеджера — вони залежать від черги та поточного темпу будівництва.</p>
+            <p>Комплекс огороджено парканом, встановлено відеоспостереження. Охорона — цілодобово. В'їзд лише для мешканців і запрошених гостей.</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-q" aria-expanded="false">
-            Чи є охорона і закрита територія?
+            Чи є паркінг для гостей?
             <span class="faq-icon"></span>
           </button>
           <div class="faq-a">
-            <p>Так. Комплекс огороджений, є відеоспостереження та цілодобова охорона. Чужі на територію не потрапляють.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">
-            Який транспорт і магазини поряд?
-            <span class="faq-icon"></span>
-          </button>
-          <div class="faq-a">
-            <p>До метро Видубичі — 15 хвилин на авто. В селі Лісники є АТБ, Сільпо і базова інфраструктура: аптека, школа, амбулаторія. До центру Києва — близько 25 хвилин.</p>
+            <p>Кожен таунхаус має власне паркувальне місце на ділянці. Для гостей — зона біля в'їзду у комплекс.</p>
           </div>
         </div>
 
