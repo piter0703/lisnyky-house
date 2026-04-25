@@ -32,7 +32,7 @@
       font-family: 'Instrument Sans', system-ui, sans-serif;
       font-weight: 400;
       color: var(--text);
-      background: var(--white);
+      background: var(--off);
       overflow-x: hidden;
     }
     img { display: block; max-width: 100%; }
@@ -132,7 +132,7 @@
       position: fixed;
       left: 0; top: 0; bottom: 0;
       width: 380px;
-      background: var(--white);
+      background: var(--off);
       z-index: 300;
       display: flex;
       flex-direction: column;
@@ -339,7 +339,7 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: var(--white);
+      background: var(--off);
       z-index: 200;
       flex-direction: column;
       align-items: flex-start;
@@ -757,7 +757,7 @@
     }
 
     /* ─── SECTION: MANIFESTO ─────────────────── */
-    .s-concept { background: var(--white); }
+    .s-concept { background: var(--off); }
 
     .manifesto-right .s-title {
       font-size: clamp(36px, 4vw, 66px);
@@ -872,13 +872,11 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      background: var(--white);
+      background: var(--off);
     }
 
-    .split-text.bg-off { background: var(--off); }
-
     /* ─── SECTION: ADVANTAGES ────────────────── */
-    .s-adv { background: var(--off); }
+    .s-adv { background: var(--off); } /* same as base */
 
     .adv-intro {
       max-width: 640px;
@@ -916,7 +914,7 @@
     }
 
     /* ─── SECTION: INTERIOR ─────────────────── */
-    .s-interior { background: var(--white); }
+    .s-interior { background: var(--off); }
 
     .interior-intro { margin-bottom: 56px; }
 
@@ -1102,7 +1100,7 @@
     }
 
     /* ─── SECTION: LOCATION ──────────────────── */
-    .s-location { background: var(--white); }
+    .s-location { background: var(--off); }
 
     .location-grid {
       display: grid;
@@ -1193,7 +1191,7 @@
     .m-btn:hover { opacity: 1; background: var(--green); color: #fff; }
 
     /* ─── CONTACT ───────────────────────────── */
-    .s-contact { background: var(--white); }
+    .s-contact { background: var(--off); }
 
     .contact-new-grid {
       display: grid;
