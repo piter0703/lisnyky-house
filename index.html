@@ -1530,27 +1530,9 @@
       line-height: 1.75;
       margin-top: 20px;
     }
-    .faq-ask-btn {
-      display: inline-block;
-      margin-top: 32px;
-      font-family: var(--mono);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text);
-      background: none;
-      border: 1px solid var(--text);
-      border-radius: 3px;
-      padding: 13px 22px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: border-color 0.2s, color 0.2s;
-    }
-    .faq-ask-btn:hover { border-color: var(--green); color: var(--green); }
     .faq-right { min-width: 0; }
-    .faq-list { border-top: 1px solid var(--line); }
-    .faq-item { border-bottom: 1px solid var(--line); }
+    .faq-list { border-top: 1px solid var(--border); }
+    .faq-item { border-bottom: 1px solid var(--border); }
     .faq-q {
       width: 100%;
       display: flex;
@@ -2169,18 +2151,23 @@
       <div class="s-label">08 — FAQ</div>
       <h2 class="s-title">Часті<br /><em>запитання</em></h2>
       <p class="faq-desc">Не знайшли свою відповідь? Зателефонуйте менеджеру або напишіть в месенджер — відповімо протягом години.</p>
-      <a href="#contact" class="faq-ask-btn">Запитати менеджера</a>
+      <a href="#contact" class="s-link" style="margin-top:32px">
+        Запитати менеджера
+        <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
+          <path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </a>
     </div>
 
     <div class="faq-right">
       <div class="faq-list">
 
         <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">
+          <button class="faq-q" aria-expanded="true">
             Коли можна заселитись?
             <span class="faq-icon"></span>
           </button>
-          <div class="faq-a">
+          <div class="faq-a" style="max-height:200px">
             <p>Усі будинки секцій 1 і 2 введено в експлуатацію і повністю готові до проживання. Ви можете заселитися наступного дня або наступного місяця — як зручно.</p>
           </div>
         </div>
