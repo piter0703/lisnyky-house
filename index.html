@@ -1514,9 +1514,16 @@
     }
 
     /* ── FAQ ─────────────────────────────────── */
-    .s-faq { background: var(--bg); }
-    .s-faq .section-inner { max-width: 760px; }
-    .faq-list { margin-top: 48px; border-top: 1px solid var(--line); }
+    .s-faq { background: var(--off); }
+    .faq-inner {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 0 80px;
+      align-items: start;
+    }
+    .faq-left { position: sticky; top: 100px; }
+    .faq-right { min-width: 0; }
+    .faq-list { border-top: 1px solid var(--line); }
     .faq-item { border-bottom: 1px solid var(--line); }
     .faq-q {
       width: 100%;
@@ -1527,20 +1534,22 @@
       background: none;
       border: none;
       cursor: pointer;
-      padding: 24px 0;
+      padding: 28px 0;
       text-align: left;
       font-family: var(--sans);
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 400;
       color: var(--text);
-      line-height: 1.4;
+      line-height: 1.45;
+      transition: color 0.2s;
     }
     .faq-q:hover { color: var(--green); }
     .faq-icon {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       flex-shrink: 0;
       position: relative;
+      color: var(--green);
     }
     .faq-icon::before,
     .faq-icon::after {
@@ -1550,8 +1559,8 @@
       border-radius: 1px;
       transition: transform 0.3s ease, opacity 0.3s ease;
     }
-    .faq-icon::before { width: 20px; height: 1.5px; top: 9px; left: 0; }
-    .faq-icon::after  { width: 1.5px; height: 20px; top: 0; left: 9px; }
+    .faq-icon::before { width: 18px; height: 1.5px; top: 8px; left: 0; }
+    .faq-icon::after  { width: 1.5px; height: 18px; top: 0; left: 8px; }
     .faq-q[aria-expanded="true"] .faq-icon::after { transform: rotate(90deg); opacity: 0; }
     .faq-q[aria-expanded="true"] { color: var(--green); }
     .faq-a {
@@ -1565,11 +1574,15 @@
       font-weight: 300;
       color: var(--text-mid);
       line-height: 1.8;
-      padding-bottom: 24px;
+      padding-bottom: 28px;
       margin: 0;
     }
+    @media (max-width: 900px) {
+      .faq-inner { grid-template-columns: 1fr; gap: 40px 0; }
+      .faq-left { position: static; }
+    }
     @media (max-width: 640px) {
-      .faq-q { font-size: 15px; padding: 20px 0; }
+      .faq-q { font-size: 15px; padding: 22px 0; }
     }
   </style>
 </head>
@@ -2124,72 +2137,79 @@
      FAQ
 ═════════════════════════════════════════════ -->
 <section class="section s-faq" id="faq">
-  <div class="section-inner">
-    <div class="s-label">Запитання</div>
-    <h2 class="s-title">Часті запитання<br /><em>від покупців</em></h2>
-    <div class="faq-list">
+  <div class="section-inner faq-inner">
 
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          Чи можна купити зараз і одразу заселитись?
-          <span class="faq-icon"></span>
-        </button>
-        <div class="faq-a">
-          <p>Так. Секції 1 і 2 повністю введено в експлуатацію і готові до заселення. Ви купуєте готовий будинок, а не права на майбутнє житло.</p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          Яка ціна і що в неї входить?
-          <span class="faq-icon"></span>
-        </button>
-        <div class="faq-a">
-          <p>100 000 $ за таунхаус площею 82 кв.м. У вартість включено: двоповерховий будинок без внутрішнього оздоблення, власну земельну ділянку, паркінг, підключення до інженерних мереж (вода, каналізація, електрика).</p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          Яке планування всередині?
-          <span class="faq-icon"></span>
-        </button>
-        <div class="faq-a">
-          <p>Перший поверх: просторова кухня-їдальня 29 кв.м, санвузол, хол. Другий поверх: дві спальні (19,5 і 10,9 кв.м), санвузол, балкон. Стеля на першому поверсі — 2,50 м, на другому — 2,99 м.</p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          Що відбувається з секціями 3–8?
-          <span class="faq-icon"></span>
-        </button>
-        <div class="faq-a">
-          <p>Секції 3–8 зараз у стадії будівництва. Ціни та терміни здачі уточнюйте у менеджера — вони залежать від черги та поточного темпу будівництва.</p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          Чи є охорона і закрита територія?
-          <span class="faq-icon"></span>
-        </button>
-        <div class="faq-a">
-          <p>Так. Комплекс огороджений, є відеоспостереження та цілодобова охорона. Чужі на територію не потрапляють.</p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          Який транспорт і магазини поряд?
-          <span class="faq-icon"></span>
-        </button>
-        <div class="faq-a">
-          <p>До метро Видубичі — 15 хвилин на авто. В селі Лісники є АТБ, Сільпо і базова інфраструктура: аптека, школа, амбулаторія. До центру Києва — близько 25 хвилин.</p>
-        </div>
-      </div>
-
+    <div class="faq-left">
+      <div class="s-label">Запитання</div>
+      <h2 class="s-title">Часті<br /><em>запитання</em></h2>
     </div>
+
+    <div class="faq-right">
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            Чи можна купити зараз і одразу заселитись?
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a">
+            <p>Так. Секції 1 і 2 повністю введено в експлуатацію і готові до заселення. Ви купуєте готовий будинок, а не права на майбутнє житло.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            Яка ціна і що в неї входить?
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a">
+            <p>100 000 $ за таунхаус площею 82 кв.м. У вартість включено: двоповерховий будинок без внутрішнього оздоблення, власну земельну ділянку, паркінг, підключення до інженерних мереж (вода, каналізація, електрика).</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            Яке планування всередині?
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a">
+            <p>Перший поверх: просторова кухня-їдальня 29 кв.м, санвузол, хол. Другий поверх: дві спальні (19,5 і 10,9 кв.м), санвузол, балкон. Стеля на першому поверсі — 2,50 м, на другому — 2,99 м.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            Що відбувається з секціями 3–8?
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a">
+            <p>Секції 3–8 зараз у стадії будівництва. Ціни та терміни здачі уточнюйте у менеджера — вони залежать від черги та поточного темпу будівництва.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            Чи є охорона і закрита територія?
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a">
+            <p>Так. Комплекс огороджений, є відеоспостереження та цілодобова охорона. Чужі на територію не потрапляють.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            Який транспорт і магазини поряд?
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a">
+            <p>До метро Видубичі — 15 хвилин на авто. В селі Лісники є АТБ, Сільпо і базова інфраструктура: аптека, школа, амбулаторія. До центру Києва — близько 25 хвилин.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 </section>
 
