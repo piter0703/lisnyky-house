@@ -987,7 +987,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 60px;
-      align-items: center;
+      align-items: start;
       margin-bottom: 80px;
     }
     @media (max-width: 768px) {
@@ -1144,14 +1144,50 @@
       margin-bottom: 32px;
     }
 
-    .stat-place {
+    .loc-facts {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-top: 56px;
+    }
+    .loc-fact {
+      padding: 32px 32px 32px 0;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .loc-fact:not(:first-child) { padding-left: 32px; }
+    .loc-fact:last-child { border-right: none; padding-right: 0; }
+    .loc-fact-num {
+      font-family: var(--serif);
+      font-size: 40px;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1;
+    }
+    .loc-fact-num sup {
+      font-family: var(--mono);
+      font-size: 14px;
+      font-style: normal;
+      vertical-align: super;
+      letter-spacing: 0.06em;
+    }
+    .loc-fact-label {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.4;
+    }
+    .loc-fact-place {
       font-family: var(--mono);
       font-size: 10px;
       font-weight: 500;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--green);
-      margin-top: 2px;
     }
 
     .location-map {
@@ -2036,83 +2072,9 @@
               <div class="ps-val" style="color:var(--green)">100 000 $</div>
             </div>
           </div>
-          <a href="houses.html" class="btn-green" style="display:inline-block;text-decoration:none">Обрати будинок</a>
         </div>
       </div>
     </div>
-
-    <div class="plan-cards">
-
-      <div class="plan-card">
-        <div class="plan-card-top">
-          <img src="images/plan-a.jpg" alt="Планування А" />
-        </div>
-        <div class="plan-card-body">
-          <div class="plan-name">Таунхаус А</div>
-          <div class="plan-specs">
-            <div>
-              <div class="ps-label">Площа</div>
-              <div class="ps-val">82 м²</div>
-            </div>
-            <div>
-              <div class="ps-label">Кімнати</div>
-              <div class="ps-val">2</div>
-            </div>
-            <div>
-              <div class="ps-label">Поверхи</div>
-              <div class="ps-val">2</div>
-            </div>
-            <div>
-              <div class="ps-label">Балкон</div>
-              <div class="ps-val">Є</div>
-            </div>
-          </div>
-          <div class="plan-price">100 000 $</div>
-          <a href="houses.html" class="s-link" style="margin-top:0">
-            Обрати таунхаус
-            <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
-              <path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-
-      <div class="plan-card">
-        <div class="plan-card-top">
-          <img src="images/plan-b.jpg" alt="Планування Б" />
-        </div>
-        <div class="plan-card-body">
-          <div class="plan-name">Таунхаус Б</div>
-          <div class="plan-specs">
-            <div>
-              <div class="ps-label">Площа</div>
-              <div class="ps-val">82 м²</div>
-            </div>
-            <div>
-              <div class="ps-label">Кімнати</div>
-              <div class="ps-val">2</div>
-            </div>
-            <div>
-              <div class="ps-label">Поверхи</div>
-              <div class="ps-val">2</div>
-            </div>
-            <div>
-              <div class="ps-label">Балкон</div>
-              <div class="ps-val">Є</div>
-            </div>
-          </div>
-          <div class="plan-price">100 000 $</div>
-          <a href="houses.html" class="s-link" style="margin-top:0">
-            Обрати таунхаус
-            <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
-              <path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-
-    </div>
-    <p style="margin-top:24px; font-size:13px; color:var(--text-light);">* Площі та планування уточнюйте у менеджера. Ціни актуальні на дату звернення.</p>
   </div>
 </section>
 
@@ -2131,8 +2093,11 @@
           вул. Виноградна, 33-35<br />
           с. Лісники, Київська обл., 08172
         </p>
-        <a href="#contact" class="btn-green" style="display:inline-block;text-decoration:none">
+        <a href="#contact" class="s-link" style="margin-top:8px">
           Приїдьте подивитись — записатись
+          <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
+            <path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
         </a>
       </div>
 
@@ -2145,26 +2110,26 @@
       </div>
     </div>
 
-    <div class="stats-row" style="margin-top:64px">
-      <div class="stat">
-        <span class="stat-n">15<sup>хв</sup></span>
-        <span class="stat-l">до метро</span>
-        <span class="stat-place">Видубичі</span>
+    <div class="loc-facts">
+      <div class="loc-fact">
+        <span class="loc-fact-num">15<sup>хв</sup></span>
+        <span class="loc-fact-label">до метро</span>
+        <span class="loc-fact-place">Видубичі</span>
       </div>
-      <div class="stat">
-        <span class="stat-n">25<sup>хв</sup></span>
-        <span class="stat-l">до</span>
-        <span class="stat-place">центру Києва</span>
+      <div class="loc-fact">
+        <span class="loc-fact-num">25<sup>хв</sup></span>
+        <span class="loc-fact-label">до</span>
+        <span class="loc-fact-place">центру Києва</span>
       </div>
-      <div class="stat">
-        <span class="stat-n">5<sup>хв</sup></span>
-        <span class="stat-l">до</span>
-        <span class="stat-place">Чернечого лісу</span>
+      <div class="loc-fact">
+        <span class="loc-fact-num">5<sup>хв</sup></span>
+        <span class="loc-fact-label">до</span>
+        <span class="loc-fact-place">Чернечого лісу</span>
       </div>
-      <div class="stat">
-        <span class="stat-n">5<sup>хв</sup></span>
-        <span class="stat-l">до</span>
-        <span class="stat-place">супермаркету</span>
+      <div class="loc-fact">
+        <span class="loc-fact-num">5<sup>хв</sup></span>
+        <span class="loc-fact-label">до</span>
+        <span class="loc-fact-place">супермаркету</span>
       </div>
     </div>
   </div>
