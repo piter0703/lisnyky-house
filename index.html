@@ -1448,16 +1448,24 @@
       .gal-item { height: 280px; }
 
       /* Plans */
-      .plans-intro { grid-template-columns: 1fr; gap: 32px; margin-bottom: 48px; }
+      .plans-intro { grid-template-columns: 1fr; gap: 32px; margin-bottom: 0; }
       .plan-card-top { height: auto; aspect-ratio: 4/3; }
       .plan-card-body { padding: 24px 20px 28px; }
 
       /* Location */
       .location-grid { grid-template-columns: 1fr; gap: 40px; }
+      .loc-facts { grid-template-columns: 1fr 1fr; }
+      .loc-fact:nth-child(2) { border-right: none; padding-right: 0; }
+      .loc-fact:nth-child(3) { padding-left: 0; border-top: 1px solid var(--border); }
+      .loc-fact:nth-child(4) { border-top: 1px solid var(--border); }
 
       /* Contact */
       .messengers { flex-wrap: wrap; gap: 10px; }
       .m-btn { padding: 11px 18px; font-size: 10px; }
+
+      /* Text spacing reset on small screens */
+      .manifesto-right .s-text { margin-top: 0; }
+      .contact-left .s-text { margin-top: 0; }
 
       /* Footer */
       .footer-top { grid-template-columns: 1fr; }
