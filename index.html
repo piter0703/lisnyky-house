@@ -1131,7 +1131,6 @@
       grid-template-columns: 1fr 1.4fr;
       gap: 80px;
       align-items: start;
-      margin-top: 48px;
     }
 
     .loc-address {
@@ -1162,32 +1161,26 @@
     .loc-fact:last-child { border-right: none; padding-right: 0; }
     .loc-fact-num {
       font-family: var(--serif);
-      font-size: 40px;
-      font-style: italic;
+      font-size: 36px;
+      font-style: normal;
       font-weight: 400;
       color: var(--text);
       line-height: 1;
+      letter-spacing: -0.01em;
     }
     .loc-fact-num sup {
       font-family: var(--mono);
-      font-size: 14px;
-      font-style: normal;
+      font-size: 12px;
       vertical-align: super;
       letter-spacing: 0.06em;
     }
-    .loc-fact-label {
-      font-size: 13px;
-      font-weight: 300;
-      color: var(--text-mid);
-      line-height: 1.4;
-    }
-    .loc-fact-place {
+    .loc-fact-desc {
       font-family: var(--mono);
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
+      font-size: 11px;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--green);
+      color: var(--text-mid);
+      margin-top: 2px;
     }
 
     .location-map {
@@ -2084,16 +2077,16 @@
 ═════════════════════════════════════════════ -->
 <section class="section s-location" id="location">
   <div class="section-inner">
-    <div class="s-label">07 — Локація</div>
-    <h2 class="s-title">Між природою<br /><em>і містом</em></h2>
 
     <div class="location-grid">
       <div>
+        <div class="s-label">07 — Локація</div>
+        <h2 class="s-title">Між природою<br /><em>і містом</em></h2>
         <p class="loc-address">
           вул. Виноградна, 33-35<br />
           с. Лісники, Київська обл., 08172
         </p>
-        <a href="#contact" class="s-link" style="margin-top:8px">
+        <a href="#contact" class="s-link">
           Приїдьте подивитись — записатись
           <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
             <path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
@@ -2113,23 +2106,19 @@
     <div class="loc-facts">
       <div class="loc-fact">
         <span class="loc-fact-num">15<sup>хв</sup></span>
-        <span class="loc-fact-label">до метро</span>
-        <span class="loc-fact-place">Видубичі</span>
+        <span class="loc-fact-desc">до метро Видубичі</span>
       </div>
       <div class="loc-fact">
         <span class="loc-fact-num">25<sup>хв</sup></span>
-        <span class="loc-fact-label">до</span>
-        <span class="loc-fact-place">центру Києва</span>
+        <span class="loc-fact-desc">до центру Києва</span>
       </div>
       <div class="loc-fact">
         <span class="loc-fact-num">5<sup>хв</sup></span>
-        <span class="loc-fact-label">до</span>
-        <span class="loc-fact-place">Чернечого лісу</span>
+        <span class="loc-fact-desc">до Чернечого лісу</span>
       </div>
       <div class="loc-fact">
         <span class="loc-fact-num">5<sup>хв</sup></span>
-        <span class="loc-fact-label">до</span>
-        <span class="loc-fact-place">супермаркету</span>
+        <span class="loc-fact-desc">до супермаркету</span>
       </div>
     </div>
   </div>
