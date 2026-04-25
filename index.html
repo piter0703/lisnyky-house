@@ -7,8 +7,8 @@
   <meta name="description" content="Готові таунхауси у с. Лісники поряд з Чернечим лісом та озером Шапарня. 15 хвилин до метро Видубичі. Розумний дім, охоронювана територія." />
 
   <!-- Preload першого hero слайду — прискорює LCP -->
-  <link rel="preload" as="image" href="images/hero-night.jpg" media="(min-width: 769px)" />
-  <link rel="preload" as="image" href="images/hero-night.jpg" media="(max-width: 768px)" />
+  <link rel="preload" as="image" href="images/avif/hero1.avif" type="image/avif" media="(min-width: 769px)" />
+  <link rel="preload" as="image" href="images/avif/heromob1.avif" type="image/avif" media="(max-width: 768px)" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,13 +16,13 @@
 
   <style>
     /* ─── HERO SLIDES: зображення ──────────── */
-    .slide-1 { background-image: url('images/hero-night.jpg'); }
-    .slide-2 { background-image: url('images/hero-night2.jpg'); }
-    .slide-3 { background-image: url('images/10.jpg'); }
+    .slide-1 { background-image: url('images/avif/hero1.avif'); }
+    .slide-2 { background-image: url('images/avif/hero2.avif'); }
+    .slide-3 { background-image: url('images/avif/hero3.avif'); }
     @media (max-width: 768px) {
-      .slide-1 { background-image: url('images/hero-night.jpg'); }
-      .slide-2 { background-image: url('images/hero-night2.jpg'); }
-      .slide-3 { background-image: url('images/hero-slide3-m.jpg'); }
+      .slide-1 { background-image: url('images/avif/heromob1.avif'); }
+      .slide-2 { background-image: url('images/avif/heromob2.avif'); }
+      .slide-3 { background-image: url('images/avif/heromob3.avif'); }
     }
 
     /* ─── RESET ─────────────────────────────── */
@@ -1785,10 +1785,14 @@
 <section class="section s-split">
   <div class="split-grid">
     <div class="split-img">
-      <img src="images/render-bikes.jpg"
-           alt="Lisnyky House — активне життя в комплексі"
-           loading="lazy"
-           style="object-position: center center;" />
+      <picture>
+        <source media="(max-width: 768px)" srcset="images/avif/моб1.avif" type="image/avif">
+        <source srcset="images/avif/блок2.avif" type="image/avif">
+        <img src="images/render-bikes.jpg"
+             alt="Lisnyky House — активне життя в комплексі"
+             loading="lazy"
+             style="object-position: center center;" />
+      </picture>
     </div>
     <div class="split-text">
       <div class="s-label">02 — Природа</div>
@@ -1828,10 +1832,14 @@
       </a>
     </div>
     <div class="split-img">
-      <img src="images/render-fence.jpg"
-           alt="Lisnyky House — закрита охоронювана територія"
-           loading="lazy"
-           style="object-position: center center;" />
+      <picture>
+        <source media="(max-width: 768px)" srcset="images/avif/моб2.avif" type="image/avif">
+        <source srcset="images/avif/блок2-2.avif" type="image/avif">
+        <img src="images/render-fence.jpg"
+             alt="Lisnyky House — закрита охоронювана територія"
+             loading="lazy"
+             style="object-position: center center;" />
+      </picture>
     </div>
   </div>
 </section>
@@ -1897,13 +1905,20 @@
   <div class="gallery-full">
 
     <div class="gal-item" style="grid-row: span 2;">
-      <img src="images/render-family.jpg" alt="Lisnyky House — комплекс з сім'єю"
-           loading="lazy" style="object-position: 30% center;" />
+      <picture>
+        <source media="(max-width: 768px)" srcset="images/avif/моб3.avif" type="image/avif">
+        <source srcset="images/avif/блок4.avif" type="image/avif">
+        <img src="images/render-family.jpg" alt="Lisnyky House — комплекс з сім'єю"
+             loading="lazy" style="object-position: 30% center;" />
+      </picture>
     </div>
 
     <div class="gal-item">
-      <img src="images/5.jpg" alt="Lisnyky House — фасад"
-           loading="lazy" style="object-position: center 20%;" />
+      <picture>
+        <source srcset="images/avif/перед.avif" type="image/avif">
+        <img src="images/5.jpg" alt="Lisnyky House — фасад"
+             loading="lazy" style="object-position: center 20%;" />
+      </picture>
     </div>
 
     <div class="gal-item">
@@ -1917,8 +1932,11 @@
     </div>
 
     <div class="gal-item">
-      <img src="images/13.jpg" alt="Lisnyky House — територія"
-           loading="lazy" style="object-position: center center;" />
+      <picture>
+        <source srcset="images/avif/3.avif" type="image/avif">
+        <img src="images/13.jpg" alt="Lisnyky House — територія"
+             loading="lazy" style="object-position: center center;" />
+      </picture>
     </div>
 
   </div>
@@ -1938,13 +1956,23 @@
   </div>
   <div class="interior-grid">
     <div class="int-item int-item--large">
-      <img src="images/p2/19.jpg" alt="Lisnyky House — вітальня з терасою" loading="lazy" />
+      <picture>
+        <source media="(max-width: 768px)" srcset="images/avif/моб5.avif" type="image/avif">
+        <source srcset="images/avif/блок5.avif" type="image/avif">
+        <img src="images/p2/19.jpg" alt="Lisnyky House — вітальня з терасою" loading="lazy" />
+      </picture>
     </div>
     <div class="int-item">
-      <img src="images/p2/27.jpg" alt="Lisnyky House — спальня з видом на ліс" loading="lazy" />
+      <picture>
+        <source srcset="images/avif/блок5-2.avif" type="image/avif">
+        <img src="images/p2/27.jpg" alt="Lisnyky House — спальня з видом на ліс" loading="lazy" />
+      </picture>
     </div>
     <div class="int-item">
-      <img src="images/p2/23.jpg" alt="Lisnyky House — ванна кімната" loading="lazy" />
+      <picture>
+        <source srcset="images/avif/блок5-3.avif" type="image/avif">
+        <img src="images/p2/23.jpg" alt="Lisnyky House — ванна кімната" loading="lazy" />
+      </picture>
     </div>
   </div>
   <div class="section-inner interior-cta">
@@ -1975,7 +2003,11 @@
       </div>
       <div class="plan-preview-card">
         <div class="plan-preview-card-img">
-          <img src="images/plan-a.jpg" alt="Планування таунхаусу Lisnyky House" />
+          <picture>
+            <source media="(max-width: 768px)" srcset="images/avif/блок6моб.avif" type="image/avif">
+            <source srcset="images/avif/блок6.avif" type="image/avif">
+            <img src="images/plan-a.jpg" alt="Планування таунхаусу Lisnyky House" />
+          </picture>
         </div>
         <div class="plan-preview-card-body">
           <div class="plan-preview-specs">
