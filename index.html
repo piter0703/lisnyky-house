@@ -895,16 +895,25 @@
 
     .gallery-full {
       display: grid;
-      grid-template-columns: 5fr 3fr 3fr;
-      height: 520px;
+      grid-template-columns: 1.5fr 1fr;
       gap: 3px;
     }
+
+    .gal-right {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3px;
+    }
+
+    .gal-right .gal-item { aspect-ratio: 1; }
 
     .gal-item {
       overflow: hidden;
       position: relative;
       background: var(--off);
     }
+
+    .gal-item picture { display: block; height: 100%; }
 
     .gal-item img {
       width: 100%;
@@ -1389,8 +1398,7 @@
       .split-img { min-height: 340px; }
       .split-text { padding: 48px 24px; }
       .adv-list { grid-template-columns: 1fr 1fr; gap: 36px 48px; }
-      .gallery-full { grid-template-columns: 1fr 1fr; height: auto; }
-      .gal-item { height: 240px; }
+      .gal-large { height: 300px; }
       .interior-grid { grid-template-columns: 1fr; grid-template-rows: auto; margin-top: 40px; }
       .int-item { height: 300px; }
       .int-item--large { grid-row: span 1; }
@@ -1439,9 +1447,7 @@
 
       /* Gallery */
       .gallery-full { grid-template-columns: 1fr; }
-      .gal-item { height: 280px; }
-      /* cancel row-span in single-column layout, make hero photo taller */
-      .gallery-full .gal-item:first-child { grid-row: span 1; height: 340px; }
+      .gal-large { height: 280px; }
 
       /* Plans */
       .plans-intro { grid-template-columns: 1fr; gap: 32px; margin-bottom: 0; }
@@ -1884,7 +1890,7 @@
 <section class="s-gallery">
   <div class="gallery-full">
 
-    <div class="gal-item" style="grid-row: span 2;">
+    <div class="gal-item gal-large">
       <picture>
         <source srcset="images/avif/блок4.avif" type="image/avif">
         <img src="images/render-family.jpg" alt="Lisnyky House — комплекс з сім'єю"
@@ -1892,30 +1898,19 @@
       </picture>
     </div>
 
-    <div class="gal-item">
-      <picture>
-        <source srcset="images/avif/перед.avif" type="image/avif">
-        <img src="images/5.jpg" alt="Lisnyky House — фасад"
-             loading="lazy" style="object-position: center 20%;" />
-      </picture>
-    </div>
-
-    <div class="gal-item">
-      <img src="images/9.jpg" alt="Lisnyky House — вхід"
-           loading="lazy" style="object-position: 35% center;" />
-    </div>
-
-    <div class="gal-item">
-      <img src="images/8.jpg" alt="Lisnyky House — деталь входу"
-           loading="lazy" style="object-position: 30% center;" />
-    </div>
-
-    <div class="gal-item">
-      <picture>
-        <source srcset="images/avif/3.avif" type="image/avif">
-        <img src="images/13.jpg" alt="Lisnyky House — територія"
-             loading="lazy" style="object-position: center center;" />
-      </picture>
+    <div class="gal-right">
+      <div class="gal-item">
+        <img src="images/avif/блок4-2.avif" alt="Lisnyky House — фасад при заході сонця" loading="lazy" />
+      </div>
+      <div class="gal-item">
+        <img src="images/avif/блок4-3.avif" alt="Lisnyky House — деталь фасаду" loading="lazy" />
+      </div>
+      <div class="gal-item">
+        <img src="images/avif/блок4-4.avif" alt="Lisnyky House — вхідна зона" loading="lazy" />
+      </div>
+      <div class="gal-item">
+        <img src="images/avif/блок4-5.avif" alt="Lisnyky House — вечірній вид" loading="lazy" />
+      </div>
     </div>
 
   </div>
