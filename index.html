@@ -967,18 +967,13 @@
 
     .plans-image-cell {
       aspect-ratio: 1;
-      background: var(--white);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px;
       overflow: hidden;
     }
-    .plans-image-cell picture { display: block; width: 100%; }
+    .plans-image-cell picture { display: block; width: 100%; height: 100%; }
     .plans-image-cell img {
       width: 100%;
-      height: auto;
-      object-fit: contain;
+      height: 100%;
+      object-fit: cover;
       display: block;
     }
 
@@ -1381,7 +1376,7 @@
       /* Plans */
       .plans-showcase { grid-template-columns: 1fr; gap: 48px; }
       .plans-left { max-width: 100%; }
-      .plans-image-cell { aspect-ratio: 1; padding: 32px; }
+      .plans-image-cell { aspect-ratio: 1; }
 
       /* Location */
       .location-grid { grid-template-columns: 1fr; gap: 40px; }
