@@ -927,47 +927,22 @@
     /* ─── SECTION: PLANS ─────────────────────── */
     .s-plans { background: var(--off); }
 
-    .plans-header { margin-bottom: 56px; }
-    .plans-header .s-text { max-width: 480px; }
-
     .plans-showcase {
       display: grid;
-      grid-template-columns: 1.15fr 1fr;
-      gap: 3px;
-      align-items: stretch;
-    }
-
-    .plans-image-cell {
-      background: var(--white);
-      display: flex;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
       align-items: center;
-      justify-content: center;
-      padding: 52px;
-      min-height: 380px;
-    }
-    .plans-image-cell picture { display: block; width: 100%; }
-    .plans-image-cell img {
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-      display: block;
     }
 
-    .plans-data-cell {
-      background: var(--white);
-      padding: 52px 56px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
+    .plans-left { max-width: 520px; }
 
-    .plans-spec-list { width: 100%; }
+    .plans-specs { margin-top: 40px; }
 
     .plans-spec-row {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      padding: 20px 0;
+      padding: 16px 0;
       border-top: 1px solid var(--border);
     }
     .plans-spec-row:last-child { border-bottom: 1px solid var(--border); }
@@ -989,6 +964,23 @@
       letter-spacing: -0.01em;
     }
     .plans-spec-val--green { color: var(--green); }
+
+    .plans-image-cell {
+      aspect-ratio: 1;
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      overflow: hidden;
+    }
+    .plans-image-cell picture { display: block; width: 100%; }
+    .plans-image-cell img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
 
 
     /* ─── SECTION: LOCATION ──────────────────── */
@@ -1387,10 +1379,9 @@
       .gal-large { height: 280px; }
 
       /* Plans */
-      .plans-header { margin-bottom: 40px; }
-      .plans-showcase { grid-template-columns: 1fr; }
-      .plans-image-cell { padding: 32px; min-height: 260px; }
-      .plans-data-cell { padding: 36px 32px; }
+      .plans-showcase { grid-template-columns: 1fr; gap: 48px; }
+      .plans-left { max-width: 100%; }
+      .plans-image-cell { aspect-ratio: 1; padding: 32px; }
 
       /* Location */
       .location-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -1900,25 +1891,14 @@
 ═════════════════════════════════════════════ -->
 <section class="section s-plans" id="plans">
   <div class="section-inner">
-
-    <div class="plans-header">
-      <div class="s-label">06 — Колекція будинків</div>
-      <h2 class="s-title">Оберіть свій<br /><em>будинок</em></h2>
-      <p class="s-text">Два поверхи, балкон, власне подвір'я і паркінг. Обидві секції введено в&nbsp;експлуатацію.</p>
-    </div>
-
     <div class="plans-showcase">
 
-      <div class="plans-image-cell">
-        <picture>
-          <source media="(max-width: 768px)" srcset="images/avif/блок6моб.avif" type="image/avif">
-          <source srcset="images/avif/блок6.avif" type="image/avif">
-          <img src="images/plan-a.jpg" alt="Планування таунхаусу Lisnyky House" />
-        </picture>
-      </div>
+      <div class="plans-left">
+        <div class="s-label">06 — Колекція будинків</div>
+        <h2 class="s-title">Оберіть свій<br /><em>будинок</em></h2>
+        <p class="s-text">Два поверхи, балкон, власне подвір'я і паркінг. Обидві секції введено в&nbsp;експлуатацію.</p>
 
-      <div class="plans-data-cell">
-        <div class="plans-spec-list">
+        <div class="plans-specs">
           <div class="plans-spec-row">
             <span class="plans-spec-lbl">Загальна площа</span>
             <span class="plans-spec-val">82 м²</span>
@@ -1928,29 +1908,28 @@
             <span class="plans-spec-val">2 + балкон</span>
           </div>
           <div class="plans-spec-row">
-            <span class="plans-spec-lbl">Ділянка — тип А</span>
-            <span class="plans-spec-val">245 м²</span>
-          </div>
-          <div class="plans-spec-row">
-            <span class="plans-spec-lbl">Ділянка — тип Б</span>
-            <span class="plans-spec-val">116 м²</span>
-          </div>
-          <div class="plans-spec-row">
             <span class="plans-spec-lbl">Ціна</span>
             <span class="plans-spec-val plans-spec-val--green">100 000 $</span>
           </div>
         </div>
+
+        <a href="houses.html" class="s-link">
+          Переглянути всі будинки
+          <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
+            <path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="plans-image-cell">
+        <picture>
+          <source media="(max-width: 768px)" srcset="images/avif/блок6моб.avif" type="image/avif">
+          <source srcset="images/avif/блок6.avif" type="image/avif">
+          <img src="images/plan-a.jpg" alt="Планування таунхаусу Lisnyky House" />
+        </picture>
       </div>
 
     </div>
-
-    <a href="houses.html" class="s-link">
-      Переглянути всі будинки
-      <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
-        <path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-      </svg>
-    </a>
-
   </div>
 </section>
 
