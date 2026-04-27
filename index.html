@@ -927,131 +927,68 @@
     /* ─── SECTION: PLANS ─────────────────────── */
     .s-plans { background: var(--off); }
 
-    .plans-intro {
+    .plans-header { margin-bottom: 56px; }
+    .plans-header .s-text { max-width: 480px; }
+
+    .plans-showcase {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: start;
-    }
-    @media (max-width: 768px) {
-      .plans-intro { grid-template-columns: 1fr; gap: 40px; }
+      grid-template-columns: 1.15fr 1fr;
+      gap: 3px;
+      align-items: stretch;
     }
 
-    .plan-preview-card {
-      border: 1px solid var(--border);
-      background: var(--off);
-      overflow: hidden;
-      border-radius: 2px;
-    }
-    .plan-preview-card-img {
-      height: 260px;
-      border-bottom: 1px solid var(--border);
-      background: var(--off);
+    .plans-image-cell {
+      background: var(--white);
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
+      padding: 52px;
+      min-height: 380px;
     }
-    .plan-preview-card-img img {
+    .plans-image-cell picture { display: block; width: 100%; }
+    .plans-image-cell img {
       width: 100%;
-      height: 100%;
+      height: auto;
       object-fit: contain;
-      padding: 20px;
+      display: block;
     }
-    .plan-preview-card-body {
-      padding: 28px 32px 32px;
+
+    .plans-data-cell {
+      background: var(--white);
+      padding: 52px 56px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
-    }
-    .plan-preview-specs {
-      display: flex;
-      gap: 32px;
-    }
-
-    .plan-cards {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3px;
-    }
-
-    .plan-card {
-      background: var(--off);
-      border: 1px solid var(--border);
-      overflow: hidden;
-    }
-
-    .plan-card-top {
-      height: 280px;
-      border-bottom: 1px solid var(--border);
-      position: relative;
-      overflow: hidden;
-      background: var(--off);
-      display: flex;
-      align-items: center;
       justify-content: center;
     }
 
-    .plan-card-top::after { content: none; }
+    .plans-spec-list { width: 100%; }
 
-    .plan-card-top img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      object-position: center;
-      padding: 20px;
-      transition: transform 0.6s ease;
-      position: relative;
-      z-index: 1;
+    .plans-spec-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 20px 0;
+      border-top: 1px solid var(--border);
     }
+    .plans-spec-row:last-child { border-bottom: 1px solid var(--border); }
 
-    .plan-card:hover .plan-card-top img { transform: scale(1.04); }
-
-    .plan-card-body { padding: 36px 40px 40px; }
-
-    .plan-name {
-      font-family: var(--serif);
-      font-size: 30px;
-      font-style: italic;
-      color: var(--text);
-      margin-bottom: 24px;
-    }
-
-    .plan-specs {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px 32px;
-      margin-bottom: 32px;
-      padding-bottom: 28px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .ps-label {
+    .plans-spec-lbl {
       font-family: var(--mono);
       font-size: 10px;
       font-weight: 400;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--text-light);
-      margin-bottom: 4px;
     }
 
-    .ps-val {
-      font-size: 18px;
-      font-weight: 500;
-      color: var(--text);
-    }
-
-    .plan-price {
+    .plans-spec-val {
       font-family: var(--serif);
-      font-size: 22px;
-      font-style: italic;
-      color: var(--green);
-      margin-bottom: 20px;
-      display: block;
-      transition: opacity 0.2s;
+      font-size: clamp(20px, 2vw, 28px);
+      font-weight: 400;
+      color: var(--text);
+      letter-spacing: -0.01em;
     }
-    .plan-price:hover { opacity: 0.7; }
+    .plans-spec-val--green { color: var(--green); }
 
 
     /* ─── SECTION: LOCATION ──────────────────── */
@@ -1450,9 +1387,10 @@
       .gal-large { height: 280px; }
 
       /* Plans */
-      .plans-intro { grid-template-columns: 1fr; gap: 32px; margin-bottom: 0; }
-      .plan-card-top { height: auto; aspect-ratio: 4/3; }
-      .plan-card-body { padding: 24px 20px 28px; }
+      .plans-header { margin-bottom: 40px; }
+      .plans-showcase { grid-template-columns: 1fr; }
+      .plans-image-cell { padding: 32px; min-height: 260px; }
+      .plans-data-cell { padding: 36px 32px; }
 
       /* Location */
       .location-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -1962,44 +1900,57 @@
 ═════════════════════════════════════════════ -->
 <section class="section s-plans" id="plans">
   <div class="section-inner">
-    <div class="plans-intro">
-      <div class="plans-intro-text">
-        <div class="s-label">06 — Колекція будинків</div>
-        <h2 class="s-title">Оберіть свій<br /><em>будинок</em></h2>
-        <p class="s-text">Кожен будинок — два поверхи, балкон, власне подвір'я і паркінг.</p>
-        <a href="houses.html" class="s-link">
-          Переглянути всі будинки
-          <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
-            <path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-          </svg>
-        </a>
+
+    <div class="plans-header">
+      <div class="s-label">06 — Колекція будинків</div>
+      <h2 class="s-title">Оберіть свій<br /><em>будинок</em></h2>
+      <p class="s-text">Два поверхи, балкон, власне подвір'я і паркінг. Обидві секції введено в&nbsp;експлуатацію.</p>
+    </div>
+
+    <div class="plans-showcase">
+
+      <div class="plans-image-cell">
+        <picture>
+          <source media="(max-width: 768px)" srcset="images/avif/блок6моб.avif" type="image/avif">
+          <source srcset="images/avif/блок6.avif" type="image/avif">
+          <img src="images/plan-a.jpg" alt="Планування таунхаусу Lisnyky House" />
+        </picture>
       </div>
-      <div class="plan-preview-card">
-        <div class="plan-preview-card-img">
-          <picture>
-            <source media="(max-width: 768px)" srcset="images/avif/блок6моб.avif" type="image/avif">
-            <source srcset="images/avif/блок6.avif" type="image/avif">
-            <img src="images/plan-a.jpg" alt="Планування таунхаусу Lisnyky House" />
-          </picture>
-        </div>
-        <div class="plan-preview-card-body">
-          <div class="plan-preview-specs">
-            <div>
-              <div class="ps-label">Площа</div>
-              <div class="ps-val">82 м²</div>
-            </div>
-            <div>
-              <div class="ps-label">Поверхи</div>
-              <div class="ps-val">2</div>
-            </div>
-            <div>
-              <div class="ps-label">Ціна</div>
-              <div class="ps-val" style="color:var(--green)">100 000 $</div>
-            </div>
+
+      <div class="plans-data-cell">
+        <div class="plans-spec-list">
+          <div class="plans-spec-row">
+            <span class="plans-spec-lbl">Загальна площа</span>
+            <span class="plans-spec-val">82 м²</span>
+          </div>
+          <div class="plans-spec-row">
+            <span class="plans-spec-lbl">Поверхи</span>
+            <span class="plans-spec-val">2 + балкон</span>
+          </div>
+          <div class="plans-spec-row">
+            <span class="plans-spec-lbl">Ділянка — тип А</span>
+            <span class="plans-spec-val">245 м²</span>
+          </div>
+          <div class="plans-spec-row">
+            <span class="plans-spec-lbl">Ділянка — тип Б</span>
+            <span class="plans-spec-val">116 м²</span>
+          </div>
+          <div class="plans-spec-row">
+            <span class="plans-spec-lbl">Ціна</span>
+            <span class="plans-spec-val plans-spec-val--green">100 000 $</span>
           </div>
         </div>
       </div>
+
     </div>
+
+    <a href="houses.html" class="s-link">
+      Переглянути всі будинки
+      <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
+        <path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+    </a>
+
   </div>
 </section>
 
