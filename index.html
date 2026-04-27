@@ -1419,8 +1419,8 @@
       .hero-nav { padding: 14px 16px; left: 0; }
       .hero-nav-phone { display: none; }
       .hero-nav .btn-green { display: none; }
-      /* badge moves to bottom-left — clears float-phone at bottom-right */
-      .hero-badge { bottom: 24px; right: auto; left: 20px; font-size: 9px; padding: 6px 11px; }
+      /* badge: top-right, below hero-nav */
+      .hero-badge { bottom: auto; top: 68px; right: 16px; left: auto; font-size: 9px; padding: 6px 11px; }
       .slide-texts { padding: 0 20px 72px 20px; left: 0; }
       .hero h1 { font-size: clamp(38px, 9vw, 56px); }
       .hero-desc { font-size: 15px; margin-bottom: 24px; }
@@ -1662,8 +1662,8 @@
       <div class="slide-num">01 <span>/ 03</span></div>
       <h1>Жити поряд<br/><em>з природою</em></h1>
       <p class="hero-desc">Чернечий ліс, озеро і тиша — 15 хвилин від метро</p>
-      <a href="#about" class="hero-cta">
-        Дізнатись більше
+      <a href="#contact" class="hero-cta">
+        Записатись на перегляд
         <svg width="20" height="10" viewBox="0 0 20 10" fill="none"><path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
       </a>
     </div>
@@ -1673,8 +1673,8 @@
       <div class="slide-num">02 <span>/ 03</span></div>
       <h1>Більше<br/><em>простору</em></h1>
       <p class="hero-desc">Власний двір, тераса і місце де діти ростуть вільно</p>
-      <a href="#advantages" class="hero-cta">
-        Переваги комплексу
+      <a href="#contact" class="hero-cta">
+        Записатись на перегляд
         <svg width="20" height="10" viewBox="0 0 20 10" fill="none"><path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
       </a>
     </div>
@@ -1684,24 +1684,14 @@
       <div class="slide-num">03 <span>/ 03</span></div>
       <h1>Розумний дім.<br/><em>Готовий до заселення</em></h1>
       <p class="hero-desc">Цілодобова охорона, закрита територія, розумний дім</p>
-      <a href="houses.html" class="hero-cta">
-        Обрати будинок
+      <a href="#contact" class="hero-cta">
+        Записатись на перегляд
         <svg width="20" height="10" viewBox="0 0 20 10" fill="none"><path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
       </a>
     </div>
 
   </div>
 
-  <!-- Controls: вертикально по центру справа -->
-  <div class="carousel-controls">
-    <button class="carousel-arrow" id="cPrev">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 15l-6-6-6 6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-    <span id="cCounter" style="font-size:11px;font-weight:600;letter-spacing:0.2em;color:rgba(255,255,255,0.6);writing-mode:vertical-rl;">01</span>
-    <button class="carousel-arrow" id="cNext">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-  </div>
 
 
 </section>
@@ -2293,9 +2283,6 @@
   const slides      = document.querySelectorAll('.slide');
   const slideTexts  = document.querySelectorAll('.slide-texts');
   const timerBar    = document.getElementById('timerBar');
-  const cPrev       = document.getElementById('cPrev');
-  const cNext       = document.getElementById('cNext');
-  const cCounter    = document.getElementById('cCounter');
   let current = 0;
   let autoPlay;
 
@@ -2305,18 +2292,12 @@
     current = (n + slides.length) % slides.length;
     slides[current].classList.add('active');
     slideTexts[current].classList.add('active');
-    if (cCounter) cCounter.innerHTML = `${String(current+1).padStart(2,'0')} <span style="opacity:.4">/ 0${slides.length}</span>`;
-    // Restart timer animation
     timerBar.classList.remove('running');
-    void timerBar.offsetWidth; // reflow
+    void timerBar.offsetWidth;
     timerBar.classList.add('running');
-    // Restart autoplay
     clearInterval(autoPlay);
     autoPlay = setInterval(() => goTo(current + 1), 5000);
   }
-
-  cPrev && cPrev.addEventListener('click', () => goTo(current - 1));
-  cNext && cNext.addEventListener('click', () => goTo(current + 1));
 
   // Start
   goTo(0);
