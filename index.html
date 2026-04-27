@@ -77,10 +77,12 @@
       transition: background 0.35s, border-color 0.35s;
     }
 
-    /* After hero — minimal bar on light bg */
+    /* After hero — matches header style */
     .side-nav.scrolled {
-      background: transparent;
-      border-right-color: rgba(0,0,0,0.1);
+      background: rgba(246,245,242,0.97);
+      backdrop-filter: blur(12px);
+      border-right-color: rgba(0,0,0,0.08);
+      box-shadow: 2px 0 24px rgba(0,0,0,0.08);
     }
 
     .side-menu-label {
@@ -720,17 +722,7 @@
     /* ─── SECTION: MANIFESTO ─────────────────── */
     .s-concept { background: var(--off); }
 
-    .manifesto-left .s-title {
-      font-size: clamp(36px, 4vw, 66px);
-      line-height: 0.96;
-    }
-
-    .manifesto-left .s-text {
-      margin-top: 40px;
-      max-width: 56ch;
-    }
-
-    .contact-left .s-text { margin-top: 32px; }
+    .contact-left .s-text { margin-top: 0; }
 
     .manifesto-grid {
       display: grid;
@@ -863,7 +855,7 @@
     }
 
     /* ─── SECTION: INTERIOR ─────────────────── */
-    .s-interior { background: var(--off); padding-bottom: 0; }
+    .s-interior { background: var(--off); padding-bottom: 80px; }
 
     .interior-intro { margin-bottom: 120px; }
 
@@ -935,14 +927,14 @@
     }
 
     .plans-left {
-      padding: 80px 72px;
+      padding: 40px 72px 60px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       background: var(--off);
     }
 
-    .plans-specs { margin-top: 40px; }
+    .plans-specs { margin-top: 40px; max-width: 480px; }
 
     .plans-spec-row {
       display: flex;
@@ -974,6 +966,16 @@
     .plans-image-cell {
       overflow: hidden;
       min-height: 580px;
+      position: relative;
+    }
+    .plans-image-cell::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 220px;
+      background: linear-gradient(to top, rgba(0,0,0,0.62) 0%, transparent 100%);
+      z-index: 1;
+      pointer-events: none;
     }
     .plans-image-cell picture { display: block; width: 100%; height: 100%; }
     .plans-image-cell img {
@@ -984,6 +986,95 @@
       transition: transform 0.8s ease;
     }
     .plans-image-cell:hover img { transform: scale(1.03); }
+
+    .plans-img-badge {
+      position: absolute;
+      top: 20px; right: 20px;
+      z-index: 2;
+      background: var(--green);
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #fff;
+      padding: 8px 14px;
+    }
+
+    .plans-img-price {
+      position: absolute;
+      bottom: 28px; left: 32px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .plans-img-price-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+    }
+    .plans-img-price-val {
+      font-family: var(--serif);
+      font-size: clamp(38px, 3.5vw, 60px);
+      font-style: italic;
+      font-weight: 400;
+      color: #fff;
+      line-height: 1;
+    }
+
+    /* Room list */
+    .plans-rooms { margin-top: 32px; max-width: 480px; }
+    .plans-floor-lbl {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      padding: 18px 0 6px;
+      border-top: 1px solid var(--border);
+    }
+    .plans-floor-lbl:first-child { padding-top: 0; border-top: none; }
+    .plans-room-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .plans-room-name {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-mid);
+    }
+    .plans-room-area {
+      font-family: var(--serif);
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--text);
+    }
+    .plans-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 12px 0 0;
+    }
+    .plans-total-lbl {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+    .plans-total-val {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--text);
+    }
 
 
     /* ─── SECTION: LOCATION ──────────────────── */
@@ -1326,9 +1417,13 @@
       .section-inner { padding: 0 24px; }
       .s-split { padding: 0; }
       .s-gallery { padding: 0; }
+      .s-plans { padding: 0; }
       .s-split .split-grid { grid-template-columns: 1fr; }
       .split-img { min-height: 340px; }
       .split-text { padding: 48px 24px; }
+      .plans-showcase { grid-template-columns: 1fr; }
+      .plans-left { padding: 48px 24px; }
+      .plans-image-cell { min-height: 420px; }
       .adv-list { grid-template-columns: 1fr 1fr; gap: 36px 48px; }
       .gal-large { height: 300px; }
       .interior-grid { grid-template-columns: 1fr; grid-template-rows: auto; margin-top: 40px; }
@@ -1370,9 +1465,19 @@
       .carousel-controls { top: auto; bottom: 24px; right: 90px; transform: none; flex-direction: row; gap: 10px; }
       .carousel-arrow { width: 36px; height: 36px; }
 
-      /* Sections — зменшений відступ зверху */
-      .section { padding: 64px 0; }
+      /* Sections */
+      .section { padding: 48px 0; }
       .s-title { margin-bottom: 20px; }
+
+      /* Split sections — скидаємо section padding, щоб не подвоювати з split-text */
+      .s-split { padding: 0; }
+      .s-gallery { padding: 0; }
+
+      /* Split text tighter on mobile */
+      .split-text { padding: 36px 20px; }
+
+      /* Divider between sections (де немає фото-розділювача) */
+      .section + .section { border-top: 1px solid var(--border); }
 
       /* Advantages */
       .adv-list { grid-template-columns: 1fr; }
@@ -1381,11 +1486,9 @@
       .gallery-full { grid-template-columns: 1fr; }
       .gal-large { height: 280px; }
 
-      /* Plans */
-      .s-plans { padding: 0; }
-      .plans-showcase { grid-template-columns: 1fr; }
-      .plans-left { padding: 48px 24px; }
-      .plans-image-cell { min-height: 340px; }
+      /* Plans mobile */
+      .plans-image-cell { min-height: 300px; }
+      .plans-left { padding: 36px 20px; }
 
       /* Location */
       .location-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -1397,10 +1500,6 @@
       /* Contact */
       .messengers { flex-wrap: wrap; gap: 10px; }
       .m-btn { padding: 11px 18px; font-size: 10px; }
-
-      /* Text spacing reset on small screens */
-      .manifesto-left .s-text { margin-top: 0; }
-      .contact-left .s-text { margin-top: 0; }
 
       /* Footer */
       .footer-top { grid-template-columns: 1fr; }
@@ -1521,6 +1620,7 @@
     <a href="houses.html">Будинки</a>
     <a href="#plans">Планування</a>
     <a href="#location">Локація</a>
+    <a href="#faq">Питання</a>
     <a href="#contact">Контакти</a>
   </nav>
 
@@ -1535,8 +1635,10 @@
   <button class="m-close" id="mClose">&times;</button>
   <a href="#about">Про комплекс</a>
   <a href="#advantages">Переваги</a>
+  <a href="houses.html">Будинки</a>
   <a href="#plans">Планування</a>
   <a href="#location">Локація</a>
+  <a href="#faq">FAQ</a>
   <a href="#contact">Контакти</a>
 </div>
 
@@ -1899,20 +2001,44 @@
     <div class="plans-left">
       <div class="s-label">06 — Колекція будинків</div>
       <h2 class="s-title">Оберіть свій<br /><em>будинок</em></h2>
-      <p class="s-text">Два поверхи, балкон, власне подвір'я і паркінг. Обидві секції введено в&nbsp;експлуатацію.</p>
+      <p class="s-text">Власний дім з лісом за вікном — і більше нікого не потрібно чекати. Оберіть таунхаус і в'їжджайте того ж місяця.</p>
 
-      <div class="plans-specs">
-        <div class="plans-spec-row">
-          <span class="plans-spec-lbl">Загальна площа</span>
-          <span class="plans-spec-val">82 м²</span>
+      <div class="plans-rooms">
+        <div class="plans-floor-lbl">I поверх · висота 2.50 м</div>
+        <div class="plans-room-row">
+          <span class="plans-room-name">Коридор</span>
+          <span class="plans-room-area">5.9 м²</span>
         </div>
-        <div class="plans-spec-row">
-          <span class="plans-spec-lbl">Поверхи</span>
-          <span class="plans-spec-val">2 + балкон</span>
+        <div class="plans-room-row">
+          <span class="plans-room-name">Кухня-їдальня</span>
+          <span class="plans-room-area">29.3 м²</span>
         </div>
-        <div class="plans-spec-row">
-          <span class="plans-spec-lbl">Ціна</span>
-          <span class="plans-spec-val plans-spec-val--green">100 000 $</span>
+        <div class="plans-room-row">
+          <span class="plans-room-name">Санвузол</span>
+          <span class="plans-room-area">4.7 м²</span>
+        </div>
+
+        <div class="plans-floor-lbl">II поверх · висота 2.99 м</div>
+        <div class="plans-room-row">
+          <span class="plans-room-name">Спальня</span>
+          <span class="plans-room-area">19.5 м²</span>
+        </div>
+        <div class="plans-room-row">
+          <span class="plans-room-name">Спальня</span>
+          <span class="plans-room-area">10.9 м²</span>
+        </div>
+        <div class="plans-room-row">
+          <span class="plans-room-name">Коридор</span>
+          <span class="plans-room-area">4.4 м²</span>
+        </div>
+        <div class="plans-room-row">
+          <span class="plans-room-name">Санвузол</span>
+          <span class="plans-room-area">4.6 м²</span>
+        </div>
+
+        <div class="plans-total-row">
+          <span class="plans-total-lbl">Загальна площа</span>
+          <span class="plans-total-val">82 м²</span>
         </div>
       </div>
 
@@ -1930,6 +2056,11 @@
         <source srcset="images/avif/блок6.avif" type="image/avif">
         <img src="images/plan-a.jpg" alt="Планування таунхаусу Lisnyky House" />
       </picture>
+      <div class="plans-img-badge">Секції 1 і 2 введено в&nbsp;експлуатацію</div>
+      <div class="plans-img-price">
+        <span class="plans-img-price-label">Ціна таунхауса</span>
+        <span class="plans-img-price-val">100 000 $</span>
+      </div>
     </div>
 
   </div>
@@ -1946,6 +2077,7 @@
       <div>
         <div class="s-label">07 — Локація</div>
         <h2 class="s-title">Між природою<br /><em>і містом</em></h2>
+        <p class="s-text">15 хвилин від Києва по Обухівській трасі — і ви вже серед лісу. Правий берег Дніпра, Чернечий ліс і сільська тиша без відриву від міської інфраструктури.</p>
         <p class="loc-address">
           вул. Виноградна, 33-35<br />
           с. Лісники, Київська обл., 08172
