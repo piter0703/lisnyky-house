@@ -1418,8 +1418,10 @@
       /* Hero mobile */
       .hero-nav { padding: 14px 16px; left: 0; }
       .hero-nav-phone { display: none; }
-      .hero-badge { bottom: 24px; right: 20px; font-size: 9px; padding: 6px 11px; }
-      .slide-texts { padding: 0 20px 100px 20px; left: 0; }
+      .hero-nav .btn-green { display: none; }
+      /* badge moves to bottom-left — clears float-phone at bottom-right */
+      .hero-badge { bottom: 24px; right: auto; left: 20px; font-size: 9px; padding: 6px 11px; }
+      .slide-texts { padding: 0 20px 72px 20px; left: 0; }
       .hero h1 { font-size: clamp(38px, 9vw, 56px); }
       .hero-desc { font-size: 15px; margin-bottom: 24px; }
       .hero-cta { padding: 12px 22px; font-size: 11px; }
@@ -1432,7 +1434,8 @@
       .hero-timer { left: 0; }
 
       /* Carousel controls mobile */
-      .carousel-controls { top: auto; bottom: 20px; right: 16px; transform: none; flex-direction: row; gap: 10px; }
+      /* controls shift left to clear float-phone (56px + 24px margin = 80px from right) */
+      .carousel-controls { top: auto; bottom: 24px; right: 90px; transform: none; flex-direction: row; gap: 10px; }
       .carousel-arrow { width: 36px; height: 36px; }
 
       /* Sections — зменшений відступ зверху */
@@ -1445,6 +1448,8 @@
       /* Gallery */
       .gallery-full { grid-template-columns: 1fr; }
       .gal-item { height: 280px; }
+      /* cancel row-span in single-column layout, make hero photo taller */
+      .gallery-full .gal-item:first-child { grid-row: span 1; height: 340px; }
 
       /* Plans */
       .plans-intro { grid-template-columns: 1fr; gap: 32px; margin-bottom: 0; }
@@ -1750,7 +1755,7 @@
             <span class="manifesto-label">до метро Видубичі</span>
           </div>
           <div class="manifesto-stat">
-            <span class="manifesto-num">20<sup>хв</sup></span>
+            <span class="manifesto-num">25<sup>хв</sup></span>
             <span class="manifesto-label">до центру Києва</span>
           </div>
           <div class="manifesto-stat">
