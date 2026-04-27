@@ -720,12 +720,12 @@
     /* ─── SECTION: MANIFESTO ─────────────────── */
     .s-concept { background: var(--off); }
 
-    .manifesto-right .s-title {
+    .manifesto-left .s-title {
       font-size: clamp(36px, 4vw, 66px);
       line-height: 0.96;
     }
 
-    .manifesto-right .s-text {
+    .manifesto-left .s-text {
       margin-top: 40px;
       max-width: 56ch;
     }
@@ -734,15 +734,12 @@
 
     .manifesto-grid {
       display: grid;
-      grid-template-columns: 1fr 2fr;
-      grid-template-rows: auto 1fr auto;
+      grid-template-columns: 2fr 1fr;
       column-gap: 80px;
+      align-items: start;
     }
 
-    .manifesto-label-wrap { grid-column: 1; grid-row: 1; }
-    .manifesto-stats-wrap { grid-column: 1; grid-row: 2 / 4; align-self: start; margin-top: 48px; }
-    .manifesto-text-wrap  { grid-column: 2; grid-row: 1 / 3; }
-    .manifesto-cta-wrap   { grid-column: 2; grid-row: 3; padding-top: 40px; display: flex; flex-direction: column; }
+    .manifesto-stats-wrap { align-self: start; margin-top: 48px; }
 
     .manifesto-stats {
       display: grid;
@@ -787,15 +784,8 @@
     }
 
     @media (max-width: 900px) {
-      .manifesto-grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-        gap: 32px;
-      }
-      .manifesto-label-wrap { order: 1; grid-column: 1; grid-row: auto; }
-      .manifesto-text-wrap  { order: 2; grid-column: 1; grid-row: auto; }
-      .manifesto-stats-wrap { order: 3; grid-column: 1; grid-row: auto; margin-top: 0; }
-      .manifesto-cta-wrap   { order: 4; grid-column: 1; grid-row: auto; padding-top: 0; }
+      .manifesto-grid { grid-template-columns: 1fr; gap: 32px; }
+      .manifesto-stats-wrap { margin-top: 0; }
     }
 
     /* ─── SECTION: SPLIT ─────────────────────── */
@@ -1470,7 +1460,7 @@
       .m-btn { padding: 11px 18px; font-size: 10px; }
 
       /* Text spacing reset on small screens */
-      .manifesto-right .s-text { margin-top: 0; }
+      .manifesto-left .s-text { margin-top: 0; }
       .contact-left .s-text { margin-top: 0; }
 
       /* Footer */
@@ -1729,15 +1719,18 @@
   <div class="section-inner">
     <div class="manifesto-grid">
 
-      <div class="manifesto-label-wrap">
-        <div class="s-label">01 — Маніфест</div>
-      </div>
-
-      <div class="manifesto-text-wrap manifesto-right">
+      <div class="manifesto-left">
+        <div class="s-label">02 — Маніфест</div>
         <h2 class="s-title">Місце, де місто<br /><em>зустрічається з лісом</em></h2>
         <p class="s-text">
           Lisnyky House — це нова категорія житла: камерний квартал таунхаусів між Чернечим лісом і Дніпровськими схилами. Без велелюддя висоток, без шуму магістралей, без компромісів в якості. Просто життя у власному домі — з приватним подвір'ям, паркінгом і заповідним лісом за п'ять хвилин пішки.
         </p>
+        <a href="#advantages" class="s-link">
+          Переваги комплексу
+          <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
+            <path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </a>
       </div>
 
       <div class="manifesto-stats-wrap">
@@ -1759,15 +1752,6 @@
             <span class="manifesto-label">охорона та відеонагляд</span>
           </div>
         </div>
-      </div>
-
-      <div class="manifesto-cta-wrap">
-        <a href="#advantages" class="s-link">
-          Переваги комплексу
-          <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
-            <path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-          </svg>
-        </a>
       </div>
 
     </div>
