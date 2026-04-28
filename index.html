@@ -415,9 +415,9 @@
       position: absolute;
       inset: 0;
       background-size: cover;
-      background-position: center 25%;
+      background-position: left top;
       opacity: 0;
-      transition: opacity 1.2s ease;
+      transition: opacity 2s ease-in-out;
     }
 
     /* No zoom — architecture stays static, only seasons change */
@@ -1492,7 +1492,7 @@
       .hero-cta:hover { background: rgba(255,255,255,0.22); border-color: rgba(255,255,255,0.7); }
 
       /* Fix: background-size:112% не покриває portrait екран */
-      .slide { background-size: cover !important; background-position: center center !important; }
+      .slide { background-size: cover !important; background-position: left top !important; }
 
       /* Timer: без зсуву від side-nav */
       .hero-timer { left: 0; }
