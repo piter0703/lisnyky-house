@@ -7,8 +7,8 @@
   <meta name="description" content="Готові таунхауси у с. Лісники поряд з Чернечим лісом та озером Шапарня. 15 хвилин до метро Видубичі. Розумний дім, охоронювана територія." />
 
   <!-- Preload першого hero слайду — прискорює LCP -->
-  <link rel="preload" as="image" href="images/avif/hero1.avif" type="image/avif" media="(min-width: 769px)" />
-  <link rel="preload" as="image" href="images/avif/heromob1.avif" type="image/avif" media="(max-width: 768px)" />
+  <link rel="preload" as="image" href="images/avif/hero1.png" media="(min-width: 769px)" />
+  <link rel="preload" as="image" href="images/avif/heromob1.png" media="(max-width: 768px)" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,13 +16,13 @@
 
   <style>
     /* ─── HERO SLIDES: зображення ──────────── */
-    .slide-1 { background-image: url('images/avif/hero1.avif'); }
-    .slide-2 { background-image: url('images/avif/hero2.avif'); }
-    .slide-3 { background-image: url('images/avif/hero3.avif'); }
+    .slide-1 { background-image: url('images/avif/hero1.png'); }
+    .slide-2 { background-image: url('images/avif/hero2.png'); }
+    .slide-3 { background-image: url('images/avif/hero3.png'); }
     @media (max-width: 768px) {
-      .slide-1 { background-image: url('images/avif/heromob1.avif'); }
-      .slide-2 { background-image: url('images/avif/heromob2.avif'); }
-      .slide-3 { background-image: url('images/avif/heromob3.avif'); }
+      .slide-1 { background-image: url('images/avif/heromob1.png'); }
+      .slide-2 { background-image: url('images/avif/heromob2.png'); }
+      .slide-3 { background-image: url('images/avif/heromob3.png'); }
     }
 
     /* ─── RESET ─────────────────────────────── */
@@ -391,7 +391,7 @@
       position: absolute;
       top: 0; left: 52px; right: 0;
       height: 2px;
-      background: rgba(255,255,255,0.15);
+      background: rgba(0,0,0,0.08);
       z-index: 20;
     }
 
@@ -402,12 +402,12 @@
 
     .hero-timer-bar {
       height: 100%;
-      background: rgba(255,255,255,0.65);
+      background: var(--green);
       width: 0%;
     }
 
     .hero-timer-bar.running {
-      animation: timerProgress 5s linear forwards;
+      animation: timerProgress 7s linear forwards;
     }
 
     /* Slides */
@@ -415,27 +415,21 @@
       position: absolute;
       inset: 0;
       background-size: cover;
-      background-position: center 55%;
+      background-position: center 25%;
       opacity: 0;
-      transition: opacity 0.9s ease;
+      transition: opacity 1.2s ease;
     }
 
-    @keyframes zoomIn {
-      from { transform: scale(1.06); }
-      to   { transform: scale(1.00); }
-    }
-
+    /* No zoom — architecture stays static, only seasons change */
     .slide.active {
       opacity: 1;
-      animation: zoomIn 7s ease-out forwards;
     }
 
     .hero-overlay {
       position: absolute;
       inset: 0;
-      background:
-        linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.3) 65%, rgba(0,0,0,0.0) 100%),
-        linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.0) 55%);
+      /* desktop: only subtle bottom gradient — glass panel covers the left */
+      background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.0) 35%);
       z-index: 2;
     }
 
@@ -452,22 +446,27 @@
       background-size: 180px;
     }
 
-    /* Slide text container */
-    .hero-content {
-      position: absolute;
-      inset: 0;
-      z-index: 5;
-    }
-
-    .slide-texts {
+    /* Glass panel — direct child of .hero, z-index above overlay */
+    .hero-panel {
       position: absolute;
       bottom: 0;
       left: 52px;
-      right: 0;
-      padding: 0 60px 80px 52px;
-      max-width: 860px;
+      width: 440px;
+      display: grid;            /* CSS Grid stacking: all slide-texts in same cell */
+      background: rgba(246,245,242,0.35);
+      backdrop-filter: blur(18px) saturate(1.5);
+      -webkit-backdrop-filter: blur(18px) saturate(1.5);
+      border-top: 1px solid rgba(255,255,255,0.7);
+      border-right: 1px solid rgba(255,255,255,0.5);
+      z-index: 4;               /* above overlay(2) and grain(3), below nav(10) */
+    }
+
+    /* All slide-texts live inside .hero-panel, stacked via grid */
+    .slide-texts {
+      grid-area: 1 / 1;
+      padding: 36px 44px 56px;
       opacity: 0;
-      transform: translateY(28px);
+      transform: translateY(20px);
       transition: opacity 0.65s ease 0.25s, transform 0.65s ease 0.25s;
       pointer-events: none;
     }
@@ -483,12 +482,12 @@
       font-size: 12px;
       font-weight: 400;
       letter-spacing: 0.2em;
-      color: rgba(255,255,255,0.55);
+      color: var(--text-light);
       margin-top: 0;
       margin-bottom: 16px;
     }
 
-    .slide-num span { color: rgba(255,255,255,0.35); }
+    .slide-num span { color: var(--text-light); opacity: 0.6; }
 
     .hero-badge {
       position: absolute;
@@ -518,39 +517,38 @@
       font-weight: 400;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.65);
+      color: var(--green);
       margin-bottom: 14px;
     }
 
     .hero h1 {
       font-family: var(--serif);
-      font-size: clamp(48px, 6.5vw, 108px);
+      font-size: clamp(34px, 3.2vw, 52px);
       font-weight: 400;
       font-style: normal;
-      line-height: 0.93;
+      line-height: 1.05;
       letter-spacing: -0.02em;
-      color: var(--white);
+      color: var(--text);
       margin-bottom: 20px;
-      text-shadow: 0 2px 32px rgba(0,0,0,0.5);
     }
 
     .hero h1 em {
       font-style: italic;
-      color: rgba(255,255,255,0.42);
+      color: var(--green);
     }
 
     .hero-desc {
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 300;
-      color: rgba(255,255,255,0.82);
-      line-height: 1.65;
+      color: var(--text-mid);
+      line-height: 1.75;
       margin-bottom: 32px;
-      max-width: 440px;
-      text-shadow: 0 1px 8px rgba(0,0,0,0.3);
     }
 
+    /* Desktop: green solid button on glass panel */
     .hero-cta {
-      display: inline-flex;
+      display: flex;
+      width: fit-content;
       align-items: center;
       gap: 12px;
       font-family: var(--mono);
@@ -558,18 +556,17 @@
       font-weight: 400;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--white);
-      background: rgba(255,255,255,0.10);
-      border: 1px solid rgba(255,255,255,0.40);
-      backdrop-filter: blur(8px);
+      color: #fff;
+      background: var(--green);
+      border: 1px solid var(--green);
       padding: 14px 28px;
       border-radius: 3px;
       transition: background 0.25s, border-color 0.25s;
     }
 
     .hero-cta:hover {
-      background: rgba(255,255,255,0.22);
-      border-color: rgba(255,255,255,0.7);
+      background: var(--green-dark);
+      border-color: var(--green-dark);
     }
     .hero-cta svg { transition: transform 0.2s; }
     .hero-cta:hover svg { transform: translateX(4px); }
@@ -1448,11 +1445,51 @@
       .hero-nav .btn-green { display: none; }
       /* badge: top-right, below hero-nav */
       .hero-badge { bottom: auto; top: 68px; right: 16px; left: auto; font-size: 9px; padding: 6px 11px; }
-      .slide-texts { padding: 0 20px 72px 20px; left: 0; }
-      .hero h1 { font-size: clamp(38px, 9vw, 56px); }
-      .hero-desc { font-size: 15px; margin-bottom: 24px; }
-      .hero-cta { padding: 12px 22px; font-size: 11px; }
-      .slide-num { font-size: 11px; margin-top: 10px; margin-bottom: 18px; }
+
+      /* Mobile: panel becomes transparent full-cover container */
+      .hero-panel {
+        position: absolute;
+        inset: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border: none;
+        display: block;         /* disable grid — texts go absolute instead */
+      }
+      /* Mobile: restore dark gradient overlay */
+      .hero-overlay {
+        background:
+          linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 65%, rgba(0,0,0,0.0) 100%),
+          linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.0) 55%);
+      }
+      /* Mobile slide texts: absolute within the transparent panel */
+      .slide-texts {
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+        padding: 0 20px 72px 20px;
+      }
+      .hero h1 { font-size: clamp(38px, 9vw, 56px); color: var(--white); text-shadow: 0 2px 20px rgba(0,0,0,0.5); }
+      .hero h1 em { color: rgba(255,255,255,0.5); }
+      .hero-label { color: rgba(255,255,255,0.65); }
+
+      /* Mobile: hide desc and slide-num — less is more */
+      .hero-desc { display: none; }
+      .slide-num { display: none; }
+
+      /* Mobile: translucent CTA */
+      .hero-cta {
+        color: var(--white);
+        background: rgba(255,255,255,0.12);
+        border-color: rgba(255,255,255,0.45);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        width: auto;
+        padding: 12px 22px;
+      }
+      .hero-cta:hover { background: rgba(255,255,255,0.22); border-color: rgba(255,255,255,0.7); }
 
       /* Fix: background-size:112% не покриває portrait екран */
       .slide { background-size: cover !important; background-position: center center !important; }
@@ -1667,9 +1704,9 @@
   <div class="hero-timer"><div class="hero-timer-bar" id="timerBar"></div></div>
 
   <!-- Slides (backgrounds) -->
-  <div class="slide slide-1 active" style="background-position: center 15%;"></div>
-  <div class="slide slide-2" style="background-position: 30% center;"></div>
-  <div class="slide slide-3" style="background-position: 25% center;"></div>
+  <div class="slide slide-1 active"></div>
+  <div class="slide slide-2"></div>
+  <div class="slide slide-3"></div>
 
   <!-- Overlay -->
   <div class="hero-overlay"></div>
@@ -1688,8 +1725,8 @@
     Секції 1 і 2 введено в експлуатацію
   </div>
 
-  <!-- Slide texts -->
-  <div class="hero-content">
+  <!-- Glass panel: contains all slide texts, sits directly in hero -->
+  <div class="hero-panel">
 
     <div class="slide-texts active">
       <div class="hero-label">Лісники, Київська область</div>
@@ -2342,7 +2379,7 @@
     void timerBar.offsetWidth;
     timerBar.classList.add('running');
     clearInterval(autoPlay);
-    autoPlay = setInterval(() => goTo(current + 1), 5000);
+    autoPlay = setInterval(() => goTo(current + 1), 7000);
   }
 
   // Start
