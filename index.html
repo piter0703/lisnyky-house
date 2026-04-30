@@ -1384,6 +1384,137 @@
       .float-phone { display: flex; }
     }
 
+    /* ─── PARTNERS / PROGRAMS ──────────────────── */
+    .s-partners { background: var(--off); }
+
+    .partners-group { margin-top: 64px; }
+
+    .partners-group-lbl {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+
+    .partners-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .partners-grid--3 { grid-template-columns: repeat(3, 1fr); }
+
+    .partner-card {
+      background: var(--sand);
+      padding: 32px;
+      border-radius: 2px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      text-align: center;
+      text-decoration: none;
+      border: 1px solid rgba(26,28,26,0.18);
+      box-shadow: 0 2px 8px rgba(26,28,26,0.06);
+      transition: box-shadow 0.3s var(--ease), transform 0.3s var(--ease);
+      cursor: pointer;
+    }
+    .partner-card:hover {
+      box-shadow: 0 12px 32px rgba(26,28,26,0.13);
+      transform: translateY(-6px);
+    }
+
+    .partner-logo {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+    .partner-logo--pill { max-height: 44px; }
+    .partner-logo--bank { max-height: 40px; }
+
+    .partners-vet-logo {
+      width: 88px;
+      height: 88px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .partners-vet-info {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .partner-card-desc {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      line-height: 1.5;
+    }
+
+    .partners-vet {
+      margin-top: 64px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+
+    .partners-vet-lbl {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+
+    .partners-vet-body {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .partners-vet-name {
+      font-family: var(--serif);
+      font-size: clamp(20px, 2.2vw, 32px);
+      font-weight: 400;
+      color: var(--text);
+      flex-shrink: 0;
+    }
+
+    .partners-vet-desc {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .partners-vet-phone {
+      font-family: var(--mono);
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      color: var(--green);
+      border-bottom: 1px solid var(--green);
+      padding-bottom: 2px;
+      flex-shrink: 0;
+      transition: opacity 0.2s;
+    }
+    .partners-vet-phone:hover { opacity: 0.7; }
+
+    @media (max-width: 900px) {
+      .partners-grid, .partners-grid--3 { grid-template-columns: 1fr; }
+      .partners-vet-body { flex-direction: column; align-items: flex-start; gap: 20px; }
+    }
+
     /* ── FAQ ─────────────────────────────────── */
     .s-faq { background: var(--off); }
     .faq-inner {
@@ -1966,20 +2097,18 @@
 <div class="marquee-strip" aria-hidden="true">
   <div class="marquee-strip__track">
     <span class="marquee-strip__item">15 хв до метро Видубичі</span>
-    <span class="marquee-strip__item">100% готово до заселення</span>
-    <span class="marquee-strip__item">Чернечий ліс та озеро поряд</span>
+    <span class="marquee-strip__item">Секції 1 і 2 введено в експлуатацію</span>
+    <span class="marquee-strip__item">Ліс та озеро поряд</span>
     <span class="marquee-strip__item">24/7 охорона та відеоспостереження</span>
     <span class="marquee-strip__item">Власний двір та паркінг</span>
-    <span class="marquee-strip__item">Можливість енергонезалежності</span>
-    <span class="marquee-strip__item">Розумний дім</span>
+    <span class="marquee-strip__item">Макдональдс і магазини поряд</span>
     <span class="marquee-strip__item">Лісники, Київська область</span>
     <span class="marquee-strip__item">15 хв до метро Видубичі</span>
-    <span class="marquee-strip__item">100% готово до заселення</span>
-    <span class="marquee-strip__item">Чернечий ліс та озеро поряд</span>
+    <span class="marquee-strip__item">Секції 1 і 2 введено в експлуатацію</span>
+    <span class="marquee-strip__item">Ліс та озеро поряд</span>
     <span class="marquee-strip__item">24/7 охорона та відеоспостереження</span>
     <span class="marquee-strip__item">Власний двір та паркінг</span>
-    <span class="marquee-strip__item">Можливість енергонезалежності</span>
-    <span class="marquee-strip__item">Розумний дім</span>
+    <span class="marquee-strip__item">Макдональдс і магазини поряд</span>
     <span class="marquee-strip__item">Лісники, Київська область</span>
   </div>
 </div>
@@ -1996,7 +2125,7 @@
         <div class="s-label">02 — Маніфест</div>
         <h2 class="s-title">Місце, де місто<br /><em>зустрічається з лісом</em></h2>
         <p class="s-text">
-          Lisnyky House — це нова категорія житла: камерний квартал таунхаусів між Чернечим лісом і Дніпровськими схилами. Без велелюддя висоток, без шуму магістралей, без компромісів в якості. Просто життя у власному домі — з приватним подвір'ям, паркінгом і заповідним лісом за п'ять хвилин пішки.
+          Lisnyky House — це там, де день починається не з шуму проспекту, а з тиші, світла і власного простору. Квартал таунхаусів створений для життя. Лісники поєднують спокій передмістя з близькістю до Києва: поруч природа, необхідна інфраструктура і зручний виїзд до столиці. Це не втеча з міста — це кращий спосіб залишатися поруч із ним.
         </p>
         <a href="#advantages" class="s-link">
           Переваги комплексу
@@ -2048,7 +2177,7 @@
       </picture>
     </div>
     <div class="split-text">
-      <div class="s-label">02 — Природа</div>
+      <div class="s-label">03 — Природа</div>
       <h2 class="s-title">Більше<br /><em>простору</em></h2>
       <p class="s-text">
         За п'ять хвилин пішки — Чернечий ліс, ландшафтний заказник площею понад 700 гектарів. Озеро Шапарня, стежки, свіже повітря. Природа не як картинка у вікні, а як частина щоденного маршруту.
@@ -2070,12 +2199,10 @@
 <section class="section s-split">
   <div class="split-grid">
     <div class="split-text">
-      <div class="s-label">03 — Готово сьогодні</div>
+      <div class="s-label">04 — Готово сьогодні</div>
       <h2 class="s-title">Ваш будинок<br /><em>вже чекає</em></h2>
       <p class="s-text">
-        Жодного «котловану» і жодного очікування. Всі будинки введено в
-        експлуатацію і готові до заселення. Ви купуєте готовий будинок і
-        в'їжджаєте коли зручно — наступного дня або наступного місяця.
+        Перші секції комплексу вже збудовані та доступні до покупки. Ви можете обрати таунхаус у готовій частині проєкту, оцінити якість будівництва наживо та спланувати переїзд у власному темпі.
       </p>
       <a href="houses.html" class="s-link">
         Переглянути планування
@@ -2104,7 +2231,7 @@
 <section class="section s-adv" id="advantages">
   <div class="section-inner">
     <div class="adv-intro">
-      <div class="s-label">04 — Переваги</div>
+      <div class="s-label">05 — Переваги</div>
       <h2 class="s-title">Технології та природа<br /><em>в одному домі</em></h2>
     </div>
 
@@ -2190,7 +2317,7 @@
 <section class="section s-interior">
   <div class="section-inner">
     <div class="interior-intro">
-      <div class="s-label">05 — Інтер'єр</div>
+      <div class="s-label">06 — Інтер'єр</div>
       <h2 class="s-title">Простір,<br /><em>створений для життя</em></h2>
       <p class="s-text">Відкрите планування першого поверху, панорамні вікна на терасу, якісні оздоблювальні матеріали — деталі, які формують атмосферу.</p>
     </div>
@@ -2231,7 +2358,7 @@
   <div class="plans-showcase">
 
     <div class="plans-left">
-      <div class="s-label">06 — Колекція будинків</div>
+      <div class="s-label">07 — Колекція будинків</div>
       <h2 class="s-title">Оберіть свій<br /><em>будинок</em></h2>
       <p class="s-text">Власний дім з лісом за вікном — і більше нікого не потрібно чекати. Оберіть таунхаус і в'їжджайте того ж місяця.</p>
 
@@ -2291,7 +2418,7 @@
       <div class="plans-img-badge">Секції 1 і 2 введено в&nbsp;експлуатацію</div>
       <div class="plans-img-price">
         <span class="plans-img-price-label">Ціна таунхауса</span>
-        <span class="plans-img-price-val">100 000 $</span>
+        <span class="plans-img-price-val">від 1 250 $/м²</span>
       </div>
     </div>
 
@@ -2307,7 +2434,7 @@
 
     <div class="location-grid">
       <div>
-        <div class="s-label">07 — Локація</div>
+        <div class="s-label">08 — Локація</div>
         <h2 class="s-title">Між природою<br /><em>і містом</em></h2>
         <p class="s-text">15 хвилин від Києва по Обухівській трасі — і ви вже серед лісу. Правий берег Дніпра, Чернечий ліс і сільська тиша без відриву від міської інфраструктури.</p>
         <p class="loc-address">
@@ -2354,13 +2481,69 @@
 
 
 <!-- ════════════════════════════════════════════
-     FAQ
+     PARTNERS / PROGRAMS
 ═════════════════════════════════════════════ -->
-<section class="section s-faq" id="faq">
+<section class="section s-partners" id="partners">
+  <div class="section-inner">
+    <div class="s-label">09 — Програми</div>
+    <h2 class="s-title">Державні програми<br><em>та банки-партнери</em></h2>
+    <p class="s-text">ЖК «Лісники Хаус» акредитовано за державними програмами пільгового кредитування. Ваш банк може фінансувати покупку з мінімальним першим внеском.</p>
+
+    <div class="partners-group">
+      <div class="partners-group-lbl">Державні програми</div>
+      <div class="partners-grid">
+        <a href="https://eoselia.diia.gov.ua/" class="partner-card" target="_blank" rel="noopener">
+          <img src="images/partner-eoselya.png" alt="єОселя" class="partner-logo partner-logo--pill" />
+          <div class="partner-card-desc">Державна програма доступного кредитування житла</div>
+        </a>
+        <a href="https://erecovery.diia.gov.ua/" class="partner-card" target="_blank" rel="noopener">
+          <img src="images/partner-evidnovlennya.png" alt="єВідновлення" class="partner-logo partner-logo--pill" />
+          <div class="partner-card-desc">Державна програма підтримки власників житла</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="partners-group">
+      <div class="partners-group-lbl">Банки-партнери</div>
+      <div class="partners-grid partners-grid--3">
+        <a href="https://privatbank.ua/kredyty/eoselya" class="partner-card" target="_blank" rel="noopener">
+          <img src="images/partner-privatbank.png" alt="ПриватБанк" class="partner-logo partner-logo--bank" />
+          <div class="partner-card-desc">Державна програма іпотечного кредитування</div>
+        </a>
+        <a href="https://www.oschadbank.ua/credit/eoselia" class="partner-card" target="_blank" rel="noopener">
+          <img src="images/partner-oschadbank.png" alt="Ощадбанк" class="partner-logo partner-logo--bank" />
+          <div class="partner-card-desc">Державна іпотека єОселя</div>
+        </a>
+        <a href="https://www.ukrgasbank.com/e_oselya/" class="partner-card" target="_blank" rel="noopener">
+          <img src="images/partner-ukrgasbank.png" alt="Укргазбанк" class="partner-logo partner-logo--bank" />
+          <div class="partner-card-desc">Державна програма іпотечного кредитування</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="partners-vet">
+      <div class="partners-vet-lbl">У взаємодії з громадською організацією</div>
+      <div class="partners-vet-body">
+        <img src="images/partner-vet-org.png" alt="На захисті ветеранів" class="partners-vet-logo" />
+        <div class="partners-vet-info">
+          <div class="partners-vet-name">«На захисті ветеранів»</div>
+          <div class="partners-vet-desc">Громадська організація у сфері ветеранських справ</div>
+          <a href="tel:+380970273704" class="partners-vet-phone">+38 097 027 37 04</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     FAQ (приховано на прохання замовника)
+═════════════════════════════════════════════ -->
+<section class="section s-faq" id="faq" style="display:none">
   <div class="section-inner faq-inner">
 
     <div class="faq-left">
-      <div class="s-label">08 — FAQ</div>
+      <div class="s-label">09 — FAQ</div>
       <h2 class="s-title">Часті<br /><em>запитання</em></h2>
       <p class="faq-desc">Не знайшли свою відповідь? Зателефонуйте менеджеру або напишіть в месенджер — відповімо протягом години.</p>
       <a href="#contact" class="s-link">
@@ -2438,7 +2621,7 @@
     <div class="contact-new-grid">
 
       <div class="contact-left">
-        <div class="s-label">09 — Контакти</div>
+        <div class="s-label">10 — Контакти</div>
         <h2 class="s-title">Приїздіть<br /><em>подивитись</em></h2>
         <p class="s-text">Ми проведемо вас кварталом, покажемо готові таунхауси і відповімо на всі запитання. Візит займає близько години.</p>
 
