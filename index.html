@@ -34,6 +34,7 @@
       color: var(--text);
       background: var(--off);
       overflow-x: hidden;
+      min-width: 360px;
     }
     img { display: block; max-width: 100%; }
     a { color: inherit; text-decoration: none; }
@@ -56,182 +57,9 @@
       --mono:       'JetBrains Mono', ui-monospace, monospace;
       --ease:       cubic-bezier(.2,.7,.2,1);
       --dur:        420ms;
+      --nav:        72px;
     }
 
-    /* ─── SIDE NAV ───────────────────────────── */
-    .side-nav {
-      position: fixed;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 52px;
-      z-index: 50;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 32px 0;
-      background: transparent;
-      border-right: 2px solid rgba(255,255,255,0.55);
-      pointer-events: none;
-      transition: background 0.35s, border-color 0.35s;
-    }
-
-    /* After hero — matches header style */
-    .side-nav.scrolled {
-      background: rgba(246,245,242,0.97);
-      backdrop-filter: blur(12px);
-      border-right-color: rgba(0,0,0,0.08);
-      box-shadow: 2px 0 24px rgba(0,0,0,0.08);
-    }
-
-    .side-menu-label {
-      pointer-events: all;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-    }
-
-    .side-menu-label span {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: #fff;
-      writing-mode: vertical-rl;
-      transform: rotate(180deg);
-      transition: color 0.2s;
-      text-shadow: 0 1px 6px rgba(0,0,0,0.4);
-    }
-
-    .side-nav.scrolled .side-menu-label span { color: var(--text); text-shadow: none; }
-    .side-nav.scrolled .side-menu-dots i { background: var(--text) !important; opacity: 0.3; }
-    .side-menu-label:hover span { color: var(--green) !important; }
-
-    .side-menu-dots {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      margin-bottom: 12px;
-    }
-
-    .side-menu-dots i {
-      display: block;
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.7);
-      transition: background 0.2s;
-    }
-
-    .side-nav.scrolled .side-menu-dots i { background: rgba(0,0,0,0.18); }
-    .side-menu-label:hover .side-menu-dots i { background: var(--green) !important; }
-
-    /* ─── SLIDE-OUT MENU ─────────────────────── */
-    .slide-menu {
-      position: fixed;
-      left: 0; top: 0; bottom: 0;
-      width: 380px;
-      background: var(--off);
-      z-index: 300;
-      display: flex;
-      flex-direction: column;
-      padding: 48px 0 48px 52px;
-      transform: translateX(-100%);
-      transition: transform 0.45s cubic-bezier(0.77,0,0.175,1);
-      box-shadow: 4px 0 40px rgba(0,0,0,0.08);
-    }
-
-    .slide-menu.open { transform: translateX(0); }
-
-    .slide-menu-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.35);
-      z-index: 299;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.35s;
-    }
-
-    .slide-menu-overlay.open { opacity: 1; pointer-events: all; }
-
-    .slide-menu-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-right: 32px;
-      margin-bottom: 48px;
-    }
-
-    .slide-menu-logo {
-      font-family: var(--serif);
-      font-size: 18px;
-      font-style: italic;
-      color: var(--text);
-      letter-spacing: 0.04em;
-    }
-
-    .slide-menu-logo img { height: 120px; }
-
-    .slide-close {
-      width: 36px;
-      height: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      cursor: pointer;
-      background: none;
-      font-size: 20px;
-      color: var(--text);
-      transition: border-color 0.2s;
-      flex-shrink: 0;
-    }
-
-    .slide-close:hover { border-color: var(--green); color: var(--green); }
-
-    .slide-menu nav {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-
-    .slide-menu nav a {
-      font-family: var(--serif);
-      font-size: 28px;
-      font-style: italic;
-      color: var(--text);
-      padding: 14px 0;
-      border-bottom: 1px solid var(--border);
-      opacity: 0.75;
-      transition: opacity 0.2s, color 0.2s, padding-left 0.2s;
-    }
-
-    .slide-menu nav a:first-child { border-top: 1px solid var(--border); }
-    .slide-menu nav a:hover { opacity: 1; color: var(--green); padding-left: 8px; }
-
-    .slide-menu-phone {
-      margin-top: 32px;
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--text-mid);
-      padding-right: 32px;
-    }
-
-    .slide-menu-phone a {
-      color: var(--text);
-      font-size: 18px;
-      font-weight: 600;
-      display: block;
-      margin-top: 4px;
-      transition: color 0.2s;
-    }
-
-    .slide-menu-phone a:hover { color: var(--green); }
 
     /* ─── HEADER ─────────────────────────────── */
     @keyframes barFadeIn {
@@ -241,7 +69,7 @@
 
     header {
       position: fixed;
-      top: 0; left: 52px; right: 0;
+      top: 0; left: 0; right: 0;
       z-index: 100;
       display: flex;
       align-items: center;
@@ -276,7 +104,7 @@
     .hero-nav {
       position: absolute;
       top: 0;
-      left: 52px;
+      left: 0;
       right: 0;
       z-index: 10;
       display: flex;
@@ -389,7 +217,7 @@
     /* Timer bar */
     .hero-timer {
       position: absolute;
-      top: 0; left: 52px; right: 0;
+      top: 0; left: 0; right: 0;
       height: 2px;
       background: rgba(0,0,0,0.08);
       z-index: 20;
@@ -450,7 +278,7 @@
     .hero-panel {
       position: absolute;
       bottom: 0;
-      left: 52px;
+      left: 0;
       width: 440px;
       display: grid;            /* CSS Grid stacking: all slide-texts in same cell */
       background: rgba(246,245,242,0.35);
@@ -523,7 +351,6 @@
 
     .hero h1 {
       font-family: var(--serif);
-      font-size: clamp(34px, 3.2vw, 52px);
       font-weight: 400;
       font-style: normal;
       line-height: 1.05;
@@ -605,7 +432,7 @@
 
 
     /* ─── SECTION SHARED ─────────────────────── */
-    .section { padding: 120px 0 120px 52px; }
+    .section { padding: 120px 0; }
     .section-inner { max-width: 1180px; margin: 0 auto; padding: 0 60px; }
 
     .s-label {
@@ -678,6 +505,7 @@
       border-bottom: 1px solid var(--border);
       background: var(--off);
       padding: 14px 0;
+      margin-top: 48px;
       white-space: nowrap;
       mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
     }
@@ -778,7 +606,7 @@
     }
 
     /* ─── SECTION: SPLIT ─────────────────────── */
-    .s-split { padding: 0 0 0 52px; }
+    .s-split { padding: 0; }
     .s-split .split-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -807,6 +635,15 @@
       flex-direction: column;
       justify-content: center;
       background: var(--off);
+    }
+    /* align text with section-inner at wide viewports — only desktop */
+    @media (min-width: 1025px) {
+      .split-grid > .split-text:first-child {
+        padding-left: max(72px, calc((100vw - 1180px) / 2 + 60px));
+      }
+      .split-grid > .split-text:last-child {
+        padding-right: max(72px, calc((100vw - 1180px) / 2 + 60px));
+      }
     }
 
     /* ─── SECTION: ADVANTAGES ────────────────── */
@@ -880,7 +717,7 @@
     .int-item--large { grid-row: span 2; }
 
     /* ─── SECTION: GALLERY FULL ──────────────── */
-    .s-gallery { padding: 0 0 0 52px; }
+    .s-gallery { padding: 0; }
 
     .gallery-full {
       display: grid;
@@ -914,7 +751,7 @@
     .gal-item:hover img { transform: scale(1.04); }
 
     /* ─── SECTION: PLANS ─────────────────────── */
-    .s-plans { padding: 0 0 0 52px; background: var(--off); }
+    .s-plans { padding: 0; background: var(--off); }
 
     .plans-showcase {
       display: grid;
@@ -924,7 +761,7 @@
     }
 
     .plans-left {
-      padding: 40px 72px 60px;
+      padding: 40px 72px 60px max(72px, calc((100vw - 1180px) / 2 + 60px));
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
@@ -1296,7 +1133,7 @@
     footer {
       background: var(--off);
       border-top: 1px solid var(--border);
-      padding: 60px 0 40px 52px;
+      padding: 60px 0 40px 0;
     }
 
     .footer-inner {
@@ -1408,7 +1245,6 @@
 
     /* ─── RESPONSIVE ──────────────────────────── */
     @media (max-width: 1024px) {
-      .side-nav { display: none; }
       header { left: 0; padding: 20px 24px; }
       .section { padding: 80px 0; }
       .section-inner { padding: 0 24px; }
@@ -1627,46 +1463,419 @@
     @media (max-width: 640px) {
       .faq-q { font-size: 15px; padding: 22px 0; }
     }
+
+    /* ─── HEADER: desktop always-visible ─── */
+    @media (min-width: 641px) {
+      header {
+        opacity: 1 !important;
+        pointer-events: all !important;
+        background: rgba(246,245,242,0.97) !important;
+        backdrop-filter: blur(12px) !important;
+        box-shadow: 0 2px 24px rgba(0,0,0,0.08) !important;
+        height: var(--nav);
+        padding: 0 48px 0 32px;
+      }
+      .header-logo img { height: 38px; }
+    }
+
+    /* Header centered nav links (desktop only) */
+    .header-nav-links {
+      display: none;
+    }
+    @media (min-width: 900px) {
+      .header-nav-links {
+        display: flex;
+        list-style: none;
+        align-items: center;
+        flex: 1;
+        justify-content: center;
+        gap: 0;
+      }
+      .header-nav-links a {
+        display: block;
+        padding: 0 14px;
+        font-size: 13px;
+        font-weight: 400;
+        color: var(--text-mid);
+        text-decoration: none;
+        letter-spacing: 0.02em;
+        transition: color 0.18s;
+      }
+      .header-nav-links a:hover { color: var(--green); }
+    }
+
+    /* ─── SIDE DOTS (slide nav inside side-nav) ─── */
+    .side-dots {
+      display: none;
+    }
+    @media (min-width: 641px) {
+      .side-dots {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: auto;
+        margin-bottom: 32px;
+        position: relative;
+        z-index: 1;
+      }
+      .side-dot {
+        display: block;
+        width: 5px; height: 5px;
+        border-radius: 50%;
+        background: rgba(26,28,26,0.20);
+        transition: background 0.3s, transform 0.3s;
+        cursor: pointer;
+        pointer-events: all;
+      }
+      .side-dot.active { background: var(--green); transform: scale(1.5); }
+    }
+
+    /* ─── NEW HERO: SPLIT GRID (desktop) ─── */
+    @media (min-width: 641px) {
+      .hero {
+        height: calc(100vh - var(--nav));
+        min-height: 520px;
+        margin-top: var(--nav);
+        display: grid;
+        grid-template-columns: clamp(280px, 40%, 600px) 1fr;
+        overflow: hidden;
+      }
+
+      /* hide old hero elements that don't exist in new HTML */
+      .hero-timer, .hero-overlay, .hero-nav, .hero-panel,
+      .slide-num, .hero-desc, .carousel-controls { display: none !important; }
+      .mob-counter { display: none; }
+      .mob-hero-gradient { display: none; }
+
+      .hero-left {
+        position: relative;
+        z-index: 10;
+        background: var(--off);
+        overflow: visible;
+        display: flex;
+        flex-direction: column;
+        padding: clamp(28px, 3.5vh, 52px) 0 0 clamp(32px, 4.5vw, 64px);
+      }
+
+      .hero-brand {
+        flex-shrink: 0;
+        white-space: nowrap;
+        overflow: visible;
+        line-height: 0.88;
+        letter-spacing: -0.03em;
+        margin-top: 10vh;
+        margin-bottom: auto;
+      }
+
+      .brand-lisnyky {
+        /* right-align so "y" is always flush to the column boundary */
+        display: block;
+        text-align: right;
+        font-family: var(--serif);
+        font-weight: 400;
+        font-size: clamp(68px, 14vw, 180px);
+        color: var(--text);
+        line-height: 0.88;
+        letter-spacing: -0.03em;
+      }
+
+      .brand-house {
+        /* absolutely anchored to the column/image boundary */
+        display: block;
+        position: absolute;
+        left: clamp(280px, 40%, 600px);
+        top: calc(clamp(28px, 3.5vh, 52px) + 10vh);
+        z-index: 11;
+        pointer-events: none;
+        white-space: nowrap;
+        font-family: var(--serif);
+        font-weight: 400;
+        font-size: clamp(68px, 14vw, 180px);
+        font-style: italic;
+        color: #fff;
+        line-height: 0.88;
+        letter-spacing: -0.03em;
+        text-shadow: 0 4px 60px rgba(0,0,0,0.30);
+      }
+
+      .hero-content {
+        padding-bottom: clamp(24px, 3.5vh, 52px);
+        padding-right: clamp(20px, 3vw, 48px);
+        margin-bottom: 10vh;
+      }
+
+      /* animated wrappers */
+      .hero-label, .hero-h1, .hero-cta-wrap {
+        opacity: 0;
+        transform: translateY(14px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+      .hero-label.in    { opacity: 1; transform: none; }
+      .hero-h1.in       { opacity: 1; transform: none; transition-delay: 0.07s; }
+      .hero-cta-wrap.in { opacity: 1; transform: none; transition-delay: 0.14s; }
+      .hero-label.out, .hero-h1.out, .hero-cta-wrap.out {
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 0.28s ease, transform 0.28s ease;
+      }
+
+      /* override old .hero-label font styles — it's now an animation wrapper */
+      .hero .hero-label {
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+        color: inherit;
+        letter-spacing: inherit;
+        text-transform: none;
+        margin-bottom: 0;
+      }
+
+      /* s-label inside hero: no ::before line */
+      .hero .s-label::before { display: none; }
+      .hero .s-label {
+        display: block;
+        margin-bottom: 16px;
+      }
+
+      .s-h1 {
+        font-family: var(--serif);
+        font-size: clamp(38px, 4.4vw, 82px);
+        font-weight: 400;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        color: var(--text);
+        margin-bottom: 28px;
+      }
+      .s-h1 em { font-style: italic; color: var(--green); }
+
+      .s-cta {
+        display: flex;
+        width: fit-content;
+        align-items: center;
+        gap: 14px;
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 400;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text);
+        text-decoration: none;
+        border-bottom: 1px solid var(--text);
+        padding-bottom: 2px;
+        margin-top: 36px;
+        transition: color 0.2s, border-color 0.2s;
+      }
+      .s-cta:hover { color: var(--green); border-color: var(--green); }
+      .s-cta svg { transition: transform 0.2s; }
+      .s-cta:hover svg { transform: translateX(5px); }
+
+      .hero-progress {
+        height: 1px;
+        background: rgba(26,28,26,0.10);
+        position: relative;
+      }
+      .hero-progress-bar {
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 0%;
+        background: var(--green);
+      }
+
+      /* right photo column */
+      .hero-right {
+        position: relative;
+        overflow: hidden;
+        z-index: 5;
+        opacity: 0;
+        transform: scale(1.04);
+        transition: opacity 1.0s ease 0.1s, transform 1.0s cubic-bezier(0.25,0.46,0.45,0.94) 0.1s;
+      }
+      body.loaded .hero-right { opacity: 1; transform: scale(1); }
+
+      .hero .slide {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center 25%;
+        opacity: 0;
+        transition: opacity 1.8s ease-in-out;
+      }
+      .hero .slide.active { opacity: 1; }
+
+      /* badge: compact, top-right of photo column */
+      .hero-badge {
+        position: absolute;
+        top: 24px; right: 24px; bottom: auto; left: auto;
+        z-index: 5;
+        background: var(--green);
+        color: #fff;
+        font-family: var(--mono);
+        font-size: 9px;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 8px 14px;
+        border-radius: 2px;
+        display: flex;
+        align-items: center;
+        gap: 0;
+        backdrop-filter: none;
+        border: none;
+        box-shadow: none;
+      }
+      .hero-badge svg { display: none; }
+
+      /* gradient + text overlay at bottom of photo */
+      .hero-cutout {
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+        height: 260px;
+        background: linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.30) 60%, transparent 100%);
+        z-index: 6;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+        transform: translateY(100%);
+        transition: transform 0.65s cubic-bezier(0.77,0,0.18,1) 0.9s;
+      }
+      body.loaded .hero-cutout { transform: translateY(0); }
+
+      .cutout-inner {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-width: 360px;
+        padding: 0 24px 28px;
+        opacity: 0;
+        transform: translateY(8px);
+        transition: opacity 0.5s ease 0.5s, transform 0.5s ease 0.5s;
+      }
+      .cutout-inner.in  { opacity: 1; transform: none; }
+      .cutout-inner.out {
+        opacity: 0;
+        transform: translateY(-6px);
+        transition: opacity 0.22s ease, transform 0.22s ease;
+      }
+
+      .cutout-body {
+        font-family: var(--sans);
+        font-size: 13px;
+        font-weight: 300;
+        line-height: 1.75;
+        color: rgba(255,255,255,0.85);
+      }
+    }
+
+    /* ─── NEW HERO: mobile fallback ─── */
+    @media (max-width: 640px) {
+      .hero-right {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
+      /* gradient mask: bright top, dark enough bottom for text readability */
+      .mob-hero-gradient {
+        display: block;
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background:
+          linear-gradient(to bottom,
+            rgba(0,0,0,0.12) 0%,
+            rgba(0,0,0,0)    22%,
+            rgba(0,0,0,0)    42%,
+            rgba(0,0,0,0.72) 100%
+          );
+      }
+      /* hero-left becomes text overlay at the bottom */
+      .hero-left {
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+        z-index: 10;
+        background: transparent;
+        display: flex !important;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 0 20px 80px;
+      }
+      .hero-brand { display: none; }
+      .brand-house { display: none; }
+      .hero-content { padding: 0; }
+      .hero-cutout { display: none; }
+      .hero-progress { display: none !important; }
+      /* white text on mobile */
+      .hero .s-h1 {
+        font-size: clamp(36px, 9vw, 52px);
+        color: #fff;
+        margin-bottom: 0;
+        text-shadow: 0 2px 24px rgba(0,0,0,0.45);
+      }
+      .hero .s-h1 em { color: rgba(255,255,255,0.55); }
+      .hero .s-label {
+        color: rgba(255,255,255,0.65);
+        margin-bottom: 10px;
+      }
+      .hero .s-label::before { display: none; }
+      /* simple fade on slide change */
+      .hero-label, .hero-h1, .hero-cta-wrap {
+        transition: opacity 0.3s ease;
+      }
+      .hero-label.out, .hero-h1.out, .hero-cta-wrap.out { opacity: 0; }
+      .hero-label.in, .hero-h1.in, .hero-cta-wrap.in { opacity: 1; }
+      /* CTA: full-width translucent button */
+      .hero .s-cta {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        font-family: var(--mono);
+        font-size: 10px;
+        font-weight: 400;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #fff;
+        text-decoration: none;
+        background: rgba(255,255,255,0.12);
+        border: 1px solid rgba(255,255,255,0.45);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        padding: 12px 20px;
+        border-radius: 3px;
+        margin-top: 20px;
+        transition: background 0.25s, border-color 0.25s;
+        box-sizing: border-box;
+      }
+      /* hero-badge: identical style to CTA, full-width */
+      .hero-badge {
+        top: 68px; left: 16px; right: 16px; bottom: auto;
+        justify-content: center;
+        background: rgba(255,255,255,0.12);
+        border: 1px solid rgba(255,255,255,0.45);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border-radius: 3px;
+        font-size: 10px;
+        padding: 12px 20px;
+      }
+      /* slide counter */
+      .mob-counter {
+        display: block;
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 400;
+        letter-spacing: 0.18em;
+        color: rgba(255,255,255,0.5);
+        margin-bottom: 16px;
+      }
+      .mob-counter span { opacity: 0.6; }
+      /* float phone: right above the CTA button */
+      .float-phone { bottom: 128px; transition: opacity 0.35s ease; }
+    }
   </style>
 </head>
 <body>
 
-<!-- ── SIDE NAV ──────────────────────────────── -->
-<div class="side-nav">
-  <div class="side-menu-label" id="menuTrigger">
-    <div class="side-menu-dots">
-      <i></i><i></i><i></i>
-    </div>
-    <span>Меню</span>
-  </div>
-</div>
-
-<!-- ── SLIDE-OUT MENU ────────────────────────── -->
-<div class="slide-menu-overlay" id="menuOverlay"></div>
-<div class="slide-menu" id="slideMenu">
-  <div class="slide-menu-top">
-    <div class="slide-menu-logo">
-      <img src="images/л2.png"
-           alt="Lisnyky House" />
-    </div>
-    <button class="slide-close" id="menuClose">&times;</button>
-  </div>
-
-  <nav>
-    <a href="#about">Про комплекс</a>
-    <a href="#advantages">Переваги</a>
-    <a href="houses.html">Будинки</a>
-    <a href="#plans">Планування</a>
-    <a href="#location">Локація</a>
-    <a href="#faq">Питання</a>
-    <a href="#contact">Контакти</a>
-  </nav>
-
-  <div class="slide-menu-phone">
-    Зателефонувати:
-    <a href="tel:+380672004777">+38 067 200 47 77</a>
-  </div>
-</div>
 
 <!-- ── MOBILE MENU (fallback) ────────────────── -->
 <div class="m-menu" id="mMenu">
@@ -1685,6 +1894,14 @@
   <a href="#top" class="header-logo">
     <img src="images/л2.png" alt="Lisnyky House" />
   </a>
+  <ul class="header-nav-links">
+    <li><a href="#about">Про комплекс</a></li>
+    <li><a href="#advantages">Переваги</a></li>
+    <li><a href="houses.html">Будинки</a></li>
+    <li><a href="#plans">Планування</a></li>
+    <li><a href="#location">Локація</a></li>
+    <li><a href="#contact">Контакти</a></li>
+  </ul>
   <div class="header-right">
     <a href="tel:+380672004777" class="header-phone" id="hPhone">+38 067 200 47 77</a>
     <a href="houses.html" class="btn-green">Обрати будинок</a>
@@ -1696,74 +1913,52 @@
 
 
 <!-- ════════════════════════════════════════════
-     HERO
+     HERO (split grid)
 ═════════════════════════════════════════════ -->
 <section class="hero" id="top">
 
-  <!-- Timer -->
-  <div class="hero-timer"><div class="hero-timer-bar" id="timerBar"></div></div>
-
-  <!-- Slides (backgrounds) -->
-  <div class="slide slide-1 active"></div>
-  <div class="slide slide-2"></div>
-  <div class="slide slide-3"></div>
-
-  <!-- Overlay -->
-  <div class="hero-overlay"></div>
-
-  <!-- Nav (scrolls with hero, no logo) -->
-  <div class="hero-nav">
-    <div class="hero-nav-right">
-      <a href="tel:+380672004777" class="hero-nav-phone">+38 067 200 47 77</a>
-      <a href="houses.html" class="btn-green">Обрати будинок</a>
+  <!-- Left column: brand + animated text -->
+  <div class="hero-left">
+    <div class="hero-brand">
+      <span class="brand-lisnyky">Lisnyky</span>
+    </div>
+    <div class="hero-content">
+      <div class="mob-counter" id="mobCounter"><b>01</b><span> / 03</span></div>
+      <div class="hero-label" id="heroLabel">
+        <span class="s-label">Лісники, Київська область</span>
+      </div>
+      <div class="hero-h1" id="heroH1">
+        <h1 class="s-h1">Жити поряд<br><em>з природою</em></h1>
+      </div>
+      <div class="hero-cta-wrap" id="heroCta">
+        <a class="s-cta" href="houses.html">Переглянути будинки
+          <svg width="16" height="8" viewBox="0 0 16 8" fill="none"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" stroke-width="1"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="hero-progress">
+      <div class="hero-progress-bar" id="progressBar"></div>
     </div>
   </div>
 
-  <!-- Exploitation badge -->
-  <div class="hero-badge">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-    Секції 1 і 2 введено в експлуатацію
+  <!-- "house" anchored to image boundary — always starts exactly at column edge -->
+  <em class="brand-house">house</em>
+
+  <!-- Right column: photos + badge + cutout -->
+  <div class="hero-right">
+    <div class="slide slide-1 active"></div>
+    <div class="slide slide-2"></div>
+    <div class="slide slide-3"></div>
+    <div class="mob-hero-gradient"></div>
+
+    <div class="hero-badge">Секції 1 і 2 введено в експлуатацію</div>
+
+    <div class="hero-cutout">
+      <div class="cutout-inner" id="cutoutInner">
+        <p class="cutout-body" id="cutoutDesc">Таунхауси розташовані в Лісниках — серед лісів і чистого повітря, лише за кілька хвилин від Києва. Тут легко відновлювати сили, насолоджуватись тишею та відчувати баланс між міським ритмом і спокоєм природи щодня.</p>
+      </div>
+    </div>
   </div>
-
-  <!-- Glass panel: contains all slide texts, sits directly in hero -->
-  <div class="hero-panel">
-
-    <div class="slide-texts active">
-      <div class="hero-label">Лісники, Київська область</div>
-      <div class="slide-num">01 <span>/ 03</span></div>
-      <h1>Жити поряд<br/><em>з природою</em></h1>
-      <p class="hero-desc">Чернечий ліс, озеро і тиша — 15 хвилин від метро</p>
-      <a href="#about" class="hero-cta">
-        Дізнатись більше
-        <svg width="20" height="10" viewBox="0 0 20 10" fill="none"><path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-      </a>
-    </div>
-
-    <div class="slide-texts">
-      <div class="hero-label">Простір для активного життя</div>
-      <div class="slide-num">02 <span>/ 03</span></div>
-      <h1>Більше<br/><em>простору</em></h1>
-      <p class="hero-desc">Власний двір, тераса і місце де діти ростуть вільно</p>
-      <a href="#advantages" class="hero-cta">
-        Переваги комплексу
-        <svg width="20" height="10" viewBox="0 0 20 10" fill="none"><path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-      </a>
-    </div>
-
-    <div class="slide-texts">
-      <div class="hero-label">Сучасна архітектура</div>
-      <div class="slide-num">03 <span>/ 03</span></div>
-      <h1>Розумний дім.<br/><em>Готовий до заселення</em></h1>
-      <p class="hero-desc">Цілодобова охорона, закрита територія, розумний дім</p>
-      <a href="houses.html" class="hero-cta">
-        Обрати будинок
-        <svg width="20" height="10" viewBox="0 0 20 10" fill="none"><path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-      </a>
-    </div>
-
-  </div>
-
-
 
 </section>
 
@@ -2349,101 +2544,116 @@
 
 
 <script>
-  // Header + side nav scroll state
-  const hdr     = document.getElementById('hdr');
-  const sideNav = document.querySelector('.side-nav');
-  const heroH   = document.querySelector('.hero').offsetHeight;
+  // Header scroll state (mobile only — desktop always visible via CSS)
+  const hdr   = document.getElementById('hdr');
+  const heroH = document.querySelector('.hero').offsetHeight;
 
-  window.addEventListener('scroll', () => {
-    const pastHero = window.scrollY > heroH * 0.98;
-    hdr.classList.toggle('scrolled', pastHero);
-    sideNav.classList.toggle('scrolled', pastHero);
-  });
+  function onScroll() {
+    if (window.innerWidth <= 640) {
+      hdr.classList.toggle('scrolled', window.scrollY > heroH * 0.98);
+    }
+  }
 
-  window.dispatchEvent(new Event('scroll'));
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 
   // ── CAROUSEL ──────────────────────────────────
-  const slides      = document.querySelectorAll('.slide');
-  const slideTexts  = document.querySelectorAll('.slide-texts');
-  const timerBar    = document.getElementById('timerBar');
-  let current = 0;
-  let autoPlay;
+  const heroSlides = [
+    {
+      label:    'Лісники, Київська область',
+      h1:       'Жити поряд<br><em>з природою</em>',
+      cta:      'Переглянути будинки', href: 'houses.html',
+      cDesc:    'Таунхауси розташовані в Лісниках — серед лісів і чистого повітря, лише за кілька хвилин від Києва. Тут легко відновлювати сили, насолоджуватись тишею та відчувати баланс між міським ритмом і спокоєм природи щодня.',
+    },
+    {
+      label:    'Простір для активного життя',
+      h1:       'Більше<br><em>простору</em>',
+      cta:      'Переваги комплексу', href: '#advantages',
+      cDesc:    'Продумані планування дають більше світла, повітря та свободи у кожному метрі. Просторі кімнати, власна тераса і парковка біля входу створюють відчуття справжнього дому.',
+    },
+    {
+      label:    'Сучасна архітектура',
+      h1:       'Свобода<br><em>ваших рішень</em>',
+      cta:      'Обрати будинок', href: 'houses.html',
+      cDesc:    'Будинок готовий до реалізації ваших ідей: ви самі обираєте стиль, матеріали та фінальні рішення. Це можливість створити простір під свій ритм життя.',
+    },
+  ];
+
+  const INTERVAL = 6500;
+  let currentSlide = 0, heroTimer = null;
+
+  const slideDivs    = document.querySelectorAll('.hero-right .slide');
+  const dots         = document.querySelectorAll('.side-dot');
+  const labelEl      = document.getElementById('heroLabel');
+  const h1El         = document.getElementById('heroH1');
+  const ctaEl        = document.getElementById('heroCta');
+  const cutoutEl     = document.getElementById('cutoutInner');
+  const descEl       = document.getElementById('cutoutDesc');
+  const progBar      = document.getElementById('progressBar');
+  const mobCounterEl = document.getElementById('mobCounter');
+
+  function startProgress() {
+    if (!progBar) return;
+    progBar.style.transition = 'none';
+    progBar.style.width = '0%';
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      progBar.style.transition = `width ${INTERVAL}ms linear`;
+      progBar.style.width = '100%';
+    }));
+  }
 
   function goTo(n) {
-    slides[current].classList.remove('active');
-    slideTexts[current].classList.remove('active');
-    current = (n + slides.length) % slides.length;
-    slides[current].classList.add('active');
-    slideTexts[current].classList.add('active');
-    timerBar.classList.remove('running');
-    void timerBar.offsetWidth;
-    timerBar.classList.add('running');
-    clearInterval(autoPlay);
-    autoPlay = setInterval(() => goTo(current + 1), 7000);
+    const d = heroSlides[n];
+    [labelEl, h1El, ctaEl].forEach(el => { if (el) { el.classList.remove('in'); el.classList.add('out'); } });
+    if (cutoutEl) { cutoutEl.classList.remove('in'); cutoutEl.classList.add('out'); }
+
+    setTimeout(() => {
+      slideDivs.forEach((s, i) => s.classList.toggle('active', i === n));
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === n));
+      if (mobCounterEl) mobCounterEl.querySelector('b').textContent = String(n + 1).padStart(2, '0');
+      if (labelEl) labelEl.querySelector('.s-label').textContent = d.label;
+      if (h1El)    h1El.querySelector('.s-h1').innerHTML = d.h1;
+      if (ctaEl) {
+        const a = ctaEl.querySelector('.s-cta');
+        a.href = d.href;
+        a.innerHTML = d.cta + ' <svg width="16" height="8" viewBox="0 0 16 8" fill="none"><path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" stroke-width="1"/></svg>';
+      }
+      if (descEl) descEl.textContent = d.cDesc;
+      [labelEl, h1El, ctaEl].forEach(el => { if (el) { el.classList.remove('out'); el.classList.add('in'); } });
+      if (cutoutEl) { cutoutEl.classList.remove('out'); cutoutEl.classList.add('in'); }
+    }, 320);
+
+    startProgress();
   }
 
-  // Start
-  goTo(0);
+  function nextSlide() { currentSlide = (currentSlide + 1) % heroSlides.length; goTo(currentSlide); }
 
-  // Slide-out menu
-  const slideMenu   = document.getElementById('slideMenu');
-  const menuOverlay = document.getElementById('menuOverlay');
-  const menuClose   = document.getElementById('menuClose');
-  const menuTrigger = document.getElementById('menuTrigger');
-  let hoverTimeout;
+  dots.forEach(dot => dot.addEventListener('click', () => {
+    const n = parseInt(dot.dataset.i);
+    if (n === currentSlide) return;
+    clearInterval(heroTimer); currentSlide = n; goTo(n);
+    heroTimer = setInterval(nextSlide, INTERVAL);
+  }));
 
-  function openMenu() {
-    clearTimeout(hoverTimeout);
-    slideMenu.classList.add('open');
-    menuOverlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
+  function initHero() {
+    document.body.classList.add('loaded');
+    setTimeout(() => {
+      [labelEl, h1El, ctaEl].forEach(el => { if (el) el.classList.add('in'); });
+      if (cutoutEl) cutoutEl.classList.add('in');
+      startProgress();
+      heroTimer = setInterval(nextSlide, INTERVAL);
+    }, 900);
   }
 
-  function closeMenu() {
-    slideMenu.classList.remove('open');
-    menuOverlay.classList.remove('open');
-    document.body.style.overflow = '';
-  }
+  document.fonts
+    ? document.fonts.ready.then(() => setTimeout(initHero, 60))
+    : window.addEventListener('load', () => setTimeout(initHero, 60));
 
-  const isMobile = () => window.innerWidth <= 1024;
-
-  // Desktop: hover to open
-  menuTrigger && menuTrigger.addEventListener('mouseenter', () => {
-    if (!isMobile()) openMenu();
-  });
-
-  // Keep open while hovering the menu panel itself
-  slideMenu && slideMenu.addEventListener('mouseenter', () => {
-    if (!isMobile()) clearTimeout(hoverTimeout);
-  });
-
-  slideMenu && slideMenu.addEventListener('mouseleave', () => {
-    if (!isMobile()) hoverTimeout = setTimeout(closeMenu, 300);
-  });
-
-  sideNav && sideNav.addEventListener('mouseleave', () => {
-    if (!isMobile()) hoverTimeout = setTimeout(closeMenu, 300);
-  });
-
-  // Mobile: click to open
-  menuTrigger && menuTrigger.addEventListener('click', () => {
-    if (isMobile()) openMenu();
-  });
-
-  menuClose   && menuClose.addEventListener('click', closeMenu);
-  menuOverlay && menuOverlay.addEventListener('click', closeMenu);
-
-  // Header burger (мобільна кнопка відкриття меню)
-  const headerBurger = document.getElementById('headerBurger');
-  headerBurger && headerBurger.addEventListener('click', openMenu);
-
-  document.querySelectorAll('.slide-menu nav a').forEach(a => {
-    a.addEventListener('click', closeMenu);
-  });
-
-  // Mobile top menu (fallback)
+  // Mobile menu
   const mMenu = document.getElementById('mMenu');
   const mClose = document.getElementById('mClose');
+  const headerBurger = document.getElementById('headerBurger');
+  headerBurger && headerBurger.addEventListener('click', () => mMenu && mMenu.classList.add('open'));
   mClose && mClose.addEventListener('click', () => mMenu.classList.remove('open'));
   document.querySelectorAll('.m-menu a').forEach(a => {
     a.addEventListener('click', () => mMenu.classList.remove('open'));
