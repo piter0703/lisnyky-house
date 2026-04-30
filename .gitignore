@@ -1,0 +1,11 @@
+.DS_Store
+**/.DS_Store
+.claude/
+__pycache__/
+*.pyc
+*.py
+*.zip
+*.mp4
+audit.js
+hero-concept.html
+images/#*
