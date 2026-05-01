@@ -397,7 +397,7 @@ Hover: `box-shadow: 0 12px 32px rgba(26,28,26,0.13)` + `translateY(-6px)` (фо�
 #### Форма
 - Поля: Ім'я (placeholder: Олена Коваленко), Телефон, Бажана дата
 - Кнопка: Записатись
-- Action: `mailto:lisnykyhouse@gmail.com` ⚠️ тимчасово, потрібен Formspree
+- Action: Telegram-бот → робоча група (Formspree не потрібен)
 - Месенджери: WhatsApp + Telegram + Viber на `+380672004777`
 
 ---
@@ -502,7 +502,7 @@ SVG overlay поверх genplan.avif. При кліку на будинок —
 #### View 2: Форма запису
 - Поля: Ім'я (placeholder: Андрій), Телефон, Зручний час (placeholder: будні 10:00–18:00)
 - Кнопка: Відправити
-- Action: `https://formspree.io/f/FORM_ID` ⚠️ FORM_ID — placeholder, потрібно замінити на реальний ID
+- Action: Telegram-бот → робоча група
 - Після відправки → View 3
 
 #### View 3: Успіх
@@ -517,7 +517,7 @@ SVG overlay поверх genplan.avif. При кліку на будинок —
 
 #### Форма
 - Поля: Ім'я, Телефон, Повідомлення (placeholder: Цікавить секція 1, таунхаус №3)
-- Action: `https://formspree.io/f/FORM_ID` ⚠️ той самий placeholder
+- Action: Telegram-бот → робоча група
 
 ---
 
@@ -533,10 +533,9 @@ SVG overlay поверх genplan.avif. При кліку на будинок —
 ---
 
 ## Що залишилось зробити
-- [ ] Запушити блок "09 — Програми"
+- [x] Блок "09 — Програми" ✅ запушено
+- [x] ~~Formspree~~ — форми працюють через Telegram-бот → робоча група ✅
+- [x] Open Graph + Twitter Card + Schema JSON-LD ✅ commit abe6f07
+- [ ] **Деплой на lisnykyhouse.kyiv.ua** (HostIQ, cPanel zip + PHP адмін) — наступне
+- [ ] GA4 аналітика — після деплою на постійний домен (щоб статистика була чиста)
 - [ ] houses.html — логіка вибору будинку (картки, форма запису, UX flow)
-- [ ] Formspree — замінити `FORM_ID` в index.html і houses.html
-- [ ] Viber додати до форм (кнопка поруч з WhatsApp + Telegram)
-- [ ] Open Graph + Schema JSON-LD
-- [ ] GA4 аналітика
-- [ ] Деплой на lisnykyhouse.kyiv.ua (HostIQ, cPanel zip + PHP адмін)
