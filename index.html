@@ -736,7 +736,7 @@
     /* ─── SECTION: INTERIOR ─────────────────── */
     .s-interior { background: var(--off); padding-bottom: 80px; }
 
-    .interior-intro { margin-bottom: 120px; }
+    .interior-intro { margin-bottom: 64px; }
 
     .interior-grid {
       display: grid;
@@ -957,7 +957,7 @@
 
 
     /* ─── SECTION: LOCATION ──────────────────── */
-    .s-location { background: var(--off); }
+    .s-location { background: var(--off); padding-bottom: 80px; }
 
     .location-grid {
       display: grid;
@@ -981,10 +981,10 @@
       grid-template-columns: repeat(4, 1fr);
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-      margin-top: 56px;
+      margin-top: 64px;
     }
     .loc-fact {
-      padding: 20px 24px 20px 0;
+      padding: 24px 24px 24px 0;
       border-right: 1px solid var(--border);
       display: flex;
       flex-direction: column;
@@ -1101,7 +1101,7 @@
       padding: 48px;
       border-radius: 2px;
       display: grid;
-      gap: 22px;
+      gap: 24px;
     }
 
     .contact-form-title {
@@ -1430,7 +1430,7 @@
     }
 
     /* ─── PARTNERS / PROGRAMS ──────────────────── */
-    .s-partners { background: var(--off); }
+    .s-partners { background: var(--off); padding: 80px 0; }
 
     .partners-group { margin-top: 64px; }
 
@@ -1483,19 +1483,6 @@
     .partner-logo--pill { max-height: 44px; }
     .partner-logo--bank { max-height: 40px; }
 
-    .partners-vet-logo {
-      width: 88px;
-      height: 88px;
-      object-fit: contain;
-      flex-shrink: 0;
-    }
-
-    .partners-vet-info {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
     .partner-card-desc {
       font-family: var(--mono);
       font-size: 10px;
@@ -1505,59 +1492,8 @@
       line-height: 1.5;
     }
 
-    .partners-vet {
-      margin-top: 64px;
-      padding-top: 32px;
-      border-top: 1px solid var(--border);
-    }
-
-    .partners-vet-lbl {
-      font-family: var(--mono);
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-light);
-      margin-bottom: 20px;
-    }
-
-    .partners-vet-body {
-      display: flex;
-      align-items: center;
-      gap: 48px;
-    }
-
-    .partners-vet-name {
-      font-family: var(--serif);
-      font-size: clamp(20px, 2.2vw, 32px);
-      font-weight: 400;
-      color: var(--text);
-      flex-shrink: 0;
-    }
-
-    .partners-vet-desc {
-      font-size: 14px;
-      font-weight: 300;
-      color: var(--text-mid);
-      line-height: 1.6;
-      flex: 1;
-    }
-
-    .partners-vet-phone {
-      font-family: var(--mono);
-      font-size: 13px;
-      letter-spacing: 0.06em;
-      color: var(--green);
-      border-bottom: 1px solid var(--green);
-      padding-bottom: 2px;
-      flex-shrink: 0;
-      transition: opacity 0.2s;
-    }
-    .partners-vet-phone:hover { opacity: 0.7; }
-
     @media (max-width: 900px) {
       .partners-grid, .partners-grid--3 { grid-template-columns: 1fr; }
-      .partners-vet-body { flex-direction: column; align-items: flex-start; gap: 20px; }
     }
 
     /* ── FAQ ─────────────────────────────────── */
@@ -2080,7 +2016,7 @@
       transition: border-color 0.2s; flex-shrink: 0;
     }
     .modal-close:hover { border-color: var(--green); color: var(--green); }
-    .cfl-wrap { display: grid; gap: 20px; }
+    .cfl-wrap { display: grid; gap: 24px; }
     .cfl-row { display: grid; gap: 8px; }
     .cfl-lbl {
       font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
@@ -2668,17 +2604,6 @@
       </div>
     </div>
 
-    <div class="partners-vet">
-      <div class="partners-vet-lbl">У взаємодії з громадською організацією</div>
-      <div class="partners-vet-body">
-        <img src="images/partner-vet-org.png" alt="На захисті ветеранів" class="partners-vet-logo" />
-        <div class="partners-vet-info">
-          <div class="partners-vet-name">«На захисті ветеранів»</div>
-          <div class="partners-vet-desc">Громадська організація у сфері ветеранських справ</div>
-          <a href="tel:+380970273704" class="partners-vet-phone">+38 097 027 37 04</a>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
