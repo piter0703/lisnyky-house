@@ -40,75 +40,9 @@
       --ease:       cubic-bezier(.2,.7,.2,1);
     }
 
-    /* ─── SIDE NAV ─── */
-    .side-nav {
-      position: fixed; left: 0; top: 0; bottom: 0; width: 52px;
-      z-index: 50; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; padding: 32px 0;
-      background: rgba(246,245,242,0.97);
-      border-right: 2px solid rgba(0,0,0,0.07);
-      pointer-events: none;
-    }
-    .side-menu-label {
-      pointer-events: all; display: flex; flex-direction: column;
-      align-items: center; gap: 10px; cursor: pointer;
-    }
-    .side-menu-label span {
-      font-size: 11px; font-weight: 700; letter-spacing: 0.28em;
-      text-transform: uppercase; color: var(--text-light);
-      writing-mode: vertical-rl; transform: rotate(180deg); transition: color 0.2s;
-    }
-    .side-menu-label:hover span { color: var(--green); }
-    .side-menu-dots { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
-    .side-menu-dots i {
-      display: block; width: 4px; height: 4px; border-radius: 50%;
-      background: rgba(0,0,0,0.18); transition: background 0.2s;
-    }
-    .side-menu-label:hover .side-menu-dots i { background: var(--green); }
-
-    /* ─── SLIDE-OUT MENU ─── */
-    .slide-menu {
-      position: fixed; left: 0; top: 0; bottom: 0; width: 380px;
-      background: var(--white); z-index: 300;
-      display: flex; flex-direction: column;
-      padding: 48px 0 48px 52px;
-      transform: translateX(-100%);
-      transition: transform 0.45s cubic-bezier(0.77,0,0.175,1);
-      box-shadow: 4px 0 40px rgba(0,0,0,0.08);
-    }
-    .slide-menu.open { transform: translateX(0); }
-    .slide-menu-overlay {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.35);
-      z-index: 299; opacity: 0; pointer-events: none; transition: opacity 0.35s;
-    }
-    .slide-menu-overlay.open { opacity: 1; pointer-events: all; }
-    .slide-menu-top {
-      display: flex; align-items: center; justify-content: space-between;
-      padding-right: 32px; margin-bottom: 48px;
-    }
-    .slide-menu-logo img { height: 120px; }
-    .slide-close {
-      width: 36px; height: 36px; display: flex; align-items: center;
-      justify-content: center; border: 1px solid var(--border); border-radius: 50%;
-      cursor: pointer; background: none; font-size: 20px; color: var(--text);
-      transition: border-color 0.2s; flex-shrink: 0;
-    }
-    .slide-close:hover { border-color: var(--green); color: var(--green); }
-    .slide-menu nav { display: flex; flex-direction: column; flex: 1; }
-    .slide-menu nav a {
-      font-family: var(--serif); font-size: 28px; font-style: italic;
-      color: var(--text); padding: 14px 0; border-bottom: 1px solid var(--border);
-      opacity: 0.75; transition: opacity 0.2s, color 0.2s, padding-left 0.2s;
-    }
-    .slide-menu nav a:first-child { border-top: 1px solid var(--border); }
-    .slide-menu nav a:hover, .slide-menu nav a.active { opacity: 1; color: var(--green); padding-left: 8px; }
-    .slide-menu-phone { margin-top: 32px; font-size: 15px; color: var(--text-mid); padding-right: 32px; }
-    .slide-menu-phone a { color: var(--text); font-size: 18px; font-weight: 600; display: block; margin-top: 4px; }
-    .slide-menu-phone a:hover { color: var(--green); }
-
     /* ─── HEADER ─── */
     header {
-      position: fixed; top: 0; left: 52px; right: 0; z-index: 100;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 17px 48px 17px 32px;
       background: rgba(246,245,242,0.97);
@@ -158,8 +92,7 @@
 
     /* ─── PAGE HERO BANNER ─── */
     .page-banner {
-      margin-left: 52px;
-      padding-top: 100px;
+      padding-top: 140px;
       background: var(--off);
       padding-bottom: 64px;
       border-bottom: 1px solid var(--border);
@@ -193,8 +126,9 @@
 
     /* ─── MAIN CONTENT ─── */
     .catalog-wrap {
-      margin-left: 52px; padding: 48px 48px 96px;
-      max-width: calc(1200px + 52px);
+      padding: 48px 48px 96px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
     /* ─── FILTER BAR ─── */
@@ -347,13 +281,29 @@
     .ms-label { font-size: 11px; color: var(--text-light); margin-bottom: 6px; }
     .ms-val { font-family: var(--mono); font-size: 20px; color: var(--text); font-weight: 500; }
 
-    .modal-features {
-      display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px;
+    .modal-rooms {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0 32px;
+      margin-bottom: 32px;
+      padding: 20px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
-    .modal-feature {
-      font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em;
-      text-transform: uppercase; padding: 6px 14px; border: 1px solid var(--border);
-      border-radius: 100px; color: var(--text-mid);
+    .modal-rooms-floor { display: flex; flex-direction: column; gap: 0; }
+    .mrf-label {
+      font-family: var(--mono); font-size: 9px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--text-light); padding-bottom: 10px; margin-bottom: 4px;
+      border-bottom: 1px solid var(--border);
+    }
+    .mrf-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 7px 0; border-bottom: 1px solid rgba(26,28,26,0.05);
+      font-size: 13px;
+    }
+    .mrf-row span:first-child { color: var(--text-mid); }
+    .mrf-row span:last-child { font-family: var(--mono); font-size: 12px; color: var(--text); font-weight: 500; }
+    @media (max-width: 480px) {
+      .modal-rooms { grid-template-columns: 1fr; gap: 20px; }
     }
 
     .modal-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
@@ -372,6 +322,24 @@
       cursor: pointer;
     }
     .modal-btn-secondary:hover { border-color: var(--green); color: var(--green); }
+
+    .modal-messengers {
+      display: flex; align-items: center; gap: 16px; margin-top: 16px;
+      padding-top: 16px; border-top: 1px solid var(--border);
+    }
+    .modal-msg-label {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text-light); white-space: nowrap;
+    }
+    .modal-msg-icons { display: flex; gap: 8px; }
+    .modal-msg-btn {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, opacity 0.2s, transform 0.15s;
+    }
+    .modal-msg-btn img { width: 22px; height: 22px; display: block; }
+    .modal-msg-btn:hover { border-color: var(--stone); opacity: 0.85; transform: scale(1.08); }
 
     /* ─── MODAL FORM VIEW ─── */
     .modal-view { }
@@ -516,13 +484,13 @@
       font-family: var(--mono); font-size: 14px; font-weight: 500;
       color: var(--green); letter-spacing: 0.02em; margin-left: auto;
     }
-    .sec-units { display: flex; flex-wrap: wrap; gap: 8px; }
+    .sec-units { display: flex; flex-wrap: nowrap; gap: 8px; }
     .unit-chip {
-      display: flex; flex-direction: column; align-items: center;
-      width: 64px; padding: 10px 6px 8px;
+      display: flex; flex-direction: row; align-items: center;
+      flex: 1; gap: 10px; padding: 12px 16px;
       border-radius: 4px; border: 1px solid var(--border);
       cursor: pointer; transition: all 0.2s var(--ease);
-      background: var(--white);
+      background: var(--white); min-width: 0;
     }
     .unit-chip.free { border-color: #5A8F45; }
     .unit-chip.free:hover { background: #5A8F45; }
@@ -532,23 +500,22 @@
     .unit-chip.sold { border-color: var(--border); cursor: default; opacity: 0.45; }
     .unit-chip.hidden { display: none; }
     .chip-num {
-      font-family: var(--mono); font-size: 16px; font-weight: 500;
-      color: var(--text); line-height: 1; margin-bottom: 5px;
+      font-family: var(--mono); font-size: 13px; font-weight: 500;
+      color: var(--text); line-height: 1; white-space: nowrap;
     }
     .chip-dot {
-      width: 8px; height: 8px; border-radius: 50%;
+      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
     }
     .chip-dot.free     { background: #5A8F45; }
     .chip-dot.reserved { background: #C89A1A; }
     .chip-dot.sold     { background: var(--stone); }
     .chip-label {
-      font-family: var(--mono); font-size: 8px; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--text-light); margin-top: 4px;
+      font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--text-light);
     }
 
     /* ─── GENPLAN INTERACTIVE ─── */
     .genplan-wrap {
-      margin-left: 52px;
       padding: 64px 48px 48px;
       background: var(--off);
     }
@@ -673,64 +640,86 @@
     }
     .gp-calib-panel.show { display: block; }
 
+    /* ─── HEADER NAV LINKS ─── */
+    .header-nav-links { display: none; }
+    @media (min-width: 900px) {
+      .header-nav-links {
+        display: flex; list-style: none; align-items: center;
+        flex: 1; justify-content: center; gap: 0;
+      }
+      .header-nav-links a {
+        display: block; padding: 0 14px; font-size: 13px; font-weight: 400;
+        color: var(--text-mid); text-decoration: none;
+        letter-spacing: 0.02em; transition: color 0.18s;
+      }
+      .header-nav-links a:hover,
+      .header-nav-links a.active { color: var(--green); }
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--off);
+      border-top: 1px solid var(--border);
+      padding: 60px 0 40px;
+    }
+    .footer-inner { max-width: 1180px; margin: 0 auto; padding: 0 60px; }
+    .footer-top {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px; padding-bottom: 48px; border-bottom: 1px solid var(--border);
+    }
+    .footer-brand img { height: 143px; margin-bottom: 16px; }
+    .footer-brand p { font-size: 13px; font-weight: 300; color: var(--text-light); line-height: 1.7; max-width: 240px; }
+    .footer-col h4 {
+      font-family: var(--mono); font-size: 10px; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--text); margin-bottom: 20px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .footer-col li a { font-size: 14px; font-weight: 300; color: var(--text-mid); transition: color 0.2s; }
+    .footer-col li a:hover { color: var(--green); }
+    .footer-bottom { padding-top: 28px; display: flex; justify-content: space-between; align-items: center; }
+    .footer-copy { font-size: 13px; font-weight: 300; color: var(--text-light); }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 1024px) {
       .house-grid { grid-template-columns: repeat(2, 1fr); }
       .modal-specs { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 768px) {
-      .genplan-wrap { margin-left: 0; padding: 32px 20px 40px; }
+      .genplan-wrap { padding: 32px 20px 40px; }
       .genplan-svg { display: block; }
       .gp-units-group { display: none; }
       .gp-section-block { display: block; }
-      .catalog-wrap { margin-left: 0; padding: 32px 20px 64px; }
-      .page-banner { margin-left: 0; padding: 80px 20px 40px; }
+      .catalog-wrap { padding: 32px 20px 64px; margin: 0; max-width: 100%; }
+      .page-banner { padding: 80px 20px 40px; }
       .page-banner-inner { padding: 0; flex-direction: column; align-items: flex-start; }
       .page-banner-meta { text-align: left; }
-      .side-nav { display: none; }
-      header { left: 0; padding: 14px 20px; }
+      header { padding: 14px 20px; }
       .house-grid { grid-template-columns: 1fr; }
+      .modal-img { aspect-ratio: 4/3; }
+      .modal-img img { object-fit: contain; }
       .modal-body { padding: 24px 20px 32px; }
       .modal-specs { grid-template-columns: repeat(2, 1fr); }
       .modal-title { font-size: 28px; }
       .filter-count { display: none; }
+      .sec-units { flex-direction: column; gap: 4px; }
+      .unit-chip { width: 100%; flex: none; padding: 14px 16px; }
+      .chip-num { font-size: 13px; }
+      .unit-chip.free::after {
+        content: '→'; margin-left: auto;
+        font-family: var(--mono); font-size: 14px; color: #5A8F45;
+      }
+      footer { margin-left: 0; padding: 48px 0 32px; }
+      .footer-inner { padding: 0 24px; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .footer-brand img { height: 80px; }
+    }
+    @media (max-width: 480px) {
+      .footer-top { grid-template-columns: 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
     }
   </style>
 </head>
 <body>
-
-<!-- ── SIDE NAV ── -->
-<div class="side-nav" id="sideNav">
-  <div class="side-menu-label" id="menuTrigger">
-    <div class="side-menu-dots">
-      <i></i><i></i><i></i>
-    </div>
-    <span>Меню</span>
-  </div>
-</div>
-
-<!-- ── SLIDE-OUT MENU ── -->
-<div class="slide-menu-overlay" id="menuOverlay"></div>
-<div class="slide-menu" id="slideMenu">
-  <div class="slide-menu-top">
-    <div class="slide-menu-logo">
-      <img src="images/л2.png" alt="Lisnyky House" />
-    </div>
-    <button class="slide-close" id="menuClose">&times;</button>
-  </div>
-  <nav>
-    <a href="index.html">Головна</a>
-    <a href="index.html#about">Про комплекс</a>
-    <a href="index.html#advantages">Переваги</a>
-    <a href="houses.html" class="active">Будинки</a>
-    <a href="index.html#location">Локація</a>
-    <a href="index.html#contact">Контакти</a>
-  </nav>
-  <div class="slide-menu-phone">
-    Зателефонувати:
-    <a href="tel:+380672004777">+38 067 200 47 77</a>
-  </div>
-</div>
 
 <!-- ── MOBILE MENU ── -->
 <div class="m-menu" id="mMenu">
@@ -748,6 +737,14 @@
   <a href="index.html" class="header-logo">
     <img src="images/л2.png" alt="Lisnyky House" />
   </a>
+  <ul class="header-nav-links">
+    <li><a href="index.html#about">Про комплекс</a></li>
+    <li><a href="index.html#advantages">Переваги</a></li>
+    <li><a href="houses.html" class="active">Будинки</a></li>
+    <li><a href="index.html#plans">Планування</a></li>
+    <li><a href="index.html#location">Локація</a></li>
+    <li><a href="index.html#contact">Контакти</a></li>
+  </ul>
   <div class="header-right">
     <a href="tel:+380672004777" class="header-phone">+38 067 200 47 77</a>
     <button class="btn-green" id="btnHeaderContact">Записатись на перегляд</button>
@@ -767,7 +764,7 @@
         </svg>
         Повернутись
       </a>
-      <h1>Усі<br/><em>будинки</em></h1>
+      <h1>Усі <em>будинки</em></h1>
     </div>
     <div class="page-banner-meta">
       <span>Доступно зараз</span>
@@ -855,17 +852,38 @@
           <div class="ms-item"><div class="ms-label">Поверхи</div><div class="ms-val">2</div></div>
           <div class="ms-item"><div class="ms-label">Балкон</div><div class="ms-val">Є</div></div>
         </div>
-        <div class="modal-features">
-          <span class="modal-feature">Розумний дім</span>
-          <span class="modal-feature">Сонячні батареї</span>
-          <span class="modal-feature">Власне подвір'я</span>
-          <span class="modal-feature">Паркінг на 2 авто</span>
-          <span class="modal-feature">Бойлер 200 л</span>
-          <span class="modal-feature">Чистова обробка</span>
+        <div class="modal-rooms">
+          <div class="modal-rooms-floor">
+            <div class="mrf-label">I поверх · 2.50 м</div>
+            <div class="mrf-row"><span>Коридор</span><span>5.9 м²</span></div>
+            <div class="mrf-row"><span>Кухня-їдальня</span><span>29.3 м²</span></div>
+            <div class="mrf-row"><span>Санвузол</span><span>4.7 м²</span></div>
+          </div>
+          <div class="modal-rooms-floor">
+            <div class="mrf-label">II поверх · 2.99 м</div>
+            <div class="mrf-row"><span>Спальня</span><span>19.5 м²</span></div>
+            <div class="mrf-row"><span>Спальня</span><span>10.9 м²</span></div>
+            <div class="mrf-row"><span>Коридор</span><span>4.4 м²</span></div>
+            <div class="mrf-row"><span>Санвузол</span><span>4.6 м²</span></div>
+          </div>
         </div>
         <div class="modal-ctas">
           <button class="modal-btn-primary" id="btnOpenForm">Записатись на перегляд</button>
           <a href="tel:+380672004777" class="modal-btn-secondary">+38 067 200 47 77</a>
+        </div>
+        <div class="modal-messengers">
+          <span class="modal-msg-label">або в месенджер</span>
+          <div class="modal-msg-icons">
+            <a href="https://wa.me/380672004777" class="modal-msg-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
+              <img src="images/icon-whatsapp.svg" alt="WhatsApp" />
+            </a>
+            <a href="https://t.me/+380672004777" class="modal-msg-btn" target="_blank" rel="noopener" aria-label="Telegram">
+              <img src="images/icon-telegram.svg" alt="Telegram" />
+            </a>
+            <a href="viber://chat?number=%2B380672004777" class="modal-msg-btn" aria-label="Viber">
+              <img src="images/icon-viber.svg" alt="Viber" />
+            </a>
+          </div>
         </div>
       </div>
 
@@ -961,6 +979,20 @@
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
       </button>
       <div class="modal-form-note" style="margin-top:20px">Ми передзвонимо протягом робочого дня — жодного спаму.</div>
+      <div class="modal-messengers" style="margin-top:20px">
+        <span class="modal-msg-label">або в месенджер</span>
+        <div class="modal-msg-icons">
+          <a href="https://wa.me/380672004777" class="modal-msg-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <img src="images/icon-whatsapp.svg" alt="WhatsApp" />
+          </a>
+          <a href="https://t.me/+380672004777" class="modal-msg-btn" target="_blank" rel="noopener" aria-label="Telegram">
+            <img src="images/icon-telegram.svg" alt="Telegram" />
+          </a>
+          <a href="viber://chat?number=%2B380672004777" class="modal-msg-btn" aria-label="Viber">
+            <img src="images/icon-viber.svg" alt="Viber" />
+          </a>
+        </div>
+      </div>
     </div>
 
     <!-- success state -->
@@ -976,20 +1008,47 @@
   </div>
 </div>
 
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="images/л2.png" alt="Lisnyky House" />
+        <p>Таунхауси біля Чернечого лісу. Секції 1 і 2 здано. Лісники, Київська область.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Про комплекс</h4>
+        <ul>
+          <li><a href="index.html#about">Про проєкт</a></li>
+          <li><a href="index.html#advantages">Переваги</a></li>
+          <li><a href="index.html#plans">Планування</a></li>
+          <li><a href="index.html#location">Локація</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Контакти</h4>
+        <ul>
+          <li><a href="tel:+380672004777">+38 067 200 47 77</a></li>
+          <li><a href="mailto:lisnykyhouse@gmail.com">lisnykyhouse@gmail.com</a></li>
+          <li><a href="index.html#location">вул. Виноградна, 33-35<br />с. Лісники, 08172</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Месенджери</h4>
+        <ul>
+          <li><a href="https://wa.me/380672004777" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="https://t.me/+380672004777" target="_blank" rel="noopener">Telegram</a></li>
+          <li><a href="viber://chat?number=%2B380672004777">Viber</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Lisnyky House. Всі права захищені.</span>
+      <a href="#" style="font-size:13px; color:var(--text-light);">Політика конфіденційності</a>
+    </div>
+  </div>
+</footer>
+
 <script>
-  // ── Side menu
-  const menuTrigger = document.getElementById('menuTrigger');
-  const slideMenu   = document.getElementById('slideMenu');
-  const menuOverlay = document.getElementById('menuOverlay');
-  const menuClose   = document.getElementById('menuClose');
-
-  function openMenu()  { slideMenu.classList.add('open'); menuOverlay.classList.add('open'); }
-  function closeMenu() { slideMenu.classList.remove('open'); menuOverlay.classList.remove('open'); }
-
-  menuTrigger.addEventListener('click', openMenu);
-  menuClose.addEventListener('click', closeMenu);
-  menuOverlay.addEventListener('click', closeMenu);
-
   // ── Mobile burger
   const headerBurger = document.getElementById('headerBurger');
   const mMenu = document.getElementById('mMenu');
@@ -1024,12 +1083,11 @@
 
   function openModal(u) {
     const numStr = String(u.unit).padStart(2, '0');
-    document.getElementById('modalImg').src = `images/${u.section}.jpg`;
-    document.getElementById('modalImg').alt = `Секція ${u.section} · №${numStr}`;
+    document.getElementById('modalImg').src = 'images/plan-b.avif';
+    document.getElementById('modalImg').alt = `Планування · Секція ${u.section} · №${numStr}`;
     document.getElementById('modalNum').textContent   = `Секція ${u.section} · Таунхаус №${numStr}`;
     document.getElementById('modalTitle').textContent = `Таунхаус №${numStr}`;
-    document.getElementById('mArea').textContent  = '—';
-    document.getElementById('mRooms').textContent = '—';
+    document.getElementById('mArea').textContent = '82 м²';
     document.getElementById('mPrice').textContent = u.price || 'Уточнити';
     // pre-fill hidden unit field
     document.getElementById('formUnit').value     = `Секція ${u.section} · Таунхаус №${numStr}`;
@@ -1217,8 +1275,8 @@
         return `
           <div class="unit-chip ${u.status}" data-uid="${u.id}" data-status="${u.status}"
                data-sec="${u.section}" data-unit="${u.unit}">
-            <div class="chip-num">${numStr}</div>
             <div class="chip-dot ${u.status}"></div>
+            <div class="chip-num">Таунхаус ${numStr}</div>
             <div class="chip-label">${STATUS_SHORT[u.status]}</div>
           </div>`;
       }).join('');

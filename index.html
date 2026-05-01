@@ -2003,6 +2003,109 @@
       /* float phone: right above the CTA button */
       .float-phone { bottom: 128px; transition: opacity 0.35s ease; }
     }
+
+    /* ─── GLOBAL CONTACT MODAL ─── */
+    .gcontact-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+      z-index: 600; display: flex; align-items: center; justify-content: center;
+      padding: 24px; opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    }
+    .gcontact-overlay.open { opacity: 1; pointer-events: all; }
+    .gcontact-modal {
+      background: var(--white); max-width: 520px; width: 100%;
+      border-radius: 4px; padding: 48px;
+      transform: translateY(16px) scale(0.98);
+      transition: transform 0.3s var(--ease);
+      max-height: 90vh; overflow-y: auto;
+    }
+    .gcontact-overlay.open .gcontact-modal { transform: translateY(0) scale(1); }
+    .gcontact-head {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      margin-bottom: 32px;
+    }
+    .gcontact-title {
+      font-family: var(--serif); font-size: 28px; font-style: italic;
+      color: var(--text); line-height: 1.1;
+    }
+    .gcontact-title em { color: var(--green); }
+    .modal-close {
+      width: 40px; height: 40px; display: flex; align-items: center;
+      justify-content: center; border: 1px solid var(--border); border-radius: 50%;
+      cursor: pointer; background: none; font-size: 22px; color: var(--text);
+      transition: border-color 0.2s; flex-shrink: 0;
+    }
+    .modal-close:hover { border-color: var(--green); color: var(--green); }
+    .cfl-wrap { display: grid; gap: 20px; }
+    .cfl-row { display: grid; gap: 8px; }
+    .cfl-lbl {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--text-light);
+    }
+    .cfl-inp {
+      background: transparent; border: 0;
+      border-bottom: 1px solid rgba(26,28,26,0.18);
+      padding: 10px 0; font-family: var(--sans); font-size: 15px;
+      color: var(--text); outline: none; transition: border-color 0.2s; width: 100%;
+    }
+    .cfl-inp:focus { border-bottom-color: var(--text); }
+    .cfl-inp::placeholder { color: var(--stone); }
+    .cfl-inp.error { border-bottom-color: #c0392b; }
+    .btn-submit-form {
+      display: inline-flex; align-items: center; gap: 14px;
+      margin-top: 32px; background: none; color: var(--text);
+      font-family: var(--mono); font-size: 11px; font-weight: 400;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 0 0 2px; border: none; border-bottom: 1px solid var(--text);
+      cursor: pointer; transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-submit-form:hover { color: var(--green); border-color: var(--green); }
+    .btn-submit-form svg { transition: transform 0.2s; }
+    .btn-submit-form:hover svg { transform: translateX(5px); }
+    .btn-submit-form:disabled { opacity: 0.5; cursor: not-allowed; }
+    .modal-form-note {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--text-light); line-height: 1.6;
+    }
+    .modal-messengers { margin-top: 20px; }
+    .modal-msg-label {
+      display: block; font-family: var(--mono); font-size: 10px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-light); margin-bottom: 12px;
+    }
+    .modal-msg-icons { display: flex; gap: 8px; }
+    .modal-msg-btn {
+      width: 40px; height: 40px; border-radius: 50%; display: flex;
+      align-items: center; justify-content: center;
+      border: 1px solid var(--border); transition: border-color 0.2s, opacity 0.2s, transform 0.15s;
+    }
+    .modal-msg-btn img { width: 22px; height: 22px; display: block; }
+    .modal-msg-btn:hover { border-color: var(--stone); opacity: 0.85; transform: scale(1.08); }
+    .modal-success-icon {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: var(--green-bg); display: flex; align-items: center;
+      justify-content: center; margin: 0 auto 24px;
+    }
+    .modal-success-icon svg { color: var(--green); }
+    .modal-success-title {
+      font-family: var(--serif); font-size: 30px; font-style: italic;
+      color: var(--text); text-align: center; margin-bottom: 12px;
+    }
+    .modal-success-text {
+      font-size: 14px; color: var(--text-mid); text-align: center;
+      line-height: 1.7; max-width: 340px; margin: 0 auto 32px;
+    }
+    .modal-success-close {
+      display: block; margin: 0 auto;
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 12px 32px; border-radius: 3px;
+      border: 1px solid var(--border); background: none; cursor: pointer;
+      color: var(--text-mid); transition: border-color 0.2s, color 0.2s;
+    }
+    .modal-success-close:hover { border-color: var(--green); color: var(--green); }
+    @media (max-width: 600px) {
+      .gcontact-modal { padding: 32px 24px; }
+      .gcontact-title { font-size: 24px; }
+    }
   </style>
 </head>
 <body>
@@ -2035,7 +2138,7 @@
   </ul>
   <div class="header-right">
     <a href="tel:+380672004777" class="header-phone" id="hPhone">+38 067 200 47 77</a>
-    <a href="#contact" class="btn-green">Записатись на перегляд</a>
+    <button class="btn-green" id="btnHeaderContact">Записатись на перегляд</button>
     <button class="header-burger" id="headerBurger" aria-label="Відкрити меню">
       <span></span><span></span><span></span>
     </button>
@@ -2633,12 +2736,16 @@
           <a href="tel:+380672004777" class="contact-info-phone">+38 067 200 47 77</a>
           <div class="messengers">
             <a href="https://wa.me/380672004777" class="m-btn wa" target="_blank" rel="noopener">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              <img src="images/icon-whatsapp.svg" alt="" width="15" height="15" />
               WhatsApp
             </a>
             <a href="https://t.me/+380672004777" class="m-btn tg" target="_blank" rel="noopener">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+              <img src="images/icon-telegram.svg" alt="" width="15" height="15" />
               Telegram
+            </a>
+            <a href="viber://chat?number=%2B380672004777" class="m-btn vb">
+              <img src="images/icon-viber.svg" alt="" width="15" height="15" />
+              Viber
             </a>
           </div>
         </div>
@@ -2717,6 +2824,63 @@
   </div>
 </footer>
 
+
+<!-- ── GLOBAL CONTACT MODAL (header button) ── -->
+<div class="gcontact-overlay" id="gcontactOverlay">
+  <div class="gcontact-modal">
+
+    <div class="gcontact-head">
+      <div class="gcontact-title">Зв'язатись<br/><em>з нами</em></div>
+      <button class="modal-close" id="gcontactClose">&times;</button>
+    </div>
+
+    <div id="gcontactViewForm">
+      <div class="cfl-wrap">
+        <label class="cfl-row">
+          <span class="cfl-lbl">Ваше ім'я</span>
+          <input class="cfl-inp" type="text" id="gcName" placeholder="Андрій" autocomplete="given-name" />
+        </label>
+        <label class="cfl-row">
+          <span class="cfl-lbl">Номер телефону</span>
+          <input class="cfl-inp" type="tel" id="gcPhone" placeholder="+38 0__ ___ __ __" autocomplete="tel" />
+        </label>
+        <label class="cfl-row">
+          <span class="cfl-lbl">Ваше запитання (необов'язково)</span>
+          <input class="cfl-inp" type="text" id="gcMsg" placeholder="Цікавить секція 1, таунхаус №3" />
+        </label>
+      </div>
+      <button class="btn-submit-form" id="gcSubmitBtn" type="button">
+        Записатись
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+      </button>
+      <div class="modal-form-note" style="margin-top:20px">Ми передзвонимо протягом робочого дня — жодного спаму.</div>
+      <div class="modal-messengers">
+        <span class="modal-msg-label">або в месенджер</span>
+        <div class="modal-msg-icons">
+          <a href="https://wa.me/380672004777" class="modal-msg-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <img src="images/icon-whatsapp.svg" alt="WhatsApp" />
+          </a>
+          <a href="https://t.me/+380672004777" class="modal-msg-btn" target="_blank" rel="noopener" aria-label="Telegram">
+            <img src="images/icon-telegram.svg" alt="Telegram" />
+          </a>
+          <a href="viber://chat?number=%2B380672004777" class="modal-msg-btn" aria-label="Viber">
+            <img src="images/icon-viber.svg" alt="Viber" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div id="gcontactViewSuccess" style="display:none; text-align:center; padding:24px 0">
+      <div class="modal-success-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <div class="modal-success-title">Дякуємо<br/><em>за заявку</em></div>
+      <div class="modal-success-text">Ми зателефонуємо вам найближчим часом.</div>
+      <button class="modal-success-close" id="gcSuccessClose">Закрити</button>
+    </div>
+
+  </div>
+</div>
 
 <!-- ── FLOATING PHONE ─────────────────────────── -->
 <a href="tel:+380672004777" class="float-phone" title="Зателефонувати">
@@ -2884,6 +3048,60 @@
         btn.nextElementSibling.style.maxHeight = btn.nextElementSibling.scrollHeight + 'px';
       }
     });
+  });
+
+  // ── Global contact modal (header button)
+  const gOverlay = document.getElementById('gcontactOverlay');
+
+  function openGContact() {
+    gOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeGContact() {
+    gOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+    document.getElementById('gcName').value  = '';
+    document.getElementById('gcPhone').value = '';
+    document.getElementById('gcMsg').value   = '';
+    document.querySelectorAll('#gcontactOverlay .cfl-inp').forEach(i => i.classList.remove('error'));
+    document.getElementById('gcontactViewForm').style.display    = '';
+    document.getElementById('gcontactViewSuccess').style.display = 'none';
+  }
+
+  document.getElementById('btnHeaderContact').addEventListener('click', openGContact);
+  document.getElementById('gcontactClose').addEventListener('click', closeGContact);
+  document.getElementById('gcSuccessClose').addEventListener('click', closeGContact);
+  gOverlay.addEventListener('click', e => { if (e.target === gOverlay) closeGContact(); });
+
+  document.getElementById('gcSubmitBtn').addEventListener('click', async () => {
+    const name  = document.getElementById('gcName').value.trim();
+    const phone = document.getElementById('gcPhone').value.trim();
+    let valid = true;
+    if (!name)  { document.getElementById('gcName').classList.add('error');  valid = false; }
+    if (!phone) { document.getElementById('gcPhone').classList.add('error'); valid = false; }
+    if (!valid) return;
+
+    const btn = document.getElementById('gcSubmitBtn');
+    btn.disabled = true;
+
+    try {
+      const res = await fetch('https://formspree.io/f/FORM_ID', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ name, phone, message: document.getElementById('gcMsg').value.trim() }),
+      });
+      if (!res.ok) throw new Error();
+    } catch {
+      const msg     = document.getElementById('gcMsg').value.trim();
+      const subject = encodeURIComponent('Заявка з сайту Lisnyky House');
+      const body    = encodeURIComponent(`Ім'я: ${name}\nТелефон: ${phone}${msg ? '\nПовідомлення: ' + msg : ''}`);
+      window.location.href = `mailto:lisnykyhouse@gmail.com?subject=${subject}&body=${body}`;
+    } finally {
+      btn.disabled = false;
+    }
+
+    document.getElementById('gcontactViewForm').style.display    = 'none';
+    document.getElementById('gcontactViewSuccess').style.display = '';
   });
 </script>
 
