@@ -2749,24 +2749,25 @@
         </div>
       </div>
 
-      <form class="contact-form-new" action="mailto:lisnykyhouse@gmail.com" method="post" enctype="text/plain">
+      <form class="contact-form-new" id="contactForm" novalidate>
         <div class="contact-form-title">Записатись на перегляд</div>
         <label class="cfl">
           <span class="cfl-label">Ім'я</span>
-          <input type="text" name="name" required placeholder="Олена Коваленко" />
+          <input type="text" id="cfName" name="name" required placeholder="Олена Коваленко" />
         </label>
         <label class="cfl">
           <span class="cfl-label">Телефон</span>
-          <input type="tel" name="phone" required placeholder="+38 0__ ___ __ __" />
+          <input type="tel" id="cfPhone" name="phone" required placeholder="+38 0__ ___ __ __" />
         </label>
         <label class="cfl">
           <span class="cfl-label">Бажана дата</span>
-          <input type="date" name="date" />
+          <input type="date" id="cfDate" name="date" />
         </label>
-        <button type="submit" class="btn-submit-new">
+        <button type="submit" id="cfSubmitBtn" class="btn-submit-new">
           Записатись
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
         </button>
+        <p id="cfSuccess" style="display:none;color:var(--green);font-size:13px;margin-top:12px;">Дякуємо! Зателефонуємо найближчим часом.</p>
         <p class="form-note-new">Надсилаючи форму, ви погоджуєтесь з політикою конфіденційності</p>
       </form>
 
@@ -3082,25 +3083,51 @@
     const btn = document.getElementById('gcSubmitBtn');
     btn.disabled = true;
 
+    const msg = document.getElementById('gcMsg').value.trim();
     try {
-      const res = await fetch('https://formspree.io/f/FORM_ID', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ name, phone, message: document.getElementById('gcMsg').value.trim() }),
-      });
-      if (!res.ok) throw new Error();
-    } catch {
-      const msg     = document.getElementById('gcMsg').value.trim();
-      const subject = encodeURIComponent('Заявка з сайту Lisnyky House');
-      const body    = encodeURIComponent(`Ім'я: ${name}\nТелефон: ${phone}${msg ? '\nПовідомлення: ' + msg : ''}`);
-      window.location.href = `mailto:lisnykyhouse@gmail.com?subject=${subject}&body=${body}`;
-    } finally {
+      await sendTelegram(`📋 <b>Форма: Хедер (головна)</b>\n\n👤 Ім'я: ${name}\n📞 Телефон: ${phone}${msg ? '\n💬 Повідомлення: ' + msg : ''}`);
+    } catch { /* silent */ } finally {
       btn.disabled = false;
     }
 
     document.getElementById('gcontactViewForm').style.display    = 'none';
     document.getElementById('gcontactViewSuccess').style.display = '';
   });
+
+  // ── Contact section form
+  document.getElementById('contactForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    const name  = document.getElementById('cfName').value.trim();
+    const phone = document.getElementById('cfPhone').value.trim();
+    const date  = document.getElementById('cfDate').value;
+    let valid = true;
+    if (!name)  { document.getElementById('cfName').classList.add('error');  valid = false; }
+    if (!phone) { document.getElementById('cfPhone').classList.add('error'); valid = false; }
+    if (!valid) return;
+
+    const btn = document.getElementById('cfSubmitBtn');
+    btn.disabled = true;
+    try {
+      await sendTelegram(`📋 <b>Форма: Контакти (головна)</b>\n\n👤 Ім'я: ${name}\n📞 Телефон: ${phone}${date ? '\n📅 Дата: ' + date : ''}`);
+    } catch { /* silent */ } finally {
+      btn.disabled = false;
+    }
+    document.getElementById('cfSuccess').style.display = '';
+    document.getElementById('contactForm').reset();
+  });
+
+  document.querySelectorAll('#contactForm .cfl-inp, #contactForm input').forEach(inp => {
+    inp.addEventListener('input', () => inp.classList.remove('error'));
+  });
+
+  async function sendTelegram(text) {
+    const res = await fetch('https://api.telegram.org/bot8742431693:AAEdDQNT8zIFQztyfNbkMcGlqk4H2A71dXE/sendMessage', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: '8622100886', text, parse_mode: 'HTML' }),
+    });
+    if (!res.ok) throw new Error('telegram');
+  }
 </script>
 
 </body>

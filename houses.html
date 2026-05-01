@@ -1135,19 +1135,8 @@
     btn.textContent = 'Надсилаємо...';
 
     try {
-      // Formspree endpoint — replace FORM_ID when ready
-      const res = await fetch('https://formspree.io/f/FORM_ID', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ name, phone, unit, time }),
-      });
-      if (!res.ok && res.status !== 200) throw new Error('send failed');
-    } catch {
-      // fallback: open mailto silently, still show success to user
-      const subject = encodeURIComponent(`Заявка на перегляд: ${unit}`);
-      const body    = encodeURIComponent(`Ім'я: ${name}\nТелефон: ${phone}\nЧас: ${time || '—'}\nОб'єкт: ${unit}`);
-      window.location.href = `mailto:lisnykyhouse@gmail.com?subject=${subject}&body=${body}`;
-    } finally {
+      await sendTelegram(`📋 <b>Форма: Перегляд будинку</b>\n\n🏡 Об'єкт: ${unit}\n👤 Ім'я: ${name}\n📞 Телефон: ${phone}${time ? '\n🕐 Зручний час: ' + time : ''}`);
+    } catch { /* silent */ } finally {
       btn.disabled = false;
       btn.textContent = 'Записатись на перегляд';
     }
@@ -1195,18 +1184,9 @@
     btn.disabled = true;
 
     try {
-      const res = await fetch('https://formspree.io/f/FORM_ID', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ name, phone, message: document.getElementById('gcMsg').value.trim() }),
-      });
-      if (!res.ok) throw new Error();
-    } catch {
       const msg = document.getElementById('gcMsg').value.trim();
-      const subject = encodeURIComponent('Заявка з сайту Lisnyky House');
-      const body    = encodeURIComponent(`Ім'я: ${name}\nТелефон: ${phone}${msg ? '\nПовідомлення: ' + msg : ''}`);
-      window.location.href = `mailto:lisnykyhouse@gmail.com?subject=${subject}&body=${body}`;
-    } finally {
+      await sendTelegram(`📋 <b>Форма: Хедер (каталог)</b>\n\n👤 Ім'я: ${name}\n📞 Телефон: ${phone}${msg ? '\n💬 Повідомлення: ' + msg : ''}`);
+    } catch { /* silent */ } finally {
       btn.disabled = false;
     }
 
@@ -1463,6 +1443,15 @@
     document.getElementById('filterCount').textContent =
       avail + ' ' + plural(avail, 'вільний', 'вільних', 'вільних');
   });
+
+  async function sendTelegram(text) {
+    const res = await fetch('https://api.telegram.org/bot8742431693:AAEdDQNT8zIFQztyfNbkMcGlqk4H2A71dXE/sendMessage', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: '8622100886', text, parse_mode: 'HTML' }),
+    });
+    if (!res.ok) throw new Error('telegram');
+  }
 </script>
 </body>
 </html>
