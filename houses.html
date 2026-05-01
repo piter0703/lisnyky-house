@@ -1117,6 +1117,32 @@
   document.getElementById('btnBackToDetail').addEventListener('click', () => showView(viewDetail));
   document.getElementById('btnSuccessClose').addEventListener('click', closeModal);
 
+  // ── Phone mask & validation
+  function initPhoneInput(inp) {
+    inp.addEventListener('focus', () => { if (!inp.value) inp.value = '+38 0'; });
+    inp.addEventListener('input', () => {
+      let d = inp.value.replace(/\D/g, '');
+      if (d.startsWith('380')) d = d.slice(2);
+      else if (d.startsWith('38')) d = d.slice(2);
+      if (d.length > 0 && d[0] !== '0') d = '0' + d;
+      d = d.slice(0, 10);
+      let out = '+38';
+      if (d.length > 0) out += ' ' + d.slice(0, 3);
+      if (d.length > 3) out += ' ' + d.slice(3, 6);
+      if (d.length > 6) out += ' ' + d.slice(6, 8);
+      if (d.length > 8) out += ' ' + d.slice(8, 10);
+      inp.value = out;
+      inp.classList.remove('error');
+    });
+  }
+  function isValidPhone(val) {
+    const d = val.replace(/\D/g, '');
+    const local = d.startsWith('380') ? d.slice(2) : d.startsWith('38') ? d.slice(2) : d;
+    return local.length >= 10;
+  }
+  initPhoneInput(document.getElementById('formPhone'));
+  initPhoneInput(document.getElementById('gcPhone'));
+
   // ── Form submit
   document.getElementById('viewingForm').addEventListener('submit', async e => {
     e.preventDefault();
@@ -1126,8 +1152,8 @@
     const time  = document.getElementById('formTime').value.trim();
 
     let valid = true;
-    if (!name)  { document.getElementById('formName').classList.add('error');  valid = false; }
-    if (!phone) { document.getElementById('formPhone').classList.add('error'); valid = false; }
+    if (!name)             { document.getElementById('formName').classList.add('error');  valid = false; }
+    if (!isValidPhone(phone)) { document.getElementById('formPhone').classList.add('error'); valid = false; }
     if (!valid) return;
 
     const btn = document.getElementById('formSubmitBtn');
@@ -1176,8 +1202,8 @@
     const name  = document.getElementById('gcName').value.trim();
     const phone = document.getElementById('gcPhone').value.trim();
     let valid = true;
-    if (!name)  { document.getElementById('gcName').classList.add('error');  valid = false; }
-    if (!phone) { document.getElementById('gcPhone').classList.add('error'); valid = false; }
+    if (!name)             { document.getElementById('gcName').classList.add('error');  valid = false; }
+    if (!isValidPhone(phone)) { document.getElementById('gcPhone').classList.add('error'); valid = false; }
     if (!valid) return;
 
     const btn = document.getElementById('gcSubmitBtn');

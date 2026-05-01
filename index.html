@@ -2750,25 +2750,33 @@
       </div>
 
       <form class="contact-form-new" id="contactForm" novalidate>
-        <div class="contact-form-title">Записатись на перегляд</div>
-        <label class="cfl">
-          <span class="cfl-label">Ім'я</span>
-          <input type="text" id="cfName" name="name" required placeholder="Олена Коваленко" />
-        </label>
-        <label class="cfl">
-          <span class="cfl-label">Телефон</span>
-          <input type="tel" id="cfPhone" name="phone" required placeholder="+38 0__ ___ __ __" />
-        </label>
-        <label class="cfl">
-          <span class="cfl-label">Бажана дата</span>
-          <input type="date" id="cfDate" name="date" />
-        </label>
-        <button type="submit" id="cfSubmitBtn" class="btn-submit-new">
-          Записатись
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
-        </button>
-        <p id="cfSuccess" style="display:none;color:var(--green);font-size:13px;margin-top:12px;">Дякуємо! Зателефонуємо найближчим часом.</p>
-        <p class="form-note-new">Надсилаючи форму, ви погоджуєтесь з політикою конфіденційності</p>
+        <div id="cfFormBody">
+          <div class="contact-form-title">Записатись на перегляд</div>
+          <label class="cfl">
+            <span class="cfl-label">Ім'я</span>
+            <input type="text" id="cfName" name="name" required placeholder="Олена Коваленко" />
+          </label>
+          <label class="cfl">
+            <span class="cfl-label">Телефон</span>
+            <input type="tel" id="cfPhone" name="phone" required placeholder="+38 0__ ___ __ __" />
+          </label>
+          <label class="cfl">
+            <span class="cfl-label">Бажана дата</span>
+            <input type="date" id="cfDate" name="date" />
+          </label>
+          <button type="submit" id="cfSubmitBtn" class="btn-submit-new">
+            Записатись
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+          </button>
+          <p class="form-note-new">Надсилаючи форму, ви погоджуєтесь з політикою конфіденційності</p>
+        </div>
+        <div id="cfSuccessBlock" style="display:none; text-align:center; padding:24px 0">
+          <div class="modal-success-icon">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="20" cy="20" r="18"/><path d="M12 20l6 6 10-12"/></svg>
+          </div>
+          <div class="modal-success-title">Дякуємо<br/><em>за заявку</em></div>
+          <div class="modal-success-text">Ми зателефонуємо вам найближчим часом.</div>
+        </div>
       </form>
 
     </div>
@@ -3072,12 +3080,38 @@
   document.getElementById('gcSuccessClose').addEventListener('click', closeGContact);
   gOverlay.addEventListener('click', e => { if (e.target === gOverlay) closeGContact(); });
 
+  // ── Phone mask & validation
+  function initPhoneInput(inp) {
+    inp.addEventListener('focus', () => { if (!inp.value) inp.value = '+38 0'; });
+    inp.addEventListener('input', () => {
+      let d = inp.value.replace(/\D/g, '');
+      if (d.startsWith('380')) d = d.slice(2);
+      else if (d.startsWith('38')) d = d.slice(2);
+      if (d.length > 0 && d[0] !== '0') d = '0' + d;
+      d = d.slice(0, 10);
+      let out = '+38';
+      if (d.length > 0) out += ' ' + d.slice(0, 3);
+      if (d.length > 3) out += ' ' + d.slice(3, 6);
+      if (d.length > 6) out += ' ' + d.slice(6, 8);
+      if (d.length > 8) out += ' ' + d.slice(8, 10);
+      inp.value = out;
+      inp.classList.remove('error');
+    });
+  }
+  function isValidPhone(val) {
+    const d = val.replace(/\D/g, '');
+    const local = d.startsWith('380') ? d.slice(2) : d.startsWith('38') ? d.slice(2) : d;
+    return local.length >= 10;
+  }
+  initPhoneInput(document.getElementById('cfPhone'));
+  initPhoneInput(document.getElementById('gcPhone'));
+
   document.getElementById('gcSubmitBtn').addEventListener('click', async () => {
     const name  = document.getElementById('gcName').value.trim();
     const phone = document.getElementById('gcPhone').value.trim();
     let valid = true;
-    if (!name)  { document.getElementById('gcName').classList.add('error');  valid = false; }
-    if (!phone) { document.getElementById('gcPhone').classList.add('error'); valid = false; }
+    if (!name)             { document.getElementById('gcName').classList.add('error');  valid = false; }
+    if (!isValidPhone(phone)) { document.getElementById('gcPhone').classList.add('error'); valid = false; }
     if (!valid) return;
 
     const btn = document.getElementById('gcSubmitBtn');
@@ -3101,8 +3135,8 @@
     const phone = document.getElementById('cfPhone').value.trim();
     const date  = document.getElementById('cfDate').value;
     let valid = true;
-    if (!name)  { document.getElementById('cfName').classList.add('error');  valid = false; }
-    if (!phone) { document.getElementById('cfPhone').classList.add('error'); valid = false; }
+    if (!name)             { document.getElementById('cfName').classList.add('error');  valid = false; }
+    if (!isValidPhone(phone)) { document.getElementById('cfPhone').classList.add('error'); valid = false; }
     if (!valid) return;
 
     const btn = document.getElementById('cfSubmitBtn');
@@ -3112,11 +3146,11 @@
     } catch { /* silent */ } finally {
       btn.disabled = false;
     }
-    document.getElementById('cfSuccess').style.display = '';
-    document.getElementById('contactForm').reset();
+    document.getElementById('cfFormBody').style.display    = 'none';
+    document.getElementById('cfSuccessBlock').style.display = '';
   });
 
-  document.querySelectorAll('#contactForm .cfl-inp, #contactForm input').forEach(inp => {
+  document.querySelectorAll('#contactForm input').forEach(inp => {
     inp.addEventListener('input', () => inp.classList.remove('error'));
   });
 
