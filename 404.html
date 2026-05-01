@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Сторінку не знайдено — Lisnyky House</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@300;400&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green:    #4F5B4C;
+      --text:     #1A1C1A;
+      --text-mid: #4A4D47;
+      --white:    #F6F5F2;
+      --serif:    'Instrument Serif', Georgia, serif;
+      --sans:     'Instrument Sans', system-ui, sans-serif;
+      --mono:     'JetBrains Mono', ui-monospace, monospace;
+    }
+    body {
+      font-family: var(--sans);
+      background: var(--white);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px;
+      text-align: center;
+    }
+    .label {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 24px;
+    }
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(40px, 8vw, 80px);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    h1 em { color: var(--green); font-style: italic; }
+    p {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.8;
+      max-width: 480px;
+      margin-bottom: 48px;
+    }
+    .btn {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid var(--text);
+      padding-bottom: 2px;
+      transition: color 0.3s, border-color 0.3s;
+    }
+    .btn:hover { color: var(--green); border-color: var(--green); }
+  </style>
+</head>
+<body>
+  <p class="label">404</p>
+  <h1>Сторінку <em>не знайдено</em></h1>
+  <p>Можливо, посилання застаріло або сторінка була переміщена. Повертайтесь на головну — там усе є.</p>
+  <a href="/" class="btn">На головну сторінку</a>
+</body>
+</html>

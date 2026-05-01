@@ -9,3 +9,10 @@ __pycache__/
 audit.js
 hero-concept.html
 images/#*
+
+# Private / AI files
+audit_lisnyky_house.md
+claude.md
+client_log.md
+skill.md
+lisnyky_house_presentation.html
