@@ -38,14 +38,14 @@
       "id": "1-1",
       "section": 1,
       "unit": 1,
-      "status": "free",
+      "status": "reserved",
       "price": "від 1 250 $/м²"
     },
     {
       "id": "1-2",
       "section": 1,
       "unit": 2,
-      "status": "free",
+      "status": "sold",
       "price": "від 1 250 $/м²"
     },
     {

@@ -703,9 +703,9 @@
     }
     @media (max-width: 768px) {
       .genplan-wrap { padding: 32px 20px 40px; }
-      .genplan-svg { display: block; }
-      .gp-units-group { display: none; }
-      .gp-section-block { display: block; }
+      .genplan-svg { display: block; pointer-events: none; }
+      .gp-units-group { display: block; }
+      .gp-section-block { display: none; }
       .catalog-wrap { padding: 32px 20px 64px; margin: 0; max-width: 100%; }
       .page-banner { padding: 80px 20px 40px; }
       .page-banner-inner { padding: 0; flex-direction: column; align-items: flex-start; }
@@ -1382,8 +1382,13 @@
           if (!isBuilding && u.status === 'free') {
             rect.addEventListener('click', () => {
               tip.classList.remove('show');
-              document.getElementById('catalog-anchor').scrollIntoView({ behavior: 'smooth', block: 'start' });
-              setTimeout(() => openModal(u), 350);
+              if (window.innerWidth <= 768) {
+                const target = document.querySelector(`.sec-group[data-sec="${u.section}"]`);
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              } else {
+                document.getElementById('catalog-anchor').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                setTimeout(() => openModal(u), 350);
+              }
             });
           }
 
@@ -1395,11 +1400,12 @@
 
       // ── MOBILE: one large section block with label
       {
+        const soldCount = secUnits.filter(u => u.status === 'sold').length;
         let secClass;
-        if (isBuilding)         secClass = 'building';
-        else if (freeCount > 0) secClass = 'free';
-        else if (resCount > 0)  secClass = 'reserved';
-        else                    secClass = 'sold';
+        if (isBuilding)          secClass = 'building';
+        else if (soldCount > 0)  secClass = 'sold';
+        else if (resCount > 0)   secClass = 'reserved';
+        else                     secClass = 'free';
 
         const g = document.createElementNS(NS, 'g');
         g.setAttribute('transform', `rotate(${gp.angle}, ${gp.x}, ${gp.y})`);
@@ -1464,7 +1470,7 @@
 
   // ── Main: load data
   Promise.all([
-    fetch('data/houses.json').then(r => r.json()),
+    fetch('data/houses.json?v=' + Date.now()).then(r => r.json()),
     fetch('data/genplan.json').then(r => r.json())
   ]).catch(err => {
     console.error('❌ fetch failed (file:// не підтримує fetch). Запусти: python3 -m http.server 8080', err);
