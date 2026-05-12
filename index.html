@@ -6,12 +6,15 @@
   <title>Lisnyky House — Таунхауси біля лісу. 15 хвилин від Києва</title>
   <meta name="description" content="Готові таунхауси у с. Лісники поряд з Чернечим лісом та озером Шапарня. 15 хвилин до метро Видубичі. Розумний дім, охоронювана територія." />
 
+  <link rel="canonical" href="https://lisnykyhouse.kyiv.ua/" />
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://piter0703.github.io/lisnyky-house/" />
+  <meta property="og:url" content="https://lisnykyhouse.kyiv.ua/" />
   <meta property="og:title" content="Lisnyky House — Таунхауси біля лісу. 15 хвилин від Києва" />
   <meta property="og:description" content="Готові таунхауси у с. Лісники поряд з Чернечим лісом та озером Шапарня. 15 хвилин до метро Видубичі." />
-  <meta property="og:image" content="https://piter0703.github.io/lisnyky-house/images/og-image.jpg" />
+  <meta property="og:image" content="https://lisnykyhouse.kyiv.ua/images/og-image.jpg" />
   <meta property="og:image:width" content="1280" />
   <meta property="og:image:height" content="714" />
   <meta property="og:locale" content="uk_UA" />
@@ -21,18 +24,26 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Lisnyky House — Таунхауси біля лісу. 15 хвилин від Києва" />
   <meta name="twitter:description" content="Готові таунхауси у с. Лісники поряд з Чернечим лісом та озером Шапарня. 15 хвилин до метро Видубичі." />
-  <meta name="twitter:image" content="https://piter0703.github.io/lisnyky-house/images/og-image.jpg" />
+  <meta name="twitter:image" content="https://lisnykyhouse.kyiv.ua/images/og-image.jpg" />
 
-  <!-- Schema: LocalBusiness -->
+  <!-- Geo -->
+  <meta name="geo.region" content="UA-32" />
+  <meta name="geo.placename" content="Лісники, Київська область" />
+  <meta name="geo.position" content="50.3583;30.6169" />
+  <meta name="ICBM" content="50.3583, 30.6169" />
+
+  <!-- Schema: ApartmentComplex -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "RealEstateAgent",
+    "@type": "ApartmentComplex",
     "name": "Lisnyky House",
-    "description": "Таунхаус-комплекс у с. Лісники, Київська область. Секції 1 і 2 введено в експлуатацію.",
-    "url": "https://piter0703.github.io/lisnyky-house/",
+    "description": "Таунхаус-комплекс у с. Лісники, Київська область. Секції 1 і 2 введено в експлуатацію. Готові до заселення таунхауси площею 82 м².",
+    "url": "https://lisnykyhouse.kyiv.ua/",
     "telephone": "+380672004777",
     "email": "lisnykyhouse@gmail.com",
+    "priceRange": "від 100 000 $",
+    "numberOfRooms": 3,
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "вул. Виноградна, 33-35",
@@ -46,10 +57,21 @@
       "latitude": 50.3583,
       "longitude": 30.6169
     },
-    "openingHours": "Mo-Su 09:00-20:00",
-    "image": "https://piter0703.github.io/lisnyky-house/images/og-image.jpg"
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+      "opens": "09:00",
+      "closes": "20:00"
+    },
+    "image": "https://lisnykyhouse.kyiv.ua/images/og-image.jpg"
   }
   </script>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
 
   <!-- Preload першого hero слайду — прискорює LCP -->
   <link rel="preload" as="image" href="images/avif/hero1.avif" media="(min-width: 769px)" />
