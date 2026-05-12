@@ -1,11 +1,16 @@
-# Block direct access to config.php
+Options -Indexes
+
 <Files "config.php">
     Order allow,deny
     Deny from all
 </Files>
 
-# Block direct access to setup.php after setup is done (uncomment when done)
-# <Files "setup.php">
-#     Order allow,deny
-#     Deny from all
-# </Files>
+<Files "setup.php">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "config.yml">
+    Order allow,deny
+    Deny from all
+</Files>
