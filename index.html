@@ -3,6 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PZ7P48RP15"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PZ7P48RP15');
+  </script>
   <title>Lisnyky House — Таунхауси біля лісу. 15 хвилин від Києва</title>
   <meta name="description" content="Готові таунхауси у с. Лісники поряд з Чернечим лісом та озером Шапарня. 15 хвилин до метро Видубичі. Розумний дім, охоронювана територія." />
 
@@ -79,7 +87,8 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" /></noscript>
 
   <style>
     /* ─── HERO SLIDES: зображення ──────────── */
@@ -2129,7 +2138,11 @@
 <!-- ── HEADER ────────────────────────────────── -->
 <header id="hdr">
   <a href="#top" class="header-logo">
-    <img src="images/л2.png" alt="Lisnyky House" />
+    <picture>
+      <source srcset="images/л2.avif" type="image/avif" />
+      <source srcset="images/л2.webp" type="image/webp" />
+      <img src="images/л2.png" alt="Lisnyky House" />
+    </picture>
   </a>
   <ul class="header-nav-links">
     <li><a href="#about">Про комплекс</a></li>
@@ -2557,6 +2570,7 @@
       <div class="location-map">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d328!2d30.5275575!3d50.2941259!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4b984d639b45f%3A0x5a9bc8430e9aa1db!2z0JbQmiBMaXNueWt5IEhvdXNl!5e1!3m2!1suk!2sua!4v1746100000000!5m2!1suk!2sua"
+          title="Розташування Lisnyky House на карті"
           allowfullscreen=""
           loading="lazy">
         </iframe>
@@ -2783,8 +2797,11 @@
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="images/л2.png"
-             alt="Lisnyky House" />
+        <picture>
+          <source srcset="images/л2.avif" type="image/avif" />
+          <source srcset="images/л2.webp" type="image/webp" />
+          <img src="images/л2.png" alt="Lisnyky House" />
+        </picture>
         <p>Таунхауси біля Чернечого лісу. Секції 1 і 2 здано. Лісники, Київська область.</p>
       </div>
 
