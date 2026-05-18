@@ -12,6 +12,17 @@ if (!($_SESSION['admin'] ?? false)) {
 $input = json_decode(file_get_contents('php://input'), true);
 $data  = json_decode(file_get_contents(DATA_FILE), true);
 
+// --- Update settings (main page price, etc.) ---
+if (isset($input['settings']) && is_array($input['settings'])) {
+    if (!isset($data['settings'])) $data['settings'] = [];
+    if (isset($input['settings']['main_price'])) {
+        $val = htmlspecialchars(strip_tags($input['settings']['main_price']));
+        if (mb_strlen($val) > 0 && mb_strlen($val) <= 60) {
+            $data['settings']['main_price'] = $val;
+        }
+    }
+}
+
 // --- Update section status ---
 if (isset($input['section'])) {
     $upd     = $input['section'];

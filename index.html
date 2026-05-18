@@ -3171,6 +3171,18 @@
     });
     if (!res.ok) throw new Error('telegram');
   }
+
+  // Load main_price from houses.json settings
+  fetch('data/houses.json')
+    .then(r => r.json())
+    .then(d => {
+      const val = d?.settings?.main_price;
+      if (val) {
+        const el = document.querySelector('.plans-img-price-val');
+        if (el) el.textContent = val;
+      }
+    })
+    .catch(() => { /* keep hardcoded fallback */ });
 </script>
 
 </body>

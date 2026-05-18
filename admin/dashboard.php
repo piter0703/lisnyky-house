@@ -7,8 +7,9 @@ if (!($_SESSION['admin'] ?? false)) {
     exit;
 }
 
-$data  = json_decode(file_get_contents(DATA_FILE), true);
-$units = $data['units'];
+$data      = json_decode(file_get_contents(DATA_FILE), true);
+$units     = $data['units'];
+$mainPrice = $data['settings']['main_price'] ?? 'від 1 250 $/м²';
 
 // Index sections by id
 $sections = [];
@@ -84,6 +85,27 @@ foreach ($units as $u) {
     ⚠️ Зміни зберігаються одразу на сайті. Перевіряйте перед збереженням.
   </div>
 
+  <p class="section-h">Головна сторінка</p>
+  <div class="section-block" style="margin-bottom:32px">
+    <div class="section-title">
+      <span class="section-name">Блок 07 — Колекція будинків</span>
+      <span style="font-size:12px;color:#888">Ціна на головній сторінці</span>
+    </div>
+    <table>
+      <thead><tr><th>Поле</th><th>Значення</th><th></th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Ціна (плашка на фото)</td>
+          <td><input type="text" id="main-price-input" value="<?= htmlspecialchars($mainPrice) ?>" style="width:220px"></td>
+          <td>
+            <button class="btn-save" onclick="saveMainPrice()">Зберегти</button>
+            <span class="inline-msg" id="main-price-msg">✓ Збережено</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
   <p class="section-h">Секції та будинки</p>
 
   <?php foreach ($bySection as $secId => $secUnits): ?>
@@ -142,6 +164,23 @@ foreach ($units as $u) {
 </div>
 
 <script>
+// Save main page price
+function saveMainPrice() {
+  const val = document.getElementById('main-price-input').value.trim();
+  if (!val) return;
+  fetch('save.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ settings: { main_price: val } })
+  }).then(r => r.json()).then(d => {
+    if (d.ok) {
+      const msg = document.getElementById('main-price-msg');
+      msg.style.display = 'inline';
+      setTimeout(() => msg.style.display = 'none', 2000);
+    } else alert('Помилка: ' + d.error);
+  }).catch(() => alert('Помилка збереження'));
+}
+
 // Save individual row
 document.querySelectorAll('.btn-save-row').forEach(btn => {
   btn.addEventListener('click', () => {
