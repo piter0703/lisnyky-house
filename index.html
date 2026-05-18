@@ -2908,11 +2908,12 @@
 
 <script>
   // Header scroll state (mobile only — desktop always visible via CSS)
-  const hdr   = document.getElementById('hdr');
-  const heroH = document.querySelector('.hero').offsetHeight;
+  const hdr = document.getElementById('hdr');
+  let heroH = 0;
 
   function onScroll() {
     if (window.innerWidth <= 640) {
+      if (!heroH) heroH = document.querySelector('.hero').offsetHeight;
       hdr.classList.toggle('scrolled', window.scrollY > heroH * 0.98);
     }
   }
